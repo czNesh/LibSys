@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="models.CatalogItem" dynamic-insert="false" dynamic-update="false" mutable="true" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+        <id name="id" type="long" unsaved-value="null">
+            <generator class="identity"/>
+        </id>
+        <property name="title" not-null="true" type="string"/>
+        <property name="year" not-null="true" type="timestamp"/>
+        <property name="addedDate" not-null="true" type="timestamp"/>
+        <property name="sponsor" not-null="true" type="string"/>
+        <property name="ISN" not-null="true" type="string"/>
+        <property name="minAge" not-null="true" type="integer"/>
+        <property name="location" not-null="true" type="string"/>
+        <property name="borrowed" not-null="true" type="boolean"/>        
+        <joined-subclass name="models.Book" extends="models.CatalogItem">
+            <key column="id" />
+            <property name="pageCount" not-null="true" type="integer"/>
+        </joined-subclass>
+        <joined-subclass name="models.Movie" extends="models.CatalogItem">
+            <key column="id" />
+            <property name="medium" not-null="true">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">models.Medium</param>
+                    <param name="type">12</param>
+                </type>
+            </property>        
+            <property name="mediumCount" not-null="true" type="integer"/>
+            <property name="movieLength" not-null="true" type="integer"/>
+        </joined-subclass> 
+    </class>
+</hibernate-mapping>
