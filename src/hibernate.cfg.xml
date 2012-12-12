@@ -10,5 +10,10 @@
     <property name="hibernate.hbm2ddl.auto">create</property>
     <mapping resource="models/SystemUser.hbm.xml"/>
     <mapping resource="models/CatalogItem.hbm.xml"/>
+    <mapping resource="models/Genre.hbm.xml"/>
+    <mapping resource="models/Customer.hbm.xml"/>
+    <mapping resource="models/Author.hbm.xml"/>
+    <mapping resource="models/Borrow.hbm.xml"/>
+    <mapping resource="models/BorrowedItem.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

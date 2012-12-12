@@ -12,7 +12,15 @@
         <property name="ISN" not-null="true" type="string"/>
         <property name="minAge" not-null="true" type="integer"/>
         <property name="location" not-null="true" type="string"/>
-        <property name="borrowed" not-null="true" type="boolean"/>        
+        <property name="borrowed" not-null="true" type="boolean"/>  
+        <set name="genres" table="item_genre" cascade="all">
+            <key column="id" />
+            <many-to-many column="genre_id"  class="models.Genre" />
+        </set> 
+        <set name="authors" table="item_author" cascade="all">
+            <key column="id" />
+            <many-to-many column="author_id"  class="models.Author" />
+        </set>    
         <joined-subclass name="models.Book" extends="models.CatalogItem">
             <key column="id" />
             <property name="pageCount" not-null="true" type="integer"/>

@@ -5,7 +5,9 @@
 package models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import org.hibernate.type.DateType;
 
 /**
@@ -23,7 +25,10 @@ public class CatalogItem implements Serializable {
     private int minAge;
     private String location;
     private boolean borrowed;
-
+    private Author mainAuthor;
+    private Set<Genre> genres = new HashSet<>();
+    private Set<Author> authors = new HashSet<>();
+    
     /**
      * @return the id
      */
@@ -174,6 +179,48 @@ public class CatalogItem implements Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the genres
+     */
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    /**
+     * @param genres the genres to set
+     */
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    /**
+     * @return the mainAuthor
+     */
+    public Author getMainAuthor() {
+        return mainAuthor;
+    }
+
+    /**
+     * @param mainAuthor the mainAuthor to set
+     */
+    public void setMainAuthor(Author mainAuthor) {
+        this.mainAuthor = mainAuthor;
+    }
+
+    /**
+     * @return the authors
+     */
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    /**
+     * @param authors the authors to set
+     */
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
  
 }

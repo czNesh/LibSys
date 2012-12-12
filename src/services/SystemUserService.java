@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package services;
 
 import models.SystemUser;
 import org.hibernate.Session;
@@ -11,16 +11,13 @@ import util.HibernateUtil;
 
 /**
  *
- * @author eXtreme
+ * @author Nesh
  */
-public class LibSys {
+public class SystemUserService {
 
-    
-    public static void main(String[] args) {
-        
-        
+    public SystemUserService() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        
+
         SystemUser u = new SystemUser();
         u.setLogin("Nesh");
         u.setEmail("petr.hejhal@mail.cz");
@@ -28,12 +25,11 @@ public class LibSys {
         u.setLastName("Hejhal");
         u.setMaster(true);
         u.setPassword("12345");
-        
+
         Transaction t = session.getTransaction();
         t.begin();
         session.save(u);
         t.commit();
         session.close();
-        
     }
 }
