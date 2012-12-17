@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="models.CatalogItem" dynamic-insert="false" dynamic-update="false" mutable="true" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+    <class name="models.entity.CatalogItem" dynamic-insert="false" dynamic-update="false" mutable="true" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
         </id>
@@ -15,21 +15,21 @@
         <property name="borrowed" not-null="true" type="boolean"/>  
         <set name="genres" table="item_genre" cascade="all">
             <key column="id" />
-            <many-to-many column="genre_id"  class="models.Genre" />
+            <many-to-many column="genre_id"  class="models.entity.Genre" />
         </set> 
         <set name="authors" table="item_author" cascade="all">
             <key column="id" />
-            <many-to-many column="author_id"  class="models.Author" />
+            <many-to-many column="author_id"  class="models.entity.Author" />
         </set>    
-        <joined-subclass name="models.Book" extends="models.CatalogItem">
+        <joined-subclass name="models.entity.Book" extends="models.entity.CatalogItem">
             <key column="id" />
             <property name="pageCount" not-null="true" type="integer"/>
         </joined-subclass>
-        <joined-subclass name="models.Movie" extends="models.CatalogItem">
+        <joined-subclass name="models.entity.Movie" extends="models.entity.CatalogItem">
             <key column="id" />
             <property name="medium" not-null="true">
                 <type name="org.hibernate.type.EnumType">
-                    <param name="enumClass">models.Medium</param>
+                    <param name="enumClass">models.entity.Medium</param>
                     <param name="type">12</param>
                 </type>
             </property>        

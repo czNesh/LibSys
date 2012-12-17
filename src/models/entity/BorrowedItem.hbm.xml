@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="models.BorrowedItem" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="models.entity.BorrowedItem" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
         </id>              
@@ -9,9 +9,9 @@
         <property name="toDate" not-null="true" type="timestamp"/>
         <property name="returned" not-null="true" type="boolean"/>
         <property name="description" not-null="true" type="string"/>           
-        <many-to-one name="borrow" class="models.Borrow" fetch="select">
+        <many-to-one name="borrow" class="models.entity.Borrow" fetch="select">
             <column name="borrow_id" not-null="true" />
         </many-to-one>   
-        <one-to-one name="item" class="models.CatalogItem" cascade="save-update"/>
+        <one-to-one name="item" class="models.entity.CatalogItem" cascade="save-update"/>
     </class>
 </hibernate-mapping>

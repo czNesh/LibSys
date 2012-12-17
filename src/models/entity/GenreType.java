@@ -2,14 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
-
-import models.SystemUser;
+package models.entity;
 
 /**
  *
  * @author Nesh
  */
-public class SystemUserController {
-    SystemUser user;
+public enum GenreType {
+
+    Akční, Scifi, Pohádka, Fantasy, Animovaný;
 }

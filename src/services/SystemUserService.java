@@ -4,7 +4,7 @@
  */
 package services;
 
-import models.SystemUser;
+import models.entity.SystemUser;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;

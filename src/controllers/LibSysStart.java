@@ -10,11 +10,10 @@ package controllers;
  */
 public class LibSysStart {
 
-    
     public static void main(String[] args) {
-        
-        
-
-        
+        AppController c = AppController.getInstance();
+        PREPARE p = new PREPARE();
+        p.fillDB();
+        c.go();
     }
 }

@@ -7,13 +7,15 @@
     <property name="hibernate.connection.url">jdbc:sqlite:LibSysDB.sqlite</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
     <property name="hibernate.hbm2ddl.auto">create</property>
-    <mapping resource="models/SystemUser.hbm.xml"/>
-    <mapping resource="models/CatalogItem.hbm.xml"/>
-    <mapping resource="models/Genre.hbm.xml"/>
-    <mapping resource="models/Customer.hbm.xml"/>
-    <mapping resource="models/Author.hbm.xml"/>
-    <mapping resource="models/Borrow.hbm.xml"/>
-    <mapping resource="models/BorrowedItem.hbm.xml"/>
+    <mapping resource="models/entity/Author.hbm.xml"/>
+    <mapping resource="models/entity/Borrow.hbm.xml"/>
+    <mapping resource="models/entity/BorrowedItem.hbm.xml"/>
+    <mapping resource="models/entity/CatalogItem.hbm.xml"/>
+    <mapping resource="models/entity/Customer.hbm.xml"/>
+    <mapping resource="models/entity/Genre.hbm.xml"/>
+    <mapping resource="models/entity/SystemUser.hbm.xml"/>
+    
   </session-factory>
 </hibernate-configuration>
