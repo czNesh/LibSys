@@ -147,7 +147,7 @@ public class SystemUser implements Serializable {
 
     @Override
     public String toString() {
-        return "SystemUser{" + "id=" + getId() + ", firstName=" + firstName + ", lastName=" + lastName + '}';
+        return firstName + " " + lastName;
     }
     
 }

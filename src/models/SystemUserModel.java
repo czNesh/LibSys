@@ -30,4 +30,8 @@ public class SystemUserModel extends BaseModel {
         loggedUser = su;
         return (su != null);
     }
+    
+    public String getLoggedUserName(){
+        return loggedUser.toString();
+    }
 }

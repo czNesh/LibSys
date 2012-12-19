@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import models.SystemUserModel;
 import views.MainView;
 
 /**
@@ -17,6 +18,7 @@ public class MainController extends BaseController {
     public MainController() {
         mainView = new MainView();
         initListeners();
+        setData();
     }
     
     private void initListeners(){
@@ -33,4 +35,15 @@ public class MainController extends BaseController {
     void dispose() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    private void setData() {
+        // SET USER NAME
+        mainView.getSystemUserLabel().setText(SystemUserModel.getInstance().getLoggedUserName());
+        
+        // FILL TABLE
+        mainView.getCatalogTable();
+    }
+    
+    
+    
 }

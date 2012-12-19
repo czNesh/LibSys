@@ -4,6 +4,8 @@
  */
 package models;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -47,5 +49,20 @@ public abstract class BaseModel{
         
         // Vrátí výsledek dotazu
         return q.uniqueResult();
+    }
+    
+    protected  HashSet<Object> getAllbyDQL(String DQL, Object... params){
+        Set<Object> tempSet = new HashSet<>();
+        // Vytvoří dotaz
+        Query q = s.createQuery(DQL);
+        
+        // nastavení parametrů
+        int i = 0;
+        for(Object object : params){
+            q.setParameter(i++, object);
+        }
+        
+        // Vrátí výsledek dotazu
+        return (HashSet<Object>) q.list();
     }
 }

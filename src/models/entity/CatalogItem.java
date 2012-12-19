@@ -5,10 +5,10 @@
 package models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import org.hibernate.type.DateType;
 
 /**
  *
@@ -18,8 +18,8 @@ public class CatalogItem implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String title;
-    private DateType year;
-    private DateType addedDate;
+    private Date year;
+    private Date addedDate;
     private String sponsor;
     private String ISN;
     private int minAge;
@@ -60,28 +60,28 @@ public class CatalogItem implements Serializable {
     /**
      * @return the year
      */
-    public DateType getYear() {
+    public Date getYear() {
         return year;
     }
 
     /**
      * @param year the year to set
      */
-    public void setYear(DateType year) {
+    public void setYear(Date year) {
         this.year = year;
     }
 
     /**
      * @return the addedDate
      */
-    public DateType getAddedDate() {
+    public Date getAddedDate() {
         return addedDate;
     }
 
     /**
      * @param addedDate the addedDate to set
      */
-    public void setAddedDate(DateType addedDate) {
+    public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
 
