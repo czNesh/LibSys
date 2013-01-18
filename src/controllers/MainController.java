@@ -4,7 +4,9 @@
  */
 package controllers;
 
-import models.SystemUserModel;
+import models.CatalogTableModel;
+import models.dao.CatalogItemDAO;
+import models.dao.SystemUserDAO;
 import views.MainView;
 
 /**
@@ -38,10 +40,11 @@ public class MainController extends BaseController {
 
     private void setData() {
         // SET USER NAME
-        mainView.getSystemUserLabel().setText(SystemUserModel.getInstance().getLoggedUserName());
+        mainView.getSystemUserLabel().setText(AppController.getInstance().getLoggedUser().toString());
         
         // FILL TABLE
-        mainView.getCatalogTable();
+        CatalogTableModel tableModel = new CatalogTableModel();
+        mainView.getCatalogTable().setModel(tableModel);
     }
     
     

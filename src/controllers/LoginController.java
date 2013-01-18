@@ -6,7 +6,8 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import models.SystemUserModel;
+import models.dao.SystemUserDAO;
+import models.entity.SystemUser;
 import views.LoginView;
 
 /**
@@ -62,8 +63,13 @@ public class LoginController extends BaseController {
             }
 
             // Zpracování
-            if(SystemUserModel.getInstance().login(login, password)){
-                AppController.getInstance().showMainFrame(); 
+            SystemUser temp = SystemUserDAO.getInstance().login(login, password);
+
+            if(temp != null){
+                AppController.getInstance().setLoggedUser(temp);
+                AppController.getInstance().showMainFrame();
+            }else{
+                loginView.getInfoLabel().setText("Neplatná kombinace jména a hesla");
             }
                 
         }

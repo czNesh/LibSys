@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import models.entity.SystemUser;
+
 /**
  *
  * @author Nesh
@@ -12,6 +14,7 @@ public class AppController {
 
     private static AppController instance;
     private BaseController actual;
+    private SystemUser loggedUser;
 
     public static AppController getInstance() {
         synchronized (AppController.class) {
@@ -21,8 +24,8 @@ public class AppController {
         }
         return instance;
     }
-
-    public AppController() {
+    
+    private AppController() {
         actual = new LoginController();
     }
 
@@ -34,5 +37,25 @@ public class AppController {
         actual.dispose();
         actual = new MainController();
         actual.showView();
+    }
+    
+    void showLoginFrame() {
+        actual.dispose();
+        actual = new LoginController();
+        actual.showView();
+    }
+
+    /**
+     * @return the loggedUser
+     */
+    public SystemUser getLoggedUser() {
+        return loggedUser;
+    }
+
+    /**
+     * @param loggedUser the loggedUser to set
+     */
+    public void setLoggedUser(SystemUser loggedUser) {
+        this.loggedUser = loggedUser;
     }
 }

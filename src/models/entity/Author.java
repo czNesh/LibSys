@@ -5,31 +5,26 @@
 package models.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Objects;
-
 
 /**
  *
  * @author Nesh
  */
 public class Author implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private Long id;
     private String firstName;
     private String lastName;
+    private Timestamp time_id;
 
     /**
      * @return the id
      */
     public Long getId() {
         return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
@@ -60,11 +55,19 @@ public class Author implements Serializable {
         this.lastName = lastName;
     }
 
+    /**
+     * @return the time_id
+     */
+    public Timestamp getTime_id() {
+        return time_id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.firstName);
-        hash = 29 * hash + Objects.hashCode(this.lastName);
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.lastName);
+        hash = 79 * hash + Objects.hashCode(this.time_id);
         return hash;
     }
 
@@ -77,14 +80,25 @@ public class Author implements Serializable {
             return false;
         }
         final Author other = (Author) obj;
-        if (!Objects.equals(this.firstName, other.firstName)) {
+
+        if (id != null && other.getId() != null) {
+            if (id == other.getId()) {
+                return true;
+            }
+            return false;
+        } else {
+            if (this.lastName.equals(other.lastName) && this.time_id.equals(other.time_id)) {
+                return true;
+            }
             return false;
         }
-        if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        return true;
+
     }
-    
-    
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

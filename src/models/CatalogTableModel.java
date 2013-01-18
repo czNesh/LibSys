@@ -1,37 +1,39 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-import java.util.Set;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import models.dao.CatalogItemDAO;
 import models.entity.CatalogItem;
 
-/**
- *
- * @author Nesh
- */
 public class CatalogTableModel extends AbstractTableModel {
 
-    private Set<CatalogItem> items;
+    private List<CatalogItem> itemList;
 
     public CatalogTableModel() {
-        items = CatalogItemModel.getInstance().getAllItems();
+        super();
+        itemList = CatalogItemDAO.getInstance().getList();
     }
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itemList.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 6;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        CatalogItem i = itemList.get(rowIndex);
+        Object[] values = new Object[]{i.getId(), i.getTitle(), i.getMainAuthor(), i.getYear(), i.getLocation(), i.isBorrowed()};
+        return values[columnIndex];
+    }
+
+    @Override
+    public String getColumnName(int column) {
+        String[] columnNames = new String[]{"id", "Titul", "Autor", "Rok", "Umístění","Půjčená?"};
+        return columnNames[column];
     }
 }

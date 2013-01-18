@@ -7,7 +7,7 @@ package controllers;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import models.AbstractlModelDAO;
+import models.dao.BaseDAO;
 import models.entity.Author;
 import models.entity.Book;
 import models.entity.Genre;
@@ -18,7 +18,7 @@ import models.entity.SystemUser;
  *
  * @author Nesh
  */
-class PREPARE extends AbstractlModelDAO<Object> {
+class PREPARE extends BaseDAO<Object> {
 
     public void fillDB() {
 
@@ -58,6 +58,52 @@ class PREPARE extends AbstractlModelDAO<Object> {
 
 
         Book b = new Book();
+        b.setTitle("Stínadla se bouří");
+        b.setAuthors(authors);
+        b.setMainAuthor(a);
+        b.setMinAge(-1);
+        b.setBorrowed(false);
+        b.setGenres(genres);
+        b.setISN("ISN4449 4449 464465");
+        b.setLocation("D2");
+        b.setPageCount(550);
+        b.setYear(new Date(1960, 1, 1));
+        b.setSponsor("CVUT");
+        b.setAddedDate(new Date(1958, 1, 1));
+        save(b);
+        
+        b = new Book();
+        b.setTitle("Stínadla se bouří");
+        b.setAuthors(authors);
+        b.setMainAuthor(a);
+        b.setMinAge(-1);
+        b.setBorrowed(false);
+        b.setGenres(genres);
+        b.setISN("ISN4449 4449 464465");
+        b.setLocation("D2");
+        b.setPageCount(550);
+        b.setYear(new Date(1960, 1, 1));
+        b.setSponsor("CVUT");
+        b.setAddedDate(new Date(1958, 1, 1));
+        save(b);
+        
+        b = new Book();
+        b.setTitle("Stínadla se bouří");
+        b.setAuthors(authors);
+        b.setMainAuthor(a);
+        b.setMinAge(-1);
+        b.setBorrowed(false);
+        b.setGenres(genres);
+        b.setISN("ISN4449 4449 464465");
+        b.setLocation("D2");
+        b.setPageCount(550);
+        b.setYear(new Date(1960, 1, 1));
+        b.setSponsor("CVUT");
+        b.setAddedDate(new Date(1958, 1, 1));
+        save(b);
+        
+        
+        b = new Book();
         b.setTitle("Stínadla se bouří");
         b.setAuthors(authors);
         b.setMainAuthor(a);
