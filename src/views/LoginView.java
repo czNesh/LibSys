@@ -6,6 +6,7 @@ package views;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -20,6 +21,7 @@ public class LoginView extends javax.swing.JDialog {
     public LoginView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(loginButton);
     }
 
     public JButton getLoginButton() {
@@ -34,7 +36,7 @@ public class LoginView extends javax.swing.JDialog {
         return inputLoginName;
     }
 
-    public JTextField getPasswordInput() {
+    public JPasswordField getPasswordInput() {
         return inputLoginPassword;
     }
 
@@ -54,12 +56,12 @@ public class LoginView extends javax.swing.JDialog {
         inputLoginName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        inputLoginPassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         resetButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         infoLabel = new javax.swing.JLabel();
+        inputLoginPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Přihlášení uživatele");
@@ -68,8 +70,6 @@ public class LoginView extends javax.swing.JDialog {
         jLabel1.setText("LibSys");
 
         jLabel2.setText("Jméno: ");
-
-        inputLoginPassword.setToolTipText("");
 
         jLabel3.setText("Heslo: ");
 
@@ -103,8 +103,8 @@ public class LoginView extends javax.swing.JDialog {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(inputLoginPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(inputLoginName)))
+                                    .addComponent(inputLoginName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(inputLoginPassword)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
@@ -125,8 +125,8 @@ public class LoginView extends javax.swing.JDialog {
                     .addComponent(inputLoginName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(inputLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
@@ -141,7 +141,7 @@ public class LoginView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel infoLabel;
     private javax.swing.JTextField inputLoginName;
-    private javax.swing.JTextField inputLoginPassword;
+    private javax.swing.JPasswordField inputLoginPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

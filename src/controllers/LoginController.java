@@ -44,12 +44,11 @@ public class LoginController extends BaseController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Log / Info
-            System.out.println("ACTION DETECTED: Login action"); // TODO (log & info sout)
 
             // Získání vstupních hodnot
             String login = loginView.getLoginInput().getText();
-            String password = loginView.getPasswordInput().getText();
+            String password = String.valueOf(loginView.getPasswordInput().getPassword());
+
 
             // VALIDACE
             if (login.isEmpty()) {

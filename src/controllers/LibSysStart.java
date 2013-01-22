@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import services.GoogleBooksSearch;
+
 /**
  *
  * @author eXtreme
@@ -17,5 +19,10 @@ public class LibSysStart {
         p.fillDB();
         
         c.go();
+        
+//        GoogleBooksSearch gbs = new GoogleBooksSearch();
+//        gbs.setISBN("9788025115824");
+//        gbs.Search();
+//        System.out.println(gbs.getBestResult().getTitle());
     }
 }

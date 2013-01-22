@@ -4,9 +4,11 @@
  */
 package controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import models.CatalogTableModel;
-import models.dao.CatalogItemDAO;
-import models.dao.SystemUserDAO;
+import models.entity.Book;
+import services.GoogleBooksSearch;
 import views.MainView;
 
 /**
@@ -16,15 +18,16 @@ import views.MainView;
 public class MainController extends BaseController {
 
     private MainView mainView;
+    private NewItemController newItemController;
 
     public MainController() {
         mainView = new MainView();
         initListeners();
         setData();
     }
-    
-    private void initListeners(){
-        
+
+    private void initListeners() {
+        mainView.getNewItemButton().addActionListener(new NewItemButtonClickedListener());
     }
 
     @Override
@@ -41,12 +44,22 @@ public class MainController extends BaseController {
     private void setData() {
         // SET USER NAME
         mainView.getSystemUserLabel().setText(AppController.getInstance().getLoggedUser().toString());
-        
+
+
         // FILL TABLE
         CatalogTableModel tableModel = new CatalogTableModel();
         mainView.getCatalogTable().setModel(tableModel);
     }
-    
-    
-    
+
+    private class NewItemButtonClickedListener implements ActionListener {
+
+        public NewItemButtonClickedListener() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            newItemController = new NewItemController(mainView);
+            newItemController.showView();
+        }
+    }
 }
