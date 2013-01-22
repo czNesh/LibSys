@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.event.ChangeListener;
+import models.entity.Author;
 import models.entity.Book;
 
 /**
@@ -34,32 +36,44 @@ public class GoogleBooksSearch {
     }
 
     public void search() {
-        connectServer();
+        results.clear();
         stateChange(0, "ready");
+        connectServer();
         searchBooks();
+        query = new StringBuilder();
     }
 
     public void setAutor(String author) {
-        query.append(("+author:" + author));
+        if (author.isEmpty()) {
+            return;
+        }
+        query.append(("+inauthor:" + author).replaceAll(" ", "%20"));
     }
 
     public void setISBN(String isbn) {
-        query.append(("+isbn:" + isbn));
+        if (isbn.isEmpty()) {
+            return;
+        }
+        query.append(("isbn:" + isbn).replaceAll(" ", "%20"));
     }
 
     public void setTitle(String title) {
-        query.append(("+title:" + title));
+        if (title.isEmpty()) {
+            return;
+        }
+        query.append(("+intitle:" + title).replaceAll(" ", "%20"));
     }
 
     public void connectServer() {
-        stateChange(10,"Connecting");
+        stateChange(10, "Connecting");
         try {
             String urlString = "https://www.googleapis.com/books/v1/volumes?q=" + query;
+            System.out.println(urlString);
             URL url = new URL(urlString);
             conn = url.openConnection();
             conn.setConnectTimeout(10000);
         } catch (IOException ex) {
-            stateChange(0,"Disconnected");
+            stateChange(0, "Disconnected");
         }
     }
 
@@ -69,25 +83,24 @@ public class GoogleBooksSearch {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String in;
+
             while (true) {
                 in = br.readLine();
-                if (in == null || in.isEmpty()) {
+                if (in == null) {
                     break;
                 }
+                if (in.isEmpty()) {
+                    continue;
+                }
                 in = clearSpaces(in);
-
-
                 if (in.startsWith("\"title\":")) {
                     temp = new Book();
                     in = in.substring(10, in.length() - 2);
-                    System.out.println(in);
                     temp.setTitle(in);
                     results.add(temp);
-                    break;
-                }
-
-
+                }        
             }
+            
             stateChange(100, "Finished");
         } catch (IOException ex) {
             stateChange(0, "Error");
@@ -99,7 +112,7 @@ public class GoogleBooksSearch {
     }
 
     public Book getBestResult() {
-        return results.get(0);
+        return (results.size() > 0) ? results.get(0) : null;
     }
 
     public String clearSpaces(String in) {
@@ -137,5 +150,9 @@ public class GoogleBooksSearch {
      */
     public String getTextStatus() {
         return textStatus;
+    }
+
+    public int getResultsCount() {
+        return (results == null) ? 0 : results.size();
     }
 }

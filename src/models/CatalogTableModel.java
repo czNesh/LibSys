@@ -14,6 +14,11 @@ public class CatalogTableModel extends AbstractTableModel {
         itemList = CatalogItemDAO.getInstance().getList();
     }
 
+    public CatalogTableModel(List<CatalogItem> l) {
+        super();
+        itemList = l;
+    }
+
     @Override
     public int getRowCount() {
         return itemList.size();
@@ -21,19 +26,19 @@ public class CatalogTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         CatalogItem i = itemList.get(rowIndex);
-        Object[] values = new Object[]{i.getId(), i.getTitle(), i.getMainAuthor(), i.getYear(), i.getLocation(), i.isBorrowed()};
+        Object[] values = new Object[]{i.getTitle(), i.getMainAuthor().toString(), i.getYear().getYear(), i.getISN()};
         return values[columnIndex];
     }
 
     @Override
     public String getColumnName(int column) {
-        String[] columnNames = new String[]{"id", "Titul", "Autor", "Rok", "Umístění","Půjčená?"};
+        String[] columnNames = new String[]{"Titul", "Autor", "Rok", "ISBN"};
         return columnNames[column];
     }
 }

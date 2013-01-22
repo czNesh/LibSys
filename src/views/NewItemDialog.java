@@ -6,6 +6,7 @@ package views;
 
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 
 /**
  *
@@ -27,6 +28,18 @@ public class NewItemDialog extends javax.swing.JDialog{
     
     public JProgressBar getSearchProgressBar(){
         return searchProgressBar;
+    }
+    
+    public JTextField getInputTitle(){
+        return inputTitle;
+    }
+    
+    public JTextField getInputAuthor(){
+        return inputAuthor;
+    }
+    
+    public JTextField getInputISBN(){
+        return inputISBN;
     }
 
     /**

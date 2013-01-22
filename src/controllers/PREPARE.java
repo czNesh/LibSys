@@ -64,7 +64,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setMinAge(-1);
         b.setBorrowed(false);
         b.setGenres(genres);
-        b.setISN("ISN4449 4449 464465");
+        b.setISN("4449 4449 464465");
         b.setLocation("D2");
         b.setPageCount(550);
         b.setYear(new Date(1960, 1, 1));
@@ -73,47 +73,47 @@ class PREPARE extends BaseDAO<Object> {
         save(b);
         
         b = new Book();
-        b.setTitle("Stínadla se bouří");
+        b.setTitle("Záhada hlavolamu");
         b.setAuthors(authors);
         b.setMainAuthor(a);
         b.setMinAge(-1);
-        b.setBorrowed(false);
+        b.setBorrowed(true);
         b.setGenres(genres);
-        b.setISN("ISN4449 4449 464465");
+        b.setISN("9788070337790");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setYear(new Date(1960, 1, 1));
+        b.setYear(new Date(1957, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
         
         b = new Book();
-        b.setTitle("Stínadla se bouří");
+        b.setTitle("Rychlé šípy");
         b.setAuthors(authors);
         b.setMainAuthor(a);
         b.setMinAge(-1);
         b.setBorrowed(false);
         b.setGenres(genres);
-        b.setISN("ISN4449 4449 464465");
+        b.setISN("1524994465");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setYear(new Date(1960, 1, 1));
+        b.setYear(new Date(1980, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
         
         
         b = new Book();
-        b.setTitle("Stínadla se bouří");
+        b.setTitle("Kronika Ztracené stopy");
         b.setAuthors(authors);
         b.setMainAuthor(a);
         b.setMinAge(-1);
         b.setBorrowed(false);
         b.setGenres(genres);
-        b.setISN("ISN4449 4449 464465");
+        b.setISN("4864615184");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setYear(new Date(1960, 1, 1));
+        b.setYear(new Date(1952, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);

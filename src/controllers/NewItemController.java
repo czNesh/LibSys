@@ -6,13 +6,17 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import models.CatalogTableModel;
 import models.entity.Book;
+import models.entity.CatalogItem;
 import services.GoogleBooksSearch;
 import views.NewItemDialog;
+import views.SearchResultsDialog;
 
 /**
  *
@@ -54,11 +58,27 @@ public class NewItemController extends BaseController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gbs.setAutor("pecinovsky");
+            gbs.setAutor(dialog.getInputAuthor().getText());
+            gbs.setTitle(dialog.getInputTitle().getText());
+            gbs.setISBN(dialog.getInputISBN().getText());
             gbs.search();
-            Book temp = gbs.getBestResult();
-            System.out.println(temp.getTitle());
+            if (gbs.getResultsCount() == 0) {
+                System.out.println("NOT MATCHES");
+            } else {
+                SearchResultsDialog resOut = new SearchResultsDialog(null, true);
+                ArrayList<CatalogItem> temp = new ArrayList<>();
+                ArrayList<Book> r = gbs.getResults();
+                
+                for (int i = 0; i < r.size(); i++) {
+                    temp.add((CatalogItem) r.get(i));                   
+                }
 
+                CatalogTableModel ctm = new CatalogTableModel(temp);
+                resOut.getResultsTable().setModel(ctm);
+                
+                resOut.setLocationRelativeTo(null);
+                resOut.setVisible(true);
+            }
         }
     }
 

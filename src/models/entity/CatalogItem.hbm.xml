@@ -20,7 +20,8 @@
         <set name="authors" table="item_author" cascade="all">
             <key column="id" />
             <many-to-many column="author_id"  class="models.entity.Author" />
-        </set>    
+        </set>   
+        <one-to-one name="mainAuthor" class="models.entity.Author" cascade="save-update"/> 
         <joined-subclass name="models.entity.Book" extends="models.entity.CatalogItem">
             <key column="id" />
             <property name="pageCount" not-null="true" type="integer"/>
@@ -36,5 +37,6 @@
             <property name="mediumCount" not-null="true" type="integer"/>
             <property name="movieLength" not-null="true" type="integer"/>
         </joined-subclass> 
+        
     </class>
 </hibernate-mapping>
