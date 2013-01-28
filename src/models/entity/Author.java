@@ -28,6 +28,13 @@ public class Author implements Serializable {
     }
 
     /**
+     * @param id the id to set
+     */
+    private void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
      * @return the firstName
      */
     public String getFirstName() {
@@ -93,13 +100,6 @@ public class Author implements Serializable {
             return false;
         }
 
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

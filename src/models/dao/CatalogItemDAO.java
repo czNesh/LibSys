@@ -7,14 +7,14 @@ package models.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import models.entity.CatalogItem;
+import models.entity.Book;
 import org.hibernate.Session;
 
 /**
  *
  * @author Nesh
  */
-public class CatalogItemDAO extends BaseDAO<CatalogItem> implements Serializable {
+public class CatalogItemDAO extends BaseDAO<Book> implements Serializable {
 
     private static CatalogItemDAO instance;
 
@@ -31,7 +31,7 @@ public class CatalogItemDAO extends BaseDAO<CatalogItem> implements Serializable
         super(session);
     }
     
-    public List<CatalogItem> getItems(){
+    public List<Book> getItems(){
         return getList();
     }
 }

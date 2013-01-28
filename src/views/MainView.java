@@ -6,6 +6,7 @@ package views;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JTable;
 
 /**
@@ -19,21 +20,7 @@ public class MainView extends javax.swing.JFrame {
      */
     public MainView() {
         initComponents();
-    }
-    
-    public JTable getCatalogTable(){
-        return catalogTable;
-    }
-    
-    public JLabel getSystemUserLabel(){
-        return systemUserLabel;
-    }
-    
-    public JButton getNewItemButton(){
-        return newItemButton;
-    }
-    
-
+    }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +56,11 @@ public class MainView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        newCustomerMenuItem = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -104,6 +96,7 @@ public class MainView extends javax.swing.JFrame {
         newItemButton.setToolTipText("Přidat novou položku (CTRL+N)");
         newItemButton.setFocusable(false);
         newItemButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newItemButton.setName("newItem"); // NOI18N
         newItemButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(newItemButton);
         jToolBar1.add(jSeparator1);
@@ -228,7 +221,25 @@ public class MainView extends javax.swing.JFrame {
         jTabbedPane1.addTab("Oznámení (5)", jPanel3);
 
         jMenu1.setText("LibSys");
+
+        jMenuItem1.setText("Odhlásit se");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Konec");
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Zákazníci");
+
+        newCustomerMenuItem.setText("Přidat zákazníka");
+        newCustomerMenuItem.setName("newCustomer"); // NOI18N
+        jMenu3.add(newCustomerMenuItem);
+
+        jMenuItem4.setText("Procházet zákazníky");
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Nápověda");
         jMenuBar1.add(jMenu2);
@@ -273,7 +284,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -286,7 +301,26 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton newBorrowButton;
+    private javax.swing.JMenuItem newCustomerMenuItem;
     private javax.swing.JButton newItemButton;
     private javax.swing.JLabel systemUserLabel;
     // End of variables declaration//GEN-END:variables
+
+    
+    public JTable getCatalogTable(){
+        return catalogTable;
+    }
+    
+    public JLabel getSystemUserLabel(){
+        return systemUserLabel;
+    }
+    
+    public JButton getNewItemButton(){
+        return newItemButton;
+    }
+    
+    public JMenuItem getNewCustomerMenuItem(){
+        return newCustomerMenuItem;
+    }
+
 }

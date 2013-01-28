@@ -3,18 +3,18 @@ package models;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.dao.CatalogItemDAO;
-import models.entity.CatalogItem;
+import models.entity.Book;
 
 public class CatalogTableModel extends AbstractTableModel {
 
-    private List<CatalogItem> itemList;
+    private List<Book> itemList;
 
     public CatalogTableModel() {
         super();
         itemList = CatalogItemDAO.getInstance().getList();
     }
 
-    public CatalogTableModel(List<CatalogItem> l) {
+    public CatalogTableModel(List<Book> l) {
         super();
         itemList = l;
     }
@@ -31,8 +31,8 @@ public class CatalogTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        CatalogItem i = itemList.get(rowIndex);
-        Object[] values = new Object[]{i.getTitle(), i.getMainAuthor().toString(), i.getYear().getYear(), i.getISN()};
+        Book i = itemList.get(rowIndex);
+        Object[] values = new Object[]{i.getTitle(), i.getMainAuthor(), i.getPublishedYear().getYear(), i.getISBN10()};
         return values[columnIndex];
     }
 

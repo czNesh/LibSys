@@ -6,7 +6,8 @@
             <generator class="identity"/>
         </id> 
         <property name="firstName" not-null="true" type="string"/>
-        <property name="lastName" not-null="true" type="string"/>        
+        <property name="lastName" not-null="true" type="string"/>
+        <property name="UCID" not-null="true" type="integer"/>       
         <property name="street" not-null="true" type="string"/>
         <property name="city" not-null="true" type="string"/> 
         <property name="country" not-null="true" type="string"/>

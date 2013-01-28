@@ -17,6 +17,7 @@ public class Customer implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+    private int UCID;
     private String street;
     private String city;
     private String country;
@@ -174,6 +175,20 @@ public class Customer implements Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the UCID
+     */
+    public int getUCID() {
+        return UCID;
+    }
+
+    /**
+     * @param UCID the UCID to set
+     */
+    public void setUCID(int UCID) {
+        this.UCID = UCID;
     }
     
 }

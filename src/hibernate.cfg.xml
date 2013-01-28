@@ -12,10 +12,9 @@
     <mapping resource="models/entity/Author.hbm.xml"/>
     <mapping resource="models/entity/Borrow.hbm.xml"/>
     <mapping resource="models/entity/BorrowedItem.hbm.xml"/>
-    <mapping resource="models/entity/CatalogItem.hbm.xml"/>
+    <mapping resource="models/entity/Book.hbm.xml"/>
     <mapping resource="models/entity/Customer.hbm.xml"/>
     <mapping resource="models/entity/Genre.hbm.xml"/>
     <mapping resource="models/entity/SystemUser.hbm.xml"/>
-    
   </session-factory>
 </hibernate-configuration>

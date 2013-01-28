@@ -16,7 +16,7 @@ public class BorrowedItem implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private Borrow borrow;
-    private CatalogItem item;
+    private Book item;
     private DateType fromDate;
     private DateType toDate;
     private boolean returned;
@@ -53,14 +53,14 @@ public class BorrowedItem implements Serializable {
     /**
      * @return the item
      */
-    public CatalogItem getItem() {
+    public Book getItem() {
         return item;
     }
 
     /**
      * @param item the item to set
      */
-    public void setItem(CatalogItem item) {
+    public void setItem(Book item) {
         this.item = item;
     }
 

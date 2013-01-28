@@ -4,11 +4,11 @@
  */
 package controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JTable;
 import models.CatalogTableModel;
-import models.entity.Book;
-import services.GoogleBooksSearch;
 import views.MainView;
 
 /**
@@ -18,16 +18,17 @@ import views.MainView;
 public class MainController extends BaseController {
 
     private MainView mainView;
-    private NewItemController newItemController;
+    private MenuController menuController;
 
     public MainController() {
         mainView = new MainView();
+        menuController = new MenuController(this, mainView);
         initListeners();
         setData();
     }
 
     private void initListeners() {
-        mainView.getNewItemButton().addActionListener(new NewItemButtonClickedListener());
+        mainView.getCatalogTable().addMouseListener(new TableMouseListener());
     }
 
     @Override
@@ -45,21 +46,41 @@ public class MainController extends BaseController {
         // SET USER NAME
         mainView.getSystemUserLabel().setText(AppController.getInstance().getLoggedUser().toString());
 
-
         // FILL TABLE
         CatalogTableModel tableModel = new CatalogTableModel();
         mainView.getCatalogTable().setModel(tableModel);
     }
 
-    private class NewItemButtonClickedListener implements ActionListener {
+    private class TableMouseListener implements MouseListener {
 
-        public NewItemButtonClickedListener() {
+        public TableMouseListener() {
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            newItemController = new NewItemController(mainView);
-            newItemController.showView();
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                Point p = e.getPoint();
+                JTable t = mainView.getCatalogTable();
+                String out = t.getValueAt(t.rowAtPoint(p), 0).toString();
+                System.out.println(out);
+            }
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
         }
     }
 }
