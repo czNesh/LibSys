@@ -62,7 +62,7 @@
                 <Property name="name" type="java.lang.String" value="newCustomer" noResource="true"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="customerListMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Proch&#xe1;zet z&#xe1;kazn&#xed;ky"/>
                 <Property name="name" type="java.lang.String" value="browseCustomers" noResource="true"/>
@@ -151,6 +151,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Vytvo&#x159;en&#xed; nov&#xe9; p&#x16f;j&#x10d;ky (CTRL+B)"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="name" type="java.lang.String" value="newBorrow" noResource="true"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>

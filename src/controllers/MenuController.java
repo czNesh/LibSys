@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import views.MainView;
+import views.NewBorrowDialog;
 
 /**
  *
@@ -27,6 +28,8 @@ public class MenuController implements ActionListener {
     private void initListeners() {
         view.getNewItemButton().addActionListener(this);
         view.getNewCustomerMenuItem().addActionListener(this);
+        view.getCustomerListMenuItem().addActionListener(this);
+        view.getNewBorrowButton().addActionListener(this);
     }
 
     @Override
@@ -40,6 +43,11 @@ public class MenuController implements ActionListener {
                 NewItemController newItemController = new NewItemController(view, controller);
                 newItemController.showView();
                 break;
+             case "newBorrow":
+                NewBorrowDialog nbd = new NewBorrowDialog(view, true);
+                nbd.setLocationRelativeTo(null);
+                nbd.setVisible(true);
+                break;                              
             case "newCustomer":
                 NewCustomerController newCustomerController = new NewCustomerController(view);
                 newCustomerController.showView();
@@ -55,8 +63,6 @@ public class MenuController implements ActionListener {
             case "barcode":
                 break;
             case "qrcode":
-                break;
-            case "newBorrow":
                 break;
             default:
                 System.out.println("Žádná akce");

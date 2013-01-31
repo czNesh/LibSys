@@ -10,8 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import models.dao.BaseDAO;
+import models.dao.CustomerDAO;
 import models.entity.Author;
 import models.entity.Book;
+import models.entity.Customer;
 import models.entity.Genre;
 import models.entity.GenreType;
 import models.entity.SystemUser;
@@ -736,6 +738,42 @@ class PREPARE extends BaseDAO<Object> {
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("5.10.1999", false));
         save(b);
+        
+        Customer c = new Customer();
+        c.setUCID(418769447);
+        c.setFirstName("Petr");
+        c.setLastName("Hejhal");
+        c.setStreet("Pařížská 19");
+        c.setCity("Praha");
+        c.setCountry("Česká republika");
+        c.setEmail("petr.hejhal@centrum.cz");
+        c.setPhone("+420721771459");
+        c.setPostcode("11000");
+        CustomerDAO.getInstance().save(c);
+        
+        c = new Customer();
+        c.setUCID(628771395);
+        c.setFirstName("Jaroslav");
+        c.setLastName("Medek");
+        c.setStreet("Kdesi v Beroune 1");
+        c.setCity("Beroun");
+        c.setCountry("Česká republika");
+        c.setEmail("medy75@seznam.cz");
+        c.setPhone("+420605447984");
+        c.setPostcode("15800");
+        CustomerDAO.getInstance().save(c);
+        
+        c = new Customer();
+        c.setUCID(184978134);
+        c.setFirstName("Radek");
+        c.setLastName("Ježdík");
+        c.setStreet("Pražského povstání 23");
+        c.setCity("Praha");
+        c.setCountry("Česká republika");
+        c.setEmail("redhead@seznam.cz");
+        c.setPhone("+420606456144");
+        c.setPostcode("12000");
+        CustomerDAO.getInstance().save(c);
 
 
     }

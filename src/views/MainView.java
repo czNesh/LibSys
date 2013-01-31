@@ -66,7 +66,7 @@ public class MainView extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         newCustomerMenuItem = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        customerListMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -111,6 +111,7 @@ public class MainView extends javax.swing.JFrame {
         newBorrowButton.setToolTipText("Vytvoření nové půjčky (CTRL+B)");
         newBorrowButton.setFocusable(false);
         newBorrowButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newBorrowButton.setName("newBorrow"); // NOI18N
         newBorrowButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(newBorrowButton);
         jToolBar1.add(jSeparator2);
@@ -256,9 +257,9 @@ public class MainView extends javax.swing.JFrame {
         newCustomerMenuItem.setName("newCustomer"); // NOI18N
         jMenu3.add(newCustomerMenuItem);
 
-        jMenuItem4.setText("Procházet zákazníky");
-        jMenuItem4.setName("browseCustomers"); // NOI18N
-        jMenu3.add(jMenuItem4);
+        customerListMenuItem.setText("Procházet zákazníky");
+        customerListMenuItem.setName("browseCustomers"); // NOI18N
+        jMenu3.add(customerListMenuItem);
 
         jMenuBar1.add(jMenu3);
 
@@ -297,6 +298,7 @@ public class MainView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable catalogTable;
     private javax.swing.JTextArea console;
+    private javax.swing.JMenuItem customerListMenuItem;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton filterButton;
@@ -314,7 +316,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -351,9 +352,19 @@ public class MainView extends javax.swing.JFrame {
         return newCustomerMenuItem;
     }
 
+    public JMenuItem getCustomerListMenuItem() {
+        return customerListMenuItem;
+    }
+
     public JButton getFilterButton(){
         return filterButton;
     }
+
+    public JButton getNewBorrowButton() {
+        return newBorrowButton;
+    }
+    
+    
 
     public JTextArea getConsole() {
         return console;

@@ -86,7 +86,7 @@ class NewCustomerController extends BaseController {
             }
 
             String[] temp = name.split(" ");
-            String lname = temp[temp.length-1];
+            String lname = temp[temp.length - 1];
             String fname = "";
             for (int i = 0; i < temp.length - 1; i++) {
                 fname += temp[i];
@@ -95,7 +95,18 @@ class NewCustomerController extends BaseController {
 
             /* SAVE CUSTOMER */
             if (isCorrectInput) {
-                CustomerDAO.getInstance().newCustomer(fname, lname, street, city, postcode, country, email, phone);
+                Customer c = new Customer();
+                c.setUCID(897115144);
+                c.setFirstName(fname);
+                c.setLastName(lname);
+                c.setStreet(street);
+                c.setCity(city);
+                c.setCountry(country);
+                c.setEmail(email);
+                c.setPhone(phone);
+                c.setPostcode(postcode);
+
+                CustomerDAO.getInstance().save(c);
                 dispose();
             }
         }
