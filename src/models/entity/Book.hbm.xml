@@ -6,13 +6,14 @@
             <generator class="identity"/>
         </id>
         <property name="title" not-null="true" type="string"/>
-        <one-to-one cascade="save-update" class="models.entity.Author" name="mainAuthor"/>
-        <set cascade="all" name="authors" table="item_author">
+        <many-to-one cascade="save-update" class="models.entity.Author" name="mainAuthor" lazy="false"/>
+        <list cascade="all" name="authors" table="item_author">
             <key column="id"/>
+            <index column="idx"/>
             <many-to-many class="models.entity.Author" column="author_id"/>
-        </set>
-        <property name="ISBN10" not-null="true" type="string"/>
-        <property name="ISBN13" not-null="true" type="string"/>
+        </list>
+        <property name="ISBN10" not-null="false" type="string"/>
+        <property name="ISBN13" not-null="false" type="string"/>
         <property name="pageCount" not-null="false" type="integer"/>
         <property name="language" not-null="false" type="string"/>
         <property name="publisher" not-null="false" type="string"/>
@@ -23,7 +24,7 @@
         </set>
         <property name="sponsor" not-null="false" type="string"/>
         <property name="addedDate" not-null="true" type="timestamp"/>
-        <property name="location" not-null="true" type="string"/>
+        <property name="location" not-null="false" type="string"/>
         <property name="count" not-null="false" type="integer"/>
         <property name="borrowedCount" not-null="false" type="integer"/>
     </class>

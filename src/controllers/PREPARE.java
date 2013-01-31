@@ -4,8 +4,10 @@
  */
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import models.dao.BaseDAO;
 import models.entity.Author;
@@ -53,7 +55,7 @@ class PREPARE extends BaseDAO<Object> {
 
         save(a);
 
-        Set<Author> authors = new HashSet<>();
+        List<Author> authors = new ArrayList<>();
         authors.add(a);
 
 
@@ -121,5 +123,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
+        
+        
     }
 }

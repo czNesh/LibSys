@@ -24,7 +24,6 @@ public class GoogleBooksSearch {
     private String textStatus;
     private List<ChangeListener> listeners = new ArrayList<>();
     private ArrayList<Book> results = new ArrayList<>();
-    private Book temp;
     URLConnection conn;
 
     public GoogleBooksSearch(String query) {
@@ -54,7 +53,7 @@ public class GoogleBooksSearch {
         if (isbn.isEmpty()) {
             return;
         }
-        query.append(("isbn:" + isbn).replaceAll(" ", "%20"));
+        query.append(("+isbn:" + isbn).replaceAll(" ", "%20"));
     }
 
     public void setTitle(String title) {
@@ -67,7 +66,7 @@ public class GoogleBooksSearch {
     public void connectServer() {
         stateChange(10, "Connecting");
         try {
-            String urlString = "https://www.googleapis.com/books/v1/volumes?q=" + query;
+            String urlString = "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=" + query;
             System.out.println(urlString);
             URL url = new URL(urlString);
             conn = url.openConnection();
@@ -77,30 +76,169 @@ public class GoogleBooksSearch {
         }
     }
 
-    public void searchBooks() {
+    private void searchBooks() {
         stateChange(30, "Searching");
 
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String in;
 
-            while (true) {
-                in = br.readLine();
-                if (in == null) {
-                    break;
-                }
+
+
+            /*
+             * 
+             * PARSING BOOKS FROM GOOGLE
+             * 
+             */
+
+            // VYTVORI POTREBNE PROMENE
+            Book tempBook = null;
+            List<Author> tempAuthors = null;
+            boolean readAuthors = false;
+            boolean readISBN = false;
+            String isbnType = "";
+
+            // CTENI
+            while ((in = br.readLine()) != null) {
+
+                in = clearSpaces(in);
+
                 if (in.isEmpty()) {
                     continue;
                 }
-                in = clearSpaces(in);
-                if (in.startsWith("\"title\":")) {
-                    temp = new Book();
-                    in = in.substring(10, in.length() - 2);
-                    temp.setTitle(in);
-                    results.add(temp);
-                }        
+
+                in = in.replaceFirst("\"", "");
+
+                // NOVA KNIHA
+                if (in.startsWith("id\":")) {
+
+                    if (tempBook == null) {
+                        tempBook = new Book();
+                        tempAuthors = new ArrayList();
+                    } else {
+                        results.add(tempBook);
+                        tempBook = new Book();
+                        tempAuthors = new ArrayList();
+                    }
+                    continue;
+                }
+
+                if (tempBook != null) {
+
+                    // ziska autory
+                    if (readAuthors) {
+                        // HLIDA KONEC CTENI AUTORU
+                        if (in.startsWith("],")) {
+                            readAuthors = false;
+                            tempBook.setMainAuthor(tempAuthors.get(0));
+                            tempBook.setAuthors(tempAuthors);
+                            continue;
+                        }
+
+                        in = in.replaceAll(",", "");
+
+                        // VYTVORI POTREBNE PROMENE
+                        Author tempAuthor = new Author();
+                        String fname = "";
+                        String lname;
+
+                        String[] foo = in.split(" ");
+
+                        for (int i = 0; i < foo.length - 1; i++) {
+                            fname += foo[i];
+                        }
+                        lname = foo[foo.length - 1];
+                        lname = lname.substring(0, lname.length() - 1);
+
+                        tempAuthor.setFirstName(fname);
+                        tempAuthor.setLastName(lname);
+                        tempAuthors.add(tempAuthor);
+                    }
+
+                    // ZISKA ISBN (oboje)
+                    if (readISBN) {
+                        // HLIDA KONEC CTENI AUTORU
+                        if (in.startsWith("],")) {
+                            readAuthors = false;
+                            continue;
+                        }
+
+                        // NASTAVI TYP ISBN
+                        if (in.startsWith("type\":")) {
+                            isbnType = in.substring(8, in.length() - 2);
+                            continue;
+                        }
+
+                        if (in.startsWith("identifier\":")) {
+                            in = in.substring(14, in.length() - 1);
+                            if (isbnType.equals("ISBN_10")) {
+                                tempBook.setISBN10(in);
+                            }
+
+                            if (isbnType.equals("ISBN_13")) {
+                                tempBook.setISBN13(in);
+                            }
+                        }
+                    }
+
+                    // ZISKAT NAZEV
+                    if (in.startsWith("title\":")) {
+                        tempBook.setTitle(in.substring(9, in.length() - 2));
+                        continue;
+                    }
+
+                    // ZAPNOUT CTENI ATUORU
+                    if (in.startsWith("authors\":")) {
+                        readAuthors = true;
+                        continue;
+                    }
+
+                    // ZISKAT VYDAVATELE
+                    if (in.startsWith("publisher\":")) {
+                        tempBook.setPublisher(in.substring(13, in.length() - 2));
+                        continue;
+                    }
+
+                    // ZISKAT ROK VYDANI
+                    if (in.startsWith("publishedDate\":")) {
+                        in = in.substring(17, in.length() - 2);
+                        try {
+                            Date d = new Date(Integer.parseInt(in), 1, 1);
+                            tempBook.setPublishedYear(d);
+                        } catch (NumberFormatException e) {
+                            continue;
+                        }
+                        continue;
+                    }
+
+                    //ZAPNOUT CTENI ISBN 
+                    if (in.startsWith("industryIdentifiers\":")) {
+                        readISBN = true;
+                        continue;
+                    }
+
+                    // ZISKAT POCET STRANEK
+                    if (in.startsWith("pageCount\":")) {
+                        in = in.substring(12, in.length() - 1);
+                        try {
+                            tempBook.setPageCount(Integer.parseInt(in));
+                        } catch (NumberFormatException e) {
+                            continue;
+                        }
+                        continue;
+                    }
+
+                    //ZAPNOUT CTENI ISBN 
+                    if (in.startsWith("language\":")) {
+                        tempBook.setLanguage(in.substring(12, in.length() - 2));
+                    }
+
+                }
             }
-            
+            if (tempBook != null) {
+                results.add(tempBook);
+            }
+
             stateChange(100, "Finished");
         } catch (IOException ex) {
             stateChange(0, "Error");
@@ -109,10 +247,6 @@ public class GoogleBooksSearch {
 
     public ArrayList<Book> getResults() {
         return results;
-    }
-
-    public Book getBestResult() {
-        return (results.size() > 0) ? results.get(0) : null;
     }
 
     public String clearSpaces(String in) {

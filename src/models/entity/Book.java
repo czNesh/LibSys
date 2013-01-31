@@ -7,6 +7,7 @@ package models.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class Book implements Serializable {
     private Long id;
     private String title;
     private Author mainAuthor;
-    private Set<Author> authors = new HashSet<>();
+    private List<Author> authors;
     private String ISBN10;
     private String ISBN13;
     private int pageCount;
@@ -79,14 +80,14 @@ public class Book implements Serializable {
     /**
      * @return the authors
      */
-    public Set<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
     /**
      * @param authors the authors to set
      */
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 
@@ -294,5 +295,10 @@ public class Book implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public String toString(){
+        return title;
     }
 }

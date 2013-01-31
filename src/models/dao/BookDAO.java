@@ -5,7 +5,6 @@
 package models.dao;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import models.entity.Book;
 import org.hibernate.Session;
@@ -14,20 +13,20 @@ import org.hibernate.Session;
  *
  * @author Nesh
  */
-public class CatalogItemDAO extends BaseDAO<Book> implements Serializable {
+public class BookDAO extends BaseDAO<Book> implements Serializable {
 
-    private static CatalogItemDAO instance;
+    private static BookDAO instance;
 
-    public static CatalogItemDAO getInstance() {
-        synchronized (CatalogItemDAO.class) {
+    public static BookDAO getInstance() {
+        synchronized (BookDAO.class) {
             if (instance == null) {
-                instance = new CatalogItemDAO(null);
+                instance = new BookDAO(null);
             }
         }
         return instance;
     }
 
-    public CatalogItemDAO(Session session) {
+    public BookDAO(Session session) {
         super(session);
     }
     

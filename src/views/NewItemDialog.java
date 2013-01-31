@@ -4,15 +4,19 @@
  */
 package views;
 
+import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import services.DateFormater;
 
 /**
  *
  * @author Administrator
  */
-public class NewItemDialog extends javax.swing.JDialog{
+public class NewItemDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form NewItemDialog
@@ -21,26 +25,7 @@ public class NewItemDialog extends javax.swing.JDialog{
         super(parent, modal);
         initComponents();
         getRootPane().setDefaultButton(saveButton);
-    }
-    
-    public JButton getSearchButton(){
-        return searchButton;
-    }
-    
-    public JProgressBar getSearchProgressBar(){
-        return searchProgressBar;
-    }
-    
-    public JTextField getInputTitle(){
-        return inputTitle;
-    }
-    
-    public JTextField getInputAuthor(){
-        return inputAuthor;
-    }
-    
-    public JTextField getInputISBN(){
-        return inputISBN10;
+        inputBuyedDate.setText(DateFormater.dateToString(new Date(), false));
     }
 
     /**
@@ -68,7 +53,7 @@ public class NewItemDialog extends javax.swing.JDialog{
         jLabel5 = new javax.swing.JLabel();
         inputGenres = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        datePickerButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         inputISBN13 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -80,7 +65,8 @@ public class NewItemDialog extends javax.swing.JDialog{
         inputSponsor = new javax.swing.JTextField();
         inputBuyedDate = new javax.swing.JTextField();
         inputPageCount = new javax.swing.JSpinner();
-        jButton4 = new javax.swing.JButton();
+        datePickerButton2 = new javax.swing.JButton();
+        errorMessageOutput = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -101,6 +87,13 @@ public class NewItemDialog extends javax.swing.JDialog{
         saveButton.setText("Uložit");
 
         cancelButton.setText("Zrušit");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        inputPublishedDate.setFocusable(false);
 
         jLabel4.setText("Vydáno roku: ");
 
@@ -108,7 +101,13 @@ public class NewItemDialog extends javax.swing.JDialog{
 
         jLabel6.setText("Vydavatel:");
 
-        jButton3.setText("...");
+        datePickerButton1.setText("...");
+        datePickerButton1.setName("publishedPickerButton"); // NOI18N
+        datePickerButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                datePickerButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("ISBN 13:");
 
@@ -120,7 +119,13 @@ public class NewItemDialog extends javax.swing.JDialog{
 
         jLabel11.setText("Zakoupno dne:");
 
-        jButton4.setText("...");
+        inputBuyedDate.setFocusable(false);
+
+        datePickerButton2.setText("...");
+        datePickerButton2.setName("buyedPickerButton"); // NOI18N
+
+        errorMessageOutput.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        errorMessageOutput.setForeground(new java.awt.Color(255, 51, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,34 +148,34 @@ public class NewItemDialog extends javax.swing.JDialog{
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(inputLanguage)
-                            .addComponent(inputPublisher, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputGenres, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputTitle, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputAuthor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputISBN10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(inputPublishedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(inputBuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3))
-                            .addComponent(inputISBN13, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(34, 34, 34)
+                                .addComponent(datePickerButton2))
+                            .addComponent(errorMessageOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputPageCount, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(inputLanguage)
+                                .addComponent(inputPublisher, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(inputGenres, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(inputTitle, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(inputAuthor, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(inputISBN10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(inputPublishedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(datePickerButton1))
+                                .addComponent(inputISBN13, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchProgressBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchProgressBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(inputBuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addGap(119, 119, 119)
-                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputPageCount, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -210,7 +215,7 @@ public class NewItemDialog extends javax.swing.JDialog{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputPublishedDate)
                     .addComponent(jLabel4)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datePickerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -222,25 +227,36 @@ public class NewItemDialog extends javax.swing.JDialog{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 191, Short.MAX_VALUE)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(inputBuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(datePickerButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(errorMessageOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void datePickerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datePickerButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_datePickerButton1ActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton datePickerButton1;
+    private javax.swing.JButton datePickerButton2;
+    private javax.swing.JLabel errorMessageOutput;
     private javax.swing.JTextField inputAuthor;
     private javax.swing.JTextField inputBuyedDate;
     private javax.swing.JTextField inputGenres;
@@ -252,8 +268,6 @@ public class NewItemDialog extends javax.swing.JDialog{
     private javax.swing.JTextField inputPublisher;
     private javax.swing.JTextField inputSponsor;
     private javax.swing.JTextField inputTitle;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -270,4 +284,69 @@ public class NewItemDialog extends javax.swing.JDialog{
     private javax.swing.JButton searchButton;
     private javax.swing.JProgressBar searchProgressBar;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getInputTitle() {
+        return inputTitle;
+    }
+
+    public JTextField getInputAuthor() {
+        return inputAuthor;
+    }
+
+    public JTextField getInputISBN10() {
+        return inputISBN10;
+    }
+
+    public JTextField getInputISBN13() {
+        return inputISBN13;
+    }
+
+    public JTextField getInputBuyedDate() {
+        return inputBuyedDate;
+    }
+
+    public JTextField getInputGenres() {
+        return inputGenres;
+    }
+
+    public JTextField getInputLanguage() {
+        return inputLanguage;
+    }
+
+    public JSpinner getInputPageCount() {
+        return inputPageCount;
+    }
+
+    public JButton getDatePickerButton1() {
+        return datePickerButton1;
+    }
+
+    public JButton getDatePickerButton2() {
+        return datePickerButton2;
+    }
+
+    public JTextField getInputPublishedDate() {
+        return inputPublishedDate;
+    }
+
+    public JTextField getInputPublisher() {
+        return inputPublisher;
+    }
+
+    public JButton getSaveButton() {
+        return saveButton;
+    }
+
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+
+    public JProgressBar getSearchProgressBar() {
+        return searchProgressBar;
+    }
+
+    public JLabel getErrorMessageOutput() {
+        return errorMessageOutput;
+    }
+
 }

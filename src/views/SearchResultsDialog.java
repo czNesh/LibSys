@@ -42,22 +42,35 @@ public class SearchResultsDialog extends javax.swing.JDialog {
 
         resultsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+                {"dfgfdg", "dgdfgdf"},
+                {"gfdgfdg", "dfgdfgdf"},
+                {"gdfgdfgd", null},
+                {"gfdgdfg", "dfgdfgfd"}
             },
             new String [] {
-
+                "nulldfgfg", "nulldfgfdg"
             }
-        ));
-        resultsTable.setColumnSelectionAllowed(true);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        resultsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(resultsTable);
         resultsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         okButton.setText("Vybrat");
 
         cancelButton.setText("Zrušit");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,6 +96,11 @@ public class SearchResultsDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JScrollPane jScrollPane1;
