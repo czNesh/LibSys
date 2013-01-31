@@ -8,12 +8,12 @@ package views;
  *
  * @author Nesh
  */
-public class SearchCustomerDialog extends javax.swing.JDialog {
+public class CustomerListDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form SearchCustomerDialog
+     * Creates new form CustomerListDialog
      */
-    public SearchCustomerDialog(java.awt.Frame parent, boolean modal) {
+    public CustomerListDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

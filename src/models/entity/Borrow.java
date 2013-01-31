@@ -19,7 +19,7 @@ public class Borrow implements Serializable {
     private SystemUser librarian;
     private Customer customer;
     private String description;
-    private Set<Author> borrowedItems = new HashSet<>();
+    private Set<Book> borrowedItems = new HashSet<>();
 
     /**
      * @return the id
@@ -80,14 +80,14 @@ public class Borrow implements Serializable {
     /**
      * @return the borrowedItems
      */
-    public Set<Author> getBorrowedItems() {
+    public Set<Book> getBorrowedItems() {
         return borrowedItems;
     }
 
     /**
      * @param borrowedItems the borrowedItems to set
      */
-    public void setBorrowedItems(Set<Author> borrowedItems) {
+    public void setBorrowedItems(Set<Book> borrowedItems) {
         this.borrowedItems = borrowedItems;
     }
 }

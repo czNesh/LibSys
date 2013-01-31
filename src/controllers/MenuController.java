@@ -37,12 +37,16 @@ public class MenuController implements ActionListener {
 
         switch (name) {
             case "newItem":
-                NewItemController newItemController = new NewItemController(view,controller);
+                NewItemController newItemController = new NewItemController(view, controller);
                 newItemController.showView();
                 break;
             case "newCustomer":
                 NewCustomerController newCustomerController = new NewCustomerController(view);
                 newCustomerController.showView();
+                break;
+            case "browseCustomers":
+                CustomerListController customerListController = new CustomerListController(view);
+                customerListController.showView();
                 break;
             case "importItems":
                 break;

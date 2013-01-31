@@ -15,6 +15,7 @@ import models.entity.Book;
 import models.entity.Genre;
 import models.entity.GenreType;
 import models.entity.SystemUser;
+import services.DateFormater;
 
 /**
  *
@@ -74,7 +75,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
-        
+
         b = new Book();
         b.setTitle("Stínadla se bouří");
         b.setAuthors(authors);
@@ -90,7 +91,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
-        
+
         b = new Book();
         b.setTitle("Stínadla se bouří");
         b.setAuthors(authors);
@@ -106,10 +107,10 @@ class PREPARE extends BaseDAO<Object> {
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
-        
-        
+
+
         b = new Book();
-        b.setTitle("Stínadla se bouří");
+        b.setTitle("Záhada hlavolamu");
         b.setAuthors(authors);
         b.setMainAuthor(a);
         b.setCount(5);
@@ -123,7 +124,619 @@ class PREPARE extends BaseDAO<Object> {
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958, 1, 1));
         save(b);
-        
-        
+
+
+
+        String tempAuthors;
+        String[] autorsArray;
+        List<Author> authorList;
+        String autori;
+        b = new Book();
+        b.setTitle("Neue Kloppelspitzen in Bandspitzenart");
+        autori = "G. Reden";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+
+
+
+
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("1.3.2005", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Neumreme na sláme");
+        autori = "V. Mihálik";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("19.7.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Neviditelní nepřátelé");
+        autori = "B. Karger-Decker";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("23.7.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Nezdárný syn");
+        autori = "R. Bornard";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("23.7.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Němá barikáda");
+        autori = "J. Drda";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("19.7.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Kouzlo keramiky a porcelánu");
+        autori = "A. Braunová";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("22.2.2002", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Follová Ivana Inventury if...");
+        autori = "Follová;Zindelová";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(0);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("26.1.2009", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Formenwelt aus dem Naturreiche");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(0);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("29.7.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Fortune for Free and other pieces");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(8);
+        b.setCount(8);
+        b.setAddedDate(DateFormater.stringToDate("9.8.2006", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Wandteppiche des 20. Jahrhunderts");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("25.11.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Warhol Andy");
+        autori = "K. Honnef";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("8.1.2007", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Washington National Gallery");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("5.8.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Wasservogel in Freiland und gemege Kolb");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("26.7.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Water - Colours");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("19.8.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Švabinský Max");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("22.11.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Švabinský Max");
+        autori = "A. Matějček";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("13.11.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Švédské stoly aneb jací jsme");
+        autori = "M. Vieweg";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("26.2.2001", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Švýcarská tapiserie - katalog");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("25.11.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Tadsch Mahal");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("23.8.1999", false));
+        save(b);
+        b = new Book();
+        b.setTitle("Taikomoji dekoratyvine daile");
+        autori = "Neznámý";
+        tempAuthors = autori;
+        autorsArray = tempAuthors.split(";");
+        authorList = new ArrayList<>();
+
+        for (int i = 0; i < autorsArray.length; i++) {
+            // VYTVORI POTREBNE PROMENE
+            Author tempAuthor = new Author();
+            String fname = "";
+            String lname;
+
+            String[] foo = autorsArray[i].split(" ");
+
+            for (int j = 0; j < foo.length - 1; j++) {
+                fname += foo[j];
+            }
+            lname = foo[foo.length - 1];
+            tempAuthor.setFirstName(fname);
+            tempAuthor.setLastName(lname);
+            authorList.add(tempAuthor);
+        }
+
+        b.setAuthors(authorList);
+        b.setMainAuthor(authorList.get(0));
+        b.setBorrowedCount(1);
+        b.setCount(1);
+        b.setAddedDate(DateFormater.stringToDate("5.10.1999", false));
+        save(b);
+
+
     }
 }
