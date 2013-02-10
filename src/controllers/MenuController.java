@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import views.MainView;
-import views.NewBorrowDialog;
 
 /**
  *
@@ -44,9 +43,8 @@ public class MenuController implements ActionListener {
                 newItemController.showView();
                 break;
              case "newBorrow":
-                NewBorrowDialog nbd = new NewBorrowDialog(view, true);
-                nbd.setLocationRelativeTo(null);
-                nbd.setVisible(true);
+                BookBorrowController bookBorrowController = new BookBorrowController(view);
+                bookBorrowController.showView();
                 break;                              
             case "newCustomer":
                 NewCustomerController newCustomerController = new NewCustomerController(view);

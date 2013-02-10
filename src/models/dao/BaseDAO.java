@@ -123,28 +123,25 @@ public abstract class BaseDAO<T> implements DAO<T> {
 
     @Override
     public List<T> getList() {
-        if (list == null) {
-            openSession();
+        openSession();
 
-            StringBuilder queryStringBuilder = new StringBuilder();
-            queryStringBuilder.append("SELECT t FROM ");
-            queryStringBuilder.append(typeName).append(" t");
-            if (condition != null) {
-                queryStringBuilder.append(" WHERE ");
-                queryStringBuilder.append("(").append(condition).append(")");
-            }
-
-            Query query = session.createQuery(queryStringBuilder.toString());
-
-            // Add parameters
-            for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
-                query.setParameter(entry.getKey(), entry.getValue());
-            }
-
-            list = (List<T>) query.list();
-
-            closeSession();
+        StringBuilder queryStringBuilder = new StringBuilder();
+        queryStringBuilder.append("SELECT t FROM ");
+        queryStringBuilder.append(typeName).append(" t");
+        if (condition != null) {
+            queryStringBuilder.append(" WHERE ");
+            queryStringBuilder.append("(").append(condition).append(")");
         }
+
+        Query query = session.createQuery(queryStringBuilder.toString());
+
+        // Add parameters
+        for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+        list = (List<T>) query.list();
+
+        closeSession();
 
         return list;
     }
@@ -157,7 +154,7 @@ public abstract class BaseDAO<T> implements DAO<T> {
      */
     @Override
     public T getUnique(String condition) {
-        
+
         if (condition == null) {
             throw new IllegalArgumentException("condition");
         }
@@ -249,6 +246,4 @@ public abstract class BaseDAO<T> implements DAO<T> {
     public Map<String, Object> getParameters() {
         return parameters;
     }
-    
-    
 }

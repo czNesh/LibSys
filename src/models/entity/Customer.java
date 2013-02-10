@@ -17,13 +17,14 @@ public class Customer implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-    private int UCID;
+    private int SSN;
     private String street;
     private String city;
     private String country;
     private String postcode;
     private String email;
     private String phone;
+    private String notes;
 
     /**
      * @return the id
@@ -180,15 +181,37 @@ public class Customer implements Serializable {
     /**
      * @return the UCID
      */
-    public int getUCID() {
-        return UCID;
+    public int getSSN() {
+        return SSN;
     }
 
     /**
      * @param UCID the UCID to set
      */
-    public void setUCID(int UCID) {
-        this.UCID = UCID;
+    public void setSSN(int SSN) {
+        this.SSN = SSN;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " (" + ((SSN != 0) ? SSN : "not saved") + ")";
     }
     
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
 }

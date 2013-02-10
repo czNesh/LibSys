@@ -7,6 +7,10 @@
         </id>  
         <one-to-one name="librarian" class="models.entity.SystemUser" cascade="save-update"/>
         <one-to-one name="customer" class="models.entity.Customer" cascade="save-update"/>
-        <property name="description" not-null="true" type="string"/>
+        <one-to-one name="item" class="models.entity.Book" cascade="save-update"/>
+        <property name="fromDate" not-null="true" type="timestamp"/>
+        <property name="toDate" not-null="true" type="timestamp"/>
+        <property name="returned" not-null="true" type="boolean"/>
+        <property name="notes" not-null="true" type="string"/>
     </class>
 </hibernate-mapping>

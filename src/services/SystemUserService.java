@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.dao;
+package services;
 
 import java.io.Serializable;
+import models.dao.BaseDAO;
 import models.entity.SystemUser;
 import org.hibernate.Session;
 
@@ -12,20 +13,20 @@ import org.hibernate.Session;
  *
  * @author Administrator
  */
-public class SystemUserDAO extends BaseDAO<SystemUser> implements Serializable {
+public class SystemUserService extends BaseDAO<SystemUser> implements Serializable {
 
-    private static SystemUserDAO instance;
+    private static SystemUserService instance;
 
-    public static SystemUserDAO getInstance() {
-        synchronized (SystemUserDAO.class) {
+    public static SystemUserService getInstance() {
+        synchronized (SystemUserService.class) {
             if (instance == null) {
-                instance = new SystemUserDAO(null);
+                instance = new SystemUserService(null);
             }
         }
         return instance;
     }
 
-    public SystemUserDAO(Session session) {
+    public SystemUserService(Session session) {
         super(session);
     }
 

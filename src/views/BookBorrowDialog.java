@@ -8,12 +8,12 @@ package views;
  *
  * @author Nesh
  */
-public class NewBorrowDialog extends javax.swing.JDialog {
+public class BookBorrowDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form NewBorrowDialog
+     * Creates new form BookBorrowDialog
      */
-    public NewBorrowDialog(java.awt.Frame parent, boolean modal) {
+    public BookBorrowDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

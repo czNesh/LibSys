@@ -15,6 +15,7 @@ import java.util.Objects;
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     private Long id;
     private String firstName;
     private String lastName;
@@ -72,9 +73,8 @@ public class Author implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.lastName);
-        hash = 79 * hash + Objects.hashCode(this.time_id);
+        hash = 97 * hash + Objects.hashCode(this.firstName);
+        hash = 97 * hash + Objects.hashCode(this.lastName);
         return hash;
     }
 
@@ -87,23 +87,20 @@ public class Author implements Serializable {
             return false;
         }
         final Author other = (Author) obj;
-
-        if (id != null && other.getId() != null) {
-            if (id == other.getId()) {
-                return true;
-            }
-            return false;
-        } else {
-            if (this.lastName.equals(other.lastName) && this.time_id.equals(other.time_id)) {
-                return true;
-            }
+        if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
-
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        return true;
     }
+
+    
 
     @Override
     public String toString() {
         return firstName + " " + lastName;
     }
+
 }

@@ -32,23 +32,40 @@
                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="inputStreet" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputCity" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputPostcode" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputCountry" alignment="0" pref="150" max="32767" attributes="0"/>
-                  <Component id="inputEmail" max="32767" attributes="0"/>
-                  <Component id="inputPhone" alignment="0" max="32767" attributes="0"/>
-                  <Component id="inputName" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="inputCountry" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputEmail" max="32767" attributes="0"/>
+                          <Component id="inputPhone" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="242" max="32767" attributes="0"/>
+                          <Component id="inputPostcode" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputCity" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="inputStreet" min="-2" pref="242" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="inputFirstName" min="-2" pref="88" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="inputLastName" min="-2" pref="88" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="saveButton" min="-2" pref="125" max="-2" attributes="0"/>
+                          <Component id="cancelButton" min="-2" pref="125" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="saveButton" max="32767" attributes="0"/>
-                  <Component id="cancelButton" pref="74" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,8 +75,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputLastName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -92,6 +111,11 @@
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inputPhone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -100,7 +124,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Jm&#xe9;no a p&#x159;ijmen&#xed;:"/>
+        <Property name="text" type="java.lang.String" value="Jm&#xe9;no:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -133,9 +157,13 @@
         <Property name="text" type="java.lang.String" value="Telefon:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputName">
+    <Component class="javax.swing.JTextField" name="inputFirstName">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" value="Vlo&#x17e;te jm&#xe9;no a p&#x159;ijmen&#xed;. Lze vlo&#x17e;it i v&#xed;ce jmen"/>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputStreet">
@@ -171,6 +199,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="inputEmail">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" value="Vlo&#x17e;te email"/>
       </Properties>
     </Component>
@@ -189,6 +220,38 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
         <Property name="toolTipText" type="java.lang.String" value="Zru&#x161;&#xed; operaci a zav&#x159;e okno"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pozn&#xe1;mky:"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="inputNotes">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="P&#x159;&#xed;ijmen&#xed;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="inputLastName">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

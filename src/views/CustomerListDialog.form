@@ -30,7 +30,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="inputCID" pref="208" max="32767" attributes="0"/>
+                      <Component id="inputSSN" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -38,17 +38,23 @@
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="inputEmail" pref="209" max="32767" attributes="0"/>
-                          <Component id="inputName" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="inputFName" min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="inputLName" min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="inputEmail" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="inputPhone" min="-2" pref="209" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="inputPhone" min="-2" pref="114" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -65,12 +71,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputCID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputSSN" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputFName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputLName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -114,7 +122,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CID:"/>
+        <Property name="text" type="java.lang.String" value="SSN:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -132,9 +140,15 @@
         <Property name="text" type="java.lang.String" value="Telefon:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputCID">
+    <Component class="javax.swing.JTextField" name="inputSSN">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="ssn" noResource="true"/>
+      </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputName">
+    <Component class="javax.swing.JTextField" name="inputFName">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="fname" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputEmail">
     </Component>
@@ -186,6 +200,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Z&#xe1;kladn&#xed; filtrace"/>
         <Property name="name" type="java.lang.String" value="filter" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="P&#x159;ijmen&#xed;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="inputLName">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="lname" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

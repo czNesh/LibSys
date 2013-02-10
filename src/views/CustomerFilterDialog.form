@@ -34,20 +34,19 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="filterOKButton" alignment="0" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="phoneCheckBox" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="CIDCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="nameCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="emailCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cityCheckBox" min="-2" max="-2" attributes="0"/>
-                              <Component id="streetCheckBox" min="-2" max="-2" attributes="0"/>
-                              <Component id="countryCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="SSNChecked" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="phoneCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="notesCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="cityCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="streetCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="countryCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -60,7 +59,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CIDCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SSNChecked" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="streetCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -74,7 +73,10 @@
                   <Component id="emailCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="phoneCheckBox" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="phoneCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="notesCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="filterOKButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -83,7 +85,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JCheckBox" name="CIDCheckBox">
+    <Component class="javax.swing.JCheckBox" name="SSNChecked">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x10c;&#xed;slo u&#x17e;ivatele"/>
       </Properties>
@@ -124,6 +126,11 @@
     <Component class="javax.swing.JCheckBox" name="phoneCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Telefon"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="notesCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pozn&#xe1;mky"/>
       </Properties>
     </Component>
   </SubComponents>

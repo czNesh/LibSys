@@ -37,14 +37,16 @@ public class CustomerListDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        inputCID = new javax.swing.JTextField();
-        inputName = new javax.swing.JTextField();
+        inputSSN = new javax.swing.JTextField();
+        inputFName = new javax.swing.JTextField();
         inputEmail = new javax.swing.JTextField();
         inputPhone = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         filterButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        inputLName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vyhledat uživatele");
@@ -62,13 +64,17 @@ public class CustomerListDialog extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(resultTable);
 
-        jLabel1.setText("CID:");
+        jLabel1.setText("SSN:");
 
         jLabel2.setText("Jméno:");
 
         jLabel4.setText("E-mail:");
 
         jLabel5.setText("Telefon:");
+
+        inputSSN.setName("ssn"); // NOI18N
+
+        inputFName.setName("fname"); // NOI18N
 
         confirmButton.setText("OK");
         confirmButton.setName("confirm"); // NOI18N
@@ -100,6 +106,10 @@ public class CustomerListDialog extends javax.swing.JDialog {
         filterButton.setText("Základní filtrace");
         filterButton.setName("filter"); // NOI18N
 
+        jLabel3.setText("Přijmení:");
+
+        inputLName.setName("lname"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,20 +121,25 @@ public class CustomerListDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(inputCID, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                        .addComponent(inputSSN))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(inputName))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(inputFName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(inputLName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputEmail))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,11 +153,13 @@ public class CustomerListDialog extends javax.swing.JDialog {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(inputCID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputSSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(inputLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -158,17 +175,18 @@ public class CustomerListDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton filterButton;
-    private javax.swing.JTextField inputCID;
     private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputName;
+    private javax.swing.JTextField inputFName;
+    private javax.swing.JTextField inputLName;
     private javax.swing.JTextField inputPhone;
+    private javax.swing.JTextField inputSSN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -184,16 +202,20 @@ public class CustomerListDialog extends javax.swing.JDialog {
         return confirmButton;
     }
 
-    public JTextField getInputCID() {
-        return inputCID;
+    public JTextField getInputSSN() {
+        return inputSSN;
     }
 
     public JTextField getInputEmail() {
         return inputEmail;
     }
 
-    public JTextField getInputName() {
-        return inputName;
+    public JTextField getInputFName() {
+        return inputFName;
+    }
+
+    public JTextField getInputLName() {
+        return inputLName;
     }
 
     public JTextField getInputPhone() {

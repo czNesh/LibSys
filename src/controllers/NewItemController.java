@@ -14,16 +14,16 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import models.CatalogTableModel;
-import models.dao.BookDAO;
+import models.BookTableModel;
+import services.BookService;
 import models.entity.Author;
 import models.entity.Book;
-import services.DateFormater;
-import services.GoogleBooksSearch;
+import helpers.DateFormater;
+import remote.GoogleBooksSearch;
 import views.DatePicker;
 import views.NewItemDialog;
 import views.SearchResultsDialog;
@@ -63,8 +63,7 @@ public class NewItemController extends BaseController {
     private void initListeners() {
         dialog.getSearchButton().addActionListener(new SearchButtonListener());
         dialog.getSaveButton().addActionListener(new SaveButtonListener());
-        dialog.getDatePickerButton1().addActionListener(new DatePickerButton());
-        dialog.getDatePickerButton2().addActionListener(new DatePickerButton());
+        dialog.getDatePickerButton().addActionListener(new DatePickerButton());
     }
 
     private class SaveButtonListener implements ActionListener {
@@ -75,18 +74,18 @@ public class NewItemController extends BaseController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Book b = new Book();
-            JLabel errorOutput = dialog.getErrorMessageOutput();
+            StringBuilder errorOutput = new StringBuilder();
 
             // TITUL
             if (dialog.getInputTitle().getText() == null || dialog.getInputTitle().getText().trim().isEmpty()) {
-                errorOutput.setText("Titul je poviná položka");
+                errorOutput.append("- Vyplňte název knihy\n");
             } else {
                 b.setTitle(dialog.getInputTitle().getText());
             }
 
             // AUTORI
             if (dialog.getInputAuthor().getText() == null || dialog.getInputAuthor().getText().trim().isEmpty()) {
-                errorOutput.setText("Autori je poviná položka");
+                errorOutput.append("- Vyplňte autora / autory \n");
             } else {
                 String tempAuthors = dialog.getInputAuthor().getText();
                 String[] autorsArray = tempAuthors.split(";");
@@ -113,37 +112,56 @@ public class NewItemController extends BaseController {
                 b.setMainAuthor(authorList.get(0));
             }
 
+            //vydavatel 
+            b.setPublisher(dialog.getInputPublisher().getText());
+            //jazyk
+            b.setLanguage(dialog.getInputLanguage().getText());
+
+            //rok vydání
+            b.setPublishedYear((Date) dialog.getInputPublishedDate().getValue());
+
+
             // ISBN 10
             if (dialog.getInputISBN10().getText() == null || dialog.getInputISBN10().getText().trim().isEmpty()) {
-                errorOutput.setText("ISBN10 je poviná položka");
+                errorOutput.append("- Vyplňte ISBN 10\n");
             } else {
                 b.setISBN10(dialog.getInputISBN10().getText());
             }
 
             // ISBN 13
             if (dialog.getInputISBN13().getText() == null || dialog.getInputISBN13().getText().trim().isEmpty()) {
-                errorOutput.setText("ISBN13 je poviná položka");
+                errorOutput.append("- vyplňte ISBN 13\n");
             } else {
                 b.setISBN13(dialog.getInputISBN13().getText());
             }
 
-            // rok vydani
-            if (dialog.getInputPublishedDate().getText() == null || dialog.getInputPublishedDate().getText().trim().isEmpty()) {
-                errorOutput.setText("rok vydani je poviná položka");
-            } else {
-                b.setPublishedYear(DateFormater.stringToDate(dialog.getInputBuyedDate().getText(), false));
-            }
-
             // datum pridani
-            if (dialog.getInputBuyedDate().getText() == null || dialog.getInputBuyedDate().getText().trim().isEmpty()) {
-                errorOutput.setText("datum pridani je poviná položka");
+
+            b.setAddedDate(DateFormater.stringToDate(dialog.getInputBuyedDate().getText(), false));
+
+            // Umístění 
+            if (dialog.getInputLocation().getText() == null || dialog.getInputLocation().getText().trim().isEmpty()) {
+                errorOutput.append("Vyplňte prosím umístění\n");
             } else {
-                b.setAddedDate(DateFormater.stringToDate(dialog.getInputBuyedDate().getText(), false));
+                b.setLocation(dialog.getInputLocation().getText());
             }
 
-            BookDAO.getInstance().save(b);
-            mc.tableDataChanged();
-            dispose();
+            // count of books
+            b.setCount((int) dialog.getInputCount().getValue());
+
+            //pages 
+            b.setPageCount((int) dialog.getInputPageCount().getValue());
+
+            // Check validation results
+            if (errorOutput.length() == 0) {
+                BookService.getInstance().saveBook(b);
+                mc.tableDataChanged();
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(dialog, errorOutput.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
+            }
+
+
         }
     }
 
@@ -164,15 +182,11 @@ public class NewItemController extends BaseController {
                 Date d = dp.getDate();
 
                 switch (name) {
-                    case "publishedPickerButton":
-                        dialog.getInputPublishedDate().setText(DateFormater.dateToString(d, true));
-                        break;
                     case "buyedPickerButton":
-
                         dialog.getInputBuyedDate().setText(DateFormater.dateToString(d, false));
                         break;
                     default:
-                        System.out.println("Operace nerozpoznána");
+                        System.out.println("Neznámý poždavek- není implementováno ?");
                 }
             }
         }
@@ -214,7 +228,7 @@ public class NewItemController extends BaseController {
                     dialog.getInputPublisher().setText(selectedBoook.getPublisher());
                 }
                 if (selectedBoook.getPublishedYear() != null) {
-                    dialog.getInputPublishedDate().setText(String.valueOf(selectedBoook.getPublishedYear().getYear()));
+                    dialog.getInputPublishedDate().setValue(selectedBoook.getPublishedYear());
                 }
                 resOut.dispose();
             }
@@ -246,29 +260,43 @@ public class NewItemController extends BaseController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            // Zamezí opětovnému spuštění
+            dialog.getSearchButton().setEnabled(false);
+
+            // Nastavý hodnoty pro vyhledávání
             gbs.setAutor(dialog.getInputAuthor().getText());
             gbs.setTitle(dialog.getInputTitle().getText());
             gbs.setISBN(dialog.getInputISBN13().getText());
             gbs.setISBN(dialog.getInputISBN10().getText());
+
+            // Vyhledávání
             gbs.search();
-            System.out.println(gbs.getResultsCount());
-            if (gbs.getResultsCount() == 0) {
-                System.out.println("NOT MATCHES");
-            } else {
+
+            // LOG
+
+
+            if (gbs.getResultsCount() > 0) {
+                
+                // Pripravi dialog pro zobrazení výsledku
+                // Nastaví listener
                 resOut = new SearchResultsDialog(null, true);
                 resOut.getResultsTable().addMouseListener(new TableClickedMouseListener());
+
+                // Ulozi nalezene vysledky do pole 
                 foundedItems = new ArrayList<>();
+                foundedItems.addAll(gbs.getResults());
 
-                ArrayList<Book> r = gbs.getResults();
-                for (int i = 0; i < r.size(); i++) {
-                    foundedItems.add((Book) r.get(i));
-                }
-
-                CatalogTableModel ctm = new CatalogTableModel(foundedItems);
+                // Pripravi table model a zobrazi vysledky
+                BookTableModel ctm = new BookTableModel(foundedItems);
                 resOut.getResultsTable().setModel(ctm);
                 resOut.setLocationRelativeTo(null);
                 resOut.setVisible(true);
+
             }
+
+            // Znovu zpristupni tlacitko pro hledaní
+            dialog.getSearchButton().setEnabled(true);
+            dialog.getSearchButton().setText("Hledat znovu");
         }
     }
 
@@ -280,7 +308,7 @@ public class NewItemController extends BaseController {
         @Override
         public void stateChanged(ChangeEvent e) {
             dialog.getSearchProgressBar().setValue(gbs.getStatus());
-            dialog.getSearchProgressBar().setToolTipText(gbs.getTextStatus());
+            dialog.getSearchButton().setText(gbs.getTextStatus());
         }
     }
 }

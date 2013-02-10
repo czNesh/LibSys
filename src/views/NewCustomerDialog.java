@@ -6,6 +6,7 @@ package views;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -39,7 +40,7 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        inputName = new javax.swing.JTextField();
+        inputFirstName = new javax.swing.JTextField();
         inputStreet = new javax.swing.JTextField();
         inputCity = new javax.swing.JTextField();
         inputPostcode = new javax.swing.JTextField();
@@ -48,10 +49,15 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         inputPhone = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inputNotes = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        inputLastName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Jméno a přijmení:");
+        jLabel1.setText("Jméno:");
 
         jLabel2.setText("Ulice a číslo:");
 
@@ -65,7 +71,9 @@ public class NewCustomerDialog extends javax.swing.JDialog {
 
         jLabel7.setText("Telefon:");
 
-        inputName.setToolTipText("Vložte jméno a přijmení. Lze vložit i více jmen");
+        inputFirstName.setBackground(new java.awt.Color(204, 255, 255));
+        inputFirstName.setToolTipText("Vložte jméno a přijmení. Lze vložit i více jmen");
+        inputFirstName.setName(""); // NOI18N
 
         inputStreet.setToolTipText("Vložte prosím název ulice a orientační číslo budovy");
 
@@ -81,6 +89,7 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         inputCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         inputCountry.setToolTipText("Vyberte jednu ze zemí");
 
+        inputEmail.setBackground(new java.awt.Color(204, 255, 255));
         inputEmail.setToolTipText("Vložte email");
 
         inputPhone.setToolTipText("Vložte telefonní čislo, včetně předvolby");
@@ -90,6 +99,16 @@ public class NewCustomerDialog extends javax.swing.JDialog {
 
         cancelButton.setText("Zrušit");
         cancelButton.setToolTipText("Zruší operaci a zavře okno");
+
+        jLabel8.setText("Poznámky:");
+
+        inputNotes.setColumns(20);
+        inputNotes.setRows(5);
+        jScrollPane1.setViewportView(inputNotes);
+
+        jLabel9.setText("Příijmení:");
+
+        inputLastName.setBackground(new java.awt.Color(204, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,21 +123,33 @@ public class NewCustomerDialog extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputStreet)
-                    .addComponent(inputCity)
-                    .addComponent(inputPostcode)
-                    .addComponent(inputCountry, 0, 150, Short.MAX_VALUE)
-                    .addComponent(inputEmail)
-                    .addComponent(inputPhone)
-                    .addComponent(inputName))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputEmail)
+                            .addComponent(inputPhone)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                            .addComponent(inputPostcode)
+                            .addComponent(inputCity))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(inputFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(inputLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,8 +157,10 @@ public class NewCustomerDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton))
+                    .addComponent(inputFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveButton)
+                    .addComponent(jLabel9)
+                    .addComponent(inputLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -153,6 +186,10 @@ public class NewCustomerDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(inputPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,7 +204,9 @@ public class NewCustomerDialog extends javax.swing.JDialog {
     private javax.swing.JTextField inputCity;
     private javax.swing.JComboBox inputCountry;
     private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputName;
+    private javax.swing.JTextField inputFirstName;
+    private javax.swing.JTextField inputLastName;
+    private javax.swing.JTextArea inputNotes;
     private javax.swing.JTextField inputPhone;
     private javax.swing.JTextField inputPostcode;
     private javax.swing.JTextField inputStreet;
@@ -178,11 +217,22 @@ public class NewCustomerDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getInputName() {
-        return inputName;
+    public JTextArea getInputNotes() {
+        return inputNotes;
+    }
+
+    public JTextField getInputFirstName() {
+        return inputFirstName;
+    }
+
+    public JTextField getInputLastName() {
+        return inputLastName;
     }
 
     public JTextField getInputStreet() {

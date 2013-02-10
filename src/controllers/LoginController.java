@@ -6,7 +6,7 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import models.dao.SystemUserDAO;
+import services.SystemUserService;
 import models.entity.SystemUser;
 import views.LoginView;
 
@@ -62,7 +62,7 @@ public class LoginController extends BaseController {
             }
 
             // Zpracování
-            SystemUser temp = SystemUserDAO.getInstance().login(login, password);
+            SystemUser temp = SystemUserService.getInstance().login(login, password);
 
             if(temp != null){
                 AppController.getInstance().setLoggedUser(temp);

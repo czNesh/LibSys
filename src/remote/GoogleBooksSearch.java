@@ -1,4 +1,4 @@
-package services;
+package remote;
 
 //import books
 import java.io.BufferedReader;
@@ -203,7 +203,7 @@ public class GoogleBooksSearch {
                     if (in.startsWith("publishedDate\":")) {
                         in = in.substring(17, in.length() - 2);
                         try {
-                            Date d = new Date(Integer.parseInt(in), 1, 1);
+                            Date d = new Date(Integer.parseInt(in)-1900, 1, 1);
                             tempBook.setPublishedYear(d);
                         } catch (NumberFormatException e) {
                             continue;

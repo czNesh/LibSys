@@ -9,8 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JComponent;
 import javax.swing.JTable;
-import models.CatalogTableModel;
+import models.BookTableModel;
+import models.entity.Book;
 import views.FilterTableDialog;
 import views.MainView;
 
@@ -23,19 +25,23 @@ public class MainController extends BaseController {
     private MainView mainView;
     private MenuController menuController;
     private FilterTableDialog filter;
-    private CatalogTableModel tableModel;
+    private BookTableModel tableModel;
 
     public MainController() {
         mainView = new MainView();
         menuController = new MenuController(this, mainView);
-        tableModel = new CatalogTableModel();
+        tableModel = new BookTableModel();
         filter = new FilterTableDialog(mainView, true);
         initListeners();
         updateView();
     }
 
     private void initListeners() {
+        // Table Listeners
         mainView.getCatalogTable().addMouseListener(new TableMouseListener());
+        BookTableActionListener bt = new BookTableActionListener();
+        mainView.getBookTableNextButton().addActionListener(bt);
+        mainView.getBookTablePrevButton().addActionListener(bt);
 
         // FILTER LISTENERS 
         mainView.getFilterButton().addActionListener(new FilterButtonListener());
@@ -61,10 +67,30 @@ public class MainController extends BaseController {
         mainView.getCatalogTable().setModel(tableModel);
         tableModel.fireTableStructureChanged();
     }
-    
-    public void tableDataChanged(){
+
+    public void tableDataChanged() {
         tableModel.updateData();
         tableModel.fireTableDataChanged();
+    }
+
+    private class BookTableActionListener implements ActionListener {
+
+        public BookTableActionListener() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch (((JComponent) e.getSource()).getName()) {
+                case "bookTableNextPage":
+                    tableModel.nextPage();
+                    updateView();
+                    break;
+                case "bookTablePrevPage":
+                    tableModel.prevPage();
+                    updateView();
+                    break;
+            }
+        }
     }
 
     private class FilterOKButtonListener implements ActionListener {
@@ -114,8 +140,10 @@ public class MainController extends BaseController {
             if (e.getClickCount() == 2) {
                 Point p = e.getPoint();
                 JTable t = mainView.getCatalogTable();
-                String out = t.getValueAt(t.rowAtPoint(p), 0).toString();
-                System.out.println(out);
+                Book b = (Book) t.getValueAt(t.rowAtPoint(p), 0);
+
+
+
             }
 
         }
@@ -137,7 +165,7 @@ public class MainController extends BaseController {
         }
     }
 
-    public CatalogTableModel getCatalogTableModel() {
+    public BookTableModel getCatalogTableModel() {
         return tableModel;
     }
 }

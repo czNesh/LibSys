@@ -4,11 +4,14 @@
  */
 package controllers;
 
+import io.ApplicationLog;
+import java.util.Observable;
+
 /**
  *
  * @author Nesh
  */
-public abstract class BaseController {
+public abstract class BaseController{
 
 	/**
 	 * Zobrazí pohled
@@ -20,5 +23,12 @@ public abstract class BaseController {
 	 * Ukončí controller.
 	 */
 	abstract void dispose();
+        
+        /*
+         * Přidá zprávu do logu
+         */
+        protected void updateLog(String message){
+            ApplicationLog.getInstance().addMessage(message);
+        }
 
 }

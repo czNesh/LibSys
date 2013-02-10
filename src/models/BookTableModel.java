@@ -3,10 +3,10 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import models.dao.BookDAO;
 import models.entity.Book;
+import services.BookService;
 
-public class CatalogTableModel extends AbstractTableModel {
+public class BookTableModel extends AbstractTableModel {
 
     private List<Book> itemList;
     private boolean showTitle = true;
@@ -19,20 +19,31 @@ public class CatalogTableModel extends AbstractTableModel {
     private boolean showPageCount;
     private boolean showLocation;
     private boolean showItemCount;
+    private int page;
+    private int maxRows;
 
-    public CatalogTableModel() {
+    public BookTableModel() {
         super();
-        itemList = BookDAO.getInstance().getList();
+        itemList = BookService.getInstance().getBooks();
+        page = 1;
+        maxRows = 10;
     }
 
-    public CatalogTableModel(List<Book> in) {
+    public BookTableModel(List<Book> in) {
         super();
+        page = 1;
+        maxRows = 10;
         itemList = in;
     }
 
     @Override
     public int getRowCount() {
-        return itemList.size();
+        if (page * maxRows < itemList.size()) {
+            return maxRows;
+        } else {
+            return itemList.size() % maxRows;
+        }
+
     }
 
     @Override
@@ -74,7 +85,7 @@ public class CatalogTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Book i = itemList.get(rowIndex);
+        Book i = itemList.get(rowIndex + getSkippedRowsCount());
         ArrayList<String> tempValues = new ArrayList<>();
 
         if (showTitle) {
@@ -91,7 +102,13 @@ public class CatalogTableModel extends AbstractTableModel {
             tempValues.add(i.getPublisher());
         }
         if (showPublishedYear) {
-            tempValues.add(i.getPublisher());
+            if (i.getPublishedYear() != null) {
+                tempValues.add(String.valueOf(i.getPublishedYear().getYear()));
+            } else {
+                tempValues.add("údaj chybí");
+            }
+
+
         }
         if (showlanguage) {
             tempValues.add(i.getLanguage());
@@ -153,7 +170,7 @@ public class CatalogTableModel extends AbstractTableModel {
         return tempValuesColumnNames.get(column);
     }
 
-    public void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount,boolean showItemCount, boolean showLocation) {
+    public void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
         this.showTitle = showTitle;
         this.showAuthor = showAuthor;
         this.showPublisher = showPublisher;
@@ -167,7 +184,46 @@ public class CatalogTableModel extends AbstractTableModel {
     }
 
     public void updateData() {
-        BookDAO.getInstance().resetList();
-        itemList = BookDAO.getInstance().getList();
+        itemList = BookService.getInstance().getBooks();
+    }
+
+    private int getSkippedRowsCount() {
+        return (page - 1) * maxRows;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        if (page < 1 || (page - 1) * maxRows > itemList.size()) {
+            return;
+        }
+
+        this.page = page - 1;
+    }
+
+    public int getMaxRows() {
+        return maxRows;
+    }
+
+    public void setMaxRows(int maxRows) {
+        if (maxRows > 0) {
+            this.maxRows = maxRows;
+        }
+    }
+
+    public void nextPage() {
+        if (page * maxRows > itemList.size()) {
+            return;
+        }
+        page++;
+    }
+
+    public void prevPage() {
+        if (page - 1 <= 0) {
+            return;
+        }
+        page--;
     }
 }

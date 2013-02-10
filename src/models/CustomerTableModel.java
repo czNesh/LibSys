@@ -7,8 +7,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import models.dao.CustomerDAO;
 import models.entity.Customer;
+import services.CustomerService;
 
 /**
  *
@@ -17,29 +17,31 @@ import models.entity.Customer;
 public class CustomerTableModel extends AbstractTableModel {
 
     private List<Customer> customersList;
-    boolean showCID;
+    boolean showSSN;
     boolean showName;
     boolean showStreet;
     boolean showCity;
     boolean showCountry;
     boolean showEmail;
     boolean showPhone;
+    boolean showNotes;
+
+    public CustomerTableModel() {
+        super();
+        customersList = CustomerService.getInstance().getCustomers();
+        showName = true;
+        showCity = true;
+    }
 
     @Override
     public int getRowCount() {
         return (customersList == null) ? 0 : customersList.size();
     }
 
-    public CustomerTableModel() {
-        customersList = CustomerDAO.getInstance().getList();
-        showName = true;
-        showCity = true;
-    }
-
     @Override
     public int getColumnCount() {
         int i = 0;
-        if (showCID) {
+        if (showSSN) {
             i++;
         }
         if (showName) {
@@ -60,6 +62,9 @@ public class CustomerTableModel extends AbstractTableModel {
         if (showPhone) {
             i++;
         }
+        if (showNotes) {
+            i++;
+        }
         return i;
     }
 
@@ -67,7 +72,7 @@ public class CustomerTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         ArrayList<String> tempValuesColumnNames = new ArrayList<>();
 
-        if (showCID) {
+        if (showSSN) {
             tempValuesColumnNames.add("Číslo uživatele");
         }
         if (showName) {
@@ -89,6 +94,9 @@ public class CustomerTableModel extends AbstractTableModel {
         if (showPhone) {
             tempValuesColumnNames.add("Telefon");
         }
+        if (showNotes) {
+            tempValuesColumnNames.add("Poznámky");
+        }
 
         return tempValuesColumnNames.get(column);
     }
@@ -98,8 +106,8 @@ public class CustomerTableModel extends AbstractTableModel {
         Customer c = customersList.get(rowIndex);
         ArrayList<String> tempValues = new ArrayList<>();
 
-        if (showCID) {
-            tempValues.add(String.valueOf(c.getUCID()));
+        if (showSSN) {
+            tempValues.add(String.valueOf(c.getSSN()));
         }
         if (showName) {
             tempValues.add(c.getFirstName() + " " + c.getLastName());
@@ -119,22 +127,25 @@ public class CustomerTableModel extends AbstractTableModel {
         if (showPhone) {
             tempValues.add(c.getPhone());
         }
+        if (showNotes) {
+            tempValues.add(c.getNotes());
+        }
 
         return tempValues.get(columnIndex);
     }
 
     public void updateData() {
-        CustomerDAO.getInstance().resetList();
-        customersList = CustomerDAO.getInstance().getList();
+        customersList = CustomerService.getInstance().getCustomers();
     }
 
-    public void setVisibility(boolean showCID, boolean showName, boolean showStreet, boolean showCity, boolean showCountry, boolean showEmail, boolean showPhone) {
-        this.showCID = showCID;
+    public void setVisibility(boolean showSSN, boolean showName, boolean showStreet, boolean showCity, boolean showCountry, boolean showEmail, boolean showPhone, boolean showNotes) {
+        this.showSSN = showSSN;
         this.showName = showName;
         this.showStreet = showStreet;
         this.showCity = showCity;
         this.showCountry = showCountry;
         this.showEmail = showEmail;
         this.showPhone = showPhone;
+        this.showNotes = showNotes;
     }
 }

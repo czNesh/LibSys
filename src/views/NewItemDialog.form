@@ -44,44 +44,45 @@
                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="inputSponsor" min="-2" pref="205" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="inputBuyedDate" min="-2" pref="69" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="inputLanguage" alignment="1" max="32767" attributes="0"/>
+                          <Component id="inputPublisher" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputGenres" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputTitle" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputAuthor" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputISBN10" alignment="0" pref="205" max="32767" attributes="0"/>
+                          <Component id="inputISBN13" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputPageCount" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="inputLocation" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputBuyedDate" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputCount" alignment="0" pref="76" max="32767" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="datePickerButton2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="errorMessageOutput" alignment="0" min="-2" pref="331" max="-2" attributes="0"/>
-                          <Component id="inputPageCount" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="inputLanguage" max="32767" attributes="0"/>
-                              <Component id="inputPublisher" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputGenres" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputTitle" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputAuthor" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputISBN10" alignment="0" pref="205" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="inputPublishedDate" min="-2" pref="69" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="datePickerButton1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="inputISBN13" alignment="0" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="searchProgressBar" alignment="1" pref="0" max="32767" attributes="0"/>
                           <Component id="cancelButton" max="32767" attributes="0"/>
                           <Component id="saveButton" max="32767" attributes="0"/>
-                          <Component id="searchButton" max="32767" attributes="0"/>
+                          <Component id="searchButton" pref="130" max="32767" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="inputSponsor" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="inputPublishedDate" min="-2" pref="76" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -130,9 +131,8 @@
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="inputPublishedDate" max="32767" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="datePickerButton1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="inputPublishedDate" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -147,7 +147,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="searchButton" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchProgressBar" min="-2" pref="5" max="-2" attributes="0"/>
@@ -161,7 +161,16 @@
                           <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="errorMessageOutput" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputCount" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="inputLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -189,7 +198,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="searchButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dohledat"/>
+        <Property name="text" type="java.lang.String" value="Dohledat informace"/>
         <Property name="toolTipText" type="java.lang.String" value="Pokus&#xed; se dle zadan&#xfd;ch &#xfa;daj&#x16f; doplnit informace o knize (CTRL+D)"/>
       </Properties>
     </Component>
@@ -215,11 +224,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputPublishedDate">
-      <Properties>
-        <Property name="focusable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vyd&#xe1;no roku: "/>
@@ -236,15 +240,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Vydavatel:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="datePickerButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
-        <Property name="name" type="java.lang.String" value="publishedPickerButton" noResource="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="datePickerButton1ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -285,6 +280,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="inputPageCount">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="datePickerButton2">
       <Properties>
@@ -292,15 +292,38 @@
         <Property name="name" type="java.lang.String" value="buyedPickerButton" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="errorMessageOutput">
+    <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
+        <Property name="text" type="java.lang.String" value="Po&#x10d;et kus&#x16f;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="inputCount">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="33" red="ff" type="rgb"/>
+        <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="1" type="code"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="inputPublishedDate">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="now" maximum="now" stepSize="1" type="date"/>
+        </Property>
+        <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+          <SpinnerEditor format="yyyy" type="1"/>
+        </Property>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel13">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Um&#xed;st&#x11b;n&#xed;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="inputLocation">
     </Component>
   </SubComponents>
 </Form>

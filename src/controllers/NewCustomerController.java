@@ -7,8 +7,9 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import models.dao.CustomerDAO;
+import javax.swing.JOptionPane;
 import models.entity.Customer;
+import services.CustomerService;
 import views.NewCustomerDialog;
 
 /**
@@ -20,7 +21,7 @@ class NewCustomerController extends BaseController {
     private NewCustomerDialog view;
 
     public NewCustomerController(JFrame parent) {
-        view = new NewCustomerDialog(parent, false);
+        view = new NewCustomerDialog(parent, true);
         setCountries();
         initListeners();
     }
@@ -67,46 +68,54 @@ class NewCustomerController extends BaseController {
         @Override
         public void actionPerformed(ActionEvent e) {
             /* GET INPUTS */
-            String name = view.getInputName().getText().trim();
+            String fname = view.getInputFirstName().getText().trim();
+            String lname = view.getInputLastName().getText().trim();
             String street = view.getInputStreet().getText().trim();
             String city = view.getInputCity().getText().trim();
             String postcode = view.getInputPostcode().getText().trim();
             String country = view.getInputCountry().getSelectedItem().toString().trim();
             String email = view.getInputEmail().getText().trim();
             String phone = view.getInputPhone().getText().trim();
+            String notes = view.getInputNotes().getText().trim();
 
             /* VALIDATION */
-            boolean isCorrectInput = true;
-            String errors = "";
+            StringBuilder validationLog = new StringBuilder();
+            Customer c = new Customer();
 
-
-            if (name.isEmpty() || !name.contains(" ") || name.length() < 5) {
-                isCorrectInput = false;
-                errors += "CHYBA: Vložte jméno ve tvaru: jméno[mezera]přijmení";
-            }
-
-            String[] temp = name.split(" ");
-            String lname = temp[temp.length - 1];
-            String fname = "";
-            for (int i = 0; i < temp.length - 1; i++) {
-                fname += temp[i];
-            }
-
-
-            /* SAVE CUSTOMER */
-            if (isCorrectInput) {
-                Customer c = new Customer();
-                c.setUCID(897115144);
+            // kontrola jména
+            if (fname.isEmpty()) {
+                validationLog.append("Zadejte jméno\n");
+            } else {
                 c.setFirstName(fname);
-                c.setLastName(lname);
-                c.setStreet(street);
-                c.setCity(city);
-                c.setCountry(country);
-                c.setEmail(email);
-                c.setPhone(phone);
-                c.setPostcode(postcode);
+            }
 
-                CustomerDAO.getInstance().save(c);
+            // kontrola přijmení
+            if (lname.isEmpty()) {
+                validationLog.append("Zadejte přijmení\n");
+            } else {
+                c.setLastName(lname);
+            }
+            
+            // kontrola emailu
+            if(!email.matches(".+@.+\\.[a-z]+")){
+                validationLog.append("Neplatný nebo prázdný email\n");
+            }else{
+                c.setEmail(email);
+            }
+            
+            // nastavení nepoviných položek
+            c.setStreet(street);
+            c.setCity(city);
+            c.setCountry(country);
+            c.setPostcode(postcode);
+            c.setNotes(notes);
+            c.setPhone(phone);
+
+            // validní? uložení : výpis
+            if (validationLog.length() > 0) {
+                JOptionPane.showMessageDialog(view, validationLog.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
+            } else {
+                CustomerService.getInstance().saveCustomer(c);
                 dispose();
             }
         }

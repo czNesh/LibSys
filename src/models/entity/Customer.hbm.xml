@@ -7,12 +7,13 @@
         </id> 
         <property name="firstName" not-null="true" type="string"/>
         <property name="lastName" not-null="true" type="string"/>
-        <property name="UCID" not-null="true" type="integer"/>       
-        <property name="street" not-null="true" type="string"/>
-        <property name="city" not-null="true" type="string"/> 
-        <property name="country" not-null="true" type="string"/>
-        <property name="postcode" not-null="true" type="string"/>
+        <property name="SSN" not-null="true" type="integer"/>       
+        <property name="street" not-null="false" type="string"/>
+        <property name="city" not-null="false" type="string"/> 
+        <property name="country" not-null="false" type="string"/>
+        <property name="postcode" not-null="false" type="string"/>
         <property name="email" not-null="true" type="string"/>
-        <property name="phone" not-null="true" type="string"/>
+        <property name="phone" not-null="false" type="string"/>
+        <property name="notes" not-null="false" type="string"/>
     </class>
 </hibernate-mapping>

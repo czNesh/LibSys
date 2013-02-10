@@ -6,6 +6,7 @@ package views;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JTextField;
 
 /**
  *
@@ -31,7 +32,7 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jCheckBox5 = new javax.swing.JCheckBox();
-        CIDCheckBox = new javax.swing.JCheckBox();
+        SSNChecked = new javax.swing.JCheckBox();
         filterOKButton = new javax.swing.JButton();
         nameCheckBox = new javax.swing.JCheckBox();
         streetCheckBox = new javax.swing.JCheckBox();
@@ -39,13 +40,14 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
         countryCheckBox = new javax.swing.JCheckBox();
         emailCheckBox = new javax.swing.JCheckBox();
         phoneCheckBox = new javax.swing.JCheckBox();
+        notesCheckBox = new javax.swing.JCheckBox();
 
         jCheckBox5.setText("jCheckBox5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Co chcete zobrazit?");
 
-        CIDCheckBox.setText("Číslo uživatele");
+        SSNChecked.setText("Číslo uživatele");
 
         filterOKButton.setText("OK");
         filterOKButton.setName("filterConfirmed"); // NOI18N
@@ -64,6 +66,8 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
 
         phoneCheckBox.setText("Telefon");
 
+        notesCheckBox.setText("Poznámky");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,18 +76,18 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(filterOKButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(phoneCheckBox)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(CIDCheckBox)
-                                .addComponent(nameCheckBox)
-                                .addComponent(emailCheckBox))
-                            .addGap(28, 28, 28)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cityCheckBox)
-                                .addComponent(streetCheckBox)
-                                .addComponent(countryCheckBox)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SSNChecked)
+                            .addComponent(nameCheckBox)
+                            .addComponent(emailCheckBox)
+                            .addComponent(phoneCheckBox))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(notesCheckBox)
+                            .addComponent(cityCheckBox)
+                            .addComponent(streetCheckBox)
+                            .addComponent(countryCheckBox))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,7 +95,7 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CIDCheckBox)
+                    .addComponent(SSNChecked)
                     .addComponent(streetCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -102,7 +106,9 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
                     .addComponent(countryCheckBox)
                     .addComponent(emailCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(phoneCheckBox)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneCheckBox)
+                    .addComponent(notesCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filterOKButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -111,19 +117,20 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CIDCheckBox;
+    private javax.swing.JCheckBox SSNChecked;
     private javax.swing.JCheckBox cityCheckBox;
     private javax.swing.JCheckBox countryCheckBox;
     private javax.swing.JCheckBox emailCheckBox;
     private javax.swing.JButton filterOKButton;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox nameCheckBox;
+    private javax.swing.JCheckBox notesCheckBox;
     private javax.swing.JCheckBox phoneCheckBox;
     private javax.swing.JCheckBox streetCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    public JCheckBox getCIDCheckBox() {
-        return CIDCheckBox;
+    public JCheckBox getSSNCheckBox() {
+        return SSNChecked;
     }
 
     public JCheckBox getCityCheckBox() {
@@ -156,5 +163,9 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
 
     public JCheckBox getStreetCheckBox() {
         return streetCheckBox;
+    }
+
+    public JCheckBox getNotesCheckBox() {
+        return notesCheckBox;
     }
 }

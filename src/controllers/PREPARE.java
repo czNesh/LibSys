@@ -10,14 +10,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import models.dao.BaseDAO;
-import models.dao.CustomerDAO;
+import services.CustomerService;
 import models.entity.Author;
 import models.entity.Book;
 import models.entity.Customer;
 import models.entity.Genre;
 import models.entity.GenreType;
 import models.entity.SystemUser;
-import services.DateFormater;
+import helpers.DateFormater;
 
 /**
  *
@@ -73,9 +73,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960, 1, 1));
+        b.setPublishedYear(new Date(1960-1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958, 1, 1));
+        b.setAddedDate(new Date(1958-1900, 1, 1));
         save(b);
 
         b = new Book();
@@ -89,9 +89,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960, 1, 1));
+        b.setPublishedYear(new Date(1960-1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958, 1, 1));
+        b.setAddedDate(new Date(1958-1900, 1, 1));
         save(b);
 
         b = new Book();
@@ -105,9 +105,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960, 1, 1));
+        b.setPublishedYear(new Date(1960-1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958, 1, 1));
+        b.setAddedDate(new Date(1958-1900, 1, 1));
         save(b);
 
 
@@ -122,9 +122,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960, 1, 1));
+        b.setPublishedYear(new Date(1960-1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958, 1, 1));
+        b.setAddedDate(new Date(1958-1900, 1, 1));
         save(b);
 
 
@@ -738,9 +738,10 @@ class PREPARE extends BaseDAO<Object> {
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("5.10.1999", false));
         save(b);
+
         
         Customer c = new Customer();
-        c.setUCID(418769447);
+        c.setSSN(418769447);
         c.setFirstName("Petr");
         c.setLastName("Hejhal");
         c.setStreet("Pařížská 19");
@@ -749,10 +750,10 @@ class PREPARE extends BaseDAO<Object> {
         c.setEmail("petr.hejhal@centrum.cz");
         c.setPhone("+420721771459");
         c.setPostcode("11000");
-        CustomerDAO.getInstance().save(c);
+        save(c);
         
         c = new Customer();
-        c.setUCID(628771395);
+        c.setSSN(628771395);
         c.setFirstName("Jaroslav");
         c.setLastName("Medek");
         c.setStreet("Kdesi v Beroune 1");
@@ -761,10 +762,10 @@ class PREPARE extends BaseDAO<Object> {
         c.setEmail("medy75@seznam.cz");
         c.setPhone("+420605447984");
         c.setPostcode("15800");
-        CustomerDAO.getInstance().save(c);
+        save(c);
         
         c = new Customer();
-        c.setUCID(184978134);
+        c.setSSN(184978134);
         c.setFirstName("Radek");
         c.setLastName("Ježdík");
         c.setStreet("Pražského povstání 23");
@@ -773,7 +774,7 @@ class PREPARE extends BaseDAO<Object> {
         c.setEmail("redhead@seznam.cz");
         c.setPhone("+420606456144");
         c.setPostcode("12000");
-        CustomerDAO.getInstance().save(c);
+        save(c);
 
 
     }
