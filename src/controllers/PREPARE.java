@@ -4,20 +4,19 @@
  */
 package controllers;
 
+import helpers.DateFormater;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import models.dao.BaseDAO;
-import services.CustomerService;
 import models.entity.Author;
 import models.entity.Book;
 import models.entity.Customer;
 import models.entity.Genre;
 import models.entity.GenreType;
 import models.entity.SystemUser;
-import helpers.DateFormater;
 
 /**
  *
@@ -73,9 +72,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960-1900, 1, 1));
+        b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958-1900, 1, 1));
+        b.setAddedDate(new Date(1958 - 1900, 1, 1));
         save(b);
 
         b = new Book();
@@ -89,9 +88,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960-1900, 1, 1));
+        b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958-1900, 1, 1));
+        b.setAddedDate(new Date(1958 - 1900, 1, 1));
         save(b);
 
         b = new Book();
@@ -105,9 +104,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960-1900, 1, 1));
+        b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958-1900, 1, 1));
+        b.setAddedDate(new Date(1958 - 1900, 1, 1));
         save(b);
 
 
@@ -122,9 +121,9 @@ class PREPARE extends BaseDAO<Object> {
         b.setISBN13("3115416856446");
         b.setLocation("D2");
         b.setPageCount(550);
-        b.setPublishedYear(new Date(1960-1900, 1, 1));
+        b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
-        b.setAddedDate(new Date(1958-1900, 1, 1));
+        b.setAddedDate(new Date(1958 - 1900, 1, 1));
         save(b);
 
 
@@ -739,7 +738,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setAddedDate(DateFormater.stringToDate("5.10.1999", false));
         save(b);
 
-        
+
         Customer c = new Customer();
         c.setSSN(418769447);
         c.setFirstName("Petr");
@@ -751,7 +750,7 @@ class PREPARE extends BaseDAO<Object> {
         c.setPhone("+420721771459");
         c.setPostcode("11000");
         save(c);
-        
+
         c = new Customer();
         c.setSSN(628771395);
         c.setFirstName("Jaroslav");
@@ -763,7 +762,7 @@ class PREPARE extends BaseDAO<Object> {
         c.setPhone("+420605447984");
         c.setPostcode("15800");
         save(c);
-        
+
         c = new Customer();
         c.setSSN(184978134);
         c.setFirstName("Radek");

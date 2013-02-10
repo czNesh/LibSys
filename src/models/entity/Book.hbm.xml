@@ -7,7 +7,7 @@
         </id>
         <property name="title" not-null="true" type="string"/>
         <many-to-one cascade="save-update" class="models.entity.Author" name="mainAuthor" lazy="false"/>
-        <list cascade="all" name="authors" table="item_author">
+        <list cascade="all" name="authors" table="item_author" lazy="false">
             <key column="id"/>
             <index column="idx"/>
             <many-to-many class="models.entity.Author" column="author_id"/>
@@ -27,5 +27,6 @@
         <property name="location" not-null="false" type="string"/>
         <property name="count" not-null="false" type="integer"/>
         <property name="borrowedCount" not-null="false" type="integer"/>
+        <property name="notes" not-null="false" type="string"/>
     </class>
 </hibernate-mapping>

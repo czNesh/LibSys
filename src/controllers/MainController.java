@@ -7,6 +7,8 @@ package controllers;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JComponent;
@@ -21,12 +23,12 @@ import views.MainView;
  * @author Nesh
  */
 public class MainController extends BaseController {
-
+    
     private MainView mainView;
     private MenuController menuController;
     private FilterTableDialog filter;
     private BookTableModel tableModel;
-
+    
     public MainController() {
         mainView = new MainView();
         menuController = new MenuController(this, mainView);
@@ -35,30 +37,31 @@ public class MainController extends BaseController {
         initListeners();
         updateView();
     }
-
+    
     private void initListeners() {
         // Table Listeners
         mainView.getCatalogTable().addMouseListener(new TableMouseListener());
         BookTableActionListener bt = new BookTableActionListener();
         mainView.getBookTableNextButton().addActionListener(bt);
         mainView.getBookTablePrevButton().addActionListener(bt);
+        mainView.getBookTableInputNumber().addKeyListener(new BookTableKeyListener());
 
         // FILTER LISTENERS 
         mainView.getFilterButton().addActionListener(new FilterButtonListener());
         filter.getOkButton().addActionListener(new FilterOKButtonListener());
     }
-
+    
     @Override
     void showView() {
         mainView.setLocationRelativeTo(null);
         mainView.setVisible(true);
     }
-
+    
     @Override
     void dispose() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
     private void updateView() {
         // SET USER NAME
         mainView.getSystemUserLabel().setText(AppController.getInstance().getLoggedUser().toString());
@@ -66,18 +69,46 @@ public class MainController extends BaseController {
         // FILL TABLE
         mainView.getCatalogTable().setModel(tableModel);
         tableModel.fireTableStructureChanged();
-    }
 
+        // GET PAGE 
+        mainView.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
+        mainView.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
+    }
+    
     public void tableDataChanged() {
         tableModel.updateData();
         tableModel.fireTableDataChanged();
     }
-
+    
+    private class BookTableKeyListener implements KeyListener {
+        
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent e) {
+        }
+        
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                String in = mainView.getBookTableInputNumber().getText();
+                try {
+                    tableModel.setPage(Integer.parseInt(in));
+                } catch (NumberFormatException ex) {
+                    System.out.println("NESPRAVNY FORMAT CISLA");
+                }
+                updateView();
+            }
+        }
+    }
+    
     private class BookTableActionListener implements ActionListener {
-
+        
         public BookTableActionListener() {
         }
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (((JComponent) e.getSource()).getName()) {
@@ -92,23 +123,23 @@ public class MainController extends BaseController {
             }
         }
     }
-
+    
     private class FilterOKButtonListener implements ActionListener {
-
+        
         public FilterOKButtonListener() {
         }
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             filter.setVisible(false);
         }
     }
-
+    
     private class FilterButtonListener implements ActionListener {
-
+        
         public FilterButtonListener() {
         }
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             filter.setLocationRelativeTo(null);
@@ -124,47 +155,45 @@ public class MainController extends BaseController {
                     filter.getPageCountCheckbox().isSelected(),
                     filter.getCountCheckbox().isSelected(),
                     filter.getLocationCheckbox().isSelected());
-
             updateView();
-
+            
         }
     }
-
+    
     private class TableMouseListener implements MouseListener {
-
+        
         public TableMouseListener() {
         }
-
+        
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
                 Point p = e.getPoint();
                 JTable t = mainView.getCatalogTable();
-                Book b = (Book) t.getValueAt(t.rowAtPoint(p), 0);
-
-
-
+                Book b = (Book) tableModel.getBook(t.getSelectedRow());
+                BookDetailController bdc = new BookDetailController(b);
+                bdc.showView();               
             }
-
+            
         }
-
+        
         @Override
         public void mousePressed(MouseEvent e) {
         }
-
+        
         @Override
         public void mouseReleased(MouseEvent e) {
         }
-
+        
         @Override
         public void mouseEntered(MouseEvent e) {
         }
-
+        
         @Override
         public void mouseExited(MouseEvent e) {
         }
     }
-
+    
     public BookTableModel getCatalogTableModel() {
         return tableModel;
     }

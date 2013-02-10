@@ -15,11 +15,18 @@ import java.util.Objects;
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private Long id;
     private String firstName;
     private String lastName;
     private Timestamp time_id;
+
+    public Author() {
+    }
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     /**
      * @return the id
@@ -96,11 +103,8 @@ public class Author implements Serializable {
         return true;
     }
 
-    
-
     @Override
     public String toString() {
         return firstName + " " + lastName;
     }
-
 }

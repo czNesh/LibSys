@@ -39,7 +39,7 @@ public class MenuController implements ActionListener {
 
         switch (name) {
             case "newItem":
-                NewItemController newItemController = new NewItemController(view, controller);
+                NewBookController newItemController = new NewBookController(view, controller);
                 newItemController.showView();
                 break;
              case "newBorrow":

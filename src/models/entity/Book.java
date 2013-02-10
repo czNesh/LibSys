@@ -34,6 +34,7 @@ public class Book implements Serializable {
     private String location;
     private int count;
     private int borrowedCount;
+    private String notes;
 
     /**
      * @return the id
@@ -41,8 +42,8 @@ public class Book implements Serializable {
     public Long getId() {
         return id;
     }
-    
-     /**
+
+    /**
      * @param id the id to set
      */
     private void setId(Long id) {
@@ -259,6 +260,20 @@ public class Book implements Serializable {
         this.borrowedCount = borrowedCount;
     }
 
+    /**
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -296,9 +311,9 @@ public class Book implements Serializable {
         }
         return true;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return title;
     }
 }

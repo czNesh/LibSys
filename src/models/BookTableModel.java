@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import models.entity.Author;
 import models.entity.Book;
 import services.BookService;
 
@@ -26,13 +27,20 @@ public class BookTableModel extends AbstractTableModel {
         super();
         itemList = BookService.getInstance().getBooks();
         page = 1;
-        maxRows = 10;
+        maxRows = 50;
     }
 
     public BookTableModel(List<Book> in) {
         super();
         page = 1;
-        maxRows = 10;
+        maxRows = 50;
+        itemList = in;
+    }
+
+    public BookTableModel(List<Book> in, int maxRows) {
+        super();
+        page = 1;
+        this.maxRows = maxRows;
         itemList = in;
     }
 
@@ -95,7 +103,18 @@ public class BookTableModel extends AbstractTableModel {
             if (i.getMainAuthor() == null) {
                 tempValues.add("Neznámý autor");
             } else {
-                tempValues.add(i.getMainAuthor().toString());
+                StringBuilder sb = new StringBuilder();
+                boolean first = true;
+                for (Author a : i.getAuthors()) {
+                    if (first) {
+                        sb.append(a.toString());
+                        first = false;
+                        continue;
+                    }
+                    sb.append(("; " + a.toString()));
+
+                }
+                tempValues.add(sb.toString());
             }
         }
         if (showPublisher) {
@@ -225,5 +244,17 @@ public class BookTableModel extends AbstractTableModel {
             return;
         }
         page--;
+    }
+
+    public int getTotalPageCount() {
+        return (int) Math.round((itemList.size() / maxRows) + 0.5); // round up
+    }
+
+    public Book getBook(int index) {
+        return itemList.get(getSkippedRowsCount() + index);
+    }
+
+    public int getListidx(int index) {
+        return getSkippedRowsCount() + index;
     }
 }

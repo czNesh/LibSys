@@ -34,14 +34,16 @@ public class AuthorService extends BaseDAO<Author> implements Serializable {
 
     public Author getOrCreate(Author mainAuthor) {
         int index = authors.indexOf(mainAuthor);
-        if(index == -1){
+        if (index == -1) {
             save(mainAuthor);
             authors.add(mainAuthor);
             return mainAuthor;
-        }else{
+        } else {
             return authors.get(index);
         }
     }
-    
-    
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
 }

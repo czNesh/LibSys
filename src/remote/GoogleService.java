@@ -9,6 +9,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.ChangeListener;
 import models.entity.Author;
 import models.entity.Book;
@@ -17,7 +19,7 @@ import models.entity.Book;
  *
  * @author Administrator
  */
-public class GoogleBooksSearch {
+public class GoogleService {
 
     private StringBuilder query;
     private int status;
@@ -26,11 +28,11 @@ public class GoogleBooksSearch {
     private ArrayList<Book> results = new ArrayList<>();
     URLConnection conn;
 
-    public GoogleBooksSearch(String query) {
+    public GoogleService(String query) {
         this.query = new StringBuilder(query);
     }
 
-    public GoogleBooksSearch() {
+    public GoogleService() {
         this.query = new StringBuilder();
     }
 
@@ -203,7 +205,7 @@ public class GoogleBooksSearch {
                     if (in.startsWith("publishedDate\":")) {
                         in = in.substring(17, in.length() - 2);
                         try {
-                            Date d = new Date(Integer.parseInt(in)-1900, 1, 1);
+                            Date d = new Date(Integer.parseInt(in) - 1900, 1, 1);
                             tempBook.setPublishedYear(d);
                         } catch (NumberFormatException e) {
                             continue;
@@ -288,5 +290,23 @@ public class GoogleBooksSearch {
 
     public int getResultsCount() {
         return (results == null) ? 0 : results.size();
+    }
+
+    public String getThumbnailURL() {
+        try {
+            connectServer();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String in;
+            while ((in = br.readLine()) != null) {
+                in = in.trim().replaceAll("\t", "");
+                if (in.startsWith("\"thumbnail\":")) {
+                    return in.substring(14, in.length() - 1).replaceAll("&zoom=1", "");
+                }
+            }
+            return null;
+        } catch (IOException ex) {
+            Logger.getLogger(GoogleService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }
