@@ -4,17 +4,20 @@
  */
 package controllers;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import models.CustomerTableModel;
+import models.entity.Book;
 import models.entity.Customer;
 import services.CustomerService;
 import views.CustomerFilterDialog;
@@ -29,9 +32,12 @@ public class CustomerListController extends BaseController {
     CustomerListDialog dialog;
     CustomerTableModel tableModel;
     CustomerFilterDialog filterDialog;
+    Customer customer;
+    boolean selectionMode;
 
-    public CustomerListController(JFrame parent) {
+    public CustomerListController(JFrame parent, boolean selectionMode) {
         dialog = new CustomerListDialog(parent, true);
+        this.selectionMode = selectionMode;
         tableModel = new CustomerTableModel();
         updateData();
         dialog.getResultTable().setModel(tableModel);
@@ -45,18 +51,19 @@ public class CustomerListController extends BaseController {
         dialog.getConfirmButton().addActionListener(b);
         dialog.getCancelButton().addActionListener(b);
         dialog.getFilterButton().addActionListener(b);
+        dialog.getSearchButton().addActionListener(b);
 
         // KeyListener
         CustomerListKeyListener k = new CustomerListKeyListener();
         dialog.getInputSSN().addKeyListener(k);
         dialog.getInputFName().addKeyListener(k);
         dialog.getInputLName().addKeyListener(k);
+        dialog.getInputEmail().addKeyListener(k);
+        dialog.getInputPhone().addKeyListener(k);
 
-        // FocusListener
-        CustomerListFocusListener f = new CustomerListFocusListener();
-        dialog.getInputSSN().addFocusListener(f);
-        dialog.getInputFName().addFocusListener(f);
-        dialog.getInputLName().addFocusListener(f);
+        // MouseListener
+        CustomerMouseListener m = new CustomerMouseListener();
+        dialog.getResultTable().addMouseListener(m);
     }
 
     @Override
@@ -76,9 +83,47 @@ public class CustomerListController extends BaseController {
         tableModel.fireTableDataChanged();
     }
 
-    
+    public Customer getSeletedCustomer() {
+        return customer;
+    }
+
+    private class CustomerMouseListener implements MouseListener {
+
+        public CustomerMouseListener() {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                Point p = e.getPoint();
+                JTable t = dialog.getResultTable();
+                customer = (Customer) tableModel.getCustomer(t.getSelectedRow());
+            }
+            if (selectionMode) {
+                if (customer != null) {
+                    dialog.dispose();
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+    }
+
     // LISTENER CLASSes
-    
     private class CustomerListButtonListener implements ActionListener {
 
         @Override
@@ -88,6 +133,11 @@ public class CustomerListController extends BaseController {
 
             switch (buttonName) {
                 case "confirm":
+                    if (dialog.getResultTable().getSelectedRow() != -1 && selectionMode) {
+                        customer = tableModel.getCustomer(dialog.getResultTable().getSelectedRow());
+                        dialog.dispose();
+                    }
+
                     break;
                 case "cancel":
                     dispose();
@@ -100,7 +150,6 @@ public class CustomerListController extends BaseController {
                     break;
 
                 case "filterConfirmed":
-                    System.out.println("1");
                     tableModel.setVisibility(
                             filterDialog.getSSNCheckBox().isSelected(),
                             filterDialog.getNameCheckBox().isSelected(),
@@ -112,6 +161,16 @@ public class CustomerListController extends BaseController {
                             filterDialog.getNotesCheckBox().isSelected());
                     tableModel.fireTableStructureChanged();
                     filterDialog.setVisible(false);
+                    break;
+
+                case "search":
+                    tableModel.setFilter(
+                            dialog.getInputSSN().getText().trim(),
+                            dialog.getInputFName().getText().trim(),
+                            dialog.getInputLName().getText().trim(),
+                            dialog.getInputEmail().getText().trim(),
+                            dialog.getInputPhone().getText().trim());
+                    tableModel.fireTableDataChanged();
                     break;
                 default:
                     System.out.println("Chyba - Jmeno polozky neodpovida zadne operaci (Buttonlistener)");
@@ -142,6 +201,12 @@ public class CustomerListController extends BaseController {
             if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
                 return;
             }
+
+            // ESCAPE pri stisku sipky
+            if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                return;
+            }
+
 
             // priprava promennych 
             String in;
@@ -208,26 +273,11 @@ public class CustomerListController extends BaseController {
                     dialog.getInputSSN().setSelectionStart(start);
                     dialog.getInputSSN().setSelectionEnd(dialog.getInputSSN().getText().length());
 
-
-
                     break;
                 default:
                     break;
 
             }
-        }
-    }
-
-    private class CustomerListFocusListener implements FocusListener {
-
-        @Override
-        public void focusLost(FocusEvent e) {
-            updateData();
-        }
-
-        @Override
-        public void focusGained(FocusEvent e) {
-            // NOT TO DO
         }
     }
 }

@@ -19,6 +19,7 @@ public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
+    private String barcode;
     private String title;
     private Author mainAuthor;
     private List<Author> authors;
@@ -48,6 +49,20 @@ public class Book implements Serializable {
      */
     private void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the barcode
+     */
+    public String getBarcode() {
+        return barcode;
+    }
+
+    /**
+     * @param barcode the barcode to set
+     */
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     /**

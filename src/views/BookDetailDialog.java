@@ -4,10 +4,11 @@
  */
 package views;
 
-import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -45,23 +46,24 @@ public class BookDetailDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        infoTitle = new javax.swing.JLabel();
-        infoAuthors = new javax.swing.JLabel();
-        infoLanguage = new javax.swing.JLabel();
-        infoPublisher = new javax.swing.JLabel();
-        infoPublishedYear = new javax.swing.JLabel();
-        infoISBN10 = new javax.swing.JLabel();
-        infoISBN13 = new javax.swing.JLabel();
-        infoPageCount = new javax.swing.JLabel();
-        infoGenre = new javax.swing.JLabel();
-        infoNotes = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         editButton = new javax.swing.JButton();
         closeButton = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
-        infoSponsor = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        infoBuyedDate = new javax.swing.JLabel();
+        infoTitle = new javax.swing.JTextField();
+        infoAuthors = new javax.swing.JTextField();
+        infoLanguage = new javax.swing.JTextField();
+        infoPageCount = new javax.swing.JTextField();
+        infoGenre = new javax.swing.JTextField();
+        infoISBN10 = new javax.swing.JTextField();
+        infoISBN13 = new javax.swing.JTextField();
+        infoPublisher = new javax.swing.JTextField();
+        infoPublishedYear = new javax.swing.JTextField();
+        infoSponsor = new javax.swing.JTextField();
+        infoBuyedDate = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        infoNotes = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -98,46 +100,35 @@ public class BookDetailDialog extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informace o knize"));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Autoři:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Jazyk:");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Titul:");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Vydavatel:");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Poznámky:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Rok vydání:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("ISBN10:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("ISBN13:");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Počet str:");
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("Žánr:");
-
-        infoTitle.setText("jLabel12");
-
-        infoAuthors.setText("jLabel13");
-
-        infoLanguage.setText("jLabel14");
-
-        infoPublisher.setText("jLabel15");
-
-        infoPublishedYear.setText("jLabel16");
-
-        infoISBN10.setText("jLabel17");
-
-        infoISBN13.setText("jLabel18");
-
-        infoPageCount.setText("jLabel19");
-
-        infoGenre.setText("jLabel20");
-
-        infoNotes.setText("jLabel21");
-        infoNotes.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         editButton.setText("Upravit");
         editButton.setName("editButton"); // NOI18N
@@ -168,13 +159,54 @@ public class BookDetailDialog extends javax.swing.JDialog {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel22.setText("Sponzor:");
 
-        infoSponsor.setText("jLabel23");
-
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel24.setText("Zakoupeno dne:");
 
-        infoBuyedDate.setText("jLabel25");
+        infoTitle.setEditable(false);
+        infoTitle.setBorder(null);
+
+        infoAuthors.setEditable(false);
+        infoAuthors.setBorder(null);
+
+        infoLanguage.setEditable(false);
+        infoLanguage.setBorder(null);
+
+        infoPageCount.setEditable(false);
+        infoPageCount.setBorder(null);
+
+        infoGenre.setEditable(false);
+        infoGenre.setBorder(null);
+
+        infoISBN10.setEditable(false);
+        infoISBN10.setBorder(null);
+
+        infoISBN13.setEditable(false);
+        infoISBN13.setBorder(null);
+
+        infoPublisher.setEditable(false);
+        infoPublisher.setBorder(null);
+
+        infoPublishedYear.setEditable(false);
+        infoPublishedYear.setBorder(null);
+
+        infoSponsor.setEditable(false);
+        infoSponsor.setBorder(null);
+
+        infoBuyedDate.setEditable(false);
+        infoBuyedDate.setBorder(null);
+
+        jScrollPane2.setBorder(null);
+
+        infoNotes.setEditable(false);
+        infoNotes.setBackground(new java.awt.Color(240, 240, 240));
+        infoNotes.setColumns(20);
+        infoNotes.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        infoNotes.setRows(5);
+        infoNotes.setBorder(null);
+        jScrollPane2.setViewportView(infoNotes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -185,40 +217,43 @@ public class BookDetailDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
                             .addComponent(jLabel8)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel11)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel10))
-                        .addContainerGap())
+                            .addComponent(jLabel4))
+                        .addGap(78, 78, 78)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(infoGenre)
+                                    .addComponent(infoISBN10)
+                                    .addComponent(infoISBN13, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                                .addContainerGap())))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel11)
                             .addComponent(jLabel22)
                             .addComponent(jLabel24))
                         .addGap(42, 42, 42)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(infoSponsor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                            .addComponent(infoLanguage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoNotes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoPublishedYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoISBN10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoISBN13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoPublisher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoPageCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoGenre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoAuthors, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(infoBuyedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(114, 114, 114))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(infoTitle)
+                            .addComponent(infoAuthors)
+                            .addComponent(infoLanguage)
+                            .addComponent(infoPageCount)
+                            .addComponent(infoPublisher)
+                            .addComponent(infoPublishedYear)
+                            .addComponent(infoSponsor)
+                            .addComponent(infoBuyedDate)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                        .addContainerGap(122, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,51 +264,53 @@ public class BookDetailDialog extends javax.swing.JDialog {
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(infoTitle))
+                            .addComponent(infoTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(infoAuthors))
+                            .addComponent(infoAuthors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(infoLanguage))
+                            .addComponent(infoLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(infoPublisher))
+                            .addComponent(jLabel10)
+                            .addComponent(infoPageCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(infoPublishedYear))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(infoGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(infoISBN10))
+                    .addComponent(infoISBN10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(infoISBN13))
+                    .addComponent(infoISBN13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(infoPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(infoPageCount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(infoGenre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(infoPublishedYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel22)
-                    .addComponent(infoSponsor))
+                    .addComponent(infoSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(infoBuyedDate))
+                    .addComponent(infoBuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(infoNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
 
@@ -323,7 +360,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(4, 4, 4)
                 .addComponent(infoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(infoLocation)
@@ -356,33 +393,32 @@ public class BookDetailDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JLabel infoAuthors;
-    private javax.swing.JLabel infoBuyedDate;
-    private javax.swing.JLabel infoGenre;
-    private javax.swing.JLabel infoISBN10;
-    private javax.swing.JLabel infoISBN13;
-    private javax.swing.JLabel infoLanguage;
+    private javax.swing.JTextField infoAuthors;
+    private javax.swing.JTextField infoBuyedDate;
+    private javax.swing.JTextField infoGenre;
+    private javax.swing.JTextField infoISBN10;
+    private javax.swing.JTextField infoISBN13;
+    private javax.swing.JTextField infoLanguage;
     private javax.swing.JLabel infoLocation;
-    private javax.swing.JLabel infoNotes;
-    private javax.swing.JLabel infoPageCount;
-    private javax.swing.JLabel infoPublishedYear;
-    private javax.swing.JLabel infoPublisher;
-    private javax.swing.JLabel infoSponsor;
+    private javax.swing.JTextArea infoNotes;
+    private javax.swing.JTextField infoPageCount;
+    private javax.swing.JTextField infoPublishedYear;
+    private javax.swing.JTextField infoPublisher;
+    private javax.swing.JTextField infoSponsor;
     private javax.swing.JLabel infoStock;
     private javax.swing.JLabel infoThumb;
     private javax.swing.JPanel infoThumbnailImage;
-    private javax.swing.JLabel infoTitle;
+    private javax.swing.JTextField infoTitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -400,6 +436,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
@@ -411,27 +448,27 @@ public class BookDetailDialog extends javax.swing.JDialog {
         return editButton;
     }
 
-    public JLabel getInfoAuthors() {
+    public JTextField getInfoAuthors() {
         return infoAuthors;
     }
 
-    public JLabel getInfoBuyedDate() {
+    public JTextField getInfoBuyedDate() {
         return infoBuyedDate;
     }
 
-    public JLabel getInfoGenre() {
+    public JTextField getInfoGenre() {
         return infoGenre;
     }
 
-    public JLabel getInfoISBN10() {
+    public JTextField getInfoISBN10() {
         return infoISBN10;
     }
 
-    public JLabel getInfoISBN13() {
+    public JTextField getInfoISBN13() {
         return infoISBN13;
     }
 
-    public JLabel getInfoLanguage() {
+    public JTextField getInfoLanguage() {
         return infoLanguage;
     }
 
@@ -439,23 +476,23 @@ public class BookDetailDialog extends javax.swing.JDialog {
         return infoLocation;
     }
 
-    public JLabel getInfoNotes() {
+    public JTextArea getInfoNotes() {
         return infoNotes;
     }
 
-    public JLabel getInfoPageCount() {
+    public JTextField getInfoPageCount() {
         return infoPageCount;
     }
 
-    public JLabel getInfoPublishedYear() {
+    public JTextField getInfoPublishedYear() {
         return infoPublishedYear;
     }
 
-    public JLabel getInfoPublisher() {
+    public JTextField getInfoPublisher() {
         return infoPublisher;
     }
 
-    public JLabel getInfoSponsor() {
+    public JTextField getInfoSponsor() {
         return infoSponsor;
     }
 
@@ -463,7 +500,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
         return infoStock;
     }
 
-    public JLabel getInfoTitle() {
+    public JTextField getInfoTitle() {
         return infoTitle;
     }
 
@@ -474,5 +511,4 @@ public class BookDetailDialog extends javax.swing.JDialog {
     public JPanel getInfoThumbnailImage() {
         return infoThumbnailImage;
     }
-
 }

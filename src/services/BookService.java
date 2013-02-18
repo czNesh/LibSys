@@ -10,7 +10,6 @@ import models.dao.BaseDAO;
 import models.entity.Book;
 import org.hibernate.Session;
 
-
 /**
  *
  * @author Nesh
@@ -30,6 +29,30 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         return instance;
     }
 
+    private String getFreeBarcode() {
+        while (true) {
+            // vygeneruje SSN
+            long timeSeed = System.nanoTime();
+            double randSeed = Math.random() * 1000;
+            long midSeed = (long) (timeSeed * randSeed);
+            String s = "5" + midSeed;
+            String subStr = s.substring(0, 9);
+            int finalSeed = Integer.parseInt(subStr);
+
+            // volné SSN ?
+            getParameters().put("barcode", finalSeed);
+            if (getUnique("barcode = :barcode") == null) {
+                return String.valueOf(finalSeed);
+            }
+        }
+    }
+
+    public void saveBook(Book b) {
+        b.setBarcode(getFreeBarcode());
+        bookList.add(b);
+        save(b);
+    }
+
     private BookService() {
         bookList = getList();
         authorService = AuthorService.getInstance();
@@ -41,11 +64,5 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
     public List<Book> getBooks() {
         return bookList;
-    }
-
-    public void saveBook(Book b) {
-        b.setMainAuthor(authorService.getOrCreate(b.getMainAuthor()));  
-        bookList.add(b);
-        save(b);
     }
 }

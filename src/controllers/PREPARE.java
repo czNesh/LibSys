@@ -17,6 +17,7 @@ import models.entity.Customer;
 import models.entity.Genre;
 import models.entity.GenreType;
 import models.entity.SystemUser;
+import services.BookService;
 
 /**
  *
@@ -68,14 +69,14 @@ class PREPARE extends BaseDAO<Object> {
         b.setCount(5);
         b.setBorrowedCount(2);
         b.setGenres(genres);
-        b.setISBN10("3116856446");
-        b.setISBN13("3115416856446");
+        b.setISBN10("3112356446");
+        b.setISBN13("34566856446");
         b.setLocation("D2");
         b.setPageCount(550);
         b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958 - 1900, 1, 1));
-        save(b);
+        BookService.getInstance().saveBook(b);
 
         b = new Book();
         b.setTitle("Stínadla se bouří");
@@ -84,14 +85,14 @@ class PREPARE extends BaseDAO<Object> {
         b.setCount(5);
         b.setBorrowedCount(2);
         b.setGenres(genres);
-        b.setISBN10("3116856446");
-        b.setISBN13("3115416856446");
+        b.setISBN10("3546446");
+        b.setISBN13("111416856446");
         b.setLocation("D2");
         b.setPageCount(550);
         b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958 - 1900, 1, 1));
-        save(b);
+        BookService.getInstance().saveBook(b);
 
         b = new Book();
         b.setTitle("Stínadla se bouří");
@@ -100,14 +101,14 @@ class PREPARE extends BaseDAO<Object> {
         b.setCount(5);
         b.setBorrowedCount(2);
         b.setGenres(genres);
-        b.setISBN10("3116856446");
-        b.setISBN13("3115416856446");
+        b.setISBN10("2346");
+        b.setISBN13("3123445416856446");
         b.setLocation("D2");
         b.setPageCount(550);
         b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958 - 1900, 1, 1));
-        save(b);
+        BookService.getInstance().saveBook(b);
 
 
         b = new Book();
@@ -124,7 +125,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setPublishedYear(new Date(1960 - 1900, 1, 1));
         b.setSponsor("CVUT");
         b.setAddedDate(new Date(1958 - 1900, 1, 1));
-        save(b);
+        BookService.getInstance().saveBook(b);
 
 
 
@@ -166,7 +167,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("1.3.2005", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Neumreme na sláme");
         autori = "V. Mihálik";
@@ -196,7 +197,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("19.7.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Neviditelní nepřátelé");
         autori = "B. Karger-Decker";
@@ -226,7 +227,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("23.7.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Nezdárný syn");
         autori = "R. Bornard";
@@ -256,7 +257,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("23.7.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Němá barikáda");
         autori = "J. Drda";
@@ -286,7 +287,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("19.7.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Kouzlo keramiky a porcelánu");
         autori = "A. Braunová";
@@ -316,7 +317,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("22.2.2002", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Follová Ivana Inventury if...");
         autori = "Follová;Zindelová";
@@ -346,7 +347,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(0);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("26.1.2009", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Formenwelt aus dem Naturreiche");
         autori = "Neznámý";
@@ -376,7 +377,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(0);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("29.7.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Fortune for Free and other pieces");
         autori = "Neznámý";
@@ -406,7 +407,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(8);
         b.setCount(8);
         b.setAddedDate(DateFormater.stringToDate("9.8.2006", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Wandteppiche des 20. Jahrhunderts");
         autori = "Neznámý";
@@ -436,7 +437,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("25.11.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Warhol Andy");
         autori = "K. Honnef";
@@ -466,7 +467,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("8.1.2007", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Washington National Gallery");
         autori = "Neznámý";
@@ -496,7 +497,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("5.8.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Wasservogel in Freiland und gemege Kolb");
         autori = "Neznámý";
@@ -526,7 +527,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("26.7.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Water - Colours");
         autori = "Neznámý";
@@ -556,7 +557,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("19.8.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Švabinský Max");
         autori = "Neznámý";
@@ -586,7 +587,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("22.11.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Švabinský Max");
         autori = "A. Matějček";
@@ -616,7 +617,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("13.11.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Švédské stoly aneb jací jsme");
         autori = "M. Vieweg";
@@ -646,7 +647,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("26.2.2001", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Švýcarská tapiserie - katalog");
         autori = "Neznámý";
@@ -676,7 +677,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("25.11.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Tadsch Mahal");
         autori = "Neznámý";
@@ -706,7 +707,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("23.8.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
         b = new Book();
         b.setTitle("Taikomoji dekoratyvine daile");
         autori = "Neznámý";
@@ -736,7 +737,7 @@ class PREPARE extends BaseDAO<Object> {
         b.setBorrowedCount(1);
         b.setCount(1);
         b.setAddedDate(DateFormater.stringToDate("5.10.1999", false));
-        save(b);
+        BookService.getInstance().saveBook(b);
 
 
         Customer c = new Customer();

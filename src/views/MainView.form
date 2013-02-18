@@ -376,7 +376,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="filterButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Z&#xe1;kladn&#xed; filtrace"/>
+                <Property name="text" type="java.lang.String" value="Volby zobrazen&#xed;"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">

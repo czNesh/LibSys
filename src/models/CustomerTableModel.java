@@ -148,4 +148,16 @@ public class CustomerTableModel extends AbstractTableModel {
         this.showPhone = showPhone;
         this.showNotes = showNotes;
     }
+
+    public void setFilter(String ssn, String fname, String lname, String email, String phone) {
+        customersList = CustomerService.getInstance().getFilteredList(ssn, fname, lname, email, phone);
+    }
+
+    public void removeFilter() {
+        customersList = CustomerService.getInstance().getCustomers();
+    }
+
+    public Customer getCustomer(int i) {
+        return customersList.get(i);
+    }
 }

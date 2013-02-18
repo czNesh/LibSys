@@ -178,7 +178,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabel2.setText("Příkaz:");
 
-        filterButton.setText("Základní filtrace");
+        filterButton.setText("Volby zobrazení");
 
         console.setColumns(20);
         console.setRows(5);

@@ -51,7 +51,7 @@ public class MenuController implements ActionListener {
                 newCustomerController.showView();
                 break;
             case "browseCustomers":
-                CustomerListController customerListController = new CustomerListController(view);
+                CustomerListController customerListController = new CustomerListController(view,false);
                 customerListController.showView();
                 break;
             case "importItems":

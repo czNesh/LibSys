@@ -5,6 +5,7 @@
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
         </id>
+        <property name="barcode" not-null="true" type="string"/>
         <property name="title" not-null="true" type="string"/>
         <many-to-one cascade="save-update" class="models.entity.Author" name="mainAuthor" lazy="false"/>
         <list cascade="all" name="authors" table="item_author" lazy="false">

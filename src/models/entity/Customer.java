@@ -208,7 +208,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " (" + ((SSN != 0) ? SSN : "not saved") + ")";
+        return firstName + " " + lastName + " - " + SSN;
     }
     
     public String getFullName(){

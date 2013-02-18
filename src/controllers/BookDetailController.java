@@ -139,7 +139,7 @@ public class BookDetailController extends BaseController {
             dialog.getInfoThumb().setText(":-( Náhled není k dispozici");
         }
     }
-
+    
     private class BookDetailActionListener implements ActionListener {
 
         @Override
