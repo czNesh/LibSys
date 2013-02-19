@@ -5,8 +5,11 @@
 package services;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import models.dao.BaseDAO;
+import models.entity.Author;
 import models.entity.Book;
 import org.hibernate.Session;
 
@@ -18,7 +21,6 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
     private static BookService instance;
     private List<Book> bookList;
-    private AuthorService authorService;
 
     public static BookService getInstance() {
         synchronized (BookService.class) {
@@ -55,7 +57,6 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
     private BookService() {
         bookList = getList();
-        authorService = AuthorService.getInstance();
     }
 
     public BookService(Session session) {
@@ -64,5 +65,63 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
     public List<Book> getBooks() {
         return bookList;
+    }
+
+    public List<Book> getFilteredList(String barcode, String title, String author, String isbn10, String isbn13, Date year) {
+        StringBuilder conditionStringBuilder = new StringBuilder();
+        getParameters().clear();
+        
+        if (barcode != null && !barcode.isEmpty()) {
+            conditionStringBuilder.append("barcode = :barcode");
+            getParameters().put("barcode", barcode);
+        }
+
+        if (title != null && !title.isEmpty()) {
+            if (conditionStringBuilder.length() > 0) {
+                conditionStringBuilder.append(" AND ");
+            }
+            conditionStringBuilder.append("title = :title");
+            getParameters().put("title", title);
+        }
+
+        if (author != null && !author.isEmpty()) {
+            if (conditionStringBuilder.length() > 0) {
+                conditionStringBuilder.append(" AND ");
+            }
+
+            List<Author> findedAuthors = AuthorService.getInstance().findAuthors(author);
+            conditionStringBuilder.append("authors in :findedAuthors");
+            getParameters().put("findedAuthors", findedAuthors);
+        }
+
+        if (isbn10 != null && !isbn10.isEmpty()) {
+            if (conditionStringBuilder.length() > 0) {
+                conditionStringBuilder.append(" AND ");
+            }
+            conditionStringBuilder.append("isbn10 = :isbn10");
+            getParameters().put("isbn10", isbn10);
+        }
+
+        if (isbn13 != null && !isbn13.isEmpty()) {
+            if (conditionStringBuilder.length() > 0) {
+                conditionStringBuilder.append(" AND ");
+            }
+            conditionStringBuilder.append("isbn13 = :isbn13");
+            getParameters().put("isbn13", isbn13);
+        }
+
+        if (year != null) {
+            if (conditionStringBuilder.length() > 0) {
+                conditionStringBuilder.append(" AND ");
+            }
+            conditionStringBuilder.append("publishedYear = :year");
+            getParameters().put("year", year);
+        }
+
+        if (conditionStringBuilder.length() > 0) {
+            setCondition(conditionStringBuilder.toString());
+        }
+
+        return getList();
     }
 }

@@ -181,7 +181,9 @@ public class MainView extends javax.swing.JFrame {
         filterButton.setText("Volby zobrazení");
 
         console.setColumns(20);
+        console.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         console.setRows(5);
+        console.setText(">> Log aplikace\n>> TODO\n");
         jScrollPane2.setViewportView(console);
 
         bookTableNextButton.setText(">");

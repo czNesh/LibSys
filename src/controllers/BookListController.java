@@ -4,21 +4,29 @@
  */
 package controllers;
 
+import helpers.DateFormater;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import models.BookTableModel;
 import models.entity.Author;
 import models.entity.Book;
 import models.entity.Customer;
 import services.AuthorService;
 import services.BookService;
+import views.BookFilterDialog;
 import views.BookListDialog;
 
 /**
@@ -28,10 +36,17 @@ import views.BookListDialog;
 public class BookListController extends BaseController {
 
     private BookListDialog dialog;
-    private ArrayList<Book> selectedBooks;
+    private ArrayList<Book> selectedBooks = new ArrayList<>();
+    private boolean selectionMode;
+    private BookTableModel tableModel;
+    private BookFilterDialog filterDialog;
 
     public BookListController(JFrame parent, boolean selectionMode) {
         dialog = new BookListDialog(parent, selectionMode);
+        this.selectionMode = selectionMode;
+        tableModel = new BookTableModel();
+        dialog.getResultTable().setModel(tableModel);
+        filterDialog = new BookFilterDialog(null, true);
         initListeners();
     }
 
@@ -75,6 +90,15 @@ public class BookListController extends BaseController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                selectedBooks.add((Book) tableModel.getBook(dialog.getResultTable().getSelectedRow()));
+            }
+            if (selectionMode) {
+                if (!selectedBooks.isEmpty()) {
+                    dialog.dispose();
+                }
+            }
+
         }
 
         @Override
@@ -95,7 +119,7 @@ public class BookListController extends BaseController {
     }
 
     private class BookListKeyListener implements KeyListener {
-        
+
         private List<Book> books;
         private List<Author> authors;
 
@@ -123,8 +147,8 @@ public class BookListController extends BaseController {
             if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 return;
             }
-            
-                        // priprava promennych 
+
+            // priprava promennych 
             String in;
             int start;
 
@@ -204,7 +228,59 @@ public class BookListController extends BaseController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            JButton b = (JButton) e.getSource();
+            String buttonName = b.getName();
+
+            switch (buttonName) {
+                case "confirm":
+                    if (dialog.getResultTable().getSelectedRows().length > 0 && selectionMode) {
+                        int[] selRows = dialog.getResultTable().getSelectedRows();
+                        for (int i = 0; i < selRows.length; i++) {
+                            selectedBooks.add(tableModel.getBook(selRows[i]));
+                        }
+                        dialog.dispose();
+                    }
+
+                    break;
+                case "cancel":
+                    dispose();
+                    break;
+
+                case "filter":
+                    filterDialog.getOkButton().addActionListener(this);
+                    filterDialog.setLocationRelativeTo(null);
+                    filterDialog.setVisible(true);
+                    break;
+
+                case "filterConfirmed":
+                    tableModel.setVisibility(
+                            filterDialog.getTitleCheckbox().isSelected(),
+                            filterDialog.getAuthorCheckbox().isSelected(),
+                            filterDialog.getPublisherCheckbox().isSelected(),
+                            filterDialog.getPublishedDateCheckbox().isSelected(),
+                            filterDialog.getLanguageCheckbox().isSelected(),
+                            filterDialog.getISBN10Checkbox().isSelected(),
+                            filterDialog.getISBN13Checkbox().isSelected(),
+                            filterDialog.getPageCountCheckbox().isSelected(),
+                            filterDialog.getCountCheckbox().isSelected(),
+                            filterDialog.getLocationCheckbox().isSelected());
+                    tableModel.fireTableStructureChanged();
+                    filterDialog.setVisible(false);
+                    break;
+
+                case "search":
+                    tableModel.setFilter(
+                            dialog.getInputBarcode().getText().trim(),
+                            dialog.getInputTitle().getText().trim(),
+                            dialog.getInputAuthor().getText().trim(),
+                            dialog.getInputISBN10().getText().trim(),
+                            dialog.getInputISBN13().getText().trim(),
+                            DateFormater.stringToDate(dialog.getInputPublishedYear().getText(), true));
+                    tableModel.fireTableDataChanged();
+                    break;
+                default:
+                    System.out.println("Chyba - Jmeno polozky neodpovida zadne operaci (Buttonlistener)");
+            }
         }
     }
 

@@ -15,7 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import models.BookTableModel;
 import models.entity.Book;
-import views.FilterTableDialog;
+import views.BookFilterDialog;
 import views.MainView;
 
 /**
@@ -26,14 +26,14 @@ public class MainController extends BaseController {
     
     private MainView mainView;
     private MenuController menuController;
-    private FilterTableDialog filter;
+    private BookFilterDialog filter;
     private BookTableModel tableModel;
     
     public MainController() {
         mainView = new MainView();
         menuController = new MenuController(this, mainView);
         tableModel = new BookTableModel();
-        filter = new FilterTableDialog(mainView, true);
+        filter = new BookFilterDialog(mainView, true);
         initListeners();
         updateView();
     }
@@ -156,7 +156,7 @@ public class MainController extends BaseController {
                     filter.getCountCheckbox().isSelected(),
                     filter.getLocationCheckbox().isSelected());
             updateView();
-            
+            filter.setVisible(false);
         }
     }
     

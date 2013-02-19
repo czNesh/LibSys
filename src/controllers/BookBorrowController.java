@@ -7,10 +7,12 @@ package controllers;
 import helpers.DateFormater;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import models.BookTableModel;
 import models.entity.Book;
 import models.entity.Customer;
 import views.BookBorrowDialog;
@@ -24,7 +26,7 @@ public class BookBorrowController extends BaseController {
 
     BookBorrowDialog dialog;
     Customer customer;
-    List<Book> booksList;
+    List<Book> booksList = new ArrayList<>();
 
     public BookBorrowController(JFrame parent) {
         dialog = new BookBorrowDialog(parent, true);
@@ -91,8 +93,16 @@ public class BookBorrowController extends BaseController {
                 case "addBook":
                     BookListController blc = new BookListController(null, true);
                     blc.showView();
-                    booksList = blc.getBooks();
+                    for (Book b : blc.getBooks()) {
+                        booksList.add(b);
+                    }
+                    dialog.getSelectedBooksTable().setModel(new BookTableModel(booksList));
+                    break;
+
+                case "confirm":
                     
+                    
+                    dispose();
                     break;
                 default:
                     break;

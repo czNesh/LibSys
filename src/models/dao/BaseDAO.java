@@ -140,11 +140,11 @@ public abstract class BaseDAO<T> implements DAO<T> {
             query.setParameter(entry.getKey(), entry.getValue());
         }
         list = (List<T>) query.list();
-        
+
         // RESET
         parameters.clear();
         condition = null;
-        
+
         closeSession();
 
         return list;

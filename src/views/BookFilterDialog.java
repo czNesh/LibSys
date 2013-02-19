@@ -11,12 +11,12 @@ import javax.swing.JCheckBox;
  *
  * @author Nesh
  */
-public class FilterTableDialog extends javax.swing.JDialog {
+public class BookFilterDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form FilterTableDialog
+     * Creates new form BookFilterDialog
      */
-    public FilterTableDialog(java.awt.Frame parent, boolean modal) {
+    public BookFilterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -74,6 +74,12 @@ public class FilterTableDialog extends javax.swing.JDialog {
         publishedDateCheckbox.setText("Rok vydání");
 
         okButton.setText("OK");
+        okButton.setName("filterConfirmed"); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
         pageCountCheckbox.setText("Počet stránek");
 
@@ -140,6 +146,10 @@ public class FilterTableDialog extends javax.swing.JDialog {
     private void ISBN13CheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ISBN13CheckboxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ISBN13CheckboxActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ISBN10Checkbox;

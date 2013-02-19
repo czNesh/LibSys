@@ -7,6 +7,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import models.entity.Book;
 import models.entity.Customer;
 import services.CustomerService;
 

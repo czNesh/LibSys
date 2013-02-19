@@ -63,7 +63,7 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
 
     public List<Customer> getFilteredList(String ssn, String fname, String lname, String email, String phone) {
         StringBuilder conditionStringBuilder = new StringBuilder();
-
+        getParameters().clear();
         if (ssn != null && !ssn.isEmpty()) {
             conditionStringBuilder.append("SSN = :SSN");
             getParameters().put("SSN", ssn);

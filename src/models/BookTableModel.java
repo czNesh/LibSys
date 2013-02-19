@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Author;
@@ -256,5 +257,9 @@ public class BookTableModel extends AbstractTableModel {
 
     public int getListidx(int index) {
         return getSkippedRowsCount() + index;
+    }
+
+    public void setFilter(String barcode, String title, String author, String isbn10, String isbn13, Date year) {
+        itemList = BookService.getInstance().getFilteredList(barcode, title, author, isbn10, isbn13, year);
     }
 }

@@ -46,4 +46,14 @@ public class AuthorService extends BaseDAO<Author> implements Serializable {
     public List<Author> getAuthors() {
         return authors;
     }
+
+    public List<Author> findAuthors(String author) {
+        List<Author> out = new ArrayList<>();
+        for(Author a : authors){
+            if(a.toString().equals(author)){
+                out.add(a);
+            }
+        }
+        return out;
+    }
 }

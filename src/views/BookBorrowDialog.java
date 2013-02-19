@@ -7,6 +7,7 @@ package views;
 import helpers.DateFormater;
 import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -36,7 +37,7 @@ public class BookBorrowDialog extends javax.swing.JDialog {
 
         inputCustomer = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        selectedBooksTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,7 +56,7 @@ public class BookBorrowDialog extends javax.swing.JDialog {
 
         inputCustomer.setEditable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        selectedBooksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -66,7 +67,7 @@ public class BookBorrowDialog extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(selectedBooksTable);
 
         jLabel1.setText("Zákazník:");
 
@@ -91,6 +92,7 @@ public class BookBorrowDialog extends javax.swing.JDialog {
         addBookButton.setName("addBook"); // NOI18N
 
         jButton3.setText("OK");
+        jButton3.setName("confirm"); // NOI18N
 
         jButton4.setText("Zrušit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -199,8 +201,8 @@ public class BookBorrowDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton searchCustomerButton;
+    private javax.swing.JTable selectedBooksTable;
     // End of variables declaration//GEN-END:variables
 
     public JButton getSearchCustomerButton() {
@@ -229,5 +231,9 @@ public class BookBorrowDialog extends javax.swing.JDialog {
 
     public JButton getAddBookButton() {
         return addBookButton;
+    }
+
+    public JTable getSelectedBooksTable() {
+        return selectedBooksTable;
     }
 }
