@@ -21,38 +21,22 @@ public class BookTableModel extends AbstractTableModel {
     private boolean showPageCount;
     private boolean showLocation;
     private boolean showItemCount;
-    private int page;
-    private int maxRows;
+    private int page = 1;
+    private int maxRows = 50;
 
     public BookTableModel() {
         super();
         itemList = BookService.getInstance().getBooks();
-        page = 1;
-        maxRows = 50;
     }
 
     public BookTableModel(List<Book> in) {
         super();
-        page = 1;
-        maxRows = 50;
-        itemList = in;
-    }
-
-    public BookTableModel(List<Book> in, int maxRows) {
-        super();
-        page = 1;
-        this.maxRows = maxRows;
         itemList = in;
     }
 
     @Override
     public int getRowCount() {
-        if (page * maxRows < itemList.size()) {
-            return maxRows;
-        } else {
-            return itemList.size() % maxRows;
-        }
-
+        return itemList.size();
     }
 
     @Override
@@ -94,7 +78,7 @@ public class BookTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Book i = itemList.get(rowIndex + getSkippedRowsCount());
+        Book i = itemList.get(rowIndex);
         ArrayList<String> tempValues = new ArrayList<>();
 
         if (showTitle) {
@@ -143,7 +127,10 @@ public class BookTableModel extends AbstractTableModel {
             tempValues.add(String.valueOf(i.getPageCount()));
         }
         if (showItemCount) {
-            tempValues.add(String.valueOf(i.getBorrowedCount()) + "/" + String.valueOf(i.getCount()));
+            int borrowed = BookService.getInstance().getBorrowed(i.getVolumeCode());
+            int count = BookService.getInstance().getCount(i.getVolumeCode());
+
+            tempValues.add(String.valueOf(count - borrowed) + "/" + String.valueOf(count));
         }
         if (showLocation) {
             tempValues.add(i.getLocation());
@@ -181,7 +168,7 @@ public class BookTableModel extends AbstractTableModel {
             tempValuesColumnNames.add("Počet stránek");
         }
         if (showItemCount) {
-            tempValuesColumnNames.add("Vypůjčeno");
+            tempValuesColumnNames.add("Skladem");
         }
         if (showLocation) {
             tempValuesColumnNames.add("Umístění");
@@ -190,7 +177,7 @@ public class BookTableModel extends AbstractTableModel {
         return tempValuesColumnNames.get(column);
     }
 
-    public void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
+    public void setViewSettings(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
         this.showTitle = showTitle;
         this.showAuthor = showAuthor;
         this.showPublisher = showPublisher;
@@ -207,20 +194,18 @@ public class BookTableModel extends AbstractTableModel {
         itemList = BookService.getInstance().getBooks();
     }
 
-    private int getSkippedRowsCount() {
-        return (page - 1) * maxRows;
-    }
-
     public int getPage() {
         return page;
     }
 
     public void setPage(int page) {
-        if (page < 1 || (page - 1) * maxRows > itemList.size()) {
+        if (page < 1 || page > getTotalPageCount()) {
             return;
         }
 
-        this.page = page - 1;
+        this.page = page;
+        BookService.getInstance().setStart((page - 1) * maxRows);
+        updateData();
     }
 
     public int getMaxRows() {
@@ -234,10 +219,13 @@ public class BookTableModel extends AbstractTableModel {
     }
 
     public void nextPage() {
-        if (page * maxRows > itemList.size()) {
+        if (page + 1 > getTotalPageCount()) {
             return;
         }
         page++;
+        BookService.getInstance().setStart((page - 1) * maxRows);
+        updateData();
+
     }
 
     public void prevPage() {
@@ -245,18 +233,19 @@ public class BookTableModel extends AbstractTableModel {
             return;
         }
         page--;
+        BookService.getInstance().setStart((page - 1) * maxRows);
+        updateData();
+
+
     }
 
     public int getTotalPageCount() {
-        return (int) Math.round((itemList.size() / maxRows) + 0.5); // round up
+        BookService.getInstance().setFilter(" GROUP BY volumeCode");
+        return (int) Math.round((BookService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
     }
 
     public Book getBook(int index) {
-        return itemList.get(getSkippedRowsCount() + index);
-    }
-
-    public int getListidx(int index) {
-        return getSkippedRowsCount() + index;
+        return itemList.get(index);
     }
 
     public void setFilter(String barcode, String title, String author, String isbn10, String isbn13, Date year) {

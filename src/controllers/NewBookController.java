@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import helpers.DateFormater;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,19 +12,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import models.BookTableModel;
-import services.BookService;
 import models.entity.Author;
 import models.entity.Book;
-import helpers.DateFormater;
-import javax.swing.DefaultListModel;
 import remote.GoogleService;
+import services.BookService;
 import views.DatePicker;
 import views.NewBookDialog;
 import views.SearchResultsDialog;
@@ -39,11 +37,9 @@ public class NewBookController extends BaseController {
     private GoogleService gbs;
     private Book selectedBoook;
     private ArrayList<Book> foundedItems;
-    private MainController mc;
     DefaultListModel<Author> authorListModel = new DefaultListModel();
 
-    public NewBookController(JFrame parent, MainController mc) {
-        this.mc = mc;
+    public NewBookController(JFrame parent) {
         gbs = new GoogleService();
         dialog = new NewBookDialog(parent, false);
         initListeners();
@@ -136,16 +132,13 @@ public class NewBookController extends BaseController {
                         b.setLocation(dialog.getInputLocation().getText());
                     }
 
-                    // count of books
-                    b.setCount((int) dialog.getInputCount().getValue());
-
                     //pages 
                     b.setPageCount((int) dialog.getInputPageCount().getValue());
 
                     // Check validation results
                     if (errorOutput.length() == 0) {
-                        BookService.getInstance().saveBook(b);
-                        mc.tableDataChanged();
+                        BookService.getInstance().saveBook(b,(int) dialog.getInputCount().getValue());
+                        // UPDATE TABULKY
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(dialog, errorOutput.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
@@ -258,7 +251,6 @@ public class NewBookController extends BaseController {
 
         public SearchButtonListener() {
             gbs = new GoogleService();
-            gbs.addChangeListener(new SearchChangeListener());
         }
 
         @Override
@@ -275,7 +267,7 @@ public class NewBookController extends BaseController {
             gbs.setISBN(dialog.getInputISBN10().getText());
 
             // Vyhledávání
-            gbs.search();
+            gbs.run();
 
             // LOG
 
@@ -302,18 +294,6 @@ public class NewBookController extends BaseController {
             // Znovu zpristupni tlacitko pro hledaní
             dialog.getSearchButton().setEnabled(true);
             dialog.getSearchButton().setText("Hledat znovu");
-        }
-    }
-
-    private class SearchChangeListener implements ChangeListener {
-
-        public SearchChangeListener() {
-        }
-
-        @Override
-        public void stateChanged(ChangeEvent e) {
-            dialog.getSearchProgressBar().setValue(gbs.getStatus());
-            dialog.getSearchButton().setText(gbs.getTextStatus());
         }
     }
 }

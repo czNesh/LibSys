@@ -29,6 +29,9 @@ public abstract class BaseDAO<T> implements DAO<T> {
     private String condition;
     private final Map<String, Object> parameters = new HashMap<>();
     private List<T> list;
+    private String filter;
+    int limit = 50;
+    int start = 0;
 
     public BaseDAO() {
         generateTypeData();
@@ -133,12 +136,26 @@ public abstract class BaseDAO<T> implements DAO<T> {
             queryStringBuilder.append("(").append(condition).append(")");
         }
 
+        if (filter != null) {
+            queryStringBuilder.append(" ").append(filter).append(" ORDER BY t.id ASC");
+            resetFilter();
+        }
+
         Query query = session.createQuery(queryStringBuilder.toString());
+
+        if (start != 0) {
+            query.setFirstResult(start);
+        }
+
+        if (limit != -1) {
+            query.setMaxResults(limit);
+        }
 
         // Add parameters
         for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
+
         list = (List<T>) query.list();
 
         // RESET
@@ -146,7 +163,6 @@ public abstract class BaseDAO<T> implements DAO<T> {
         condition = null;
 
         closeSession();
-
         return list;
     }
 
@@ -169,6 +185,7 @@ public abstract class BaseDAO<T> implements DAO<T> {
         for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
+        parameters.clear();
         T unique = (T) type.cast(query.uniqueResult());
 
         closeSession();
@@ -249,5 +266,34 @@ public abstract class BaseDAO<T> implements DAO<T> {
      */
     public Map<String, Object> getParameters() {
         return parameters;
+    }
+
+    public void resetFilter() {
+        filter = null;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getTotalCount() {
+        openSession();
+        StringBuilder query = new StringBuilder("SELECT t.id FROM ");
+        query.append(typeName).append(" t");
+
+        if (filter != null) {
+            query.append(filter);
+        }
+        int count = session.createQuery(query.toString()).list().size();
+        closeSession();
+        return count;
     }
 }

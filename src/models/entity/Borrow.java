@@ -5,7 +5,7 @@
 package models.entity;
 
 import java.io.Serializable;
-import org.hibernate.type.DateType;
+import java.util.Date;
 
 /**
  *
@@ -18,8 +18,8 @@ public class Borrow implements Serializable {
     private SystemUser librarian;
     private Customer customer;
     private Book item;
-    private DateType fromDate;
-    private DateType toDate;
+    private Date fromDate;
+    private Date toDate;
     private boolean returned;
     private String notes;
 
@@ -97,28 +97,28 @@ public class Borrow implements Serializable {
     /**
      * @return the fromDate
      */
-    public DateType getFromDate() {
+    public Date getFromDate() {
         return fromDate;
     }
 
     /**
      * @param fromDate the fromDate to set
      */
-    public void setFromDate(DateType fromDate) {
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
     /**
      * @return the toDate
      */
-    public DateType getToDate() {
+    public Date getToDate() {
         return toDate;
     }
 
     /**
      * @param toDate the toDate to set
      */
-    public void setToDate(DateType toDate) {
+    public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 

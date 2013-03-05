@@ -33,9 +33,9 @@ public class Book implements Serializable {
     private String sponsor;
     private Date addedDate;
     private String location;
-    private int count;
-    private int borrowedCount;
+    private int borrowed;
     private String notes;
+    private String volumeCode;
 
     /**
      * @return the id
@@ -248,34 +248,6 @@ public class Book implements Serializable {
     }
 
     /**
-     * @return the count
-     */
-    public int getCount() {
-        return count;
-    }
-
-    /**
-     * @param count the count to set
-     */
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    /**
-     * @return the borrowedCount
-     */
-    public int getBorrowedCount() {
-        return borrowedCount;
-    }
-
-    /**
-     * @param borrowedCount the borrowedCount to set
-     */
-    public void setBorrowedCount(int borrowedCount) {
-        this.borrowedCount = borrowedCount;
-    }
-
-    /**
      * @return the notes
      */
     public String getNotes() {
@@ -330,5 +302,33 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         return title;
+    }
+
+    /**
+     * @return the volumeCode
+     */
+    public String getVolumeCode() {
+        return volumeCode;
+    }
+
+    /**
+     * @param volumeCode the volumeCode to set
+     */
+    public void setVolumeCode(String volumeCode) {
+        this.volumeCode = volumeCode;
+    }
+
+    /**
+     * @return the borrowed
+     */
+    public int getBorrowed() {
+        return borrowed;
+    }
+
+    /**
+     * @param borrowed the borrowed to set
+     */
+    public void setBorrowed(int borrowed) {
+        this.borrowed = borrowed;
     }
 }

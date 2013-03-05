@@ -7,7 +7,6 @@ package services;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import models.dao.BaseDAO;
 import models.entity.Author;
 import models.entity.Book;
@@ -20,7 +19,6 @@ import org.hibernate.Session;
 public class BookService extends BaseDAO<Book> implements Serializable {
 
     private static BookService instance;
-    private List<Book> bookList;
 
     public static BookService getInstance() {
         synchronized (BookService.class) {
@@ -42,6 +40,7 @@ public class BookService extends BaseDAO<Book> implements Serializable {
             int finalSeed = Integer.parseInt(subStr);
 
             // volné SSN ?
+            getParameters().clear();
             getParameters().put("barcode", finalSeed);
             if (getUnique("barcode = :barcode") == null) {
                 return String.valueOf(finalSeed);
@@ -49,14 +48,36 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         }
     }
 
-    public void saveBook(Book b) {
-        b.setBarcode(getFreeBarcode());
-        bookList.add(b);
-        save(b);
+    private String getFreeVolumeCode() {
+        while (true) {
+            // vygeneruje SSN
+            long timeSeed = System.nanoTime();
+            double randSeed = Math.random() * 1000;
+            long midSeed = (long) (timeSeed * randSeed);
+            String s = "9" + midSeed;
+            String subStr = s.substring(0, 9);
+            int finalSeed = Integer.parseInt(subStr);
+
+            // volné SSN ?
+            getParameters().clear();
+            getParameters().put("volumeCode", finalSeed);
+            if (getUnique("volumeCode = :volumeCode") == null) {
+                return String.valueOf(finalSeed);
+            }
+        }
+    }
+
+    public void saveBook(Book b, int count) {
+        b.setVolumeCode(getFreeVolumeCode());
+        b.setBorrowed(0);
+        for (int i = 0; i < count; i++) {
+            b.setBarcode(getFreeBarcode());
+            create(b);
+        }
+
     }
 
     private BookService() {
-        bookList = getList();
     }
 
     public BookService(Session session) {
@@ -64,13 +85,14 @@ public class BookService extends BaseDAO<Book> implements Serializable {
     }
 
     public List<Book> getBooks() {
-        return bookList;
+        setFilter("GROUP BY volumeCode");
+        return getList();
     }
 
     public List<Book> getFilteredList(String barcode, String title, String author, String isbn10, String isbn13, Date year) {
         StringBuilder conditionStringBuilder = new StringBuilder();
         getParameters().clear();
-        
+
         if (barcode != null && !barcode.isEmpty()) {
             conditionStringBuilder.append("barcode = :barcode");
             getParameters().put("barcode", barcode);
@@ -121,7 +143,21 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         if (conditionStringBuilder.length() > 0) {
             setCondition(conditionStringBuilder.toString());
         }
-
+        setFilter("GROUP BY volumeCode");
         return getList();
+    }
+
+    public int getBorrowed(String volumeCode) {
+        openSession();
+        int count = ((Long) getSession().createQuery("SELECT SUM(b.borrowed) FROM Book b WHERE volumeCode = :volumeCode").setParameter("volumeCode", volumeCode).uniqueResult()).intValue();
+        closeSession();
+        return count;
+    }
+
+    public int getCount(String volumeCode) {
+        openSession();
+        int count = ((Long) getSession().createQuery("SELECT COUNT(*) FROM Book WHERE volumeCode = :volumeCode").setParameter("volumeCode", volumeCode).uniqueResult()).intValue();
+        closeSession();
+        return count;
     }
 }

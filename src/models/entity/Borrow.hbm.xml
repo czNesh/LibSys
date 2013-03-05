@@ -5,12 +5,12 @@
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
         </id>  
-        <one-to-one name="librarian" class="models.entity.SystemUser" cascade="save-update"/>
-        <one-to-one name="customer" class="models.entity.Customer" cascade="save-update"/>
-        <one-to-one name="item" class="models.entity.Book" cascade="save-update"/>
+        <many-to-one name="customer" class="models.entity.Customer" column="customer_id" lazy="false"/>
+        <many-to-one name="librarian" class="models.entity.SystemUser" column="librarian_id" lazy="false" />
+        <many-to-one name="item" class="models.entity.Book" column="item_id" lazy="false" />
         <property name="fromDate" not-null="true" type="timestamp"/>
         <property name="toDate" not-null="true" type="timestamp"/>
         <property name="returned" not-null="true" type="boolean"/>
-        <property name="notes" not-null="true" type="string"/>
+        <property name="notes" not-null="false" type="string"/>
     </class>
 </hibernate-mapping>

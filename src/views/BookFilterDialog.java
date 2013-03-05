@@ -42,6 +42,7 @@ public class BookFilterDialog extends javax.swing.JDialog {
         pageCountCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Nastavení zobrazení");
 
         titleCheckbox.setSelected(true);
         titleCheckbox.setText("Název");
@@ -63,7 +64,7 @@ public class BookFilterDialog extends javax.swing.JDialog {
             }
         });
 
-        countCheckbox.setText("Množství");
+        countCheckbox.setText("Množství skladem");
 
         locationCheckbox.setText("Umístění");
 
@@ -74,7 +75,7 @@ public class BookFilterDialog extends javax.swing.JDialog {
         publishedDateCheckbox.setText("Rok vydání");
 
         okButton.setText("OK");
-        okButton.setName("filterConfirmed"); // NOI18N
+        okButton.setName("filterConfirm"); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);

@@ -234,13 +234,14 @@
     <Component class="javax.swing.JButton" name="bookTablePrevButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
-        <Property name="name" type="java.lang.String" value="bookTablePrevPage" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="prevPage" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="bookTableInputNumber">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="1"/>
+        <Property name="name" type="java.lang.String" value="inputPageNumber" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="bookTableTotalPage">
@@ -252,7 +253,7 @@
     <Component class="javax.swing.JButton" name="bookTableNextButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
-        <Property name="name" type="java.lang.String" value="bookTableNextPage" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="nextPage" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="searchButton">

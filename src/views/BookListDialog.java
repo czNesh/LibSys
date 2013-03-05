@@ -93,16 +93,17 @@ public class BookListDialog extends javax.swing.JDialog {
         inputISBN10.setName("lname"); // NOI18N
 
         bookTablePrevButton.setText("<");
-        bookTablePrevButton.setName("bookTablePrevPage"); // NOI18N
+        bookTablePrevButton.setName("prevPage"); // NOI18N
 
         bookTableInputNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         bookTableInputNumber.setText("1");
+        bookTableInputNumber.setName("inputPageNumber"); // NOI18N
 
         bookTableTotalPage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         bookTableTotalPage.setText("/ 5");
 
         bookTableNextButton.setText(">");
-        bookTableNextButton.setName("bookTableNextPage"); // NOI18N
+        bookTableNextButton.setName("nextPage"); // NOI18N
 
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.gif"))); // NOI18N
         searchButton.setText("Hledat");
@@ -311,5 +312,5 @@ public class BookListDialog extends javax.swing.JDialog {
 
     public JTextField getInputAuthor() {
         return inputAuthor;
-    }
+    }    
 }

@@ -1,6 +1,7 @@
 package remote;
 
 //import books
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.event.ChangeListener;
+import javax.imageio.ImageIO;
 import models.entity.Author;
 import models.entity.Book;
 
@@ -19,29 +20,33 @@ import models.entity.Book;
  *
  * @author Administrator
  */
-public class GoogleService {
+public class GoogleService implements Runnable {
 
+    // QUERY
     private StringBuilder query;
-    private int status;
-    private String textStatus;
-    private List<ChangeListener> listeners = new ArrayList<>();
+    // RESULTS
     private ArrayList<Book> results = new ArrayList<>();
+    // THUMBNAIL
+    private Image thumbnail;
+    // Connection
     URLConnection conn;
 
-    public GoogleService(String query) {
-        this.query = new StringBuilder(query);
+    @Override
+    public void run() {
+        results.clear();
+        connectServer();
+        searchBooks();
+        query = new StringBuilder();
     }
+    
+
 
     public GoogleService() {
         this.query = new StringBuilder();
     }
 
-    public void search() {
-        results.clear();
-        stateChange(0, "ready");
-        connectServer();
-        searchBooks();
-        query = new StringBuilder();
+    public GoogleService(String query) {
+        this.query = new StringBuilder(query);
     }
 
     public void setAutor(String author) {
@@ -66,7 +71,6 @@ public class GoogleService {
     }
 
     public void connectServer() {
-        stateChange(10, "Connecting");
         try {
             String urlString = "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=" + query;
             System.out.println(urlString);
@@ -74,24 +78,13 @@ public class GoogleService {
             conn = url.openConnection();
             conn.setConnectTimeout(10000);
         } catch (IOException ex) {
-            stateChange(0, "Disconnected");
         }
     }
 
     private void searchBooks() {
-        stateChange(30, "Searching");
-
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String in;
-
-
-
-            /*
-             * 
-             * PARSING BOOKS FROM GOOGLE
-             * 
-             */
 
             // VYTVORI POTREBNE PROMENE
             Book tempBook = null;
@@ -241,14 +234,8 @@ public class GoogleService {
                 results.add(tempBook);
             }
 
-            stateChange(100, "Finished");
         } catch (IOException ex) {
-            stateChange(0, "Error");
         }
-    }
-
-    public ArrayList<Book> getResults() {
-        return results;
     }
 
     public String clearSpaces(String in) {
@@ -258,41 +245,7 @@ public class GoogleService {
         return out;
     }
 
-    public void addChangeListener(ChangeListener e) {
-        listeners.add(e);
-    }
-
-    public void removeChangeListener(ChangeListener e) {
-        listeners.remove(e);
-    }
-
-    public void stateChange(int status, String textStatus) {
-        this.status = status;
-        this.textStatus = textStatus;
-        for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).stateChanged(null);
-        }
-    }
-
-    /**
-     * @return the status
-     */
-    public int getStatus() {
-        return status;
-    }
-
-    /**
-     * @return the textStatus
-     */
-    public String getTextStatus() {
-        return textStatus;
-    }
-
-    public int getResultsCount() {
-        return (results == null) ? 0 : results.size();
-    }
-
-    public String getThumbnailURL() {
+    public void downloadThumbnail() {
         try {
             connectServer();
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -300,13 +253,26 @@ public class GoogleService {
             while ((in = br.readLine()) != null) {
                 in = in.trim().replaceAll("\t", "");
                 if (in.startsWith("\"thumbnail\":")) {
-                    return in.substring(14, in.length() - 1).replaceAll("&zoom=1", "");
+                    URLConnection connection = new URL(in.substring(14, in.length() - 1).replaceAll("&zoom=1", "")).openConnection();
+                    connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.21; Mac_PowerPC)");
+                    thumbnail = ImageIO.read(connection.getInputStream());
+                    return;
                 }
             }
-            return null;
         } catch (IOException ex) {
             Logger.getLogger(GoogleService.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
         }
+    }
+
+    public ArrayList<Book> getResults() {
+        return results;
+    }
+
+    public int getResultsCount() {
+        return (results == null) ? 0 : results.size();
+    }
+
+    public Image getThumbnail() {
+        return thumbnail;
     }
 }

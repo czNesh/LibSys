@@ -17,7 +17,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import models.CustomerTableModel;
-import models.entity.Book;
 import models.entity.Customer;
 import services.CustomerService;
 import views.CustomerFilterDialog;

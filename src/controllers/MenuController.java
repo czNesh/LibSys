@@ -16,10 +16,8 @@ import views.MainView;
 public class MenuController implements ActionListener {
 
     private MainView view;
-    private MainController controller;
 
-    public MenuController(MainController controller, MainView view) {
-        this.controller = controller;
+    public MenuController(MainView view) {
         this.view = view;
         initListeners();
     }
@@ -39,19 +37,19 @@ public class MenuController implements ActionListener {
 
         switch (name) {
             case "newItem":
-                NewBookController newItemController = new NewBookController(view, controller);
+                NewBookController newItemController = new NewBookController(view);
                 newItemController.showView();
                 break;
-             case "newBorrow":
+            case "newBorrow":
                 BookBorrowController bookBorrowController = new BookBorrowController(view);
                 bookBorrowController.showView();
-                break;                              
+                break;
             case "newCustomer":
                 NewCustomerController newCustomerController = new NewCustomerController(view);
                 newCustomerController.showView();
                 break;
             case "browseCustomers":
-                CustomerListController customerListController = new CustomerListController(view,false);
+                CustomerListController customerListController = new CustomerListController(view, false);
                 customerListController.showView();
                 break;
             case "importItems":

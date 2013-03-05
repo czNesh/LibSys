@@ -4,18 +4,20 @@
  */
 package services;
 
+import controllers.AppController;
 import java.util.List;
+import models.dao.BaseDAO;
+import models.entity.Book;
 import models.entity.Borrow;
 
 /**
  *
  * @author Nesh
  */
-public class BorrowService {
-
+public class BorrowService extends BaseDAO<Borrow> {
+    
     private static BorrowService instance;
-    private List<Borrow> borrows;
-
+    
     public static BorrowService getInstance() {
         synchronized (BorrowService.class) {
             if (instance == null) {
@@ -23,5 +25,21 @@ public class BorrowService {
             }
         }
         return instance;
+    }
+    
+    public void newBorrow(Borrow b, List<Book> booksList) {
+        for (Book book : booksList) {
+            b.setItem(book);
+            b.setLibrarian(AppController.getInstance().getLoggedUser());
+            create(b);
+        }
+    }
+
+    public List<Borrow> getBorrows() {
+        return getList();
+    }
+
+    public List<Borrow> getFilteredList() {
+        return getList();
     }
 }

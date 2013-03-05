@@ -5,7 +5,6 @@
 package controllers;
 
 import io.ApplicationLog;
-import java.util.Observable;
 
 /**
  *

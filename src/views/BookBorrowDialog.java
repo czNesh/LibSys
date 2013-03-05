@@ -46,8 +46,8 @@ public class BookBorrowDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         inputDateTo = new javax.swing.JTextField();
         addBookButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         dateFromButton = new javax.swing.JButton();
         dateToButton = new javax.swing.JButton();
 
@@ -91,13 +91,14 @@ public class BookBorrowDialog extends javax.swing.JDialog {
         addBookButton.setText("Přidat knihu");
         addBookButton.setName("addBook"); // NOI18N
 
-        jButton3.setText("OK");
-        jButton3.setName("confirm"); // NOI18N
+        confirmButton.setText("OK");
+        confirmButton.setName("confirm"); // NOI18N
 
-        jButton4.setText("Zrušit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Zrušit");
+        cancelButton.setName("cancel"); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -141,9 +142,9 @@ public class BookBorrowDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(searchCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -157,8 +158,8 @@ public class BookBorrowDialog extends javax.swing.JDialog {
                             .addComponent(inputCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)))
+                        .addComponent(confirmButton)
+                        .addComponent(cancelButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -184,18 +185,18 @@ public class BookBorrowDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputDateToActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBookButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JButton dateFromButton;
     private javax.swing.JButton dateToButton;
     private javax.swing.JTextField inputCustomer;
     private javax.swing.JTextField inputDateFrom;
     private javax.swing.JTextField inputDateTo;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -235,5 +236,13 @@ public class BookBorrowDialog extends javax.swing.JDialog {
 
     public JTable getSelectedBooksTable() {
         return selectedBooksTable;
+    }
+
+    public JButton getConfirmButton() {
+        return confirmButton;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
     }
 }

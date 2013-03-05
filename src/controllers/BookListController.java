@@ -5,25 +5,20 @@
 package controllers;
 
 import helpers.DateFormater;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import models.BookTableModel;
 import models.entity.Author;
 import models.entity.Book;
-import models.entity.Customer;
 import services.AuthorService;
 import services.BookService;
 import views.BookFilterDialog;
@@ -48,15 +43,18 @@ public class BookListController extends BaseController {
         dialog.getResultTable().setModel(tableModel);
         filterDialog = new BookFilterDialog(null, true);
         initListeners();
+        updateView();
     }
 
     private void initListeners() {
         // ActionListener
-        BookListButtonListener b = new BookListButtonListener();
-        dialog.getConfirmButton().addActionListener(b);
-        dialog.getCancelButton().addActionListener(b);
-        dialog.getFilterButton().addActionListener(b);
-        dialog.getSearchButton().addActionListener(b);
+        BookListActionListener a = new BookListActionListener();
+        dialog.getConfirmButton().addActionListener(a);
+        dialog.getCancelButton().addActionListener(a);
+        dialog.getFilterButton().addActionListener(a);
+        dialog.getSearchButton().addActionListener(a);
+        dialog.getBookTablePrevButton().addActionListener(a);
+        dialog.getBookTableNextButton().addActionListener(a);
 
         // KeyListener
         BookListKeyListener k = new BookListKeyListener();
@@ -65,10 +63,21 @@ public class BookListController extends BaseController {
         dialog.getInputAuthor().addKeyListener(k);
         dialog.getInputISBN10().addKeyListener(k);
         dialog.getInputISBN13().addKeyListener(k);
+        dialog.getBookTableInputNumber().addKeyListener(k);
 
         // MouseListener
         BookListMouseListener m = new BookListMouseListener();
         dialog.getResultTable().addMouseListener(m);
+    }
+
+    private void updateView() {
+        // Update table
+        tableModel.fireTableDataChanged();
+        tableModel.fireTableStructureChanged();
+
+        // Update page counting 
+        dialog.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
+        dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
     }
 
     @Override
@@ -138,6 +147,18 @@ public class BookListController extends BaseController {
 
         @Override
         public void keyReleased(KeyEvent e) {
+            String sourceName =((JComponent) e.getSource()).getName();
+            
+            if (e.getKeyCode() == KeyEvent.VK_ENTER && sourceName.equals("inputPageNumber")) {
+                String in = dialog.getBookTableInputNumber().getText();
+                try {
+                    tableModel.setPage(Integer.parseInt(in));
+                } catch (NumberFormatException ex) {
+                    System.out.println("NESPRAVNY FORMAT CISLA");
+                }
+                updateView();
+            }
+            
             // pokud se nezapise znak - hned skonci
             if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
                 return;
@@ -153,7 +174,7 @@ public class BookListController extends BaseController {
             int start;
 
             // co se doplňuje 
-            switch (((JComponent) e.getSource()).getName()) {
+            switch (sourceName) {
 
                 // doplnění jména
                 case "barcode":
@@ -221,9 +242,9 @@ public class BookListController extends BaseController {
         }
     }
 
-    private class BookListButtonListener implements ActionListener {
+    private class BookListActionListener implements ActionListener {
 
-        public BookListButtonListener() {
+        public BookListActionListener() {
         }
 
         @Override
@@ -252,8 +273,8 @@ public class BookListController extends BaseController {
                     filterDialog.setVisible(true);
                     break;
 
-                case "filterConfirmed":
-                    tableModel.setVisibility(
+                case "filterConfirm":
+                    tableModel.setViewSettings(
                             filterDialog.getTitleCheckbox().isSelected(),
                             filterDialog.getAuthorCheckbox().isSelected(),
                             filterDialog.getPublisherCheckbox().isSelected(),
@@ -277,6 +298,15 @@ public class BookListController extends BaseController {
                             dialog.getInputISBN13().getText().trim(),
                             DateFormater.stringToDate(dialog.getInputPublishedYear().getText(), true));
                     tableModel.fireTableDataChanged();
+                    break;
+
+                case "prevPage":
+                    tableModel.prevPage();
+                    updateView();
+                    break;
+                case "nextPage":
+                    tableModel.nextPage();
+                    updateView();
                     break;
                 default:
                     System.out.println("Chyba - Jmeno polozky neodpovida zadne operaci (Buttonlistener)");

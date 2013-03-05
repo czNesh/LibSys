@@ -26,8 +26,8 @@
         <property name="sponsor" not-null="false" type="string"/>
         <property name="addedDate" not-null="true" type="timestamp"/>
         <property name="location" not-null="false" type="string"/>
-        <property name="count" not-null="false" type="integer"/>
-        <property name="borrowedCount" not-null="false" type="integer"/>
+        <property name="borrowed" not-null="true" type="integer"/>
         <property name="notes" not-null="false" type="string"/>
+        <property name="volumeCode" not-null="true" type="string"/>
     </class>
 </hibernate-mapping>
