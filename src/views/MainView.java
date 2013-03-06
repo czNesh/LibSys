@@ -461,9 +461,11 @@ public class MainView extends javax.swing.JFrame {
         jMenu1.setText("LibSys");
 
         logoutMenuItem.setText("Odhlásit se");
+        logoutMenuItem.setName("logout"); // NOI18N
         jMenu1.add(logoutMenuItem);
 
         exitMenuItem.setText("Konec");
+        exitMenuItem.setName("exit"); // NOI18N
         jMenu1.add(exitMenuItem);
 
         jMenuBar1.add(jMenu1);
@@ -681,6 +683,14 @@ public class MainView extends javax.swing.JFrame {
 
     public JButton getBorrowFilterButton() {
         return borrowFilterButton;
+    }
+
+    public JMenuItem getExitMenuItem() {
+        return exitMenuItem;
+    }
+
+    public JMenuItem getLogoutMenuItem() {
+        return logoutMenuItem;
     }
    
     

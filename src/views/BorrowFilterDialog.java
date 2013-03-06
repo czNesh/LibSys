@@ -4,6 +4,7 @@
  */
 package views;
 
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
@@ -37,7 +38,7 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
         toCheckBox = new javax.swing.JCheckBox();
         returnedCheckBox = new javax.swing.JCheckBox();
         itemCheckBox = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        groupCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení zobrazení");
@@ -62,7 +63,7 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
         itemCheckBox.setSelected(true);
         itemCheckBox.setText("Kniha");
 
-        jCheckBox2.setText("Spojit výpůjčky jednoho uživatele");
+        groupCheckBox.setText("Spojit výpůjčky jednoho uživatele");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +81,7 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
                             .addComponent(librarianCheckBox)
                             .addComponent(returnedCheckBox)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jCheckBox2)
+                        .addComponent(groupCheckBox)
                         .addGap(0, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(fromCheckBox)
@@ -105,7 +106,7 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
                     .addComponent(fromCheckBox)
                     .addComponent(toCheckBox))
                 .addGap(26, 26, 26)
-                .addComponent(jCheckBox2)
+                .addComponent(groupCheckBox)
                 .addGap(8, 8, 8)
                 .addComponent(okButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -116,8 +117,8 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox customerCheckBox;
     private javax.swing.JCheckBox fromCheckBox;
+    private javax.swing.JCheckBox groupCheckBox;
     private javax.swing.JCheckBox itemCheckBox;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox librarianCheckBox;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox returnedCheckBox;
@@ -151,5 +152,10 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
     public JCheckBox getItemCheckBox() {
         return itemCheckBox;
     }
+
+    public JCheckBox getGroupCheckBox() {
+        return groupCheckBox;
+    }
+    
 
 }

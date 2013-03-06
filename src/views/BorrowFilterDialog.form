@@ -38,7 +38,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                      <Component id="groupCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -71,7 +71,7 @@
                   <Component id="toCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+              <Component id="groupCheckBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="okButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -121,7 +121,7 @@
         <Property name="text" type="java.lang.String" value="Kniha"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+    <Component class="javax.swing.JCheckBox" name="groupCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spojit v&#xfd;p&#x16f;j&#x10d;ky jednoho u&#x17e;ivatele"/>
       </Properties>

@@ -7,6 +7,8 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import views.MainView;
 
 /**
@@ -27,6 +29,8 @@ public class MenuController implements ActionListener {
         view.getNewCustomerMenuItem().addActionListener(this);
         view.getCustomerListMenuItem().addActionListener(this);
         view.getNewBorrowButton().addActionListener(this);
+        view.getLogoutMenuItem().addActionListener(this);
+        view.getExitMenuItem().addActionListener(this);
     }
 
     @Override
@@ -59,6 +63,19 @@ public class MenuController implements ActionListener {
             case "barcode":
                 break;
             case "qrcode":
+                break;
+            case "logout":
+                int logout = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu se chcete odhlásit?", "Odhlásit?", JOptionPane.OK_CANCEL_OPTION);
+                if (logout == JOptionPane.OK_OPTION) {
+                    AppController.getInstance().setLoggedUser(null);
+                    AppController.getInstance().showLoginFrame();
+                }
+                break;
+            case "exit":
+                int exit = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu si přejete ukončit program?", "Ukončit?", JOptionPane.OK_CANCEL_OPTION);
+                if (exit == JOptionPane.OK_OPTION) {
+                    System.exit(1);
+                }
                 break;
             default:
                 System.out.println("Žádná akce");

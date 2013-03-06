@@ -41,7 +41,8 @@ public class MainController extends BaseController {
     
     @Override
     void dispose() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        mainView.dispose();
+        mainView = null;
     }
     
     private void updateView() {

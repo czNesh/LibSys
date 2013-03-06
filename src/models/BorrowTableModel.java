@@ -25,6 +25,8 @@ public class BorrowTableModel extends AbstractTableModel {
     boolean showTo = true;
     boolean showReturned = true;
     boolean showLibrarian = false;
+    //
+    boolean userGrouping = true;
     // Paging settings
     int page = 1;
     int maxRows = 50;
@@ -180,12 +182,13 @@ public class BorrowTableModel extends AbstractTableModel {
         return borrowList.get(index);
     }
 
-    public void setViewSettings(boolean showCustomer, boolean showItem, boolean showFrom, boolean showTo, boolean showReturned, boolean showLibrarian) {
+    public void setViewSettings(boolean showCustomer, boolean showItem, boolean showFrom, boolean showTo, boolean showReturned, boolean showLibrarian,boolean userGrouping) {
         this.showCustomer = showCustomer;
         this.showItem = showItem;
         this.showFrom = showFrom;
         this.showTo = showTo;
         this.showReturned = showReturned;
         this.showLibrarian = showLibrarian;
+        this.userGrouping = userGrouping;
     }
 }

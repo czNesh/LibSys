@@ -127,10 +127,10 @@ class BorrowTabController {
                     tableModel.setViewSettings(
                             filter.getCustomerCheckBox().isSelected(),
                             filter.getItemCheckBox().isSelected(),
-                            filter.getLibrarianCheckBox().isSelected(),
                             filter.getFromCheckBox().isSelected(),
                             filter.getToCheckBox().isSelected(),
-                            filter.getReturnedCheckBox().isSelected());
+                            filter.getReturnedCheckBox().isSelected(),
+                            filter.getLibrarianCheckBox().isSelected(),filter.getGroupCheckBox().isSelected());
                     updateView();
                     filter.setVisible(false);
                     break;
