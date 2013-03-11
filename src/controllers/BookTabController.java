@@ -148,8 +148,7 @@ class BookTabController{
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-                JTable t = mainView.getCatalogTable();
-                Book b = (Book) tableModel.getBook(t.getSelectedRow());
+                Book b = (Book) tableModel.getBook(mainView.getCatalogTable().getSelectedRow());
                 BookDetailController bdc = new BookDetailController(b);
                 bdc.showView();
             }

@@ -79,9 +79,10 @@
             <Property name="text" type="java.lang.String" value="N&#xe1;stroje"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="settingsMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nastaven&#xed;"/>
+                <Property name="name" type="java.lang.String" value="settings" noResource="true"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">

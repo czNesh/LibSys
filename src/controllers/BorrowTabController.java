@@ -81,10 +81,9 @@ class BorrowTabController {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-                JTable t = mainView.getCatalogTable();
-                Borrow b = (Borrow) tableModel.getBorrow(t.getSelectedRow());
-                //   BorrowDetailController bdc = new BorrowDetailController(b);
-                //   bdc.showView();
+                Borrow b = (Borrow) tableModel.getBorrow(mainView.getBorrowTable().getSelectedRow());
+                BorrowDetailController bdc = new BorrowDetailController(b);
+                bdc.showView();
             }
         }
 
@@ -130,7 +129,7 @@ class BorrowTabController {
                             filter.getFromCheckBox().isSelected(),
                             filter.getToCheckBox().isSelected(),
                             filter.getReturnedCheckBox().isSelected(),
-                            filter.getLibrarianCheckBox().isSelected(),filter.getGroupCheckBox().isSelected());
+                            filter.getLibrarianCheckBox().isSelected(), filter.getGroupCheckBox().isSelected());
                     updateView();
                     filter.setVisible(false);
                     break;

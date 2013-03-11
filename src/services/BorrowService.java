@@ -27,7 +27,28 @@ public class BorrowService extends BaseDAO<Borrow> {
         return instance;
     }
     
+        private String getFreeBorrowedCode() {
+        while (true) {
+            // vygeneruje SSN
+            long timeSeed = System.nanoTime();
+            double randSeed = Math.random() * 1000;
+            long midSeed = (long) (timeSeed * randSeed);
+            String s = "3" + midSeed;
+            String subStr = s.substring(0, 9);
+            int finalSeed = Integer.parseInt(subStr);
+
+            // volné SSN ?
+            getParameters().clear();
+            getParameters().put("borrowCode", finalSeed);
+            if (getUnique("borrowCode = :borrowCode") == null) {
+                return String.valueOf(finalSeed);
+            }
+        }
+    }
+
+   
     public void newBorrow(Borrow b, List<Book> booksList) {
+        b.setBorrowCode(getFreeBorrowedCode());
         for (Book book : booksList) {
             b.setItem(book);
             b.setLibrarian(AppController.getInstance().getLoggedUser());
@@ -36,6 +57,7 @@ public class BorrowService extends BaseDAO<Borrow> {
     }
 
     public List<Borrow> getBorrows() {
+        setFilter(" GROUP BY borrowCode");
         return getList();
     }
 

@@ -64,6 +64,9 @@ public class MenuController implements ActionListener {
                 break;
             case "qrcode":
                 break;
+            case "settings":
+                
+                break;
             case "logout":
                 int logout = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu se chcete odhlásit?", "Odhlásit?", JOptionPane.OK_CANCEL_OPTION);
                 if (logout == JOptionPane.OK_OPTION) {

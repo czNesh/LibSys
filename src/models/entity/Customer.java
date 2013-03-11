@@ -210,8 +210,12 @@ public class Customer implements Serializable {
     public String toString() {
         return firstName + " " + lastName + " - " + SSN;
     }
-    
-    public String getFullName(){
+
+    public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    public String getFullAdress() {
+        return street + ", " + city + " - " + country;
     }
 }

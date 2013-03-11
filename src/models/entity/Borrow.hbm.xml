@@ -12,5 +12,6 @@
         <property name="toDate" not-null="true" type="timestamp"/>
         <property name="returned" not-null="true" type="boolean"/>
         <property name="notes" not-null="false" type="string"/>
+        <property name="borrowCode" not-null="true" type="string"/>
     </class>
 </hibernate-mapping>

@@ -96,7 +96,7 @@ public class MainView extends javax.swing.JFrame {
         newCustomerMenuItem = new javax.swing.JMenuItem();
         customerListMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        settingsMenuItem = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -484,8 +484,9 @@ public class MainView extends javax.swing.JFrame {
 
         jMenu4.setText("Nástroje");
 
-        jMenuItem3.setText("Nastavení");
-        jMenu4.add(jMenuItem3);
+        settingsMenuItem.setText("Nastavení");
+        settingsMenuItem.setName("settings"); // NOI18N
+        jMenu4.add(settingsMenuItem);
 
         jMenuItem4.setText("Knihovníci");
         jMenu4.add(jMenuItem4);
@@ -577,7 +578,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -603,6 +603,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton newBorrowButton;
     private javax.swing.JMenuItem newCustomerMenuItem;
     private javax.swing.JButton newItemButton;
+    private javax.swing.JMenuItem settingsMenuItem;
     private javax.swing.JLabel systemUserLabel;
     // End of variables declaration//GEN-END:variables
 

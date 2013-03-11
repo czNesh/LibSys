@@ -6,8 +6,8 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import services.SystemUserService;
 import models.entity.SystemUser;
+import services.SystemUserService;
 import views.LoginView;
 
 /**
@@ -19,7 +19,7 @@ public class LoginController extends BaseController {
     private LoginView loginView;
 
     public LoginController() {
-        loginView = new LoginView(null, true);
+        loginView = new LoginView();
         initListeners();
     }
 
@@ -46,8 +46,8 @@ public class LoginController extends BaseController {
         public void actionPerformed(ActionEvent e) {
 
             // Získání vstupních hodnot
-            String login = loginView.getLoginInput().getText();
-            String password = String.valueOf(loginView.getPasswordInput().getPassword());
+            String login = loginView.getInputLoginName().getText();
+            String password = String.valueOf(loginView.getInputLoginPassword().getPassword());
 
 
             // VALIDACE
@@ -82,8 +82,8 @@ public class LoginController extends BaseController {
             System.out.println("ACTION DETECTED: Reset action"); // TODO (log & info sout)            
 
             // Smazání polí
-            loginView.getLoginInput().setText("");
-            loginView.getPasswordInput().setText("");
+            loginView.getInputLoginName().setText("");
+            loginView.getInputLoginPassword().setText("");
         }
     }
 }

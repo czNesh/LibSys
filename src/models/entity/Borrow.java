@@ -22,6 +22,7 @@ public class Borrow implements Serializable {
     private Date toDate;
     private boolean returned;
     private String notes;
+    private String borrowCode;
 
     /**
      * @return the id
@@ -135,4 +136,19 @@ public class Borrow implements Serializable {
     public void setReturned(boolean returned) {
         this.returned = returned;
     }
+
+    /**
+     * @return the borrowCode
+     */
+    public String getBorrowCode() {
+        return borrowCode;
+    }
+
+    /**
+     * @param borrowCode the borrowCode to set
+     */
+    public void setBorrowCode(String borrowCode) {
+        this.borrowCode = borrowCode;
+    }
+    
 }
