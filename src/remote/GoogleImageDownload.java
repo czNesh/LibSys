@@ -83,7 +83,7 @@ public class GoogleImageDownload extends Thread {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(GoogleService.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Chyba: " + ex);
         }
     }
 

@@ -5,15 +5,12 @@
 package controllers;
 
 import helpers.DateFormater;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import models.entity.Author;
 import models.entity.Book;
 import remote.GoogleImageDownload;
-import remote.GoogleService;
 import services.BookService;
 import views.BookDetailDialog;
 

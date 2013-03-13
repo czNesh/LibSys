@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import models.BookTableModel;
 import models.entity.Author;
 import models.entity.Book;
-import remote.GoogleService;
+import remote.GoogleSearch;
 import services.BookService;
 import views.DatePicker;
 import views.NewBookDialog;
@@ -34,13 +34,13 @@ public class NewBookController extends BaseController {
 
     private NewBookDialog dialog;
     private SearchResultsDialog resOut;
-    private GoogleService gbs;
+    private GoogleSearch gbs;
     private Book selectedBoook;
     private ArrayList<Book> foundedItems;
     DefaultListModel<Author> authorListModel = new DefaultListModel();
 
     public NewBookController(JFrame parent) {
-        gbs = new GoogleService();
+        gbs = new GoogleSearch();
         dialog = new NewBookDialog(parent, false);
         initListeners();
     }
@@ -66,6 +66,32 @@ public class NewBookController extends BaseController {
         dialog.getRemoveAuthorButton().addActionListener(a);
         dialog.getDatePickerButton().addActionListener(a);
         dialog.getSearchButton().addActionListener(new SearchButtonListener());
+    }
+    
+    public void showResults(){
+    
+            if (gbs.getResultsCount() > 0) {
+
+                // Pripravi dialog pro zobrazení výsledku
+                // Nastaví listener
+                resOut = new SearchResultsDialog(null, true);
+                resOut.getResultsTable().addMouseListener(new TableClickedMouseListener());
+
+                // Ulozi nalezene vysledky do pole 
+                foundedItems = new ArrayList<>();
+                foundedItems.addAll(gbs.getResults());
+
+                // Pripravi table model a zobrazi vysledky
+                BookTableModel ctm = new BookTableModel(foundedItems);
+                resOut.getResultsTable().setModel(ctm);
+                resOut.setLocationRelativeTo(null);
+                resOut.setVisible(true);
+
+            }
+
+            // Znovu zpristupni tlacitko pro hledaní
+            dialog.getSearchButton().setEnabled(true);
+            dialog.getSearchButton().setText("Hledat znovu");
     }
 
     private class NewBookActionListener implements ActionListener {
@@ -250,7 +276,7 @@ public class NewBookController extends BaseController {
     private class SearchButtonListener implements ActionListener {
 
         public SearchButtonListener() {
-            gbs = new GoogleService();
+            gbs = new GoogleSearch();
         }
 
         @Override
@@ -267,33 +293,9 @@ public class NewBookController extends BaseController {
             gbs.setISBN(dialog.getInputISBN10().getText());
 
             // Vyhledávání
-            gbs.run();
+            gbs.start();
 
             // LOG
-
-
-            if (gbs.getResultsCount() > 0) {
-
-                // Pripravi dialog pro zobrazení výsledku
-                // Nastaví listener
-                resOut = new SearchResultsDialog(null, true);
-                resOut.getResultsTable().addMouseListener(new TableClickedMouseListener());
-
-                // Ulozi nalezene vysledky do pole 
-                foundedItems = new ArrayList<>();
-                foundedItems.addAll(gbs.getResults());
-
-                // Pripravi table model a zobrazi vysledky
-                BookTableModel ctm = new BookTableModel(foundedItems);
-                resOut.getResultsTable().setModel(ctm);
-                resOut.setLocationRelativeTo(null);
-                resOut.setVisible(true);
-
-            }
-
-            // Znovu zpristupni tlacitko pro hledaní
-            dialog.getSearchButton().setEnabled(true);
-            dialog.getSearchButton().setText("Hledat znovu");
         }
     }
 }
