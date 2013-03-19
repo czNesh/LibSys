@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Book;
 import models.entity.Customer;
+import services.BorrowService;
 import services.CustomerService;
 
 /**
@@ -26,6 +27,9 @@ public class CustomerTableModel extends AbstractTableModel {
     boolean showEmail;
     boolean showPhone;
     boolean showNotes;
+    // Paging settings
+    int page = 1;
+    int maxRows = 50;
 
     public CustomerTableModel() {
         super();
@@ -160,5 +164,54 @@ public class CustomerTableModel extends AbstractTableModel {
 
     public Customer getCustomer(int i) {
         return customersList.get(i);
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        if (page < 1 || page > getTotalPageCount()) {
+            return;
+        }
+
+        this.page = page;
+        CustomerService.getInstance().setStart((page - 1) * maxRows);
+        updateData();
+    }
+
+    public int getMaxRows() {
+        return maxRows;
+    }
+
+    public void setMaxRows(int maxRows) {
+        if (maxRows > 0) {
+            this.maxRows = maxRows;
+        }
+    }
+
+    public void nextPage() {
+        if (page + 1 > getTotalPageCount()) {
+            return;
+        }
+        page++;
+        CustomerService.getInstance().setStart((page - 1) * maxRows);
+        updateData();
+
+    }
+
+    public void prevPage() {
+        if (page - 1 <= 0) {
+            return;
+        }
+        page--;
+        CustomerService.getInstance().setStart((page - 1) * maxRows);
+        updateData();
+
+
+    }
+
+    public int getTotalPageCount() {
+        return (int) Math.round((CustomerService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
     }
 }

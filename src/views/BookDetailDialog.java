@@ -7,6 +7,7 @@ package views;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -66,12 +67,13 @@ public class BookDetailDialog extends javax.swing.JDialog {
         infoNotes = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lastBorrowTable = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         infoStock = new javax.swing.JLabel();
         infoLocation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Informace o knize");
         setResizable(false);
 
         infoThumbnailImage.setBorder(javax.swing.BorderFactory.createTitledBorder("Náhled"));
@@ -316,7 +318,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Poslední vypůjčení této knihy"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lastBorrowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -327,7 +329,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(lastBorrowTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -437,7 +439,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable lastBorrowTable;
     // End of variables declaration//GEN-END:variables
 
     public JButton getCloseButton() {
@@ -511,4 +513,9 @@ public class BookDetailDialog extends javax.swing.JDialog {
     public JPanel getInfoThumbnailImage() {
         return infoThumbnailImage;
     }
+
+    public JTable getLastBorrowTable() {
+        return lastBorrowTable;
+    }
+
 }

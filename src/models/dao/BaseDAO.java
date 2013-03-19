@@ -155,7 +155,7 @@ public abstract class BaseDAO<T> implements DAO<T> {
         for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
-
+        System.out.println(query.getQueryString());
         list = (List<T>) query.list();
 
         // RESET
@@ -296,4 +296,5 @@ public abstract class BaseDAO<T> implements DAO<T> {
         closeSession();
         return count;
     }
+    
 }

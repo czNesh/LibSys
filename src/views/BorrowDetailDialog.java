@@ -4,6 +4,7 @@
  */
 package views;
 
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -48,7 +49,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bookListTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -63,6 +64,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Informace o půjčce");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Údaje o zákazníkovi"));
 
@@ -162,7 +164,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Vypůjčené knihy"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bookListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -173,7 +175,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(bookListTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -226,6 +228,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable bookListTable;
     private javax.swing.JTextField customerAdressTextField;
     private javax.swing.JTextField customerEmailTextField;
     private javax.swing.JTextField customerNameTextField;
@@ -245,7 +248,6 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     public JTextField getCustomerAdressTextField() {
@@ -271,4 +273,10 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
     public JTextField getCustomerSSNTextField() {
         return customerSSNTextField;
     }
+
+    public JTable getBookListTable() {
+        return bookListTable;
+    }
+    
+    
 }

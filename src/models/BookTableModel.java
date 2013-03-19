@@ -251,4 +251,14 @@ public class BookTableModel extends AbstractTableModel {
     public void setFilter(String barcode, String title, String author, String isbn10, String isbn13, Date year) {
         itemList = BookService.getInstance().getFilteredList(barcode, title, author, isbn10, isbn13, year);
     }
+
+    public void resetFilter() {
+        BookService.getInstance().resetFilter();
+        BookService.getInstance().getParameters().clear();
+        itemList = BookService.getInstance().getBooks();
+    }
+
+    public void applyFilter(String filterString) {
+        itemList = BookService.getInstance().getFilteredResult(filterString);
+    }
 }

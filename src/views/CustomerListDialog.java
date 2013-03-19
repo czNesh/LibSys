@@ -5,6 +5,7 @@
 package views;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -53,7 +54,7 @@ public class CustomerListDialog extends javax.swing.JDialog {
         confirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Vyhledat uživatele");
+        setTitle("Seznam zákazníků");
 
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,7 +89,7 @@ public class CustomerListDialog extends javax.swing.JDialog {
         inputLName.setName("lname"); // NOI18N
 
         bookTablePrevButton.setText("<");
-        bookTablePrevButton.setName("bookTablePrevPage"); // NOI18N
+        bookTablePrevButton.setName("prevPage"); // NOI18N
 
         bookTableInputNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         bookTableInputNumber.setText("1");
@@ -97,7 +98,7 @@ public class CustomerListDialog extends javax.swing.JDialog {
         bookTableTotalPage.setText("/ 5");
 
         bookTableNextButton.setText(">");
-        bookTableNextButton.setName("bookTableNextPage"); // NOI18N
+        bookTableNextButton.setName("nextPage"); // NOI18N
 
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.gif"))); // NOI18N
         searchButton.setText("Hledat");
@@ -263,6 +264,22 @@ public class CustomerListDialog extends javax.swing.JDialog {
 
     public JButton getSearchButton() {
         return searchButton;
+    }
+
+    public JTextField getBookTableInputNumber() {
+        return bookTableInputNumber;
+    }
+
+    public JButton getBookTableNextButton() {
+        return bookTableNextButton;
+    }
+
+    public JButton getBookTablePrevButton() {
+        return bookTablePrevButton;
+    }
+
+    public JLabel getBookTableTotalPage() {
+        return bookTableTotalPage;
     }
     
 }

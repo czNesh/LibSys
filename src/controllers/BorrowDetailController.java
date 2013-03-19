@@ -4,7 +4,10 @@
  */
 package controllers;
 
+import models.BookTableModel;
 import models.entity.Borrow;
+import services.BookService;
+import services.BorrowService;
 import views.BorrowDetailDialog;
 
 /**
@@ -15,10 +18,12 @@ public class BorrowDetailController extends BaseController {
 
     private BorrowDetailDialog dialog;
     private Borrow item;
+    private BookTableModel tableModel;
 
     public BorrowDetailController(Borrow item) {
         this.item = item;
         dialog = new BorrowDetailDialog(null, true);
+        tableModel = new BookTableModel(BorrowService.getInstance().getBooksOfBorrow(item.getBorrowCode()));
         setValues();
     }
 
@@ -26,7 +31,6 @@ public class BorrowDetailController extends BaseController {
     void showView() {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-
     }
 
     @Override
@@ -42,5 +46,7 @@ public class BorrowDetailController extends BaseController {
         dialog.getCustomerPhoneTextField().setText(item.getCustomer().getPhone());
         dialog.getCustomerEmailTextField().setText(item.getCustomer().getEmail());
         dialog.getCustomerNotesTextArea().setText(item.getCustomer().getNotes());
+        
+        dialog.getBookListTable().setModel(tableModel);
     }
 }

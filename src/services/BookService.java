@@ -4,6 +4,7 @@
  */
 package services;
 
+import helpers.DateFormater;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -159,5 +160,57 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         int count = ((Long) getSession().createQuery("SELECT COUNT(*) FROM Book WHERE volumeCode = :volumeCode").setParameter("volumeCode", volumeCode).uniqueResult()).intValue();
         closeSession();
         return count;
+    }
+
+    public List<Book> getFilteredResult(String filterString) {
+        StringBuilder conditionStringBuilder = new StringBuilder();
+        getParameters().clear();
+
+//        conditionStringBuilder.append("barcode = :filterString");
+//        getParameters().put("filterString", filterString);
+//
+//        if (conditionStringBuilder.length() > 0) {
+//            conditionStringBuilder.append(" OR ");
+//        }
+//        conditionStringBuilder.append("title LIKE :filterString");
+//        getParameters().put("filterString", "%"+filterString+"%");
+//
+
+
+        List<Author> findedAuthors = AuthorService.getInstance().findAuthors(filterString);
+        if (findedAuthors != null) {
+            if (conditionStringBuilder.length() > 0) {
+                conditionStringBuilder.append(" OR ");
+            }
+            conditionStringBuilder.append("authors in :findedAuthors");
+            getParameters().put("findedAuthors", findedAuthors);
+        }
+
+//        if (conditionStringBuilder.length() > 0) {
+//            conditionStringBuilder.append(" OR ");
+//        }
+//        conditionStringBuilder.append("isbn10 = :filterString");
+//        getParameters().put("filterString", filterString);
+//
+//        if (conditionStringBuilder.length() > 0) {
+//            conditionStringBuilder.append(" OR ");
+//        }
+//        conditionStringBuilder.append("isbn13 = :filterString");
+//        getParameters().put("filterString", filterString);
+//
+//
+//
+//        if (conditionStringBuilder.length() > 0) {
+//            conditionStringBuilder.append(" OR ");
+//        }
+//        conditionStringBuilder.append("publishedYear = :filterString");
+//        getParameters().put("filterString", DateFormater.stringToDate(filterString, false));
+//
+
+        if (conditionStringBuilder.length() > 0) {
+            setCondition(conditionStringBuilder.toString());
+        }
+        setFilter("GROUP BY volumeCode");
+        return getList();
     }
 }

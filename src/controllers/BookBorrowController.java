@@ -131,7 +131,7 @@ public class BookBorrowController extends BaseController {
                         Borrow b = new Borrow();
                         b.setFromDate(from);
                         b.setToDate(to);
-                        b.setReturned(false);
+                        b.setReturned(0);
                         b.setCustomer(customer);
                         BorrowService.getInstance().newBorrow(b, booksList);
                         dispose();

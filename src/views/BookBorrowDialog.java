@@ -52,7 +52,7 @@ public class BookBorrowDialog extends javax.swing.JDialog {
         dateToButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nové vypůjčení knihy");
+        setTitle("Nové vypůjčení");
 
         inputCustomer.setEditable(false);
 

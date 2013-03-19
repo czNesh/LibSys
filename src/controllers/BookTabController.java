@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JComponent;
-import javax.swing.JTable;
 import models.BookTableModel;
 import models.entity.Book;
 import views.BookFilterDialog;
@@ -21,13 +20,13 @@ import views.MainView;
  *
  * @author Nesh
  */
-class BookTabController{
+class BookTabController {
 
     private MainView mainView;
     private BookFilterDialog filter;
     private BookTableModel tableModel;
 
-    public BookTabController(MainView mainView){
+    public BookTabController(MainView mainView) {
         // MainView
         this.mainView = mainView;
 
@@ -40,7 +39,7 @@ class BookTabController{
 
         // INIT LISTENERS
         initListeners();
-        
+
         // update view
         updateView();
     }
@@ -56,16 +55,18 @@ class BookTabController{
         mainView.getFilterButton().addActionListener(a);
 
         // KeyListener
-        mainView.getBookTableInputNumber().addKeyListener(new BookTabKeyListener());
+        BookTabKeyListener b = new BookTabKeyListener();
+        mainView.getBookTableInputNumber().addKeyListener(b);
+        mainView.getBookFilterInput().addKeyListener(b);
 
         // FILTER Listeners
         filter.getOkButton().addActionListener(a);
-        
+
     }
 
     private void updateView() {
         // Update table
-        tableModel.fireTableDataChanged();   
+        tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();
 
         // Update page counting 
@@ -85,14 +86,30 @@ class BookTabController{
 
         @Override
         public void keyReleased(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                String in = mainView.getBookTableInputNumber().getText();
-                try {
-                    tableModel.setPage(Integer.parseInt(in));
-                } catch (NumberFormatException ex) {
-                    System.out.println("NESPRAVNY FORMAT CISLA");
-                }
-                updateView();
+            switch (((JComponent) e.getSource()).getName()) {
+                case "bookFilter":
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        if (mainView.getBookFilterInput().getText().trim().isEmpty()) {
+                            tableModel.resetFilter();
+                        } else {
+                            tableModel.applyFilter(mainView.getBookFilterInput().getText().trim());
+                        }
+                        updateView();
+                    }
+                    break;
+                case "bookPageNumber":
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        String in = mainView.getBookTableInputNumber().getText();
+                        try {
+                            tableModel.setPage(Integer.parseInt(in));
+                        } catch (NumberFormatException ex) {
+                            System.out.println("NESPRAVNY FORMAT CISLA");
+                        }
+                        updateView();
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

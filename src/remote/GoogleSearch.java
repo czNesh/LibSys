@@ -4,6 +4,7 @@
  */
 package remote;
 
+import controllers.NewBookController;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +14,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JLabel;
 import models.entity.Author;
 import models.entity.Book;
 
@@ -31,6 +31,9 @@ public class GoogleSearch extends Thread {
     private Image thumbnail;
     // Connection
     URLConnection conn;
+    
+    // New Book Controller
+    NewBookController controller;
 
     @Override
     public void run() {
@@ -38,14 +41,12 @@ public class GoogleSearch extends Thread {
             return;
         }
         connectServer();
+        searchBooks();
     }
 
-    public GoogleSearch() {
+    public GoogleSearch(NewBookController controller) {
         this.query = new StringBuilder();
-    }
-
-    public GoogleSearch(String query) {
-        this.query = new StringBuilder(query);
+        this.controller = controller;
     }
 
     public void setAutor(String author) {
@@ -235,6 +236,8 @@ public class GoogleSearch extends Thread {
 
         } catch (IOException ex) {
         }
+        
+        showResults();
     }
 
     public String clearSpaces(String in) {
@@ -250,5 +253,13 @@ public class GoogleSearch extends Thread {
 
     public int getResultsCount() {
         return (results == null) ? 0 : results.size();
+    }
+    
+    private void showResults(){
+        controller.showResults();
+    }
+
+    public String getQuery() {
+        return query.toString();
     }
 }

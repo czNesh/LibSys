@@ -8,7 +8,9 @@ import helpers.DateFormater;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import models.entity.Book;
 import models.entity.Borrow;
+import services.BookService;
 import services.BorrowService;
 
 /**
@@ -80,6 +82,14 @@ public class BorrowTableModel extends AbstractTableModel {
             tempValues.add(b.getCustomer().getFullName());
         }
         if (showItem) {
+            StringBuilder books = new StringBuilder();
+            for (Book temp : BorrowService.getInstance().getBooksOfBorrow(b.getBorrowCode())) {
+                if (books.length() > 0) {
+                    books.append("; ");
+                }
+                books.append(temp.getTitle());
+            }
+
             tempValues.add(b.getItem().toString());
         }
         if (showFrom) {
@@ -89,7 +99,11 @@ public class BorrowTableModel extends AbstractTableModel {
             tempValues.add(DateFormater.dateToString(b.getToDate(), false));
         }
         if (showReturned) {
-            tempValues.add((b.isReturned()) ? "VRÁCENO" : "NEVRÁCENO");
+            if (BorrowService.getInstance().isAllReturned(b.getBorrowCode())) {
+                tempValues.add("VRÁCENO");
+            } else {
+                tempValues.add("NEVRÁCENO");
+            }
         }
         if (showLibrarian) {
             tempValues.add(b.getLibrarian().toString());
@@ -170,8 +184,6 @@ public class BorrowTableModel extends AbstractTableModel {
         page--;
         BorrowService.getInstance().setStart((page - 1) * maxRows);
         updateData();
-
-
     }
 
     public int getTotalPageCount() {
@@ -183,7 +195,7 @@ public class BorrowTableModel extends AbstractTableModel {
         return borrowList.get(index);
     }
 
-    public void setViewSettings(boolean showCustomer, boolean showItem, boolean showFrom, boolean showTo, boolean showReturned, boolean showLibrarian,boolean userGrouping) {
+    public void setViewSettings(boolean showCustomer, boolean showItem, boolean showFrom, boolean showTo, boolean showReturned, boolean showLibrarian, boolean userGrouping) {
         this.showCustomer = showCustomer;
         this.showItem = showItem;
         this.showFrom = showFrom;

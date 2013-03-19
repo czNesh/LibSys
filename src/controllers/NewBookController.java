@@ -8,6 +8,8 @@ import helpers.DateFormater;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class NewBookController extends BaseController {
     DefaultListModel<Author> authorListModel = new DefaultListModel();
 
     public NewBookController(JFrame parent) {
-        gbs = new GoogleSearch();
+        gbs = new GoogleSearch(this);
         dialog = new NewBookDialog(parent, false);
         initListeners();
     }
@@ -66,6 +68,9 @@ public class NewBookController extends BaseController {
         dialog.getRemoveAuthorButton().addActionListener(a);
         dialog.getDatePickerButton().addActionListener(a);
         dialog.getSearchButton().addActionListener(new SearchButtonListener());
+        
+        NewBookKeyListener k = new NewBookKeyListener();
+        dialog.getInputAuthors().addKeyListener(k);
     }
     
     public void showResults(){
@@ -88,10 +93,34 @@ public class NewBookController extends BaseController {
                 resOut.setVisible(true);
 
             }
-
+            
             // Znovu zpristupni tlacitko pro hledaní
             dialog.getSearchButton().setEnabled(true);
             dialog.getSearchButton().setText("Hledat znovu");
+            gbs = new GoogleSearch(this);
+    }
+
+    private class NewBookKeyListener implements KeyListener{
+
+        public NewBookKeyListener() {
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                authorListModel.remove(dialog.getInputAuthors().getSelectedIndex());
+                dialog.getInputAuthors().setModel(authorListModel);
+            }
+            
+        }  
     }
 
     private class NewBookActionListener implements ActionListener {
@@ -276,7 +305,6 @@ public class NewBookController extends BaseController {
     private class SearchButtonListener implements ActionListener {
 
         public SearchButtonListener() {
-            gbs = new GoogleSearch();
         }
 
         @Override
@@ -292,10 +320,14 @@ public class NewBookController extends BaseController {
             gbs.setISBN(dialog.getInputISBN13().getText());
             gbs.setISBN(dialog.getInputISBN10().getText());
 
+            if(gbs.getQuery().isEmpty()){
+                dialog.getSearchButton().setEnabled(true);
+                return;
+            }
+            
             // Vyhledávání
             gbs.start();
-
-            // LOG
+            System.out.println("aa");
         }
     }
 }

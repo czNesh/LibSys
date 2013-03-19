@@ -20,7 +20,7 @@ public class Borrow implements Serializable {
     private Book item;
     private Date fromDate;
     private Date toDate;
-    private boolean returned;
+    private int returned;
     private String notes;
     private String borrowCode;
 
@@ -126,14 +126,14 @@ public class Borrow implements Serializable {
     /**
      * @return the returned
      */
-    public boolean isReturned() {
+    public int isReturned() {
         return returned;
     }
 
     /**
      * @param returned the returned to set
      */
-    public void setReturned(boolean returned) {
+    public void setReturned(int returned) {
         this.returned = returned;
     }
 

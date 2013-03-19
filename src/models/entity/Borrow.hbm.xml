@@ -10,7 +10,7 @@
         <many-to-one name="item" class="models.entity.Book" column="item_id" lazy="false" />
         <property name="fromDate" not-null="true" type="timestamp"/>
         <property name="toDate" not-null="true" type="timestamp"/>
-        <property name="returned" not-null="true" type="boolean"/>
+        <property name="returned" not-null="true" type="byte"/>
         <property name="notes" not-null="false" type="string"/>
         <property name="borrowCode" not-null="true" type="string"/>
     </class>

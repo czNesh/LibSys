@@ -7,11 +7,16 @@ package controllers;
 import helpers.DateFormater;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JComponent;
+import models.BorrowTableModel;
 import models.entity.Author;
 import models.entity.Book;
+import models.entity.Borrow;
 import remote.GoogleImageDownload;
 import services.BookService;
+import services.BorrowService;
 import views.BookDetailDialog;
 
 /**
@@ -21,11 +26,13 @@ import views.BookDetailDialog;
 public class BookDetailController extends BaseController {
 
     private BookDetailDialog dialog;
+    private BorrowTableModel tableModel;
     Book book;
 
     public BookDetailController(Book book) {
         dialog = new BookDetailDialog(null, true);
         this.book = book;
+        tableModel = new BorrowTableModel(BorrowService.getInstance().getBorrowsOfBook(book));
         initListeners();
         showData();
 
@@ -48,6 +55,10 @@ public class BookDetailController extends BaseController {
         BookDetailActionListener a = new BookDetailActionListener();
         dialog.getEditButton().addActionListener(a);
         dialog.getCloseButton().addActionListener(a);
+
+        //MouseListener
+        BookDetailListListener m = new BookDetailListListener();
+        dialog.getLastBorrowTable().addMouseListener(m);
     }
 
     private void showData() {
@@ -112,6 +123,40 @@ public class BookDetailController extends BaseController {
         GoogleImageDownload gid = new GoogleImageDownload(dialog.getInfoThumb(), 173, 263);
         gid.setISBN(book.getISBN10());
         gid.start();
+
+        // Posledni výpůjčky
+        dialog.getLastBorrowTable().setModel(tableModel);
+    }
+
+    private class BookDetailListListener implements MouseListener {
+
+        public BookDetailListListener() {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                Borrow b = (Borrow) tableModel.getBorrow(dialog.getLastBorrowTable().getSelectedRow());
+                BorrowDetailController bdc = new BorrowDetailController(b);
+                bdc.showView();
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
     }
 
     private class BookDetailActionListener implements ActionListener {

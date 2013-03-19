@@ -38,7 +38,7 @@ public class CustomerListController extends BaseController {
         dialog = new CustomerListDialog(parent, true);
         this.selectionMode = selectionMode;
         tableModel = new CustomerTableModel();
-        updateData();
+        updateView();
         dialog.getResultTable().setModel(tableModel);
         filterDialog = new CustomerFilterDialog(null, true);
         initListeners();
@@ -51,6 +51,8 @@ public class CustomerListController extends BaseController {
         dialog.getCancelButton().addActionListener(b);
         dialog.getFilterButton().addActionListener(b);
         dialog.getSearchButton().addActionListener(b);
+        dialog.getBookTableNextButton().addActionListener(b);
+        dialog.getBookTablePrevButton().addActionListener(b);
 
         // KeyListener
         CustomerListKeyListener k = new CustomerListKeyListener();
@@ -77,9 +79,13 @@ public class CustomerListController extends BaseController {
         dialog = null;
     }
 
-    private void updateData() {
+    private void updateView() {
         tableModel.updateData();
         tableModel.fireTableDataChanged();
+
+        // Update page counting 
+        dialog.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
+        dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
     }
 
     public Customer getSeletedCustomer() {
@@ -170,6 +176,15 @@ public class CustomerListController extends BaseController {
                             dialog.getInputEmail().getText().trim(),
                             dialog.getInputPhone().getText().trim());
                     tableModel.fireTableDataChanged();
+                    break;
+
+                case "nextPage":
+                    tableModel.nextPage();
+                    updateView();
+                    break;
+                case "prevPage":
+                    tableModel.prevPage();
+                    updateView();
                     break;
                 default:
                     System.out.println("Chyba - Jmeno polozky neodpovida zadne operaci (Buttonlistener)");
