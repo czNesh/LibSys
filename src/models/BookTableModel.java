@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Author;
 import models.entity.Book;
+import models.entity.Borrow;
 import services.BookService;
 
 public class BookTableModel extends AbstractTableModel {
@@ -261,4 +262,5 @@ public class BookTableModel extends AbstractTableModel {
     public void applyFilter(String filterString) {
         itemList = BookService.getInstance().getFilteredResult(filterString);
     }
+
 }

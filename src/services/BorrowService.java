@@ -92,4 +92,8 @@ public class BorrowService extends BaseDAO<Borrow> {
         return (sum == count)? true : false;
     }
     
+    public void returnBorrows(ArrayList<Borrow> borrowlist){
+        
+    }
+    
 }

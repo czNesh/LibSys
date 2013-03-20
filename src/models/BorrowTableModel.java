@@ -204,4 +204,12 @@ public class BorrowTableModel extends AbstractTableModel {
         this.showLibrarian = showLibrarian;
         this.userGrouping = userGrouping;
     }
+    
+//        public ArrayList<Borrow> getRows(int[] selectedRows) {
+//        ArrayList<Borrow> list = new ArrayList<>();
+//        for (int i = selectedRows.length - 1; i > 0; i--) {
+//            list.add(itemList.get(selectedRows[i]));
+//        }
+
+  //  }
 }

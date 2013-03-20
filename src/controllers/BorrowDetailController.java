@@ -4,9 +4,12 @@
  */
 package controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JComponent;
 import models.BookTableModel;
 import models.entity.Borrow;
-import services.BookService;
 import services.BorrowService;
 import views.BorrowDetailDialog;
 
@@ -24,7 +27,8 @@ public class BorrowDetailController extends BaseController {
         this.item = item;
         dialog = new BorrowDetailDialog(null, true);
         tableModel = new BookTableModel(BorrowService.getInstance().getBooksOfBorrow(item.getBorrowCode()));
-        setValues();
+        updateView();
+        initListeners();
     }
 
     @Override
@@ -39,14 +43,46 @@ public class BorrowDetailController extends BaseController {
         dialog = null;
     }
 
-    private void setValues() {
+    private void updateView() {
         dialog.getCustomerSSNTextField().setText(String.valueOf(item.getCustomer().getSSN()));
         dialog.getCustomerNameTextField().setText(item.getCustomer().getFullName());
         dialog.getCustomerAdressTextField().setText(item.getCustomer().getFullAdress());
         dialog.getCustomerPhoneTextField().setText(item.getCustomer().getPhone());
         dialog.getCustomerEmailTextField().setText(item.getCustomer().getEmail());
         dialog.getCustomerNotesTextArea().setText(item.getCustomer().getNotes());
-        
+
         dialog.getBookListTable().setModel(tableModel);
+    }
+
+    private void initListeners() {
+        BorrowDialogActionListener a = new BorrowDialogActionListener();
+        dialog.getOkButton().addActionListener(a);
+        dialog.getCancelButton().addActionListener(a);
+    }
+
+    private class BorrowDialogActionListener implements ActionListener {
+
+        public BorrowDialogActionListener() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch (((JComponent) e.getSource()).getName()) {
+                case "ok":
+                    dialog.dispose();
+                    dialog = null;
+                    break;
+                case "cancel":
+                    dialog.dispose();
+                    dialog = null;
+                    break;
+                case "return": 
+                 //   ArrayList<Borrow> list = tableModel.getRows(dialog.getBookListTable().getSelectedRows());
+                   // BorrowService.getInstance().returnBooks(list);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

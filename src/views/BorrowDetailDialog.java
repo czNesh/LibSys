@@ -4,6 +4,7 @@
  */
 package views;
 
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -46,11 +47,12 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         customerPhoneTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerNotesTextArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        okButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         bookListTable = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        returnSelectedBooksButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,7 +162,8 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jButton1.setText("Ok");
+        okButton.setText("Ok");
+        okButton.setName("ok"); // NOI18N
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Vypůjčené knihy"));
 
@@ -188,10 +191,14 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
         );
 
-        jButton2.setText("Cancel");
+        cancelButton.setText("Cancel");
+        cancelButton.setName("cancel"); // NOI18N
+
+        returnSelectedBooksButton.setText("Vrátiti označené");
+        returnSelectedBooksButton.setName("return"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,9 +211,10 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(returnSelectedBooksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -216,27 +224,28 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jButton1)
+                        .addComponent(okButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(cancelButton)
+                        .addGap(33, 33, 33)
+                        .addComponent(returnSelectedBooksButton))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable bookListTable;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JTextField customerAdressTextField;
     private javax.swing.JTextField customerEmailTextField;
     private javax.swing.JTextField customerNameTextField;
     private javax.swing.JTextArea customerNotesTextArea;
     private javax.swing.JTextField customerPhoneTextField;
     private javax.swing.JTextField customerSSNTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -248,6 +257,8 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton okButton;
+    private javax.swing.JButton returnSelectedBooksButton;
     // End of variables declaration//GEN-END:variables
 
     public JTextField getCustomerAdressTextField() {
@@ -276,6 +287,18 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
 
     public JTable getBookListTable() {
         return bookListTable;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public JButton getOkButton() {
+        return okButton;
+    }
+
+    public JButton getReturnSelectedBooksButton() {
+        return returnSelectedBooksButton;
     }
     
     
