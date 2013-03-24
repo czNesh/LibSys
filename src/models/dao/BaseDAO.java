@@ -9,9 +9,17 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.AliasToBeanConstructorResultTransformer;
+import org.hibernate.transform.AliasToBeanResultTransformer;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
+import org.hibernate.transform.ResultTransformer;
 import util.HibernateUtil;
 
 /**
@@ -296,5 +304,24 @@ public abstract class BaseDAO<T> implements DAO<T> {
         closeSession();
         return count;
     }
-    
+
+    public List<T> criteriaSearch(ResultTransformer rt, Projection p, Criterion... criterions) {
+        openSession();
+        Criteria criteria = session.createCriteria(type);
+        for (Criterion c : criterions) {
+            criteria.add(c);
+        }
+
+        if (p != null) {
+            criteria.setProjection(p);
+        }
+
+        if (rt != null) {
+            criteria.setResultTransformer(rt);
+        }
+
+        List<T> out = criteria.list();
+        closeSession();
+        return out;
+    }
 }

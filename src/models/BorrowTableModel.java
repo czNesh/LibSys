@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Book;
 import models.entity.Borrow;
-import services.BookService;
 import services.BorrowService;
 
 /**
