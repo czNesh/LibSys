@@ -112,8 +112,6 @@ public class BookTableModel extends AbstractTableModel {
             } else {
                 tempValues.add("údaj chybí");
             }
-
-
         }
         if (showlanguage) {
             tempValues.add(i.getLanguage());

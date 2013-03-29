@@ -4,6 +4,7 @@
  */
 package services;
 
+import io.ApplicationLog;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
         c.setSSN(getFreeSSN());
         customersList.add(c);
         save(c);
+        ApplicationLog.getInstance().addMessage("Zákazník byl úspěšně přidán do systému (" + c.getFullName() + ")");
     }
 
     public List<Customer> getCustomers() {

@@ -5,6 +5,7 @@
 package services;
 
 import controllers.AppController;
+import io.ApplicationLog;
 import java.util.ArrayList;
 import java.util.List;
 import models.dao.BaseDAO;
@@ -54,6 +55,7 @@ public class BorrowService extends BaseDAO<Borrow> {
             b.setLibrarian(AppController.getInstance().getLoggedUser());
             create(b);
         }
+        ApplicationLog.getInstance().addMessage("Nové vypůjčení uloženo");
     }
 
     public List<Borrow> getBorrows() {

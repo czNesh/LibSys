@@ -4,6 +4,8 @@
  */
 package controllers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import services.SystemUserService;
 
 /**
@@ -13,12 +15,14 @@ import services.SystemUserService;
 public class LibSysStart {
 
     public static void main(String[] args) {
-       // PREPARE p = new PREPARE();
-      //  p.fillDB();
-        
-        AppController c = AppController.getInstance();
-        c.setLoggedUser(SystemUserService.getInstance().find(1L));
-        c.showMainFrame();
-        // c.go();
+        try {
+            AppController c = AppController.getInstance();
+            c.setLoggedUser(SystemUserService.getInstance().find(1L));
+            c.showMainFrame();
+            c.go();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(LibSysStart.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

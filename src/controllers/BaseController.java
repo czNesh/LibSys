@@ -29,5 +29,12 @@ public abstract class BaseController{
         protected void updateLog(String message){
             ApplicationLog.getInstance().addMessage(message);
         }
+        
+        /*
+         *  Informuje controllery o změně logu
+         */      
+        public void logChanged(){
+            // STANDARDNE - nedelej nic
+        }
 
 }

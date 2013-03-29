@@ -5,6 +5,7 @@
 package services;
 
 import helpers.DateFormater;
+import io.ApplicationLog;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -75,7 +76,7 @@ public class BookService extends BaseDAO<Book> implements Serializable {
             b.setBarcode(getFreeBarcode());
             create(b);
         }
-
+        ApplicationLog.getInstance().addMessage("Uložení knih(y) proběhlo úspěšně (" + count + ")");
     }
 
     private BookService() {

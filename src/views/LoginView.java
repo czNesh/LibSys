@@ -4,6 +4,7 @@
  */
 package views;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -21,6 +22,7 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         getRootPane().setDefaultButton(loginButton);
+        setIconImage(new ImageIcon(getClass().getResource("../images/LSIcon.png")).getImage());
     }
 
     /**

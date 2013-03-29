@@ -300,6 +300,7 @@ public abstract class BaseDAO<T> implements DAO<T> {
         if (filter != null) {
             query.append(filter);
         }
+        
         int count = session.createQuery(query.toString()).list().size();
         closeSession();
         return count;
