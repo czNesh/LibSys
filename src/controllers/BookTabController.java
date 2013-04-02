@@ -133,7 +133,7 @@ class BookTabController {
                 case "filter":
                     filter.setLocationRelativeTo(null);
                     filter.setVisible(true);
-                    tableModel.setViewSettings(
+                    tableModel.setVisibility(
                             filter.getTitleCheckbox().isSelected(),
                             filter.getAuthorCheckbox().isSelected(),
                             filter.getPublisherCheckbox().isSelected(),

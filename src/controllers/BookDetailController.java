@@ -4,11 +4,13 @@
  */
 package controllers;
 
+import coding.Barcode;
 import helpers.DateFormater;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 import models.BorrowTableModel;
 import models.entity.Author;
@@ -169,6 +171,10 @@ public class BookDetailController extends BaseController {
                     break;
                 case "closeButton":
                     dispose();
+                    break;
+                case "qrcode":
+                    BufferedImage barcode = Barcode.encode(book.getBarcode());
+                    
                     break;
                 default:
                     break;

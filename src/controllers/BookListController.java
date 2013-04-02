@@ -40,10 +40,15 @@ public class BookListController extends BaseController {
         dialog = new BookListDialog(parent, selectionMode);
         this.selectionMode = selectionMode;
         tableModel = new BookTableModel();
+
+
         dialog.getResultTable().setModel(tableModel);
         filterDialog = new BookFilterDialog(null, true);
+        setVisibility(true, true, false, true, false, false, false, false, true, true);
         initListeners();
         updateView();
+
+
     }
 
     private void initListeners() {
@@ -90,6 +95,21 @@ public class BookListController extends BaseController {
     void dispose() {
         dialog.dispose();
         dialog = null;
+    }
+
+    private void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
+        tableModel.setVisibility(showTitle, showAuthor, showPublisher, showPublishedYear, showlanguage, showISBN10, showISBN13, showPageCount, showItemCount, showLocation);
+
+        filterDialog.getTitleCheckbox().setSelected(showTitle);
+        filterDialog.getAuthorCheckbox().setSelected(showAuthor);
+        filterDialog.getPublisherCheckbox().setSelected(showPublisher);
+        filterDialog.getPublishedDateCheckbox().setSelected(showPublishedYear);
+        filterDialog.getLanguageCheckbox().setSelected(showlanguage);
+        filterDialog.getISBN10Checkbox().setSelected(showISBN10);
+        filterDialog.getISBN13Checkbox().setSelected(showISBN13);
+        filterDialog.getPageCountCheckbox().setSelected(showPageCount);
+        filterDialog.getCountCheckbox().setSelected(showItemCount);
+        filterDialog.getLocationCheckbox().setSelected(showLocation);
     }
 
     private class BookListMouseListener implements MouseListener {
@@ -147,8 +167,8 @@ public class BookListController extends BaseController {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            String sourceName =((JComponent) e.getSource()).getName();
-            
+            String sourceName = ((JComponent) e.getSource()).getName();
+
             if (e.getKeyCode() == KeyEvent.VK_ENTER && sourceName.equals("inputPageNumber")) {
                 String in = dialog.getBookTableInputNumber().getText();
                 try {
@@ -158,7 +178,7 @@ public class BookListController extends BaseController {
                 }
                 updateView();
             }
-            
+
             // pokud se nezapise znak - hned skonci
             if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
                 return;
@@ -274,7 +294,7 @@ public class BookListController extends BaseController {
                     break;
 
                 case "filterConfirm":
-                    tableModel.setViewSettings(
+                    tableModel.setVisibility(
                             filterDialog.getTitleCheckbox().isSelected(),
                             filterDialog.getAuthorCheckbox().isSelected(),
                             filterDialog.getPublisherCheckbox().isSelected(),

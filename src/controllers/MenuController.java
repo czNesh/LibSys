@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import coding.QRCode;
 import io.ApplicationLog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +33,9 @@ public class MenuController implements ActionListener {
         view.getNewBorrowButton().addActionListener(this);
         view.getLogoutMenuItem().addActionListener(this);
         view.getExitMenuItem().addActionListener(this);
+        view.getNewCustomerButton().addActionListener(this);
+        view.getQRCodeButton().addActionListener(this);
+        view.getBarcodeButton().addActionListener(this);
     }
 
     @Override
@@ -53,6 +57,10 @@ public class MenuController implements ActionListener {
                 NewCustomerController newCustomerController = new NewCustomerController(view);
                 newCustomerController.showView();
                 break;
+            case "newCustomerButton":
+                NewCustomerController newCustomerController2 = new NewCustomerController(view);
+                newCustomerController2.showView();
+                break;
             case "browseCustomers":
                 CustomerListController customerListController = new CustomerListController(view, false);
                 customerListController.showView();
@@ -60,13 +68,6 @@ public class MenuController implements ActionListener {
             case "importItems":
                 break;
             case "exportItems":
-                break;
-            case "barcode":
-                break;
-            case "qrcode":
-                break;
-            case "settings":
-                
                 break;
             case "logout":
                 int logout = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu se chcete odhlásit?", "Odhlásit?", JOptionPane.OK_CANCEL_OPTION);

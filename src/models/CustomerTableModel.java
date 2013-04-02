@@ -214,4 +214,12 @@ public class CustomerTableModel extends AbstractTableModel {
     public int getTotalPageCount() {
         return (int) Math.round((CustomerService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
     }
+
+    public void resetFilter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void applyFilter(String trim) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

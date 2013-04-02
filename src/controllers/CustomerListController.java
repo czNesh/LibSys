@@ -177,7 +177,6 @@ public class CustomerListController extends BaseController {
                             dialog.getInputPhone().getText().trim());
                     tableModel.fireTableDataChanged();
                     break;
-
                 case "nextPage":
                     tableModel.nextPage();
                     updateView();
@@ -220,7 +219,6 @@ public class CustomerListController extends BaseController {
             if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 return;
             }
-
 
             // priprava promennych 
             String in;
@@ -286,11 +284,9 @@ public class CustomerListController extends BaseController {
                     // oznaci doplnene
                     dialog.getInputSSN().setSelectionStart(start);
                     dialog.getInputSSN().setSelectionEnd(dialog.getInputSSN().getText().length());
-
                     break;
                 default:
                     break;
-
             }
         }
     }

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -24,7 +25,8 @@ public class MainView extends javax.swing.JFrame {
     public MainView() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../images/LSIcon.png")).getImage());
-    }  
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,19 +41,22 @@ public class MainView extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jToolBar1 = new javax.swing.JToolBar();
         newItemButton = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         newBorrowButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        newCustomerButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton2 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        barcodeButton = new javax.swing.JButton();
+        QRCodeButton = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         systemUserLabel = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabPanel = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         catalogTable = new javax.swing.JTable();
@@ -63,6 +68,15 @@ public class MainView extends javax.swing.JFrame {
         bookTableTotalPage = new javax.swing.JLabel();
         bookTableInputNumber = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
+        customerFilterButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        customerTable = new javax.swing.JTable();
+        customerTablePrevButton = new javax.swing.JButton();
+        customerTableInputNumber = new javax.swing.JTextField();
+        customerTableTotalPage = new javax.swing.JLabel();
+        customerTableNextButton = new javax.swing.JButton();
+        customerFilterInput = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         borrowFilterButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -131,14 +145,13 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
-        newItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-icon.png"))); // NOI18N
+        newItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book_add2.gif"))); // NOI18N
         newItemButton.setToolTipText("Přidat novou položku (CTRL+N)");
         newItemButton.setFocusable(false);
         newItemButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         newItemButton.setName("newItem"); // NOI18N
         newItemButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(newItemButton);
-        jToolBar1.add(jSeparator1);
 
         newBorrowButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/borrow-icon.png"))); // NOI18N
         newBorrowButton.setToolTipText("Vytvoření nové půjčky (CTRL+B)");
@@ -147,7 +160,22 @@ public class MainView extends javax.swing.JFrame {
         newBorrowButton.setName("newBorrow"); // NOI18N
         newBorrowButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(newBorrowButton);
+        jToolBar1.add(jSeparator1);
+
+        newCustomerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_add.gif"))); // NOI18N
+        newCustomerButton.setFocusable(false);
+        newCustomerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newCustomerButton.setName("newCustomerButton"); // NOI18N
+        newCustomerButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(newCustomerButton);
         jToolBar1.add(jSeparator2);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
+        jToolBar1.add(jSeparator6);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/export-icon.png"))); // NOI18N
         jButton3.setFocusable(false);
@@ -162,17 +190,19 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(jButton4);
         jToolBar1.add(jSeparator3);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/barcode-icon.png"))); // NOI18N
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
+        barcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/barcode-icon.png"))); // NOI18N
+        barcodeButton.setFocusable(false);
+        barcodeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        barcodeButton.setName("barcode"); // NOI18N
+        barcodeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(barcodeButton);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton6);
+        QRCodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
+        QRCodeButton.setFocusable(false);
+        QRCodeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        QRCodeButton.setName("qrcode"); // NOI18N
+        QRCodeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(QRCodeButton);
         jToolBar1.add(jSeparator4);
         jToolBar1.add(filler2);
 
@@ -184,7 +214,9 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(systemUserLabel);
         jToolBar1.add(filler3);
 
-        jTabbedPane1.setName("bookFilterShow"); // NOI18N
+        TabPanel.setName("bookFilterShow"); // NOI18N
+
+        jPanel1.setName("catalogTab"); // NOI18N
 
         catalogTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -250,7 +282,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(bookFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookTableNextButton)
@@ -260,20 +292,87 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(6, 6, 6))
         );
 
-        jTabbedPane1.addTab("Knihovna", jPanel1);
+        TabPanel.addTab("Knihovna", jPanel1);
+
+        jPanel4.setName("customerTab"); // NOI18N
+
+        customerFilterButton.setText("Volby zobrazení");
+        customerFilterButton.setName("filter"); // NOI18N
+
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(customerTable);
+
+        customerTablePrevButton.setText("<");
+        customerTablePrevButton.setName("prevPage"); // NOI18N
+
+        customerTableInputNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        customerTableInputNumber.setText("1");
+        customerTableInputNumber.setName("bookPageNumber"); // NOI18N
+
+        customerTableTotalPage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        customerTableTotalPage.setText("/ 5");
+
+        customerTableNextButton.setText(">");
+        customerTableNextButton.setName("nextPage"); // NOI18N
+
+        customerFilterInput.setName("bookFilter"); // NOI18N
+
+        jLabel2.setText("Rychlý filtr:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(customerFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(customerTablePrevButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerTableInputNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerTableTotalPage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerTableNextButton)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerFilterButton)
+                    .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerTableNextButton)
+                    .addComponent(customerTablePrevButton)
+                    .addComponent(customerTableTotalPage)
+                    .addComponent(customerTableInputNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
         );
 
-        jTabbedPane1.addTab("Zákazníci", jPanel4);
+        TabPanel.addTab("Zákazníci", jPanel4);
+
+        jPanel2.setName("borrowTab"); // NOI18N
 
         borrowFilterButton.setText("Volby zobrazení");
         borrowFilterButton.setName("filter"); // NOI18N
@@ -348,7 +447,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrowNextButton)
@@ -362,7 +461,9 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Půjčky", jPanel2);
+        TabPanel.addTab("Půjčky", jPanel2);
+
+        jPanel3.setName("announcementTab"); // NOI18N
 
         filterButton2.setText("Volby zobrazení");
 
@@ -436,7 +537,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookTableNextButton2)
@@ -450,7 +551,7 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Oznámení (5)", jPanel3);
+        TabPanel.addTab("Oznámení (5)", jPanel3);
 
         console.setEditable(false);
         console.setColumns(20);
@@ -506,7 +607,7 @@ public class MainView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1)
+            .addComponent(TabPanel)
             .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
@@ -514,12 +615,12 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
+                .addComponent(TabPanel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("Knihovna");
+        TabPanel.getAccessibleContext().setAccessibleName("Knihovna");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -535,8 +636,10 @@ public class MainView extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton QRCodeButton;
+    private javax.swing.JTabbedPane TabPanel;
+    private javax.swing.JButton barcodeButton;
     private javax.swing.JTextField bookFilterInput;
     private javax.swing.JTextField bookTableInputNumber;
     private javax.swing.JTextField bookTableInputNumber2;
@@ -555,19 +658,26 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTable catalogTable;
     private javax.swing.JTable catalogTable2;
     private javax.swing.JTextArea console;
+    private javax.swing.JButton customerFilterButton;
+    private javax.swing.JTextField customerFilterInput;
     private javax.swing.JMenuItem customerListMenuItem;
+    private javax.swing.JTable customerTable;
+    private javax.swing.JTextField customerTableInputNumber;
+    private javax.swing.JButton customerTableNextButton;
+    private javax.swing.JButton customerTablePrevButton;
+    private javax.swing.JLabel customerTableTotalPage;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton filterButton;
     private javax.swing.JButton filterButton2;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -586,12 +696,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -599,25 +710,39 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JButton newBorrowButton;
+    private javax.swing.JButton newCustomerButton;
     private javax.swing.JMenuItem newCustomerMenuItem;
     private javax.swing.JButton newItemButton;
     private javax.swing.JMenuItem settingsMenuItem;
     private javax.swing.JLabel systemUserLabel;
     // End of variables declaration//GEN-END:variables
+
+    /*
+     * BASIC
+     */
     
-    public JTable getCatalogTable(){
-        return catalogTable;
-    }
-    
-    public JLabel getSystemUserLabel(){
+    public JLabel getSystemUserLabel() {
         return systemUserLabel;
     }
+
+    public JTextArea getConsole() {
+        return console;
+    }
+
+    public JTabbedPane getTabPanel() {
+        return TabPanel;
+    }
+     
+
+    /*
+     * MENU ITEMS
+     */
     
-    public JButton getNewItemButton(){
+    public JButton getNewItemButton() {
         return newItemButton;
     }
-    
-    public JMenuItem getNewCustomerMenuItem(){
+
+    public JMenuItem getNewCustomerMenuItem() {
         return newCustomerMenuItem;
     }
 
@@ -625,16 +750,40 @@ public class MainView extends javax.swing.JFrame {
         return customerListMenuItem;
     }
 
-    public JButton getFilterButton(){
-        return filterButton;
-    }
-
     public JButton getNewBorrowButton() {
         return newBorrowButton;
     }
+
+    public JMenuItem getExitMenuItem() {
+        return exitMenuItem;
+    }
+
+    public JMenuItem getLogoutMenuItem() {
+        return logoutMenuItem;
+    }
+
+    public JButton getNewCustomerButton() {
+        return newCustomerButton;
+    }
+
+    public JButton getQRCodeButton() {
+        return QRCodeButton;
+    }
+
+    public JButton getBarcodeButton() {
+        return barcodeButton;
+    }
     
-    public JTextArea getConsole() {
-        return console;
+    /*
+     * CATALOG TAB
+     */
+
+    public JTable getCatalogTable() {
+        return catalogTable;
+    }
+
+    public JButton getFilterButton() {
+        return filterButton;
     }
 
     public JTextField getBookTableInputNumber() {
@@ -653,11 +802,8 @@ public class MainView extends javax.swing.JFrame {
         return bookTableTotalPage;
     }
 
-
     /*
-     * 
-     * BORROW TAB GET METHODS
-     * 
+     * BORROW TAB 
      */
     
     public JTable getBorrowTable() {
@@ -684,17 +830,38 @@ public class MainView extends javax.swing.JFrame {
         return borrowFilterButton;
     }
 
-    public JMenuItem getExitMenuItem() {
-        return exitMenuItem;
-    }
-
-    public JMenuItem getLogoutMenuItem() {
-        return logoutMenuItem;
-    }
-
     public JTextField getBookFilterInput() {
         return bookFilterInput;
     }
-   
     
+    /*
+     * CUSTOMER TAB
+     */
+    public JButton getCustomerFilterButton() {
+        return customerFilterButton;
+    }
+
+    public JTextField getCustomerFilterInput() {
+        return customerFilterInput;
+    }
+
+    public JTable getCustomerTable() {
+        return customerTable;
+    }
+
+    public JTextField getCustomerTableInputNumber() {
+        return customerTableInputNumber;
+    }
+
+    public JButton getCustomerTableNextButton() {
+        return customerTableNextButton;
+    }
+
+    public JButton getCustomerTablePrevButton() {
+        return customerTablePrevButton;
+    }
+
+    public JLabel getCustomerTableTotalPage() {
+        return customerTableTotalPage;
+    }
 }

@@ -176,7 +176,7 @@ public class BookTableModel extends AbstractTableModel {
         return tempValuesColumnNames.get(column);
     }
 
-    public void setViewSettings(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
+    public void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
         this.showTitle = showTitle;
         this.showAuthor = showAuthor;
         this.showPublisher = showPublisher;
@@ -260,5 +260,5 @@ public class BookTableModel extends AbstractTableModel {
     public void applyFilter(String filterString) {
         itemList = BookService.getInstance().getFilteredResult(filterString);
     }
-
+    
 }

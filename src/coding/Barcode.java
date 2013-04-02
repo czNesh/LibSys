@@ -20,7 +20,7 @@ public class Barcode {
     private static final int WIDTH = 300;
     private static final int HEIGHT = 100;
 
-    public static BufferedImage encode(String input) throws Exception {
+    public static BufferedImage encode(String input){
         UPCAWriter writer = new UPCAWriter();
         BitMatrix bitMatrix = null;
         try {
@@ -32,7 +32,7 @@ public class Barcode {
         }
     }
 
-    public static ArrayList<BufferedImage> encode(ArrayList<String> inputs) throws Exception {
+    public static ArrayList<BufferedImage> encode(ArrayList<String> inputs){
         UPCAWriter writer = new UPCAWriter();
         BitMatrix bitMatrix = null;
         ArrayList<BufferedImage> list = new ArrayList<>();

@@ -18,9 +18,15 @@ public class MainController extends BaseController {
 
     private MainView mainView;
     private MenuController menuController;
+    
+    /*
+     * TABs controllers
+     */
+    
     private BookTabController bookTabController;
     private BorrowTabController borrowTabController;
     private NotificationTabController notificationTabController;
+    private CustomerTabController customerTabController;
 
     public MainController() {
         // Hlavní pohled
@@ -36,7 +42,8 @@ public class MainController extends BaseController {
         bookTabController = new BookTabController(mainView);
         borrowTabController = new BorrowTabController(mainView);
         notificationTabController = new NotificationTabController(mainView);
-
+        customerTabController = new CustomerTabController(mainView);
+        
         // registrace listeneru logu
         ApplicationLog.getInstance().registerListener(this);
 
