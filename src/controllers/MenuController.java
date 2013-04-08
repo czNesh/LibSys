@@ -36,15 +36,12 @@ public class MenuController implements ActionListener {
         view.getNewCustomerButton().addActionListener(this);
         view.getQRCodeButton().addActionListener(this);
         view.getBarcodeButton().addActionListener(this);
+        view.getConnectionButton().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        JComponent b = (JComponent) e.getSource();
-        String name = b.getName();
-
-        switch (name) {
+        switch (((JComponent) e.getSource()).getName()) {
             case "newItem":
                 NewBookController newItemController = new NewBookController(view);
                 newItemController.showView();
@@ -68,6 +65,9 @@ public class MenuController implements ActionListener {
             case "importItems":
                 break;
             case "exportItems":
+                break;
+            case "connection":
+                SocketServerController.getInstance().showView();
                 break;
             case "logout":
                 int logout = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu se chcete odhlásit?", "Odhlásit?", JOptionPane.OK_CANCEL_OPTION);

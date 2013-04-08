@@ -214,4 +214,10 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         setFilter("GROUP BY volumeCode");
         return getList();
     }
+
+    public Book getBookWithCode(String code) {
+        getParameters().clear();
+        getParameters().put("barcode", code);
+        return getUnique("barcode = :barcode");
+    }
 }

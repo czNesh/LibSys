@@ -53,6 +53,7 @@ public class MainView extends javax.swing.JFrame {
         barcodeButton = new javax.swing.JButton();
         QRCodeButton = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
+        connectionButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         systemUserLabel = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
@@ -204,6 +205,13 @@ public class MainView extends javax.swing.JFrame {
         QRCodeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(QRCodeButton);
         jToolBar1.add(jSeparator4);
+
+        connectionButton.setText("Připojení");
+        connectionButton.setFocusable(false);
+        connectionButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        connectionButton.setName("connection"); // NOI18N
+        connectionButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(connectionButton);
         jToolBar1.add(filler2);
 
         systemUserLabel.setForeground(new java.awt.Color(0, 153, 0));
@@ -657,6 +665,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel borrowTotalPageNumber;
     private javax.swing.JTable catalogTable;
     private javax.swing.JTable catalogTable2;
+    private javax.swing.JButton connectionButton;
     private javax.swing.JTextArea console;
     private javax.swing.JButton customerFilterButton;
     private javax.swing.JTextField customerFilterInput;
@@ -720,7 +729,6 @@ public class MainView extends javax.swing.JFrame {
     /*
      * BASIC
      */
-    
     public JLabel getSystemUserLabel() {
         return systemUserLabel;
     }
@@ -732,12 +740,15 @@ public class MainView extends javax.swing.JFrame {
     public JTabbedPane getTabPanel() {
         return TabPanel;
     }
-     
 
     /*
      * MENU ITEMS
      */
     
+    public JButton getConnectionButton() {
+        return connectionButton;
+    }
+
     public JButton getNewItemButton() {
         return newItemButton;
     }
@@ -773,11 +784,10 @@ public class MainView extends javax.swing.JFrame {
     public JButton getBarcodeButton() {
         return barcodeButton;
     }
-    
+
     /*
      * CATALOG TAB
      */
-
     public JTable getCatalogTable() {
         return catalogTable;
     }
@@ -805,7 +815,6 @@ public class MainView extends javax.swing.JFrame {
     /*
      * BORROW TAB 
      */
-    
     public JTable getBorrowTable() {
         return borrowTable;
     }
@@ -833,7 +842,7 @@ public class MainView extends javax.swing.JFrame {
     public JTextField getBookFilterInput() {
         return bookFilterInput;
     }
-    
+
     /*
      * CUSTOMER TAB
      */
