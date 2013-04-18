@@ -31,6 +31,8 @@ public class SocketServerController extends BaseController {
         }
         return instance;
     }
+    
+
 
     private SocketServerController() {
         dialog = new SocketServerDialog(null, false);

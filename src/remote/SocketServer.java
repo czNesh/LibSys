@@ -153,6 +153,7 @@ public class SocketServer extends Thread {
                     existingConnection.remove(this);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    existingConnection.remove(this);
                     return;
                 }
             }
