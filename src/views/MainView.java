@@ -785,6 +785,10 @@ public class MainView extends javax.swing.JFrame {
         return barcodeButton;
     }
 
+    public JMenuItem getSettingsMenuItem() {
+        return settingsMenuItem;
+    }
+
     /*
      * CATALOG TAB
      */

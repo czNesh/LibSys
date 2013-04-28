@@ -11,6 +11,7 @@ import java.util.List;
 import models.dao.BaseDAO;
 import models.entity.Book;
 import models.entity.Borrow;
+import models.entity.Customer;
 
 /**
  *
@@ -96,6 +97,14 @@ public class BorrowService extends BaseDAO<Borrow> {
     
     public void returnBorrows(ArrayList<Borrow> borrowlist){
         
+    }
+
+    public List<Borrow> getBorrowsOfCustomer(Long customerID) {
+        getParameters().clear();
+        getParameters().put("customer_id", customerID);
+        setCondition("customer_id = :customer_id");       
+        setFilter(" GROUP BY borrowCode");
+        return getList();
     }
     
 }

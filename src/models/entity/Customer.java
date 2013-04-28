@@ -218,4 +218,5 @@ public class Customer implements Serializable {
     public String getFullAdress() {
         return street + ", " + city + " - " + country;
     }
+    
 }

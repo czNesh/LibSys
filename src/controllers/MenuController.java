@@ -37,6 +37,7 @@ public class MenuController implements ActionListener {
         view.getQRCodeButton().addActionListener(this);
         view.getBarcodeButton().addActionListener(this);
         view.getConnectionButton().addActionListener(this);
+        view.getSettingsMenuItem().addActionListener(this);
     }
 
     @Override
@@ -68,6 +69,10 @@ public class MenuController implements ActionListener {
                 break;
             case "connection":
                 SocketServerController.getInstance().showView();
+                break;
+            case "settings":
+                SettingsController sc = new SettingsController();
+                sc.showView();
                 break;
             case "logout":
                 int logout = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu se chcete odhlásit?", "Odhlásit?", JOptionPane.OK_CANCEL_OPTION);

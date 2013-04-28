@@ -59,8 +59,6 @@ public class SocketServerController extends BaseController {
     public void logMessage(String in) {
         dialog.getLogOutput().setText(dialog.getLogOutput().getText() + in + "\n");
     }
-    
-    
 
     public void setServerStatus(boolean online) {
         if (online) {
