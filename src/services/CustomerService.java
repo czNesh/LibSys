@@ -5,8 +5,8 @@
 package services;
 
 import io.ApplicationLog;
+import io.Refresh;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import models.dao.BaseDAO;
 import models.entity.Customer;
@@ -54,8 +54,10 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
 
     public void saveCustomer(Customer c) {
         c.setSSN(getFreeSSN());
+        c.setDeleted(false);
         customersList.add(c);
         save(c);
+        Refresh.getInstance().refreshCustomerTab();
         ApplicationLog.getInstance().addMessage("Zákazník byl úspěšně přidán do systému (" + c.getFullName() + ")");
     }
 

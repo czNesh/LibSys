@@ -20,6 +20,7 @@ public class SystemUser implements Serializable {
     private String lastName;
     private String email;
     private boolean master;
+    private boolean deleted;
     
     /**
      * @return the id
@@ -149,5 +150,21 @@ public class SystemUser implements Serializable {
     public String toString() {
         return firstName + " " + lastName;
     }
+
+    /**
+     * @return the deleted
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    /**
+     * @param deleted the deleted to set
+     */
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+    
+    
     
 }

@@ -52,7 +52,7 @@ public class CustomerTabController {
         mainView.getCustomerFilterInput().addKeyListener(k);
     }
 
-    private void updateView() {
+    public void updateView() {
         // Update table
         tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();

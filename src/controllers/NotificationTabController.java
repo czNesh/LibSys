@@ -10,10 +10,14 @@ import views.MainView;
  *
  * @author Nesh
  */
-class NotificationTabController {
+public class NotificationTabController {
 
     public NotificationTabController(MainView mainView) {
         
+    }
+    
+    public void updateView(){
+    
     }
     
 }

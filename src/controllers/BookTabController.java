@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JComponent;
 import models.BookTableModel;
 import models.entity.Book;
+import services.BookService;
 import views.BookFilterDialog;
 import views.MainView;
 
@@ -20,7 +21,7 @@ import views.MainView;
  *
  * @author Nesh
  */
-class BookTabController {
+public class BookTabController {
 
     private MainView mainView;
     private BookFilterDialog filter;
@@ -58,13 +59,14 @@ class BookTabController {
         BookTabKeyListener b = new BookTabKeyListener();
         mainView.getBookTableInputNumber().addKeyListener(b);
         mainView.getBookFilterInput().addKeyListener(b);
+        mainView.getCatalogTable().addKeyListener(b);
 
         // FILTER Listeners
         filter.getOkButton().addActionListener(a);
 
     }
 
-    private void updateView() {
+    public void updateView() {
         // Update table
         tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();
@@ -106,6 +108,18 @@ class BookTabController {
                             System.out.println("NESPRAVNY FORMAT CISLA");
                         }
                         updateView();
+                    }
+                    break;
+                case "bookTable":
+                    if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                        
+                        int[] array = mainView.getCatalogTable().getSelectedRows();
+                        if (array.length > 0) {
+                            for (int i = array.length - 1; i >= 0; i--) {
+                                Book b = tableModel.getBook(array[i]);
+                                BookService.getInstance().delete(b.getBarcode());
+                            }
+                        }
                     }
                     break;
                 default:

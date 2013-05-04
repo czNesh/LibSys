@@ -20,7 +20,7 @@ import views.MainView;
  *
  * @author Nesh
  */
-class BorrowTabController {
+public class BorrowTabController {
 
     BorrowTableModel tableModel;
     BorrowFilterDialog filter;
@@ -61,7 +61,7 @@ class BorrowTabController {
         filter.getOkButton().addActionListener(a);
     }
 
-    private void updateView() {
+    public void updateView() {
         // Update table
         tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();

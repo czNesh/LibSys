@@ -25,6 +25,7 @@ public class Customer implements Serializable {
     private String email;
     private String phone;
     private String notes;
+    private boolean deleted;
 
     /**
      * @return the id
@@ -218,5 +219,21 @@ public class Customer implements Serializable {
     public String getFullAdress() {
         return street + ", " + city + " - " + country;
     }
+
+    /**
+     * @return the deleted
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    /**
+     * @param deleted the deleted to set
+     */
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+    
+    
     
 }

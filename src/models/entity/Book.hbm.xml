@@ -29,5 +29,6 @@
         <property name="borrowed" not-null="true" type="integer"/>
         <property name="notes" not-null="false" type="string"/>
         <property name="volumeCode" not-null="true" type="string"/>
+        <property name="deleted" not-null="true" type="boolean"/>
     </class>
 </hibernate-mapping>

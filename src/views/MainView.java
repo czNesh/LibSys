@@ -234,6 +234,7 @@ public class MainView extends javax.swing.JFrame {
 
             }
         ));
+        catalogTable.setName("bookTable"); // NOI18N
         jScrollPane1.setViewportView(catalogTable);
 
         jLabel1.setText("Rychlý filtr:");

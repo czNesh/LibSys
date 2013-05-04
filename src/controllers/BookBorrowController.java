@@ -124,14 +124,13 @@ public class BookBorrowController extends BaseController {
                         validationLog.append("Nebyl vybrán žádný zákazník\n");
                     }
 
-
                     if (validationLog.length() > 0) {
                         JOptionPane.showMessageDialog(dialog, validationLog.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
                     } else {
                         Borrow b = new Borrow();
                         b.setFromDate(from);
                         b.setToDate(to);
-                        b.setReturned(0);
+                        b.setReturned(Byte.valueOf("0"));
                         b.setCustomer(customer);
                         BorrowService.getInstance().newBorrow(b, booksList);
                         dispose();

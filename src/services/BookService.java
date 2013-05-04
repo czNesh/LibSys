@@ -6,6 +6,7 @@ package services;
 
 import helpers.DateFormater;
 import io.ApplicationLog;
+import io.Refresh;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -72,10 +73,12 @@ public class BookService extends BaseDAO<Book> implements Serializable {
     public void saveBook(Book b, int count) {
         b.setVolumeCode(getFreeVolumeCode());
         b.setBorrowed(0);
+        b.setDeleted(false);
         for (int i = 0; i < count; i++) {
             b.setBarcode(getFreeBarcode());
             create(b);
         }
+        Refresh.getInstance().refreshBookTab();
         ApplicationLog.getInstance().addMessage("Uložení knih(y) proběhlo úspěšně (" + count + ")");
     }
 
@@ -219,5 +222,10 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         getParameters().clear();
         getParameters().put("barcode", code);
         return getUnique("barcode = :barcode");
+    }
+
+    public void delete(String barcode) {
+        // TODO
+        System.out.println("MAZU");
     }
 }

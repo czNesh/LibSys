@@ -14,21 +14,19 @@ import views.SettingsDialog;
 public class SettingsController extends BaseController {
 
     Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+    SettingsDialog dialog;
 
-   SettingsDialog dialog;
-    
     public SettingsController() {
-        dialog = new SettingsDialog(null, true); 
-      //  prefs.putInt("MAX_ROWS", 15);
-        System.out.println(prefs.getInt("MAX_ROWS", 20));
+        dialog = new SettingsDialog(null, true);
+        prefs.putInt("MAX_ROWS", 15);
+
+
     }
-    
-    private void initListeners(){
-    
+
+    private void initListeners() {
     }
-    
-    private void updateDate(){
-        
+
+    private void updateData() {
     }
 
     @Override

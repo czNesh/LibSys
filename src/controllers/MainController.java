@@ -5,6 +5,7 @@
 package controllers;
 
 import io.ApplicationLog;
+import io.Refresh;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
@@ -43,6 +44,9 @@ public class MainController extends BaseController {
         borrowTabController = new BorrowTabController(mainView);
         notificationTabController = new NotificationTabController(mainView);
         customerTabController = new CustomerTabController(mainView);
+        
+        // Refresh module
+        Refresh.getInstance().setControllers(bookTabController, customerTabController, borrowTabController, notificationTabController);
         
         // registrace listeneru logu
         ApplicationLog.getInstance().registerListener(this);

@@ -20,9 +20,10 @@ public class Borrow implements Serializable {
     private Book item;
     private Date fromDate;
     private Date toDate;
-    private int returned;
+    private Byte returned;
     private String notes;
     private String borrowCode;
+    private boolean deleted;
 
     /**
      * @return the id
@@ -123,17 +124,11 @@ public class Borrow implements Serializable {
         this.toDate = toDate;
     }
 
-    /**
-     * @return the returned
-     */
-    public int isReturned() {
+    public Byte getReturned() {
         return returned;
     }
 
-    /**
-     * @param returned the returned to set
-     */
-    public void setReturned(int returned) {
+    public void setReturned(Byte returned) {
         this.returned = returned;
     }
 
@@ -149,6 +144,20 @@ public class Borrow implements Serializable {
      */
     public void setBorrowCode(String borrowCode) {
         this.borrowCode = borrowCode;
+    }
+
+    /**
+     * @return the deleted
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    /**
+     * @param deleted the deleted to set
+     */
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
     
 }

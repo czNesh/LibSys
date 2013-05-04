@@ -6,6 +6,7 @@ package services;
 
 import controllers.AppController;
 import io.ApplicationLog;
+import io.Refresh;
 import java.util.ArrayList;
 import java.util.List;
 import models.dao.BaseDAO;
@@ -51,11 +52,13 @@ public class BorrowService extends BaseDAO<Borrow> {
 
     public void newBorrow(Borrow b, List<Book> booksList) {
         b.setBorrowCode(getFreeBorrowedCode());
+        b.setDeleted(false);
         for (Book book : booksList) {
             b.setItem(book);
             b.setLibrarian(AppController.getInstance().getLoggedUser());
             create(b);
         }
+        Refresh.getInstance().refreshBorrowTab();
         ApplicationLog.getInstance().addMessage("Nové vypůjčení uloženo");
     }
 

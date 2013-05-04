@@ -17,8 +17,9 @@ public class LibSysStart {
     public static void main(String[] args) {
         try {
             AppController c = AppController.getInstance();
-            c.setLoggedUser(SystemUserService.getInstance().find(1L));
+            c.setLoggedUser(SystemUserService.getInstance().find(2L));
             c.showMainFrame();
+            //c.showLoginFrame();
             c.go();
             
         } catch (Exception ex) {

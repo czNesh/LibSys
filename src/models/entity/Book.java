@@ -36,7 +36,7 @@ public class Book implements Serializable {
     private int borrowed;
     private String notes;
     private String volumeCode;
-
+    private boolean deleted;
     /**
      * @return the id
      */
@@ -331,4 +331,21 @@ public class Book implements Serializable {
     public void setBorrowed(int borrowed) {
         this.borrowed = borrowed;
     }
+
+    /**
+     * @return the deleted
+     */
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    /**
+     * @param deleted the deleted to set
+     */
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+    
+    
+    
 }

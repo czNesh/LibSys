@@ -15,5 +15,6 @@
         <property name="email" not-null="true" type="string"/>
         <property name="phone" not-null="false" type="string"/>
         <property name="notes" not-null="false" type="string"/>
+        <property name="deleted" not-null="true" type="boolean"/>
     </class>
 </hibernate-mapping>

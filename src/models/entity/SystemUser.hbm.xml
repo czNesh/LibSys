@@ -11,5 +11,6 @@
         <property name="lastName" not-null="true" type="string"/>
         <property name="email" not-null="true" type="string"/>
         <property name="master" not-null="true" type="boolean"/>
+        <property name="deleted" not-null="true" type="boolean"/>
     </class>
 </hibernate-mapping>

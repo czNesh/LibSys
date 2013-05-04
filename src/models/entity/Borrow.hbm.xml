@@ -13,5 +13,6 @@
         <property name="returned" not-null="true" type="byte"/>
         <property name="notes" not-null="false" type="string"/>
         <property name="borrowCode" not-null="true" type="string"/>
+        <property name="deleted" not-null="true" type="boolean"/>
     </class>
 </hibernate-mapping>
