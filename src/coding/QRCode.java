@@ -18,10 +18,11 @@ import java.util.ArrayList;
  * @author Nesh
  */
 public class QRCode {
+
     private static final int WIDTH = 300;
     private static final int HEIGHT = 300;
 
-    public static BufferedImage encode(String input) throws Exception {
+    public static BufferedImage encode(String input) {
         QRCodeWriter writer = new QRCodeWriter();
         BitMatrix bitMatrix = null;
         try {
@@ -33,7 +34,7 @@ public class QRCode {
         }
     }
 
-    public static ArrayList<BufferedImage> encode(ArrayList<String> inputs) throws Exception {
+    public static ArrayList<BufferedImage> encode(ArrayList<String> inputs) {
         QRCodeWriter writer = new QRCodeWriter();
         BitMatrix bitMatrix = null;
         ArrayList<BufferedImage> list = new ArrayList<>();
@@ -47,5 +48,5 @@ public class QRCode {
             return null;
         }
         return list;
-    }    
+    }
 }

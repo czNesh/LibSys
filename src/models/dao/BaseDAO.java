@@ -4,6 +4,7 @@
  */
 package models.dao;
 
+import io.Configuration;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -15,11 +16,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
-import org.hibernate.transform.AliasToBeanConstructorResultTransformer;
-import org.hibernate.transform.AliasToBeanResultTransformer;
-import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.hibernate.transform.ResultTransformer;
+
 import util.HibernateUtil;
 
 /**
@@ -36,10 +34,11 @@ public abstract class BaseDAO<T> implements DAO<T> {
     private boolean customTransactionMode = false;
     private String condition;
     private final Map<String, Object> parameters = new HashMap<>();
-    private List<T> list;
-    private String filter;
-    int limit = 50;
-    int start = 0;
+    private String groupBy;
+    int limit = -1;
+    int start = -1;
+    private String orderBy = "id";
+    private String orderType = "ASC";
 
     public BaseDAO() {
         generateTypeData();
@@ -139,38 +138,44 @@ public abstract class BaseDAO<T> implements DAO<T> {
         StringBuilder queryStringBuilder = new StringBuilder();
         queryStringBuilder.append("SELECT t FROM ");
         queryStringBuilder.append(typeName).append(" t");
+
         if (condition != null) {
             queryStringBuilder.append(" WHERE ");
             queryStringBuilder.append("(").append(condition).append(")");
         }
 
-        if (filter != null) {
-            queryStringBuilder.append(" ").append(filter).append(" ORDER BY t.id ASC");
-            resetFilter();
+        if (groupBy != null) {
+            queryStringBuilder.append(" ").append("GROUP BY ").append(groupBy);
+        }
+
+        if (orderType.equals("ASC")) {
+            queryStringBuilder.append(" ").append("ORDER BY t.").append(orderBy).append(" ASC");
+        } else {
+            queryStringBuilder.append(" ").append("ORDER BY t.").append(orderBy).append(" DESC");
         }
 
         Query query = session.createQuery(queryStringBuilder.toString());
 
-        if (start != 0) {
+        if (start != -1) {
             query.setFirstResult(start);
         }
-
         if (limit != -1) {
             query.setMaxResults(limit);
         }
 
         // Add parameters
         for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
-            query.setParameter(entry.getKey(), entry.getValue());
+            if (entry.getValue() instanceof List) {
+                System.out.println("je list");
+                query.setParameterList(entry.getKey(), (List) entry.getValue());
+            } else {
+                query.setParameter(entry.getKey(), entry.getValue());
+            }
         }
         System.out.println(query.getQueryString());
-        list = (List<T>) query.list();
-
-        // RESET
-        parameters.clear();
-        condition = null;
-
+        List<T> list = (List<T>) query.list();
         closeSession();
+        clear();
         return list;
     }
 
@@ -193,18 +198,12 @@ public abstract class BaseDAO<T> implements DAO<T> {
         for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
-        parameters.clear();
+
         T unique = (T) type.cast(query.uniqueResult());
 
         closeSession();
+        clear();
         return unique;
-    }
-
-    /**
-     * Sets list to null so it will be recreated after next access
-     */
-    public void resetList() {
-        list = null;
     }
 
     /**
@@ -252,7 +251,11 @@ public abstract class BaseDAO<T> implements DAO<T> {
      * @param condition the condition to set
      */
     public void setCondition(String condition) {
-        this.condition = condition;
+        if (this.condition == null) {
+            this.condition = condition;
+        } else {
+            this.condition = "(" + this.condition + ") AND " + "(" + condition + ")";
+        }
     }
 
     /**
@@ -276,12 +279,20 @@ public abstract class BaseDAO<T> implements DAO<T> {
         return parameters;
     }
 
-    public void resetFilter() {
-        filter = null;
+    public void setGroupBy(String groupBy) {
+        this.groupBy = groupBy;
     }
 
-    public void setFilter(String filter) {
-        this.filter = filter;
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public void setOrderType(String ascending) {
+        if (ascending.equals("ASC") || ascending.equals("ASCENDING")) {
+            this.orderType = "ASC";
+        } else {
+            this.orderType = "DESC";
+        }
     }
 
     public void setLimit(int limit) {
@@ -292,17 +303,32 @@ public abstract class BaseDAO<T> implements DAO<T> {
         this.start = start;
     }
 
+    public void setExactMatch(String column, List<String> list) {
+        getParameters().put("list", list);
+        setCondition(column + " in (:list)");
+    }
+
     public int getTotalCount() {
         openSession();
-        StringBuilder query = new StringBuilder("SELECT t.id FROM ");
-        query.append(typeName).append(" t");
+        StringBuilder queryStringBuilder = new StringBuilder("SELECT t.id FROM ");
+        queryStringBuilder.append(typeName).append(" t");
 
-        if (filter != null) {
-            query.append(filter);
+        if (condition != null) {
+            queryStringBuilder.append(" WHERE");
+            queryStringBuilder.append("(").append(condition).append(")");
         }
-        
-        int count = session.createQuery(query.toString()).list().size();
+
+        if (groupBy != null) {
+            queryStringBuilder.append(" ").append("GROUP BY ").append(groupBy);
+        }
+        Query q = session.createQuery(queryStringBuilder.toString());
+        for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
+            q.setParameter(entry.getKey(), entry.getValue());
+        }
+
+        int count = q.list().size();
         closeSession();
+        clear();
         return count;
     }
 
@@ -324,5 +350,20 @@ public abstract class BaseDAO<T> implements DAO<T> {
         List<T> out = criteria.list();
         closeSession();
         return out;
+    }
+
+    private void clear() {
+        groupBy = null;
+        parameters.clear();
+        condition = null;
+        start = -1;
+        limit = -1;
+    }
+
+    public Map<String, String> getOrderTypeMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("Vzestupně", "ASC");
+        map.put("Sestupně", "DESC");
+        return map;
     }
 }

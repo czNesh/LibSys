@@ -4,8 +4,11 @@
  */
 package views;
 
+import io.Configuration;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -40,6 +43,14 @@ public class BookFilterDialog extends javax.swing.JDialog {
         publishedDateCheckbox = new javax.swing.JCheckBox();
         okButton = new javax.swing.JButton();
         pageCountCheckbox = new javax.swing.JCheckBox();
+        INPbookMaxRowsCount = new javax.swing.JSpinner();
+        INPbookMaxRowsCount.setValue(Configuration.getInstance().getMaxBookRowsCount());
+
+        INPorderBy = new javax.swing.JComboBox();
+        INPorderType = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení zobrazení");
@@ -84,6 +95,24 @@ public class BookFilterDialog extends javax.swing.JDialog {
 
         pageCountCheckbox.setText("Počet stránek");
 
+        INPorderBy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPorderByActionPerformed(evt);
+            }
+        });
+
+        INPorderType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPorderTypeActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Zobrazit záznamů:");
+
+        jLabel2.setText("Řadit podle:");
+
+        jLabel3.setText("Způsob řazení:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,23 +120,36 @@ public class BookFilterDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(titleCheckbox)
-                                .addComponent(authorCheckbox)
-                                .addComponent(ISBN10Checkbox)
-                                .addComponent(ISBN13Checkbox))
-                            .addGap(62, 62, 62)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(publishedDateCheckbox)
-                                .addComponent(publisherCheckbox)
-                                .addComponent(languageCheckbox)
-                                .addComponent(locationCheckbox)
-                                .addComponent(pageCountCheckbox)))
-                        .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(countCheckbox))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(titleCheckbox)
+                                        .addComponent(authorCheckbox)
+                                        .addComponent(ISBN10Checkbox)
+                                        .addComponent(ISBN13Checkbox))
+                                    .addGap(62, 62, 62)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(publishedDateCheckbox)
+                                        .addComponent(publisherCheckbox)
+                                        .addComponent(languageCheckbox)
+                                        .addComponent(locationCheckbox)
+                                        .addComponent(pageCountCheckbox)))
+                                .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(countCheckbox))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(INPbookMaxRowsCount, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(INPorderBy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(INPorderType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +174,21 @@ public class BookFilterDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(countCheckbox)
                     .addComponent(pageCountCheckbox))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPbookMaxRowsCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPorderBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPorderType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(okButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -152,11 +206,25 @@ public class BookFilterDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_okButtonActionPerformed
 
+    private void INPorderByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPorderByActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPorderByActionPerformed
+
+    private void INPorderTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPorderTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPorderTypeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner INPbookMaxRowsCount;
+    private javax.swing.JComboBox INPorderBy;
+    private javax.swing.JComboBox INPorderType;
     private javax.swing.JCheckBox ISBN10Checkbox;
     private javax.swing.JCheckBox ISBN13Checkbox;
     private javax.swing.JCheckBox authorCheckbox;
     private javax.swing.JCheckBox countCheckbox;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JCheckBox languageCheckbox;
     private javax.swing.JCheckBox locationCheckbox;
     private javax.swing.JButton okButton;
@@ -212,6 +280,18 @@ public class BookFilterDialog extends javax.swing.JDialog {
 
     public JButton getOkButton() {
         return okButton;
+    }
+
+    public JSpinner getINPbookMaxRowsCount() {
+        return INPbookMaxRowsCount;
+    }
+
+    public JComboBox getINPorderBy() {
+        return INPorderBy;
+    }
+
+    public JComboBox getINPorderType() {
+        return INPorderType;
     }
 
 }

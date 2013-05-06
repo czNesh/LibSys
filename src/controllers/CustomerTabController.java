@@ -11,8 +11,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import models.CustomerTableModel;
 import models.entity.Customer;
+import services.BorrowService;
+import services.CustomerService;
 import views.CustomerFilterDialog;
 import views.MainView;
 
@@ -50,16 +53,32 @@ public class CustomerTabController {
         CustomerTabKeyListener k = new CustomerTabKeyListener();
         mainView.getCustomerTableInputNumber().addKeyListener(k);
         mainView.getCustomerFilterInput().addKeyListener(k);
+        mainView.getCustomerTable().addKeyListener(k);
     }
 
     public void updateView() {
+        // UPDATE DATA
+        tableModel.updateData();
+
         // Update table
         tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();
-        
+
         // Update page counting 
         mainView.getCustomerTableInputNumber().setText(String.valueOf(tableModel.getPage()));
         mainView.getCustomerTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
+
+        if (tableModel.getPage() == 1) {
+            mainView.getCustomerTablePrevButton().setEnabled(false);
+        } else {
+            mainView.getCustomerTablePrevButton().setEnabled(true);
+        }
+
+        if (tableModel.getPage() == tableModel.getTotalPageCount()) {
+            mainView.getCustomerTableNextButton().setEnabled(false);
+        } else {
+            mainView.getCustomerTableNextButton().setEnabled(true);
+        }
     }
 
     private class CustomerTabKeyListener implements KeyListener {
@@ -99,6 +118,25 @@ public class CustomerTabController {
                         updateView();
                     }
                     break;
+                case "customerTable":
+
+                    if (mainView.getCustomerTable().getSelectedRows().length == 0) {
+                        return;
+                    }
+                    int isSure = JOptionPane.showInternalConfirmDialog(mainView.getContentPane(), "Opravdu chcete smazat vybrané položky?", "Opravdu smazat?", JOptionPane.OK_CANCEL_OPTION);
+                    if (isSure == JOptionPane.OK_OPTION) {
+                        for (Customer c : tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows())) {
+                            if (BorrowService.getInstance().activeBorrowsOfCustomer(c).size() > 0) {
+                                JOptionPane.showMessageDialog(mainView, "Uživatel má aktivní výpůjčky", "Nelze smazat", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                CustomerService.getInstance().delete(c);
+                            }
+
+                        }
+                    }
+
+                    break;
+
                 default:
                     break;
             }
@@ -154,7 +192,7 @@ public class CustomerTabController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(e.getClickCount() == 2){
+            if (e.getClickCount() == 2) {
                 Customer temp = tableModel.getCustomer(mainView.getCustomerTable().getSelectedRow());
                 CustomerDetailController c = new CustomerDetailController(temp);
             }

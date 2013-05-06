@@ -113,7 +113,6 @@ public class MainView extends javax.swing.JFrame {
         customerListMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         settingsMenuItem = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -316,6 +315,7 @@ public class MainView extends javax.swing.JFrame {
 
             }
         ));
+        customerTable.setName("customerTable"); // NOI18N
         jScrollPane5.setViewportView(customerTable);
 
         customerTablePrevButton.setText("<");
@@ -601,9 +601,6 @@ public class MainView extends javax.swing.JFrame {
         settingsMenuItem.setName("settings"); // NOI18N
         jMenu4.add(settingsMenuItem);
 
-        jMenuItem4.setText("Knihovníci");
-        jMenu4.add(jMenuItem4);
-
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Nápověda");
@@ -697,7 +694,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

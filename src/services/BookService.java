@@ -4,16 +4,25 @@
  */
 package services;
 
+import controllers.RefreshController;
 import helpers.DateFormater;
 import io.ApplicationLog;
-import io.Refresh;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import models.dao.BaseDAO;
 import models.entity.Author;
 import models.entity.Book;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -30,6 +39,10 @@ public class BookService extends BaseDAO<Book> implements Serializable {
             }
         }
         return instance;
+    }
+
+    private BookService() {
+        // SINGLETON
     }
 
     private String getFreeBarcode() {
@@ -78,11 +91,8 @@ public class BookService extends BaseDAO<Book> implements Serializable {
             b.setBarcode(getFreeBarcode());
             create(b);
         }
-        Refresh.getInstance().refreshBookTab();
-        ApplicationLog.getInstance().addMessage("Uložení knih(y) proběhlo úspěšně (" + count + ")");
-    }
-
-    private BookService() {
+        RefreshController.getInstance().refreshBookTab();
+        ApplicationLog.getInstance().addMessage("Uložení knih proběhlo úspěšně (" + count + "x " + b.getTitle() + ")");
     }
 
     public BookService(Session session) {
@@ -90,7 +100,6 @@ public class BookService extends BaseDAO<Book> implements Serializable {
     }
 
     public List<Book> getBooks() {
-        setFilter("GROUP BY volumeCode");
         return getList();
     }
 
@@ -148,84 +157,131 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         if (conditionStringBuilder.length() > 0) {
             setCondition(conditionStringBuilder.toString());
         }
-        setFilter("GROUP BY volumeCode");
+        setGroupBy("volumeCode");
+
         return getList();
     }
 
     public int getBorrowed(String volumeCode) {
         openSession();
-        int count = ((Long) getSession().createQuery("SELECT SUM(b.borrowed) FROM Book b WHERE volumeCode = :volumeCode").setParameter("volumeCode", volumeCode).uniqueResult()).intValue();
+        int count = 0;
+        try {
+            count = ((Long) getSession().createQuery("SELECT SUM(b.borrowed) FROM Book b WHERE volumeCode = :volumeCode AND deleted = :deleted").setParameter("volumeCode", volumeCode).setParameter("deleted", false).uniqueResult()).intValue();
+        } catch (NullPointerException e) {
+            return 0;
+        }
+
         closeSession();
         return count;
     }
 
     public int getCount(String volumeCode) {
         openSession();
-        int count = ((Long) getSession().createQuery("SELECT COUNT(*) FROM Book WHERE volumeCode = :volumeCode").setParameter("volumeCode", volumeCode).uniqueResult()).intValue();
+        int count = ((Long) getSession().createQuery("SELECT COUNT(*) FROM Book WHERE volumeCode = :volumeCode AND deleted = :deleted").setParameter("volumeCode", volumeCode).setParameter("deleted", false).uniqueResult()).intValue();
         closeSession();
         return count;
     }
 
-    public List<Book> getFilteredResult(String filterString) {
-        StringBuilder conditionStringBuilder = new StringBuilder();
-        getParameters().clear();
-
-//        conditionStringBuilder.append("barcode = :filterString");
-//        getParameters().put("filterString", filterString);
-//
-//        if (conditionStringBuilder.length() > 0) {
-//            conditionStringBuilder.append(" OR ");
-//        }
-//        conditionStringBuilder.append("title LIKE :filterString");
-//        getParameters().put("filterString", "%"+filterString+"%");
-//
-
-
-        List<Author> findedAuthors = AuthorService.getInstance().findAuthors(filterString);
-        if (findedAuthors != null) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" OR ");
-            }
-            conditionStringBuilder.append("authors in :findedAuthors");
-            getParameters().put("findedAuthors", findedAuthors);
-        }
-
-//        if (conditionStringBuilder.length() > 0) {
-//            conditionStringBuilder.append(" OR ");
-//        }
-//        conditionStringBuilder.append("isbn10 = :filterString");
-//        getParameters().put("filterString", filterString);
-//
-//        if (conditionStringBuilder.length() > 0) {
-//            conditionStringBuilder.append(" OR ");
-//        }
-//        conditionStringBuilder.append("isbn13 = :filterString");
-//        getParameters().put("filterString", filterString);
-//
-//
-//
-//        if (conditionStringBuilder.length() > 0) {
-//            conditionStringBuilder.append(" OR ");
-//        }
-//        conditionStringBuilder.append("publishedYear = :filterString");
-//        getParameters().put("filterString", DateFormater.stringToDate(filterString, false));
-//
-
-        if (conditionStringBuilder.length() > 0) {
-            setCondition(conditionStringBuilder.toString());
-        }
-        setFilter("GROUP BY volumeCode");
-        return getList();
-    }
-
     public Book getBookWithCode(String code) {
-        getParameters().clear();
         getParameters().put("barcode", code);
         return getUnique("barcode = :barcode");
     }
 
-    public void delete(String barcode) {
-        // TODO
-        System.out.println("MAZU");
+    public void delete(String code) {
+        getParameters().put("barcode", code);
+        Book b = getUnique("barcode = :barcode");
+        b.setDeleted(true);
+        update(b);
+        ApplicationLog.getInstance().addMessage("Smazána kniha (" + b.getBarcode() + " - " + b.getTitle() + ")");
+        RefreshController.getInstance().refreshBookTab();
+    }
+
+    public List<Book> getBooksByVolumeCode(String volumeCode, boolean selectDeletedItems) {
+
+        getParameters().put("volumeCode", volumeCode);
+        String conditionString = "volumeCode = :volumeCode";
+        if (!selectDeletedItems) {
+            getParameters().put("deleted", false);
+            conditionString += " AND deleted = :deleted";
+        }
+        setCondition(conditionString);
+        return getList();
+    }
+
+    public List<String> criteriaSearch(String in) {
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(Book.class);
+
+        Disjunction d = Restrictions.disjunction();
+        d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
+        d.add(Restrictions.ilike("publisher", in, MatchMode.ANYWHERE));
+        d.add(Restrictions.in("mainAuthor", AuthorService.getInstance().findAuthors(in)));
+        d.add(Restrictions.ilike("sponsor", in, MatchMode.ANYWHERE));
+        d.add(Restrictions.ilike("notes", in, MatchMode.ANYWHERE));
+        d.add(Restrictions.eq("barcode", in));
+        d.add(Restrictions.eq("location", in).ignoreCase());
+        d.add(Restrictions.eq("ISBN10", in));
+        d.add(Restrictions.eq("ISBN13", in));
+        c.add(d);
+
+        c.setProjection(Projections.projectionList().add(Property.forName("barcode")));
+        List<String> result = c.list();
+        closeSession();
+        return result;
+    }
+
+    public Map<String, String> getOrderByMap() {
+        Map<String, String> out = new HashMap<>();
+        out.put("ID", "id");
+        out.put("Titul", "title");
+        out.put("Datum přidání", "addedDate");
+        out.put("Rok publikace", "publishedYear");
+        out.put("Počet stránek", "pageCount");
+        return out;
+    }
+
+    public List<String> extendedCriteriaSearch(String barcode, String title, String author, String bn10, String bn13, String year) {
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(Book.class);
+
+        Disjunction d = Restrictions.disjunction();
+        boolean isRestrictionSet = false;
+        if (title != null && !title.isEmpty()) {
+            d.add(Restrictions.ilike("title", title, MatchMode.ANYWHERE));
+            isRestrictionSet = true;
+        }
+        if (author != null && !author.isEmpty()) {
+            d.add(Restrictions.in("mainAuthor", AuthorService.getInstance().findAuthors(author)));
+            isRestrictionSet = true;
+        }
+        if (year != null && !year.isEmpty()) {
+            d.add(Restrictions.ilike("publishedYear", DateFormater.stringToDate(year, true)));
+            isRestrictionSet = true;
+        }
+        if (barcode != null && !barcode.isEmpty()) {
+            d.add(Restrictions.eq("barcode", barcode));
+            isRestrictionSet = true;
+        }
+        if (bn10 != null && !bn10.isEmpty()) {
+            d.add(Restrictions.eq("ISBN10", bn10));
+            isRestrictionSet = true;
+        }
+        if (bn13 != null && !bn13.isEmpty()) {
+            d.add(Restrictions.eq("ISBN13", bn13));
+            isRestrictionSet = true;
+        }
+        if (!isRestrictionSet) {
+            closeSession();
+            return new ArrayList<>();
+        }
+        c.add(d);
+
+        c.setProjection(Projections.projectionList().add(Property.forName("barcode")));
+        List<String> result = c.list();
+
+        closeSession();
+        return result;
     }
 }

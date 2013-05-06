@@ -4,8 +4,9 @@
  */
 package services;
 
+import controllers.RefreshController;
 import io.ApplicationLog;
-import io.Refresh;
+import io.Configuration;
 import java.io.Serializable;
 import java.util.List;
 import models.dao.BaseDAO;
@@ -18,7 +19,6 @@ import models.entity.Customer;
 public class CustomerService extends BaseDAO<Customer> implements Serializable {
 
     private static CustomerService instance;
-    private List<Customer> customersList;
 
     public static CustomerService getInstance() {
         synchronized (CustomerService.class) {
@@ -31,7 +31,7 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
     }
 
     private CustomerService() {
-        customersList = getList();
+        // SINGLETON
     }
 
     private int getFreeSSN() {
@@ -55,14 +55,17 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
     public void saveCustomer(Customer c) {
         c.setSSN(getFreeSSN());
         c.setDeleted(false);
-        customersList.add(c);
-        save(c);
-        Refresh.getInstance().refreshCustomerTab();
+        create(c);
+        RefreshController.getInstance().refreshCustomerTab();
         ApplicationLog.getInstance().addMessage("Zákazník byl úspěšně přidán do systému (" + c.getFullName() + ")");
     }
 
     public List<Customer> getCustomers() {
-        return customersList;
+        if (!Configuration.getInstance().isDeletedItemVisible()) {
+            getParameters().put("false", false);
+            setCondition("deleted = :false");
+        }
+        return getList();
     }
 
     public List<Customer> getFilteredList(String ssn, String fname, String lname, String email, String phone) {
@@ -110,5 +113,13 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
         }
         return getList();
 
+    }
+    
+    @Override
+    public void delete(Customer c){
+        c.setDeleted(true);
+        save(c);
+        ApplicationLog.getInstance().addMessage("Smazán uživatel (" + c.getFullName() + ")");
+        RefreshController.getInstance().refreshCustomerTab();
     }
 }

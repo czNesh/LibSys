@@ -34,73 +34,65 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="38" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="38" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="inputTitle" min="-2" pref="205" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="searchProgressBar" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Component id="cancelButton" max="32767" attributes="0"/>
-                          <Component id="saveButton" max="32767" attributes="0"/>
-                          <Component id="searchButton" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="inputLanguage" alignment="1" max="32767" attributes="0"/>
-                              <Component id="inputPublisher" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputGenres" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputISBN10" alignment="0" pref="205" max="32767" attributes="0"/>
-                              <Component id="inputISBN13" alignment="0" max="32767" attributes="0"/>
-                              <Component id="inputPageCount" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="inputLocation" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="inputBuyedDate" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="inputCount" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="datePickerButton2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="inputPageCount" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="inputLocation" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputBuyedDate" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="inputCount" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="datePickerButton2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Component id="inputPublishedDate" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane1" min="-2" pref="155" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="inputSponsor" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="inputPublishedDate" min="-2" pref="76" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane1" min="-2" pref="155" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addAuthorButton" min="-2" pref="44" max="-2" attributes="0"/>
-                                          <Component id="removeAuthorButton" min="-2" pref="44" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="addAuthorButton" min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="removeAuthorButton" min="-2" pref="44" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="0" pref="166" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="inputSponsor" alignment="0" pref="218" max="32767" attributes="0"/>
+                          <Component id="inputGenres" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputPublisher" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputLanguage" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputISBN13" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputISBN10" alignment="0" max="32767" attributes="0"/>
+                          <Component id="inputTitle" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="searchButton" max="32767" attributes="0"/>
+                          <Component id="cancelButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="saveButton" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -185,10 +177,8 @@
                   <Component id="inputLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="searchButton" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="searchProgressBar" min="-2" pref="5" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -201,6 +191,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputTitle">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputTitleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -213,8 +206,6 @@
         <Property name="toolTipText" type="java.lang.String" value="Pokus&#xed; se dle zadan&#xfd;ch &#xfa;daj&#x16f; doplnit informace o knize (CTRL+D)"/>
         <Property name="name" type="java.lang.String" value="searchButton" noResource="true"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JProgressBar" name="searchProgressBar">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -249,6 +240,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputGenres">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="genres" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -351,6 +345,7 @@
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="authors" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>

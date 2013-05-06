@@ -1,19 +1,18 @@
 package models;
 
+import io.Configuration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Author;
 import models.entity.Book;
-import models.entity.Borrow;
 import services.BookService;
 
 public class BookTableModel extends AbstractTableModel {
 
     private List<Book> itemList;
-    private boolean showTitle = true;
-    private boolean showAuthor = true;
+    private boolean showTitle;
+    private boolean showAuthor;
     private boolean showPublisher;
     private boolean showPublishedYear;
     private boolean showlanguage;
@@ -22,17 +21,58 @@ public class BookTableModel extends AbstractTableModel {
     private boolean showPageCount;
     private boolean showLocation;
     private boolean showItemCount;
+    private String filterString = "";
+    // Nastavení dotazu
     private int page = 1;
-    private int maxRows = 50;
+    private int maxRows = Configuration.getInstance().getMaxBookRowsCount();
+    private String groupBy = "volumeCode";
+    private List<String> resultOfSearch = new ArrayList<>();
 
     public BookTableModel() {
         super();
+        setParams();
         itemList = BookService.getInstance().getBooks();
     }
 
     public BookTableModel(List<Book> in) {
         super();
+        showTitle = true;
+        showAuthor = true;
+        showPublishedYear = true;
+        showISBN10 = true;
+        showISBN13 = true;
         itemList = in;
+    }
+
+    private void setParams() {
+        // SHOW     
+        showTitle = Configuration.getInstance().isShowTitle();
+        showAuthor = Configuration.getInstance().isShowAuthor();
+        showPublisher = Configuration.getInstance().isShowPublisher();
+        showPublishedYear = Configuration.getInstance().isShowPublishedYear();
+        showlanguage = Configuration.getInstance().isShowLanguage();
+        showISBN10 = Configuration.getInstance().isShowISBN10();
+        showISBN13 = Configuration.getInstance().isShowISBN13();
+        showPageCount = Configuration.getInstance().isShowPageCount();
+        showLocation = Configuration.getInstance().isShowLocation();
+        showItemCount = Configuration.getInstance().isShowCount();
+
+        maxRows = Configuration.getInstance().getMaxBookRowsCount();
+        BookService.getInstance().setLimit(Configuration.getInstance().getMaxBookRowsCount());
+        BookService.getInstance().setStart((page - 1) * maxRows);
+        BookService.getInstance().setGroupBy(groupBy);
+        BookService.getInstance().setOrderType(Configuration.getInstance().getBookOrderType());
+        BookService.getInstance().setOrderBy(Configuration.getInstance().getBookOrderBy());
+        if (!Configuration.getInstance().isDeletedItemVisible()) {
+            BookService.getInstance().getParameters().put("deleted", false);
+            BookService.getInstance().setCondition("deleted = :deleted");
+        }
+        if (!filterString.isEmpty()) {
+            BookService.getInstance().setExactMatch("t.barcode", BookService.getInstance().criteriaSearch(filterString));
+        }
+        if (!resultOfSearch.isEmpty()) {
+            BookService.getInstance().setExactMatch("t.barcode", resultOfSearch);
+        }
     }
 
     @Override
@@ -176,24 +216,15 @@ public class BookTableModel extends AbstractTableModel {
         return tempValuesColumnNames.get(column);
     }
 
-    public void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
-        this.showTitle = showTitle;
-        this.showAuthor = showAuthor;
-        this.showPublisher = showPublisher;
-        this.showPublishedYear = showPublishedYear;
-        this.showlanguage = showlanguage;
-        this.showISBN10 = showISBN10;
-        this.showISBN13 = showISBN13;
-        this.showPageCount = showPageCount;
-        this.showItemCount = showItemCount;
-        this.showLocation = showLocation;
-    }
-
     public void updateData() {
+        setParams();
         itemList = BookService.getInstance().getBooks();
     }
 
     public int getPage() {
+        if (page > getTotalPageCount()) {
+            page = getTotalPageCount();
+        }
         return page;
     }
 
@@ -203,8 +234,6 @@ public class BookTableModel extends AbstractTableModel {
         }
 
         this.page = page;
-        BookService.getInstance().setStart((page - 1) * maxRows);
-        updateData();
     }
 
     public int getMaxRows() {
@@ -222,9 +251,7 @@ public class BookTableModel extends AbstractTableModel {
             return;
         }
         page++;
-        BookService.getInstance().setStart((page - 1) * maxRows);
         updateData();
-
     }
 
     public void prevPage() {
@@ -234,12 +261,10 @@ public class BookTableModel extends AbstractTableModel {
         page--;
         BookService.getInstance().setStart((page - 1) * maxRows);
         updateData();
-
-
     }
 
     public int getTotalPageCount() {
-        BookService.getInstance().setFilter(" GROUP BY volumeCode");
+        setParams();
         return (int) Math.round((BookService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
     }
 
@@ -247,18 +272,13 @@ public class BookTableModel extends AbstractTableModel {
         return itemList.get(index);
     }
 
-    public void setFilter(String barcode, String title, String author, String isbn10, String isbn13, Date year) {
-        itemList = BookService.getInstance().getFilteredList(barcode, title, author, isbn10, isbn13, year);
-    }
+    public void search(String barcode, String title, String author, String isbn10, String isbn13, String year) {
+        resultOfSearch.clear();
+        resultOfSearch = BookService.getInstance().extendedCriteriaSearch(barcode, title, author, isbn10, isbn13, year);
 
-    public void resetFilter() {
-        BookService.getInstance().resetFilter();
-        BookService.getInstance().getParameters().clear();
-        itemList = BookService.getInstance().getBooks();
     }
 
     public void applyFilter(String filterString) {
-        itemList = BookService.getInstance().getFilteredResult(filterString);
+        this.filterString = filterString;
     }
-    
 }

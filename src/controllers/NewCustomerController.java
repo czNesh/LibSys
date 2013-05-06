@@ -6,6 +6,7 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.entity.Customer;
@@ -45,78 +46,83 @@ class NewCustomerController extends BaseController {
     }
 
     private void initListeners() {
-        view.getSaveButton().addActionListener(new SaveButtonListener());
-        view.getCancelButton().addActionListener(new CloseButtonListener());
+        // Action Listener
+        NewCustomerActionListener a = new NewCustomerActionListener();
+        view.getSaveButton().addActionListener(a);
+        view.getCancelButton().addActionListener(a);
     }
 
-    private class CloseButtonListener implements ActionListener {
+    private void saveCustomer() {
+        /* Získání dat */
+        String fname = view.getInputFirstName().getText().trim();
+        String lname = view.getInputLastName().getText().trim();
+        String street = view.getInputStreet().getText().trim();
+        String city = view.getInputCity().getText().trim();
+        String postcode = view.getInputPostcode().getText().trim();
+        String country = view.getInputCountry().getSelectedItem().toString().trim();
+        String email = view.getInputEmail().getText().trim();
+        String phone = view.getInputPhone().getText().trim();
+        String notes = view.getInputNotes().getText().trim();
 
-        public CloseButtonListener() {
+        /* Validace */
+        StringBuilder validationLog = new StringBuilder();
+        Customer c = new Customer();
+
+        // Kontrola jména
+        if (fname.isEmpty()) {
+            validationLog.append("Zadejte jméno\n");
+        } else {
+            c.setFirstName(fname);
         }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
+        // Kontrola přijmení
+        if (lname.isEmpty()) {
+            validationLog.append("Zadejte přijmení\n");
+        } else {
+            c.setLastName(lname);
+        }
+
+        // Kontrola emailu
+        if (!email.matches(".+@.+\\.[a-z]+")) {
+            validationLog.append("Neplatný nebo prázdný email\n");
+        } else {
+            c.setEmail(email);
+        }
+
+        // Nastavení nepovinných položek
+        c.setStreet(street);
+        c.setCity(city);
+        c.setCountry(country);
+        c.setPostcode(postcode);
+        c.setNotes(notes);
+        c.setPhone(phone);
+
+        // Validní? uložení : chyba
+        if (validationLog.length() > 0) {
+            JOptionPane.showMessageDialog(view, validationLog.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
+        } else {
+            CustomerService.getInstance().saveCustomer(c);
             dispose();
         }
     }
 
-    private class SaveButtonListener implements ActionListener {
+    private class NewCustomerActionListener implements ActionListener {
 
-        public SaveButtonListener() {
+        public NewCustomerActionListener() {
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            /* GET INPUTS */
-            String fname = view.getInputFirstName().getText().trim();
-            String lname = view.getInputLastName().getText().trim();
-            String street = view.getInputStreet().getText().trim();
-            String city = view.getInputCity().getText().trim();
-            String postcode = view.getInputPostcode().getText().trim();
-            String country = view.getInputCountry().getSelectedItem().toString().trim();
-            String email = view.getInputEmail().getText().trim();
-            String phone = view.getInputPhone().getText().trim();
-            String notes = view.getInputNotes().getText().trim();
-
-            /* VALIDATION */
-            StringBuilder validationLog = new StringBuilder();
-            Customer c = new Customer();
-
-            // kontrola jména
-            if (fname.isEmpty()) {
-                validationLog.append("Zadejte jméno\n");
-            } else {
-                c.setFirstName(fname);
-            }
-
-            // kontrola přijmení
-            if (lname.isEmpty()) {
-                validationLog.append("Zadejte přijmení\n");
-            } else {
-                c.setLastName(lname);
-            }
-            
-            // kontrola emailu
-            if(!email.matches(".+@.+\\.[a-z]+")){
-                validationLog.append("Neplatný nebo prázdný email\n");
-            }else{
-                c.setEmail(email);
-            }
-            
-            // nastavení nepoviných položek
-            c.setStreet(street);
-            c.setCity(city);
-            c.setCountry(country);
-            c.setPostcode(postcode);
-            c.setNotes(notes);
-            c.setPhone(phone);
-
-            // validní? uložení : výpis
-            if (validationLog.length() > 0) {
-                JOptionPane.showMessageDialog(view, validationLog.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
-            } else {
-                CustomerService.getInstance().saveCustomer(c);
-                dispose();
+            switch (((JComponent) e.getSource()).getName()) {
+                case "save":
+                    saveCustomer();
+                    break;
+                case "cancel":
+                    dispose();
+                    break;
+                default:
+                    System.out.println("New customer Controller - žádná akce");
+                    break;
             }
         }
     }

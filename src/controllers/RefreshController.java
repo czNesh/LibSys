@@ -2,35 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package io;
-
-import controllers.BookTabController;
-import controllers.BorrowTabController;
-import controllers.CustomerTabController;
-import controllers.NotificationTabController;
+package controllers;
 
 /**
  *
  * @author petr.hejhal
  */
-public class Refresh {
+public class RefreshController {
 
-    public static Refresh instance;
+    public static RefreshController instance;
     private BookTabController bookTabController;
     private CustomerTabController customerTabController;
     private BorrowTabController borrowTabController;
     private NotificationTabController notificationTabController;
 
-    public static Refresh getInstance() {
-        synchronized (Refresh.class) {
+    public static RefreshController getInstance() {
+        synchronized (RefreshController.class) {
             if (instance == null) {
-                instance = new Refresh();
+                instance = new RefreshController();
             }
         }
         return instance;
     }
 
-    private Refresh() {
+    private RefreshController() {
+        // SINGLETON
     }
 
     public void setBookTabController(BookTabController bookTabController) {
@@ -60,27 +56,41 @@ public class Refresh {
         if (bookTabController == null) {
             return;
         }
+        System.out.println("Refresh book");
         bookTabController.updateView();
     }
 
     public void refreshCustomerTab() {
+
         if (customerTabController == null) {
             return;
         }
+        System.out.println("Refresh customer");
         customerTabController.updateView();
     }
 
     public void refreshBorrowTab() {
+
         if (borrowTabController == null) {
             return;
         }
+        System.out.println("Refresh borrow");
         borrowTabController.updateView();
     }
 
     public void refreshNotificationTab() {
+
         if (notificationTabController == null) {
             return;
         }
+        System.out.println("Refresh notification");
         notificationTabController.updateView();
+    }
+
+    public void refreshAll() {
+        refreshBookTab();
+        refreshBorrowTab();
+        refreshCustomerTab();
+        refreshNotificationTab();
     }
 }

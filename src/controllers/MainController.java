@@ -5,7 +5,7 @@
 package controllers;
 
 import io.ApplicationLog;
-import io.Refresh;
+import io.Configuration;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
@@ -19,17 +19,16 @@ public class MainController extends BaseController {
 
     private MainView mainView;
     private MenuController menuController;
-    
     /*
      * TABs controllers
      */
-    
     private BookTabController bookTabController;
     private BorrowTabController borrowTabController;
     private NotificationTabController notificationTabController;
     private CustomerTabController customerTabController;
 
     public MainController() {
+        
         // Hlavní pohled
         mainView = new MainView();
 
@@ -44,10 +43,10 @@ public class MainController extends BaseController {
         borrowTabController = new BorrowTabController(mainView);
         notificationTabController = new NotificationTabController(mainView);
         customerTabController = new CustomerTabController(mainView);
-        
-        // Refresh module
-        Refresh.getInstance().setControllers(bookTabController, customerTabController, borrowTabController, notificationTabController);
-        
+
+        // RefreshController module
+        RefreshController.getInstance().setControllers(bookTabController, customerTabController, borrowTabController, notificationTabController);
+
         // registrace listeneru logu
         ApplicationLog.getInstance().registerListener(this);
 
@@ -55,6 +54,10 @@ public class MainController extends BaseController {
         mainView.getSystemUserLabel().setText(AppController.getInstance().getLoggedUser().toString());
         ApplicationLog.getInstance().addMessage("Úspěšné přihlášení uživatele (" + AppController.getInstance().getLoggedUser().toString() + ")");
 
+        // Kontrola vypnutého přihlašování - potlačení tlačítka pro odhlášení
+        if (Configuration.getInstance().isSkipLogging()) {
+            mainView.getLogoutMenuItem().setVisible(false);
+        }
     }
 
     @Override
@@ -72,7 +75,12 @@ public class MainController extends BaseController {
 
     @Override
     public void logChanged() {
-        mainView.getConsole().setText(ApplicationLog.getInstance().getLastLog() + "\n" + mainView.getConsole().getText());
+        if (mainView.getConsole().getText().isEmpty()) {
+            mainView.getConsole().setText(ApplicationLog.getInstance().getLastLog());
+        } else {
+            mainView.getConsole().setText(mainView.getConsole().getText() + "\n" + ApplicationLog.getInstance().getLastLog());
+        }
+
     }
 
     private class MainViewWindowListener implements WindowListener {

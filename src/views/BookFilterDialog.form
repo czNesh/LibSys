@@ -7,7 +7,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -27,28 +26,46 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="titleCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="authorCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="ISBN10Checkbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="ISBN13Checkbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="titleCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="authorCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ISBN10Checkbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ISBN13Checkbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="publishedDateCheckbox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="publisherCheckbox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="languageCheckbox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="locationCheckbox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="pageCountCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="okButton" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="publishedDateCheckbox" min="-2" max="-2" attributes="0"/>
-                              <Component id="publisherCheckbox" min="-2" max="-2" attributes="0"/>
-                              <Component id="languageCheckbox" min="-2" max="-2" attributes="0"/>
-                              <Component id="locationCheckbox" min="-2" max="-2" attributes="0"/>
-                              <Component id="pageCountCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="countCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="okButton" alignment="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="countCheckbox" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="INPbookMaxRowsCount" alignment="1" max="32767" attributes="0"/>
+                          <Component id="INPorderBy" max="32767" attributes="0"/>
+                          <Component id="INPorderType" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,9 +97,24 @@
                   <Component id="countCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pageCountCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="INPbookMaxRowsCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="INPorderBy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="INPorderType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
               <Component id="okButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,6 +185,46 @@
     <Component class="javax.swing.JCheckBox" name="pageCountCheckbox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Po&#x10d;et str&#xe1;nek"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="INPbookMaxRowsCount">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="INPbookMaxRowsCount.setValue(Configuration.getInstance().getMaxBookRowsCount());&#xd;&#xa;        "/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="INPorderBy">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPorderByActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="INPorderType">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPorderTypeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zobrazit z&#xe1;znam&#x16f;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x158;adit podle:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zp&#x16f;sob &#x159;azen&#xed;:"/>
       </Properties>
     </Component>
   </SubComponents>

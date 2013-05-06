@@ -5,6 +5,7 @@
 package controllers;
 
 import helpers.DateFormater;
+import io.Configuration;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -22,8 +24,10 @@ import javax.swing.JTable;
 import models.BookTableModel;
 import models.entity.Author;
 import models.entity.Book;
+import models.entity.Genre;
 import remote.GoogleSearch;
 import services.BookService;
+import services.GenreService;
 import views.DatePicker;
 import views.NewBookDialog;
 import views.SearchResultsDialog;
@@ -68,41 +72,45 @@ public class NewBookController extends BaseController {
         dialog.getRemoveAuthorButton().addActionListener(a);
         dialog.getDatePickerButton().addActionListener(a);
         dialog.getSearchButton().addActionListener(new SearchButtonListener());
-        
+
         NewBookKeyListener k = new NewBookKeyListener();
         dialog.getInputAuthors().addKeyListener(k);
-    }
-    
-    public void showResults(){
-    
-            if (gbs.getResultsCount() > 0) {
-
-                // Pripravi dialog pro zobrazení výsledku
-                // Nastaví listener
-                resOut = new SearchResultsDialog(null, true);
-                resOut.getResultsTable().addMouseListener(new TableClickedMouseListener());
-
-                // Ulozi nalezene vysledky do pole 
-                foundedItems = new ArrayList<>();
-                foundedItems.addAll(gbs.getResults());
-
-                // Pripravi table model a zobrazi vysledky
-                BookTableModel ctm = new BookTableModel(foundedItems);
-                resOut.getResultsTable().setModel(ctm);
-                resOut.setLocationRelativeTo(null);
-                resOut.setVisible(true);
-
-            }
-            
-            // Znovu zpristupni tlacitko pro hledaní
-            dialog.getSearchButton().setEnabled(true);
-            dialog.getSearchButton().setText("Hledat znovu");
-            gbs = new GoogleSearch(this);
+        dialog.getInputGenres().addKeyListener(k);
     }
 
-    private class NewBookKeyListener implements KeyListener{
+    public void showResults() {
+
+        if (gbs.getResultsCount() > 0) {
+
+            // Pripravi dialog pro zobrazení výsledku
+            // Nastaví listener
+            resOut = new SearchResultsDialog(null, true);
+            resOut.getResultsTable().addMouseListener(new TableClickedMouseListener());
+
+            // Ulozi nalezene vysledky do pole 
+            foundedItems = new ArrayList<>();
+            foundedItems.addAll(gbs.getResults());
+
+            // Pripravi table model a zobrazi vysledky
+            BookTableModel ctm = new BookTableModel(foundedItems);
+            resOut.getResultsTable().setModel(ctm);
+            resOut.setLocationRelativeTo(null);
+            resOut.setVisible(true);
+
+        }
+
+        // Znovu zpristupni tlacitko pro hledaní
+        dialog.getSearchButton().setEnabled(true);
+        dialog.getSearchButton().setText("Hledat znovu");
+        gbs = new GoogleSearch(this);
+    }
+
+    private class NewBookKeyListener implements KeyListener {
+
+        List<Genre> genres;
 
         public NewBookKeyListener() {
+            genres = GenreService.getInstance().getList();
         }
 
         @Override
@@ -115,12 +123,52 @@ public class NewBookController extends BaseController {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_DELETE){
-                authorListModel.remove(dialog.getInputAuthors().getSelectedIndex());
-                dialog.getInputAuthors().setModel(authorListModel);
+            switch (((JComponent) e.getSource()).getName()) {
+                case "authors":
+                    if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                        authorListModel.remove(dialog.getInputAuthors().getSelectedIndex());
+                        dialog.getInputAuthors().setModel(authorListModel);
+                    }
+                    break;
+                case "genres":
+                    // pokud se nezapise znak - hned skonci
+                    if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
+                        return;
+                    }
+
+                    if (e.getKeyChar() == ';') {
+                        return;
+                    }
+
+                    // priprava promennych 
+                    String in = dialog.getInputGenres().getText().trim();
+                    String before = "";
+
+
+                    if (in.contains(";")) {
+                        int lastNewWord = in.lastIndexOf(';');
+                        before = in.substring(0, lastNewWord + 1);
+                        in = in.substring(lastNewWord + 1);
+
+                    }
+
+                    int start = in.length();
+
+                    // zadany aspon 2 znaky
+                    if (start > 1) {
+                        for (Genre g : genres) {
+                            if (g.getGenre() != null && g.getGenre().toLowerCase().startsWith(in.toLowerCase())) {
+                                dialog.getInputGenres().setText(before + g.getGenre());
+                                // oznaci doplnene
+                                dialog.getInputGenres().setSelectionStart(before.length() + start);
+                                dialog.getInputGenres().setSelectionEnd(dialog.getInputGenres().getText().length());
+                                break;
+                            }
+                        }
+                    }
+                    break;
             }
-            
-        }  
+        }
     }
 
     private class NewBookActionListener implements ActionListener {
@@ -130,81 +178,12 @@ public class NewBookController extends BaseController {
             switch (((JComponent) e.getSource()).getName()) {
 
                 case "saveButton":
-
-                    Book b = new Book();
-                    StringBuilder errorOutput = new StringBuilder();
-
-                    // TITUL
-                    if (dialog.getInputTitle().getText() == null || dialog.getInputTitle().getText().trim().isEmpty()) {
-                        errorOutput.append("- Vyplňte název knihy\n");
-                    } else {
-                        b.setTitle(dialog.getInputTitle().getText());
-                    }
-
-                    // AUTORI
-                    if (authorListModel.isEmpty()) {
-                        errorOutput.append("- Vyplňte autora / autory \n");
-                    } else {
-                        ArrayList<Author> temp = new ArrayList<>();
-                        for (int i = 0; i < authorListModel.getSize(); i++) {
-                            temp.add(authorListModel.get(i));
-                        }
-                        b.setAuthors(temp);
-                        b.setMainAuthor(temp.get(0));
-                    }
-
-                    //vydavatel 
-                    b.setPublisher(dialog.getInputPublisher().getText());
-                    //jazyk
-                    b.setLanguage(dialog.getInputLanguage().getText());
-
-                    //rok vydání
-                    b.setPublishedYear((Date) dialog.getInputPublishedDate().getValue());
-
-
-                    // ISBN 10
-                    if (dialog.getInputISBN10().getText() == null || dialog.getInputISBN10().getText().trim().isEmpty()) {
-                        errorOutput.append("- Vyplňte ISBN 10\n");
-                    } else {
-                        b.setISBN10(dialog.getInputISBN10().getText());
-                    }
-
-                    // ISBN 13
-                    if (dialog.getInputISBN13().getText() == null || dialog.getInputISBN13().getText().trim().isEmpty()) {
-                        errorOutput.append("- vyplňte ISBN 13\n");
-                    } else {
-                        b.setISBN13(dialog.getInputISBN13().getText());
-                    }
-
-                    // datum pridani
-
-                    b.setAddedDate(DateFormater.stringToDate(dialog.getInputBuyedDate().getText(), false));
-
-                    // Umístění 
-                    if (dialog.getInputLocation().getText() == null || dialog.getInputLocation().getText().trim().isEmpty()) {
-                        errorOutput.append("Vyplňte prosím umístění\n");
-                    } else {
-                        b.setLocation(dialog.getInputLocation().getText());
-                    }
-
-                    //pages 
-                    b.setPageCount((int) dialog.getInputPageCount().getValue());
-
-                    // Check validation results
-                    if (errorOutput.length() == 0) {
-                        BookService.getInstance().saveBook(b,(int) dialog.getInputCount().getValue());
-                        // UPDATE TABULKY
-                        dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(dialog, errorOutput.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
-                    }
-
+                    saveBook();
                     break;
                 case "cancelButton":
                     dispose();
                     break;
                 case "addAuthorButton":
-
                     AddAuthorController aac = new AddAuthorController();
                     aac.showView();
                     if (aac.getAuthor() != null) {
@@ -235,6 +214,110 @@ public class NewBookController extends BaseController {
                 default:
                     break;
 
+            }
+        }
+
+        private void saveBook() {
+            Book b = new Book();
+            StringBuilder errorOutput = new StringBuilder();
+
+            // TITUL
+            if (dialog.getInputTitle().getText() == null || dialog.getInputTitle().getText().trim().isEmpty()) {
+                errorOutput.append("- Vyplňte název knihy\n");
+            } else {
+                b.setTitle(dialog.getInputTitle().getText());
+            }
+
+            // AUTORI
+            if (authorListModel.isEmpty()) {
+                if (Configuration.getInstance().isRequireAuthor()) {
+                    errorOutput.append("- Vyplňte autora \n");
+                }
+            } else {
+                ArrayList<Author> temp = new ArrayList<>();
+                for (int i = 0; i < authorListModel.getSize(); i++) {
+                    temp.add(authorListModel.get(i));
+                }
+                b.setAuthors(temp);
+                b.setMainAuthor(temp.get(0));
+            }
+
+            //vydavatel 
+            if (dialog.getInputPublisher().getText().trim().isEmpty()) {
+                if (Configuration.getInstance().isRequirePublisher()) {
+                    errorOutput.append("- Vyplňte vydavatele \n");
+                }
+            } else {
+                b.setPublisher(dialog.getInputPublisher().getText());
+            }
+
+            //jazyk
+            if (dialog.getInputLanguage().getText().trim().isEmpty()) {
+
+                if (Configuration.getInstance().isRequireLanguage()) {
+                    errorOutput.append("- Vyplňte jazyk \n");
+                }
+            } else {
+                b.setLanguage(dialog.getInputLanguage().getText());
+            }
+
+            //rok vydání
+            Date d = (Date) dialog.getInputPublishedDate().getValue();
+
+            if (d == null) {
+                if (Configuration.getInstance().isRequirePublishedYear()) {
+                    errorOutput.append("- Vyplňte rok vydání \n");
+                }
+            } else {
+                b.setPublishedYear(d);
+            }
+
+            // ISBN 10
+            if (dialog.getInputISBN10().getText() == null || dialog.getInputISBN10().getText().trim().isEmpty()) {
+                if (Configuration.getInstance().isRequireISBN10()) {
+                    errorOutput.append("- Vyplňte ISBN 10\n");
+                }
+            } else {
+                b.setISBN10(dialog.getInputISBN10().getText());
+            }
+
+            // ISBN 13
+            if (dialog.getInputISBN13().getText() == null || dialog.getInputISBN13().getText().trim().isEmpty()) {
+                if (Configuration.getInstance().isRequireISBN13()) {
+                    errorOutput.append("- vyplňte ISBN 13\n");
+                }
+            } else {
+                b.setISBN13(dialog.getInputISBN13().getText());
+            }
+
+            // datum pridani
+            Date d2 = DateFormater.stringToDate(dialog.getInputBuyedDate().getText(), false);
+            if (d2 == null) {
+                if (Configuration.getInstance().isRequireAddedDate()) {
+                    errorOutput.append("- Zkontrolujte zadané datum přidání\n");
+                }
+            } else {
+                b.setAddedDate(d2);
+            }
+
+            // Umístění 
+            if (dialog.getInputLocation().getText() == null || dialog.getInputLocation().getText().trim().isEmpty()) {
+                if (Configuration.getInstance().isRequireLocation()) {
+                    errorOutput.append("Vyplňte prosím umístění\n");
+                }
+            } else {
+                b.setLocation(dialog.getInputLocation().getText());
+            }
+
+            b.setPageCount((int) dialog.getInputPageCount().getValue());
+
+            // Check validation results
+            if (errorOutput.length() == 0) {
+                BookService.getInstance().saveBook(b, (int) dialog.getInputCount().getValue());
+                // UPDATE TABULKY
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(dialog, errorOutput.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -320,14 +403,13 @@ public class NewBookController extends BaseController {
             gbs.setISBN(dialog.getInputISBN13().getText());
             gbs.setISBN(dialog.getInputISBN10().getText());
 
-            if(gbs.getQuery().isEmpty()){
+            if (gbs.getQuery().isEmpty()) {
                 dialog.getSearchButton().setEnabled(true);
                 return;
             }
-            
+
             // Vyhledávání
             gbs.start();
-            System.out.println("aa");
         }
     }
 }

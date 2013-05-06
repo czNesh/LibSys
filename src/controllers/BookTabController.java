@@ -4,12 +4,14 @@
  */
 package controllers;
 
+import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Map;
 import javax.swing.JComponent;
 import models.BookTableModel;
 import models.entity.Book;
@@ -26,6 +28,8 @@ public class BookTabController {
     private MainView mainView;
     private BookFilterDialog filter;
     private BookTableModel tableModel;
+    Map<String, String> orderType = BookService.getInstance().getOrderTypeMap();
+    Map<String, String> orderBy = BookService.getInstance().getOrderByMap();
 
     public BookTabController(MainView mainView) {
         // MainView
@@ -37,6 +41,7 @@ public class BookTabController {
 
         // FilterDialog
         filter = new BookFilterDialog(mainView, true);
+        setFilterData();
 
         // INIT LISTENERS
         initListeners();
@@ -59,7 +64,6 @@ public class BookTabController {
         BookTabKeyListener b = new BookTabKeyListener();
         mainView.getBookTableInputNumber().addKeyListener(b);
         mainView.getBookFilterInput().addKeyListener(b);
-        mainView.getCatalogTable().addKeyListener(b);
 
         // FILTER Listeners
         filter.getOkButton().addActionListener(a);
@@ -67,6 +71,9 @@ public class BookTabController {
     }
 
     public void updateView() {
+        // UPDATE DATA
+        tableModel.updateData();
+
         // Update table
         tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();
@@ -74,6 +81,50 @@ public class BookTabController {
         // Update page counting 
         mainView.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
         mainView.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
+
+        if (tableModel.getPage() == 1) {
+            mainView.getBookTablePrevButton().setEnabled(false);
+        } else {
+            mainView.getBookTablePrevButton().setEnabled(true);
+        }
+
+        if (tableModel.getPage() == tableModel.getTotalPageCount()) {
+            mainView.getBookTableNextButton().setEnabled(false);
+        } else {
+            mainView.getBookTableNextButton().setEnabled(true);
+        }
+    }
+
+    private void setFilterData() {
+        filter.getTitleCheckbox().setSelected(Configuration.getInstance().isShowTitle());
+        filter.getAuthorCheckbox().setSelected(Configuration.getInstance().isShowAuthor());
+        filter.getISBN10Checkbox().setSelected(Configuration.getInstance().isShowISBN10());
+        filter.getISBN13Checkbox().setSelected(Configuration.getInstance().isShowISBN13());
+        filter.getCountCheckbox().setSelected(Configuration.getInstance().isShowCount());
+        filter.getLocationCheckbox().setSelected(Configuration.getInstance().isShowLocation());
+        filter.getLanguageCheckbox().setSelected(Configuration.getInstance().isShowLanguage());
+        filter.getPublisherCheckbox().setSelected(Configuration.getInstance().isShowPublisher());
+        filter.getPublishedDateCheckbox().setSelected(Configuration.getInstance().isShowPublishedYear());
+        filter.getPageCountCheckbox().setSelected(Configuration.getInstance().isShowPageCount());
+
+        filter.getINPbookMaxRowsCount().setValue((int) Configuration.getInstance().getMaxBookRowsCount());
+
+        for (Map.Entry<String, String> entry : orderType.entrySet()) {
+            filter.getINPorderType().addItem(entry.getKey());
+            if (entry.getValue().equals(Configuration.getInstance().getBookOrderType())) {
+                filter.getINPorderType().setSelectedItem(entry.getKey());
+            }
+        }
+
+        for (Map.Entry<String, String> entry : orderBy.entrySet()) {
+            filter.getINPorderBy().addItem(entry.getKey());
+            if (entry.getValue().equals(Configuration.getInstance().getBookOrderBy())) {
+                filter.getINPorderBy().setSelectedItem(entry.getKey());
+            }
+        }
+
+
+        RefreshController.getInstance().refreshBookTab();
     }
 
     private class BookTabKeyListener implements KeyListener {
@@ -92,7 +143,8 @@ public class BookTabController {
                 case "bookFilter":
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         if (mainView.getBookFilterInput().getText().trim().isEmpty()) {
-                            tableModel.resetFilter();
+                            tableModel.applyFilter("");
+                            tableModel.updateData();
                         } else {
                             tableModel.applyFilter(mainView.getBookFilterInput().getText().trim());
                         }
@@ -108,18 +160,6 @@ public class BookTabController {
                             System.out.println("NESPRAVNY FORMAT CISLA");
                         }
                         updateView();
-                    }
-                    break;
-                case "bookTable":
-                    if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-                        
-                        int[] array = mainView.getCatalogTable().getSelectedRows();
-                        if (array.length > 0) {
-                            for (int i = array.length - 1; i >= 0; i--) {
-                                Book b = tableModel.getBook(array[i]);
-                                BookService.getInstance().delete(b.getBarcode());
-                            }
-                        }
                     }
                     break;
                 default:
@@ -147,22 +187,24 @@ public class BookTabController {
                 case "filter":
                     filter.setLocationRelativeTo(null);
                     filter.setVisible(true);
-                    tableModel.setVisibility(
-                            filter.getTitleCheckbox().isSelected(),
-                            filter.getAuthorCheckbox().isSelected(),
-                            filter.getPublisherCheckbox().isSelected(),
-                            filter.getPublishedDateCheckbox().isSelected(),
-                            filter.getLanguageCheckbox().isSelected(),
-                            filter.getISBN10Checkbox().isSelected(),
-                            filter.getISBN13Checkbox().isSelected(),
-                            filter.getPageCountCheckbox().isSelected(),
-                            filter.getCountCheckbox().isSelected(),
-                            filter.getLocationCheckbox().isSelected());
-                    updateView();
-                    filter.setVisible(false);
                     break;
 
                 case "filterConfirm":
+                    Configuration.getInstance().setShowTitle(filter.getTitleCheckbox().isSelected());
+                    Configuration.getInstance().setShowAuthor(filter.getAuthorCheckbox().isSelected());
+                    Configuration.getInstance().setShowPublisher(filter.getPublisherCheckbox().isSelected());
+                    Configuration.getInstance().setShowPublishedYear(filter.getPublishedDateCheckbox().isSelected());
+                    Configuration.getInstance().setShowLanguage(filter.getLanguageCheckbox().isSelected());
+                    Configuration.getInstance().setShowISBN10(filter.getISBN10Checkbox().isSelected());
+                    Configuration.getInstance().setShowISBN13(filter.getISBN13Checkbox().isSelected());
+                    Configuration.getInstance().setShowPageCount(filter.getPageCountCheckbox().isSelected());
+                    Configuration.getInstance().setShowCount(filter.getCountCheckbox().isSelected());
+                    Configuration.getInstance().setShowLocation(filter.getLocationCheckbox().isSelected());
+
+                    Configuration.getInstance().setBookOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
+                    Configuration.getInstance().setBookOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
+                    Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
+                    updateView();
                     filter.setVisible(false);
                     break;
                 default:
@@ -183,7 +225,6 @@ public class BookTabController {
                 BookDetailController bdc = new BookDetailController(b);
                 bdc.showView();
             }
-
         }
 
         @Override

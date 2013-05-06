@@ -24,11 +24,12 @@
             <many-to-many class="models.entity.Genre" column="genre_id"/>
         </set>
         <property name="sponsor" not-null="false" type="string"/>
-        <property name="addedDate" not-null="true" type="timestamp"/>
+        <property name="addedDate" not-null="false" type="timestamp"/>
         <property name="location" not-null="false" type="string"/>
         <property name="borrowed" not-null="true" type="integer"/>
         <property name="notes" not-null="false" type="string"/>
         <property name="volumeCode" not-null="true" type="string"/>
         <property name="deleted" not-null="true" type="boolean"/>
+        <property name="inventoriedDate" not-null="false" type="timestamp"/>
     </class>
 </hibernate-mapping>

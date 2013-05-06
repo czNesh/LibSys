@@ -16,19 +16,23 @@ import java.util.Date;
 public class DateFormater {
 
     public static String dateToString(Date in, boolean onlyYear) {
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat df;
         if (onlyYear) {
             df = new SimpleDateFormat("yyyy");
+        } else {
+            df = new SimpleDateFormat("dd.MM.yyyy");
         }
         return df.format(in);
     }
 
     public static Date stringToDate(String in, boolean onlyYear) {
         try {
-            Date date = new SimpleDateFormat("dd.MM.yyyy").parse(in);
+            Date date;
 
             if (onlyYear) {
                 date = new SimpleDateFormat("yyyy").parse(in);
+            } else {
+                date = new SimpleDateFormat("dd.MM.yyyy").parse(in);
             }
 
             return date;
@@ -36,5 +40,10 @@ public class DateFormater {
             System.out.println("NELZE PARSOVAT DATUM");
             return null;
         }
+    }
+
+    public static String dateToStringIncludingTime(Date in) {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        return df.format(in);
     }
 }

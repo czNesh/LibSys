@@ -5,6 +5,7 @@
 package controllers;
 
 import helpers.DateFormater;
+import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -34,17 +36,17 @@ public class BookListController extends BaseController {
     private ArrayList<Book> selectedBooks = new ArrayList<>();
     private boolean selectionMode;
     private BookTableModel tableModel;
-    private BookFilterDialog filterDialog;
+    private BookFilterDialog filter;
+    Map<String, String> orderType = BookService.getInstance().getOrderTypeMap();
+    Map<String, String> orderBy = BookService.getInstance().getOrderByMap();
 
     public BookListController(JFrame parent, boolean selectionMode) {
         dialog = new BookListDialog(parent, selectionMode);
         this.selectionMode = selectionMode;
         tableModel = new BookTableModel();
-
-
         dialog.getResultTable().setModel(tableModel);
-        filterDialog = new BookFilterDialog(null, true);
-        setVisibility(true, true, false, true, false, false, false, false, true, true);
+        filter = new BookFilterDialog(null, true);
+        setFilterData();
         initListeners();
         updateView();
 
@@ -76,6 +78,9 @@ public class BookListController extends BaseController {
     }
 
     private void updateView() {
+        // UPDATE DATA
+        tableModel.updateData();
+
         // Update table
         tableModel.fireTableDataChanged();
         tableModel.fireTableStructureChanged();
@@ -83,6 +88,18 @@ public class BookListController extends BaseController {
         // Update page counting 
         dialog.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
         dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
+
+        if (tableModel.getPage() == 1) {
+            dialog.getBookTablePrevButton().setEnabled(false);
+        } else {
+            dialog.getBookTablePrevButton().setEnabled(true);
+        }
+
+        if (tableModel.getPage() == tableModel.getTotalPageCount()) {
+            dialog.getBookTableNextButton().setEnabled(false);
+        } else {
+            dialog.getBookTableNextButton().setEnabled(true);
+        }
     }
 
     @Override
@@ -97,19 +114,36 @@ public class BookListController extends BaseController {
         dialog = null;
     }
 
-    private void setVisibility(boolean showTitle, boolean showAuthor, boolean showPublisher, boolean showPublishedYear, boolean showlanguage, boolean showISBN10, boolean showISBN13, boolean showPageCount, boolean showItemCount, boolean showLocation) {
-        tableModel.setVisibility(showTitle, showAuthor, showPublisher, showPublishedYear, showlanguage, showISBN10, showISBN13, showPageCount, showItemCount, showLocation);
+    private void setFilterData() {
+        filter.getTitleCheckbox().setSelected(Configuration.getInstance().isShowTitle());
+        filter.getAuthorCheckbox().setSelected(Configuration.getInstance().isShowAuthor());
+        filter.getISBN10Checkbox().setSelected(Configuration.getInstance().isShowISBN10());
+        filter.getISBN13Checkbox().setSelected(Configuration.getInstance().isShowISBN13());
+        filter.getCountCheckbox().setSelected(Configuration.getInstance().isShowCount());
+        filter.getLocationCheckbox().setSelected(Configuration.getInstance().isShowLocation());
+        filter.getLanguageCheckbox().setSelected(Configuration.getInstance().isShowLanguage());
+        filter.getPublisherCheckbox().setSelected(Configuration.getInstance().isShowPublisher());
+        filter.getPublishedDateCheckbox().setSelected(Configuration.getInstance().isShowPublishedYear());
+        filter.getPageCountCheckbox().setSelected(Configuration.getInstance().isShowPageCount());
 
-        filterDialog.getTitleCheckbox().setSelected(showTitle);
-        filterDialog.getAuthorCheckbox().setSelected(showAuthor);
-        filterDialog.getPublisherCheckbox().setSelected(showPublisher);
-        filterDialog.getPublishedDateCheckbox().setSelected(showPublishedYear);
-        filterDialog.getLanguageCheckbox().setSelected(showlanguage);
-        filterDialog.getISBN10Checkbox().setSelected(showISBN10);
-        filterDialog.getISBN13Checkbox().setSelected(showISBN13);
-        filterDialog.getPageCountCheckbox().setSelected(showPageCount);
-        filterDialog.getCountCheckbox().setSelected(showItemCount);
-        filterDialog.getLocationCheckbox().setSelected(showLocation);
+        filter.getINPbookMaxRowsCount().setValue((int) Configuration.getInstance().getMaxBookRowsCount());
+
+        for (Map.Entry<String, String> entry : orderType.entrySet()) {
+            filter.getINPorderType().addItem(entry.getKey());
+            if (entry.getValue().equals(Configuration.getInstance().getBookOrderType())) {
+                filter.getINPorderType().setSelectedItem(entry.getKey());
+            }
+        }
+
+        for (Map.Entry<String, String> entry : orderBy.entrySet()) {
+            filter.getINPorderBy().addItem(entry.getKey());
+            if (entry.getValue().equals(Configuration.getInstance().getBookOrderBy())) {
+                filter.getINPorderBy().setSelectedItem(entry.getKey());
+            }
+        }
+
+
+        RefreshController.getInstance().refreshBookTab();
     }
 
     private class BookListMouseListener implements MouseListener {
@@ -288,36 +322,40 @@ public class BookListController extends BaseController {
                     break;
 
                 case "filter":
-                    filterDialog.getOkButton().addActionListener(this);
-                    filterDialog.setLocationRelativeTo(null);
-                    filterDialog.setVisible(true);
+                    filter.getOkButton().addActionListener(this);
+                    filter.setLocationRelativeTo(null);
+                    filter.setVisible(true);
                     break;
 
                 case "filterConfirm":
-                    tableModel.setVisibility(
-                            filterDialog.getTitleCheckbox().isSelected(),
-                            filterDialog.getAuthorCheckbox().isSelected(),
-                            filterDialog.getPublisherCheckbox().isSelected(),
-                            filterDialog.getPublishedDateCheckbox().isSelected(),
-                            filterDialog.getLanguageCheckbox().isSelected(),
-                            filterDialog.getISBN10Checkbox().isSelected(),
-                            filterDialog.getISBN13Checkbox().isSelected(),
-                            filterDialog.getPageCountCheckbox().isSelected(),
-                            filterDialog.getCountCheckbox().isSelected(),
-                            filterDialog.getLocationCheckbox().isSelected());
+                    Configuration.getInstance().setShowTitle(filter.getTitleCheckbox().isSelected());
+                    Configuration.getInstance().setShowAuthor(filter.getAuthorCheckbox().isSelected());
+                    Configuration.getInstance().setShowPublisher(filter.getPublisherCheckbox().isSelected());
+                    Configuration.getInstance().setShowPublishedYear(filter.getPublishedDateCheckbox().isSelected());
+                    Configuration.getInstance().setShowLanguage(filter.getLanguageCheckbox().isSelected());
+                    Configuration.getInstance().setShowISBN10(filter.getISBN10Checkbox().isSelected());
+                    Configuration.getInstance().setShowISBN13(filter.getISBN13Checkbox().isSelected());
+                    Configuration.getInstance().setShowPageCount(filter.getPageCountCheckbox().isSelected());
+                    Configuration.getInstance().setShowCount(filter.getCountCheckbox().isSelected());
+                    Configuration.getInstance().setShowLocation(filter.getLocationCheckbox().isSelected());
+
+                    Configuration.getInstance().setBookOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
+                    Configuration.getInstance().setBookOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
+                    Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
+                    tableModel.updateData();
                     tableModel.fireTableStructureChanged();
-                    filterDialog.setVisible(false);
+                    filter.setVisible(false);
                     break;
 
                 case "search":
-                    tableModel.setFilter(
+                    tableModel.search(
                             dialog.getInputBarcode().getText().trim(),
                             dialog.getInputTitle().getText().trim(),
                             dialog.getInputAuthor().getText().trim(),
                             dialog.getInputISBN10().getText().trim(),
                             dialog.getInputISBN13().getText().trim(),
-                            DateFormater.stringToDate(dialog.getInputPublishedYear().getText(), true));
-                    tableModel.fireTableDataChanged();
+                            dialog.getInputPublishedYear().getText().trim());
+                    updateView();
                     break;
 
                 case "prevPage":

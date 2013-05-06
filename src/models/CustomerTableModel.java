@@ -7,9 +7,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import models.entity.Book;
 import models.entity.Customer;
-import services.BorrowService;
 import services.CustomerService;
 
 /**
@@ -156,10 +154,12 @@ public class CustomerTableModel extends AbstractTableModel {
 
     public void setFilter(String ssn, String fname, String lname, String email, String phone) {
         customersList = CustomerService.getInstance().getFilteredList(ssn, fname, lname, email, phone);
+        System.out.println("1");
     }
 
     public void removeFilter() {
         customersList = CustomerService.getInstance().getCustomers();
+        System.out.println("2");
     }
 
     public Customer getCustomer(int i) {
@@ -207,8 +207,6 @@ public class CustomerTableModel extends AbstractTableModel {
         page--;
         CustomerService.getInstance().setStart((page - 1) * maxRows);
         updateData();
-
-
     }
 
     public int getTotalPageCount() {
@@ -221,5 +219,13 @@ public class CustomerTableModel extends AbstractTableModel {
 
     public void applyFilter(String trim) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Customer> getCustomers(int[] selectedRows) {
+        List<Customer> list = new ArrayList<>();
+        for (int i = 0; i < selectedRows.length; i++) {
+            list.add(customersList.get(selectedRows[i]));
+        }
+        return list;
     }
 }

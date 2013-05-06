@@ -6,7 +6,7 @@ package services;
 
 import controllers.AppController;
 import io.ApplicationLog;
-import io.Refresh;
+import controllers.RefreshController;
 import java.util.ArrayList;
 import java.util.List;
 import models.dao.BaseDAO;
@@ -58,12 +58,12 @@ public class BorrowService extends BaseDAO<Borrow> {
             b.setLibrarian(AppController.getInstance().getLoggedUser());
             create(b);
         }
-        Refresh.getInstance().refreshBorrowTab();
+        RefreshController.getInstance().refreshBorrowTab();
         ApplicationLog.getInstance().addMessage("Nové vypůjčení uloženo");
     }
 
     public List<Borrow> getBorrows() {
-        setFilter(" GROUP BY borrowCode");
+        setGroupBy("borrowCode");
         return getList();
     }
 
@@ -103,10 +103,16 @@ public class BorrowService extends BaseDAO<Borrow> {
     }
 
     public List<Borrow> getBorrowsOfCustomer(Long customerID) {
-        getParameters().clear();
         getParameters().put("customer_id", customerID);
         setCondition("customer_id = :customer_id");       
-        setFilter(" GROUP BY borrowCode");
+        setGroupBy("borrowCode");
+        return getList();
+    }
+
+    public List<Borrow> activeBorrowsOfCustomer(Customer c) {
+        getParameters().put("customer_id", c.getId());
+        getParameters().put("returned", false);
+        setCondition("customer_id = :customer_id AND returned = :returned");   
         return getList();
     }
     

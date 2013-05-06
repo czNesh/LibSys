@@ -5,11 +5,7 @@
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
         </id>
-        <property name="genreType" not-null="true">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">models.entity.GenreType</param>
-                <param name="type">12</param>
-            </type>
-        </property>  
+        <property name="genre" not-null="true" type="string"/>
+        <property name="deleted" not-null="true" type="boolean"/>
     </class>
 </hibernate-mapping>

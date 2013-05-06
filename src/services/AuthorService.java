@@ -50,7 +50,7 @@ public class AuthorService extends BaseDAO<Author> implements Serializable {
     public List<Author> findAuthors(String author) {
         List<Author> out = new ArrayList<>();
         for(Author a : authors){
-            if(a.toString().contains(author)){
+            if(a.toString().toLowerCase().contains(author.toLowerCase())){
                 out.add(a);
             }
         }

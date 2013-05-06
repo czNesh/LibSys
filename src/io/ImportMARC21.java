@@ -37,6 +37,7 @@ public class ImportMARC21 {
             System.out.println("PARSING STARTED");
 
         } catch (SAXException | IOException e) {
+            System.out.println("CHYBA");
         }
     }
 }
@@ -156,6 +157,7 @@ class Parse implements ContentHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("record")) {
             tempBook.setAddedDate(new Date());
+            tempBook.setDeleted(false);
             tempBook.setSponsor("Národní knihovna České republiky");
             tempBook.setNotes("IMPORTOVANO Z DAT NARODNI KNIHOVNY V PRAZE");
             tempBook.setLocation("NK" + String.valueOf(rand.nextInt(20) + 1));

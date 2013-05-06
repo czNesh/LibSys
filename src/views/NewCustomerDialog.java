@@ -96,9 +96,11 @@ public class NewCustomerDialog extends javax.swing.JDialog {
 
         saveButton.setText("Uložit");
         saveButton.setToolTipText("Stiskněte pro uložení nového uživatele");
+        saveButton.setName("save"); // NOI18N
 
         cancelButton.setText("Zrušit");
         cancelButton.setToolTipText("Zruší operaci a zavře okno");
+        cancelButton.setName("cancel"); // NOI18N
 
         jLabel8.setText("Poznámky:");
 

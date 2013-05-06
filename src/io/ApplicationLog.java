@@ -34,7 +34,7 @@ public class ApplicationLog {
     }
 
     public void addMessage(String in) {
-        logList.add(DateFormater.dateToString(new Date(), false) + ": "+ in);
+        logList.add(DateFormater.dateToStringIncludingTime(new Date()) + ": "+ in);
         
         // NOTIFY LISTENERS
         for(BaseController c : listeners){

@@ -124,7 +124,7 @@ public class AddAuthorController extends BaseController {
                     // zadany aspon 2 znaky
                     if (start > 1) {
                         for (Author a : authors) {
-                            if (a.getFirstName().startsWith(in)) {
+                            if (a.getFirstName() != null && a.getFirstName().startsWith(in)) {
                                 dialog.getInputFName().setText(a.getFirstName());
                                 break;
                             }
@@ -144,7 +144,7 @@ public class AddAuthorController extends BaseController {
                     // zadany aspon 3 znaky
                     if (start > 2) {
                         for (Author a : authors) {
-                            if (a.getLastName().startsWith(in)) {
+                            if (a.getLastName() != null && a.getLastName().startsWith(in)) {
                                 dialog.getInputLName().setText(a.getLastName());
                                 break;
                             }

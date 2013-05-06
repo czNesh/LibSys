@@ -214,12 +214,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ulo&#x17e;it"/>
         <Property name="toolTipText" type="java.lang.String" value="Stiskn&#x11b;te pro ulo&#x17e;en&#xed; nov&#xe9;ho u&#x17e;ivatele"/>
+        <Property name="name" type="java.lang.String" value="save" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
         <Property name="toolTipText" type="java.lang.String" value="Zru&#x161;&#xed; operaci a zav&#x159;e okno"/>
+        <Property name="name" type="java.lang.String" value="cancel" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">

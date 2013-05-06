@@ -4,9 +4,9 @@
  */
 package views;
 
+import io.Configuration;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JTextField;
 
 /**
  *
@@ -41,11 +41,19 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
         emailCheckBox = new javax.swing.JCheckBox();
         phoneCheckBox = new javax.swing.JCheckBox();
         notesCheckBox = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        INPorderBy = new javax.swing.JComboBox();
+        INPbookMaxRowsCount = new javax.swing.JSpinner();
+        INPbookMaxRowsCount.setValue(Configuration.getInstance().getMaxCustomerRowsCount());
+
+        INPorderType = new javax.swing.JComboBox();
 
         jCheckBox5.setText("jCheckBox5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Co chcete zobrazit?");
+        setTitle("Zobrazit");
 
         SSNChecked.setText("Číslo uživatele");
 
@@ -68,27 +76,58 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
 
         notesCheckBox.setText("Poznámky");
 
+        jLabel3.setText("Způsob řazení:");
+
+        jLabel2.setText("Řadit podle:");
+
+        jLabel1.setText("Zobrazit záznamů:");
+
+        INPorderBy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPorderByActionPerformed(evt);
+            }
+        });
+
+        INPorderType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPorderTypeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterOKButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SSNChecked)
-                            .addComponent(nameCheckBox)
-                            .addComponent(emailCheckBox)
-                            .addComponent(phoneCheckBox))
-                        .addGap(28, 28, 28)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(notesCheckBox)
-                            .addComponent(cityCheckBox)
-                            .addComponent(streetCheckBox)
-                            .addComponent(countryCheckBox))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(INPbookMaxRowsCount, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(INPorderBy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(INPorderType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SSNChecked)
+                                    .addComponent(nameCheckBox)
+                                    .addComponent(emailCheckBox)
+                                    .addComponent(phoneCheckBox))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(notesCheckBox)
+                                    .addComponent(cityCheckBox)
+                                    .addComponent(streetCheckBox)
+                                    .addComponent(countryCheckBox)))
+                            .addComponent(filterOKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,20 +148,47 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneCheckBox)
                     .addComponent(notesCheckBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPbookMaxRowsCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPorderBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPorderType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterOKButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void INPorderByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPorderByActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPorderByActionPerformed
+
+    private void INPorderTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPorderTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPorderTypeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner INPbookMaxRowsCount;
+    private javax.swing.JComboBox INPorderBy;
+    private javax.swing.JComboBox INPorderType;
     private javax.swing.JCheckBox SSNChecked;
     private javax.swing.JCheckBox cityCheckBox;
     private javax.swing.JCheckBox countryCheckBox;
     private javax.swing.JCheckBox emailCheckBox;
     private javax.swing.JButton filterOKButton;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JCheckBox nameCheckBox;
     private javax.swing.JCheckBox notesCheckBox;
     private javax.swing.JCheckBox phoneCheckBox;

@@ -37,6 +37,7 @@ public class Book implements Serializable {
     private String notes;
     private String volumeCode;
     private boolean deleted;
+    private Date inventoriedDate;
     /**
      * @return the id
      */
@@ -260,6 +261,16 @@ public class Book implements Serializable {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    public Date getInventoriedDate() {
+        return inventoriedDate;
+    }
+
+    public void setInventoriedDate(Date inventoriedDate) {
+        this.inventoriedDate = inventoriedDate;
+    }
+    
+    
 
     @Override
     public int hashCode() {

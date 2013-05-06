@@ -24,7 +24,7 @@ public class Barcode {
         UPCAWriter writer = new UPCAWriter();
         BitMatrix bitMatrix = null;
         try {
-            bitMatrix = writer.encode(input, BarcodeFormat.UPC_A, WIDTH, HEIGHT);
+            bitMatrix = writer.encode(input+"00", BarcodeFormat.UPC_A, WIDTH, HEIGHT);
             return MatrixToImageWriter.toBufferedImage(bitMatrix);
         } catch (WriterException e) {
             e.printStackTrace();
@@ -38,7 +38,7 @@ public class Barcode {
         ArrayList<BufferedImage> list = new ArrayList<>();
         try {
             for (String s : inputs) {
-                bitMatrix = writer.encode(s, BarcodeFormat.UPC_A, WIDTH, HEIGHT);
+                bitMatrix = writer.encode(s+"00", BarcodeFormat.UPC_A, WIDTH, HEIGHT);
                 list.add(MatrixToImageWriter.toBufferedImage(bitMatrix));
             }
         } catch (WriterException e) {

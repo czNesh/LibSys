@@ -4,12 +4,9 @@
  */
 package controllers;
 
-import coding.QRCode;
-import io.ApplicationLog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import views.MainView;
 
@@ -46,6 +43,7 @@ public class MenuController implements ActionListener {
             case "newItem":
                 NewBookController newItemController = new NewBookController(view);
                 newItemController.showView();
+                RefreshController.getInstance().refreshBookTab();
                 break;
             case "newBorrow":
                 BookBorrowController bookBorrowController = new BookBorrowController(view);
@@ -54,6 +52,7 @@ public class MenuController implements ActionListener {
             case "newCustomer":
                 NewCustomerController newCustomerController = new NewCustomerController(view);
                 newCustomerController.showView();
+
                 break;
             case "newCustomerButton":
                 NewCustomerController newCustomerController2 = new NewCustomerController(view);

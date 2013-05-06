@@ -10,11 +10,12 @@ import java.io.Serializable;
  *
  * @author Nesh
  */
-
 public class Genre implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private Long id;
-    private GenreType genreType;
+    private String genre;
+    private boolean deleted;
 
     /**
      * @return the id
@@ -30,18 +31,19 @@ public class Genre implements Serializable {
         this.id = id;
     }
 
-    /**
-     * @return the genreType
-     */
-    public GenreType getGenreType() {
-        return genreType;
+    public boolean isDeleted() {
+        return deleted;
     }
 
-    /**
-     * @param genreType the genreType to set
-     */
-    public void setGenreType(GenreType genreType) {
-        this.genreType = genreType;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 }

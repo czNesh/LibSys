@@ -186,7 +186,7 @@ public class BorrowTableModel extends AbstractTableModel {
     }
 
     public int getTotalPageCount() {
-        BorrowService.getInstance().setFilter(" GROUP BY borrowCode");
+        BorrowService.getInstance().setGroupBy("borrowCode");
         return (int) Math.round((BorrowService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
     }
 

@@ -4,6 +4,12 @@
  */
 package views;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author petr.hejhal
@@ -18,7 +24,6 @@ public class SettingsDialog extends javax.swing.JDialog {
         initComponents();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,22 +33,67 @@ public class SettingsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        CMPtabbedPanel = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        INPportNumber = new javax.swing.JSpinner();
+        INPautoStartServer = new javax.swing.JCheckBox();
+        jPanel8 = new javax.swing.JPanel();
+        INPshowDeletedItems = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        INPworkspace = new javax.swing.JTextField();
+        BTNworkspace = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        INPmaxBorrowRows = new javax.swing.JSpinner();
         jPanel3 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        INPmaxCustomerRows = new javax.swing.JSpinner();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        INPauthor = new javax.swing.JCheckBox();
+        INPisbn10 = new javax.swing.JCheckBox();
+        INPisbn13 = new javax.swing.JCheckBox();
+        INPcount = new javax.swing.JCheckBox();
+        INPlocation = new javax.swing.JCheckBox();
+        INPlanguage = new javax.swing.JCheckBox();
+        INPpublisher = new javax.swing.JCheckBox();
+        INPpublishedYear = new javax.swing.JCheckBox();
+        INPpageCount = new javax.swing.JCheckBox();
+        INPsponsor = new javax.swing.JCheckBox();
+        INPgenre = new javax.swing.JCheckBox();
+        INPaddedDate = new javax.swing.JCheckBox();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        INPmaxNotificationRows = new javax.swing.JSpinner();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        INPdefaultEmail = new javax.swing.JTextField();
+        INPskipLogging = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        BTNsave = new javax.swing.JButton();
+        BTNcancel = new javax.swing.JButton();
+        BTNdefault = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Nastavení");
 
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        CMPtabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Nastavení LibSys Serveru"));
 
         jLabel1.setText("Naslouchat na portu:");
+
+        INPportNumber.setModel(new javax.swing.SpinnerNumberModel(6789, 1, 65535, 1));
+
+        INPautoStartServer.setText("Zapnout po spuštění:");
+        INPautoStartServer.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        INPautoStartServer.setIconTextGap(145);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -51,131 +101,627 @@ public class SettingsDialog extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(INPportNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPautoStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(INPportNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(INPautoStartServer)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Základní nastavení"));
+
+        INPshowDeletedItems.setText("Zobrazovat smazané položky:");
+        INPshowDeletedItems.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        INPshowDeletedItems.setIconTextGap(50);
+
+        jLabel4.setText("Pracovní prostor:");
+
+        INPworkspace.setEnabled(false);
+
+        BTNworkspace.setText("Zvolit");
+        BTNworkspace.setName("workspace"); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(INPshowDeletedItems, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(INPworkspace, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNworkspace)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(INPworkspace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNworkspace))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(INPshowDeletedItems)
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Základní", jPanel1);
+        CMPtabbedPanel.addTab("Základní", jPanel1);
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Nastavení výpůjček"));
+
+        jLabel2.setText("Záznamů na stránku:");
+
+        INPmaxBorrowRows.setModel(new javax.swing.SpinnerNumberModel(30, 10, 100, 1));
+        INPmaxBorrowRows.setToolTipText("Vložte číslo od 10 do 100");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addComponent(INPmaxBorrowRows, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(INPmaxBorrowRows, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Vypůjčky", jPanel2);
+        CMPtabbedPanel.addTab("Výpůjčky", jPanel2);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Nastavení zákazníků"));
+
+        jLabel3.setText("Záznamů na stránku:");
+
+        INPmaxCustomerRows.setModel(new javax.swing.SpinnerNumberModel(30, 10, 100, 1));
+        INPmaxCustomerRows.setToolTipText("Vložte číslo od 10 do 100");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addComponent(INPmaxCustomerRows, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(INPmaxCustomerRows, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Uživatelé", jPanel3);
+        CMPtabbedPanel.addTab("Uživatelé", jPanel3);
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Povinné položky"));
+
+        INPauthor.setText("Autor");
+        INPauthor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPauthor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPauthor.setIconTextGap(20);
+
+        INPisbn10.setText("ISBN10");
+        INPisbn10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPisbn10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPisbn10.setIconTextGap(20);
+
+        INPisbn13.setText("ISBN13");
+        INPisbn13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPisbn13.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPisbn13.setIconTextGap(20);
+        INPisbn13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPisbn13ActionPerformed(evt);
+            }
+        });
+
+        INPcount.setText("Množství skladem");
+        INPcount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPcount.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPcount.setIconTextGap(20);
+
+        INPlocation.setText("Umístění");
+        INPlocation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPlocation.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPlocation.setIconTextGap(20);
+
+        INPlanguage.setText("Jazyk");
+        INPlanguage.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPlanguage.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPlanguage.setIconTextGap(20);
+
+        INPpublisher.setText("Vydavatel");
+        INPpublisher.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPpublisher.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPpublisher.setIconTextGap(20);
+
+        INPpublishedYear.setText("Rok vydání");
+        INPpublishedYear.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPpublishedYear.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPpublishedYear.setIconTextGap(20);
+
+        INPpageCount.setText("Počet stránek");
+        INPpageCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPpageCount.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPpageCount.setIconTextGap(20);
+
+        INPsponsor.setText("Sponzor");
+        INPsponsor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPsponsor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPsponsor.setIconTextGap(20);
+
+        INPgenre.setText("Žánr");
+        INPgenre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPgenre.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPgenre.setIconTextGap(20);
+
+        INPaddedDate.setText("Datum přidání");
+        INPaddedDate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        INPaddedDate.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        INPaddedDate.setIconTextGap(20);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPauthor)
+                    .addComponent(INPisbn10)
+                    .addComponent(INPisbn13)
+                    .addComponent(INPcount)
+                    .addComponent(INPlocation)
+                    .addComponent(INPgenre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(INPpublishedYear)
+                    .addComponent(INPpublisher)
+                    .addComponent(INPlanguage)
+                    .addComponent(INPpageCount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(INPsponsor)
+                    .addComponent(INPaddedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(INPauthor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPisbn10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPisbn13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPcount))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(INPlanguage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPpublisher)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPpublishedYear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPpageCount)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPlocation)
+                    .addComponent(INPsponsor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPgenre)
+                    .addComponent(INPaddedDate))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(212, 212, 212))
         );
 
-        jTabbedPane1.addTab("Knihy", jPanel4);
+        CMPtabbedPanel.addTab("Knihy", jPanel4);
 
-        jButton1.setText("Uložit");
+        jLabel5.setText("Záznamů na stránku:");
 
-        jButton2.setText("Zrušit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        INPmaxNotificationRows.setModel(new javax.swing.SpinnerNumberModel(30, 10, 100, 1));
+        INPmaxNotificationRows.setToolTipText("Vložte číslo od 10 do 100");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 292, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(INPmaxNotificationRows, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(INPmaxNotificationRows, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        CMPtabbedPanel.addTab("Oznámení", jPanel6);
+
+        jLabel6.setText("Defaultní email:");
+
+        INPskipLogging.setText("Vypnout přihlašování:");
+        INPskipLogging.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        INPskipLogging.setIconTextGap(90);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(INPdefaultEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(INPskipLogging)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(INPdefaultEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(INPskipLogging)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
+        );
+
+        CMPtabbedPanel.addTab("Správce", jPanel7);
+
+        BTNsave.setText("Uložit");
+        BTNsave.setName("save"); // NOI18N
+
+        BTNcancel.setText("Zrušit");
+        BTNcancel.setName("cancel"); // NOI18N
+        BTNcancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BTNcancelActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Obnovit");
+        BTNdefault.setText("Defaultní");
+        BTNdefault.setName("default"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(4, 4, 4)
+                .addComponent(CMPtabbedPanel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTNcancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNdefault, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(CMPtabbedPanel)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(BTNsave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(BTNcancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(BTNdefault)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BTNcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNcancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BTNcancelActionPerformed
+
+    private void INPisbn13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPisbn13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPisbn13ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton BTNcancel;
+    private javax.swing.JButton BTNdefault;
+    private javax.swing.JButton BTNsave;
+    private javax.swing.JButton BTNworkspace;
+    private javax.swing.JTabbedPane CMPtabbedPanel;
+    private javax.swing.JCheckBox INPaddedDate;
+    private javax.swing.JCheckBox INPauthor;
+    private javax.swing.JCheckBox INPautoStartServer;
+    private javax.swing.JCheckBox INPcount;
+    private javax.swing.JTextField INPdefaultEmail;
+    private javax.swing.JCheckBox INPgenre;
+    private javax.swing.JCheckBox INPisbn10;
+    private javax.swing.JCheckBox INPisbn13;
+    private javax.swing.JCheckBox INPlanguage;
+    private javax.swing.JCheckBox INPlocation;
+    private javax.swing.JSpinner INPmaxBorrowRows;
+    private javax.swing.JSpinner INPmaxCustomerRows;
+    private javax.swing.JSpinner INPmaxNotificationRows;
+    private javax.swing.JCheckBox INPpageCount;
+    private javax.swing.JSpinner INPportNumber;
+    private javax.swing.JCheckBox INPpublishedYear;
+    private javax.swing.JCheckBox INPpublisher;
+    private javax.swing.JCheckBox INPshowDeletedItems;
+    private javax.swing.JCheckBox INPskipLogging;
+    private javax.swing.JCheckBox INPsponsor;
+    private javax.swing.JTextField INPworkspace;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBTNcancel() {
+        return BTNcancel;
+    }
+
+    public JButton getBTNdefault() {
+        return BTNdefault;
+    }
+
+    public JButton getBTNsave() {
+        return BTNsave;
+    }
+
+    public JCheckBox getINPautoStartServer() {
+        return INPautoStartServer;
+    }
+
+    public JSpinner getINPmaxBorrowRows() {
+        return INPmaxBorrowRows;
+    }
+
+    public JSpinner getINPmaxCustomerRows() {
+        return INPmaxCustomerRows;
+    }
+
+    public JSpinner getINPmaxNotificationRows() {
+        return INPmaxNotificationRows;
+    }
+
+    public JSpinner getINPportNumber() {
+        return INPportNumber;
+    }
+
+    public JCheckBox getINPshowDeletedItems() {
+        return INPshowDeletedItems;
+    }
+
+    public JTextField getINPdefaultEmail() {
+        return INPdefaultEmail;
+    }
+
+    public JTabbedPane getCMPtabbedPanel() {
+        return CMPtabbedPanel;
+    }
+
+    public JCheckBox getINPskipLogging() {
+        return INPskipLogging;
+    }
+
+    public JCheckBox getINPauthor() {
+        return INPauthor;
+    }
+
+    public JCheckBox getINPcount() {
+        return INPcount;
+    }
+
+    public JCheckBox getINPisbn10() {
+        return INPisbn10;
+    }
+
+    public JCheckBox getINPisbn13() {
+        return INPisbn13;
+    }
+
+    public JCheckBox getINPlanguage() {
+        return INPlanguage;
+    }
+
+    public JCheckBox getINPlocation() {
+        return INPlocation;
+    }
+
+    public JCheckBox getINPpageCount() {
+        return INPpageCount;
+    }
+
+    public JCheckBox getINPpublishedYear() {
+        return INPpublishedYear;
+    }
+
+    public JCheckBox getINPpublisher() {
+        return INPpublisher;
+    }
+
+    public JCheckBox getINPaddedDate() {
+        return INPaddedDate;
+    }
+
+    public JCheckBox getINPgenre() {
+        return INPgenre;
+    }
+
+    public JCheckBox getINPsponsor() {
+        return INPsponsor;
+    }
+
+    public JButton getBTNworkspace() {
+        return BTNworkspace;
+    }
+
+    public JTextField getINPworkspace() {
+        return INPworkspace;
+    }    
 }
