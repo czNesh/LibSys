@@ -5,6 +5,7 @@
 package models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,6 +27,8 @@ public class Customer implements Serializable {
     private String phone;
     private String notes;
     private boolean deleted;
+    /*VAZBY*/
+    private List<Borrow> borrows;
 
     /**
      * @return the id
@@ -170,10 +173,7 @@ public class Customer implements Serializable {
             return false;
         }
         final Customer other = (Customer) obj;
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.phone, other.phone)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -193,6 +193,14 @@ public class Customer implements Serializable {
         this.SSN = SSN;
     }
 
+    public List<Borrow> getBorrows() {
+        return borrows;
+    }
+
+    public void setBorrows(List<Borrow> borrows) {
+        this.borrows = borrows;
+    }
+
     /**
      * @return the description
      */
@@ -209,15 +217,69 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " - " + SSN;
+        String temp = "";
+        if (firstName != null && !firstName.isEmpty()) {
+            temp = firstName;
+        }
+        if (lastName != null && !lastName.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = lastName;
+            } else {
+                temp += " " + lastName;
+            }
+
+        }
+        String ssnS = String.valueOf(SSN);
+        if (ssnS != null && !ssnS.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = ssnS;
+            } else {
+                temp += " " + ssnS;
+            }
+
+        }
+        return temp;
     }
 
     public String getFullName() {
-        return firstName + " " + lastName;
+        String temp = "";
+        if (firstName != null && !firstName.isEmpty()) {
+            temp = firstName;
+        }
+        if (lastName != null && !lastName.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = lastName;
+            } else {
+                temp += " " + lastName;
+            }
+
+        }
+        return temp;
     }
 
     public String getFullAdress() {
-        return street + ", " + city + " - " + country;
+        String temp = "";
+        if (street != null && !street.isEmpty()) {
+            temp = street;
+        }
+        if (city != null && !city.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = city;
+            } else {
+                temp += ", " + city;
+            }
+
+        }
+        if (country != null && !country.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = country;
+            } else {
+                temp += " - " + country;
+            }
+
+        }
+
+        return temp;
     }
 
     /**
@@ -233,7 +295,45 @@ public class Customer implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-    
-    
-    
+
+    public String getStringSSN() {
+        return String.valueOf(SSN);
+    }
+
+    public String getFormatedFullAdress() {
+        String temp = "";
+
+        if (street != null && !street.isEmpty()) {
+            temp = street + "\n";
+        }
+
+        if (postcode != null && !postcode.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = postcode + " - ";
+            } else {
+                temp += postcode + " - ";
+            }
+
+        }
+
+        if (city != null && !city.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = city + "\n";
+            } else {
+                temp += city + "\n";
+            }
+
+        } else {
+            temp += "\n";
+        }
+
+        if (country != null && !country.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = country + "\n";
+            } else {
+                temp += country + "\n";
+            }
+        }
+        return temp;
+    }
 }

@@ -95,6 +95,8 @@ public class BookFilterDialog extends javax.swing.JDialog {
 
         pageCountCheckbox.setText("Počet stránek");
 
+        INPbookMaxRowsCount.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));
+
         INPorderBy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 INPorderByActionPerformed(evt);

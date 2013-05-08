@@ -6,6 +6,7 @@ package remote;
 
 import controllers.SocketServerController;
 import io.ApplicationLog;
+import io.Configuration;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,7 +31,6 @@ public class SocketServer extends Thread {
 
     SocketServerController controller;
     ServerSocket serverSocket = null;
-    private int port = 6789;
     List<ServerThread> existingConnection;
 
     public SocketServer(SocketServerController controller) {
@@ -39,19 +39,11 @@ public class SocketServer extends Thread {
         start();
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
     @Override
     public void run() {
         Socket socket = null;
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(Configuration.getInstance().getServerPort());
         } catch (BindException e) {
             controller.serverFail("Port je využíván - nelze spustit");
 

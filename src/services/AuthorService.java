@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import models.dao.BaseDAO;
 import models.entity.Author;
+import models.entity.Customer;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -48,12 +54,19 @@ public class AuthorService extends BaseDAO<Author> implements Serializable {
     }
 
     public List<Author> findAuthors(String author) {
-        List<Author> out = new ArrayList<>();
-        for(Author a : authors){
-            if(a.toString().toLowerCase().contains(author.toLowerCase())){
-                out.add(a);
-            }
-        }
-        return out;
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(Author.class);
+        Disjunction d = Restrictions.disjunction();
+
+        d.add(Restrictions.ilike("firstName", author, MatchMode.ANYWHERE));
+        d.add(Restrictions.ilike("lastName", author, MatchMode.ANYWHERE));
+
+        c.add(d);
+
+        List<Author> result = c.list();
+
+        closeSession();
+        return result;
     }
 }

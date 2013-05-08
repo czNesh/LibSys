@@ -28,7 +28,6 @@ public class MainController extends BaseController {
     private CustomerTabController customerTabController;
 
     public MainController() {
-        
         // Hlavní pohled
         mainView = new MainView();
 
@@ -57,6 +56,11 @@ public class MainController extends BaseController {
         // Kontrola vypnutého přihlašování - potlačení tlačítka pro odhlášení
         if (Configuration.getInstance().isSkipLogging()) {
             mainView.getLogoutMenuItem().setVisible(false);
+        }
+        
+        // LibSysServer Autostart
+        if(Configuration.getInstance().isServerAutoStart()){
+            SocketServerController.getInstance().setServerStatus(true);
         }
     }
 

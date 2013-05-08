@@ -4,9 +4,11 @@
  */
 package views;
 
-import java.util.logging.Logger;
+import io.Configuration;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -31,39 +33,65 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        okButton = new javax.swing.JButton();
-        customerCheckBox = new javax.swing.JCheckBox();
-        librarianCheckBox = new javax.swing.JCheckBox();
-        fromCheckBox = new javax.swing.JCheckBox();
-        toCheckBox = new javax.swing.JCheckBox();
-        returnedCheckBox = new javax.swing.JCheckBox();
-        itemCheckBox = new javax.swing.JCheckBox();
-        groupCheckBox = new javax.swing.JCheckBox();
+        BTNok = new javax.swing.JButton();
+        INPcustomer = new javax.swing.JCheckBox();
+        INPlibrarian = new javax.swing.JCheckBox();
+        INPfrom = new javax.swing.JCheckBox();
+        INPto = new javax.swing.JCheckBox();
+        INPreturned = new javax.swing.JCheckBox();
+        INPitems = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        INPborrowMaxRowsCount = new javax.swing.JSpinner();
+        INPborrowMaxRowsCount.setValue(Configuration.getInstance().getMaxBorrowRowsCount());
+
+        INPorderBy = new javax.swing.JComboBox();
+        INPorderType = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení zobrazení");
+        setResizable(false);
 
-        okButton.setText("OK");
-        okButton.setName("filterConfirm"); // NOI18N
+        BTNok.setText("OK");
+        BTNok.setName("filterConfirmed"); // NOI18N
 
-        customerCheckBox.setSelected(true);
-        customerCheckBox.setText("Zákazník");
+        INPcustomer.setSelected(true);
+        INPcustomer.setText("Zákazník");
 
-        librarianCheckBox.setText("Knihovník");
+        INPlibrarian.setText("Knihovník");
 
-        fromCheckBox.setSelected(true);
-        fromCheckBox.setText("Datum od");
+        INPfrom.setSelected(true);
+        INPfrom.setText("Datum od");
 
-        toCheckBox.setSelected(true);
-        toCheckBox.setText("Datum do");
+        INPto.setSelected(true);
+        INPto.setText("Datum do");
 
-        returnedCheckBox.setSelected(true);
-        returnedCheckBox.setText("Vráceno");
+        INPreturned.setSelected(true);
+        INPreturned.setText("Stav půjčky");
 
-        itemCheckBox.setSelected(true);
-        itemCheckBox.setText("Kniha");
+        INPitems.setSelected(true);
+        INPitems.setText("Půjčené knihy");
 
-        groupCheckBox.setText("Spojit výpůjčky jednoho uživatele");
+        jLabel3.setText("Způsob řazení:");
+
+        jLabel2.setText("Řadit podle:");
+
+        jLabel1.setText("Zobrazit záznamů:");
+
+        INPborrowMaxRowsCount.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));
+
+        INPorderBy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPorderByActionPerformed(evt);
+            }
+        });
+
+        INPorderType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPorderTypeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,22 +100,27 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTNok, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(INPborrowMaxRowsCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(INPorderBy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(INPorderType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customerCheckBox)
-                            .addComponent(itemCheckBox))
+                            .addComponent(INPcustomer)
+                            .addComponent(INPitems)
+                            .addComponent(INPfrom))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(librarianCheckBox)
-                            .addComponent(returnedCheckBox)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(groupCheckBox)
-                        .addGap(0, 26, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(fromCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(toCheckBox))
-                    .addComponent(okButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(INPto)
+                            .addComponent(INPlibrarian)
+                            .addComponent(INPreturned))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -95,67 +128,96 @@ public class BorrowFilterDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerCheckBox)
-                    .addComponent(returnedCheckBox))
+                    .addComponent(INPcustomer)
+                    .addComponent(INPreturned))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(librarianCheckBox)
-                    .addComponent(itemCheckBox))
+                    .addComponent(INPlibrarian)
+                    .addComponent(INPitems))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fromCheckBox)
-                    .addComponent(toCheckBox))
-                .addGap(26, 26, 26)
-                .addComponent(groupCheckBox)
-                .addGap(8, 8, 8)
-                .addComponent(okButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(INPfrom)
+                    .addComponent(INPto))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPborrowMaxRowsCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPorderBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(INPorderType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(BTNok)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void INPorderByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPorderByActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPorderByActionPerformed
+
+    private void INPorderTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPorderTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPorderTypeActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox customerCheckBox;
-    private javax.swing.JCheckBox fromCheckBox;
-    private javax.swing.JCheckBox groupCheckBox;
-    private javax.swing.JCheckBox itemCheckBox;
-    private javax.swing.JCheckBox librarianCheckBox;
-    private javax.swing.JButton okButton;
-    private javax.swing.JCheckBox returnedCheckBox;
-    private javax.swing.JCheckBox toCheckBox;
+    private javax.swing.JButton BTNok;
+    private javax.swing.JSpinner INPborrowMaxRowsCount;
+    private javax.swing.JCheckBox INPcustomer;
+    private javax.swing.JCheckBox INPfrom;
+    private javax.swing.JCheckBox INPitems;
+    private javax.swing.JCheckBox INPlibrarian;
+    private javax.swing.JComboBox INPorderBy;
+    private javax.swing.JComboBox INPorderType;
+    private javax.swing.JCheckBox INPreturned;
+    private javax.swing.JCheckBox INPto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getOkButton() {
-        return okButton;
+    public JButton getBTNok() {
+        return BTNok;
     }
 
-    public JCheckBox getCustomerCheckBox() {
-        return customerCheckBox;
+    public JSpinner getINPborrowMaxRowsCount() {
+        return INPborrowMaxRowsCount;
     }
 
-    public JCheckBox getFromCheckBox() {
-        return fromCheckBox;
+    public JCheckBox getINPcustomer() {
+        return INPcustomer;
     }
 
-    public JCheckBox getLibrarianCheckBox() {
-        return librarianCheckBox;
+    public JCheckBox getINPfrom() {
+        return INPfrom;
     }
 
-    public JCheckBox getReturnedCheckBox() {
-        return returnedCheckBox;
+    public JCheckBox getINPitems() {
+        return INPitems;
     }
 
-    public JCheckBox getToCheckBox() {
-        return toCheckBox;
+    public JCheckBox getINPlibrarian() {
+        return INPlibrarian;
     }
 
-    public JCheckBox getItemCheckBox() {
-        return itemCheckBox;
+    public JComboBox getINPorderBy() {
+        return INPorderBy;
     }
 
-    public JCheckBox getGroupCheckBox() {
-        return groupCheckBox;
+    public JComboBox getINPorderType() {
+        return INPorderType;
     }
-    
 
+    public JCheckBox getINPreturned() {
+        return INPreturned;
+    }
+
+    public JCheckBox getINPto() {
+        return INPto;
+    }
 }

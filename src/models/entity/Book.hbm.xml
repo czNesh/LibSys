@@ -19,10 +19,11 @@
         <property name="language" not-null="false" type="string"/>
         <property name="publisher" not-null="false" type="string"/>
         <property name="publishedYear" not-null="false" type="timestamp"/>
-        <set cascade="all" name="genres" table="item_genre">
+        <list cascade="all" name="genres" table="item_genre" lazy="false">
             <key column="id"/>
+            <index column="idx"/>
             <many-to-many class="models.entity.Genre" column="genre_id"/>
-        </set>
+        </list>
         <property name="sponsor" not-null="false" type="string"/>
         <property name="addedDate" not-null="false" type="timestamp"/>
         <property name="location" not-null="false" type="string"/>

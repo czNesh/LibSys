@@ -159,9 +159,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="inputFirstName">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
-        </Property>
         <Property name="toolTipText" type="java.lang.String" value="Vlo&#x17e;te jm&#xe9;no a p&#x159;ijmen&#xed;. Lze vlo&#x17e;it i v&#xed;ce jmen"/>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
@@ -199,9 +196,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="inputEmail">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
-        </Property>
         <Property name="toolTipText" type="java.lang.String" value="Vlo&#x17e;te email"/>
       </Properties>
     </Component>
@@ -250,11 +244,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputLastName">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

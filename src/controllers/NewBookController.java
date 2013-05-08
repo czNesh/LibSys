@@ -144,12 +144,10 @@ public class NewBookController extends BaseController {
                     String in = dialog.getInputGenres().getText().trim();
                     String before = "";
 
-
                     if (in.contains(";")) {
                         int lastNewWord = in.lastIndexOf(';');
                         before = in.substring(0, lastNewWord + 1);
                         in = in.substring(lastNewWord + 1);
-
                     }
 
                     int start = in.length();
@@ -310,6 +308,32 @@ public class NewBookController extends BaseController {
             }
 
             b.setPageCount((int) dialog.getInputPageCount().getValue());
+
+            //zanry
+            if (!dialog.getInputGenres().getText().trim().isEmpty()) {
+                List<Genre> genres = new ArrayList<>();
+
+                String[] tempGenres = dialog.getInputGenres().getText().split(";");
+
+                for (String s : tempGenres) {
+                    Genre g = GenreService.getInstance().findGenre(s);
+                    if (g == null) {
+                        errorOutput.append("žánr ").append(s).append(" neexistuje - přidat jej můžete v nastavení");
+                        break;
+                    }
+                    genres.add(g);
+                }
+                if (genres.isEmpty() && Configuration.getInstance().isRequireGenre()) {
+                    errorOutput.append("Vyplňte žánr");
+                } else {
+                    b.setGenres(genres);
+                }
+            } else {
+                if (Configuration.getInstance().isRequireGenre()) {
+                    errorOutput.append("Vyplňte žánr");
+                }
+            }
+
 
             // Check validation results
             if (errorOutput.length() == 0) {

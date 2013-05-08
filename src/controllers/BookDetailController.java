@@ -14,6 +14,8 @@ import io.PDFPrinter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -28,10 +30,13 @@ import models.BorrowTableModel;
 import models.entity.Author;
 import models.entity.Book;
 import models.entity.Borrow;
+import models.entity.Genre;
 import remote.GoogleImageDownload;
 import services.AuthorService;
 import services.BookService;
 import services.BorrowService;
+import services.CustomerService;
+import services.GenreService;
 import views.BookDetailDialog;
 import views.DatePicker;
 
@@ -82,10 +87,14 @@ public class BookDetailController extends BaseController {
         dialog.getBTNbarcode().addActionListener(a);
         dialog.getBTNqrcode().addActionListener(a);
         dialog.getBTNprint().addActionListener(a);
+        dialog.getBTNrenew().addActionListener(a);
 
         //MouseListener
         BookDetailListListener m = new BookDetailListListener();
         dialog.getLastBorrowTable().addMouseListener(m);
+
+        BookDetailKeyListener k = new BookDetailKeyListener();
+        dialog.getInfoGenre().addKeyListener(k);
     }
 
     private void showData() {
@@ -132,7 +141,16 @@ public class BookDetailController extends BaseController {
         dialog.getInfoPageCount().setText(String.valueOf(book.getPageCount()));
 
         // Zanr
-        //dialog.getInfoGenre().setText(book.getGenres());
+        String tempGenre = "";
+        for (Genre g : book.getGenres()) {
+            if (tempGenre.isEmpty()) {
+                tempGenre = g.getGenre();
+            } else {
+                tempGenre += ";" + g.getGenre();
+            }
+        }
+
+        dialog.getInfoGenre().setText(tempGenre);
 
         // Sponzor
         dialog.getInfoSponsor().setText(book.getSponsor());
@@ -165,9 +183,74 @@ public class BookDetailController extends BaseController {
             }
         }
 
+        if (book.isDeleted()) {
+            dialog.getBTNrenew().setVisible(true);
+            dialog.getBTNdelete().setVisible(false);
+            dialog.getBTNcheckItem().setVisible(false);
+        }
 
         // Posledni výpůjčky
         dialog.getLastBorrowTable().setModel(tableModel);
+    }
+
+    private class BookDetailKeyListener implements KeyListener {
+
+        List<Genre> genres;
+
+        public BookDetailKeyListener() {
+            genres = GenreService.getInstance().getList();
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            switch (((JComponent) e.getSource()).getName()) {
+
+                case "genres":
+                    // pokud se nezapise znak - hned skonci
+                    if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
+                        return;
+                    }
+
+                    if (e.getKeyChar() == ';') {
+                        return;
+                    }
+
+                    // priprava promennych 
+                    String in = dialog.getInfoGenre().getText().trim();
+                    String before = "";
+
+                    if (in.contains(";")) {
+                        int lastNewWord = in.lastIndexOf(';');
+                        before = in.substring(0, lastNewWord + 1);
+                        in = in.substring(lastNewWord + 1);
+                    }
+
+                    int start = in.length();
+
+                    // zadany aspon 2 znaky
+                    if (start > 1) {
+                        for (Genre g : genres) {
+                            if (g.getGenre() != null && g.getGenre().toLowerCase().startsWith(in.toLowerCase())) {
+                                dialog.getInfoGenre().setText(before + g.getGenre());
+                                // oznaci doplnene
+                                dialog.getInfoGenre().setSelectionStart(before.length() + start);
+                                dialog.getInfoGenre().setSelectionEnd(dialog.getInfoGenre().getText().length());
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
+
+        }
     }
 
     private class BookDetailListListener implements MouseListener {
@@ -212,6 +295,9 @@ public class BookDetailController extends BaseController {
                 case "saveButton":
                     saveBook();
                     break;
+                case "renew":
+                    renew();
+                    break;
                 case "delete":
                     deleteAction();
                     break;
@@ -223,15 +309,14 @@ public class BookDetailController extends BaseController {
                     break;
                 case "qrcode":
                     BufferedImage qrcode = QRCode.encode(book.getBarcode());
-                    FileManager.getInstance().saveImage("QR_" + book.getBarcode(), qrcode);
-                    FileManager.getInstance().openImage("QR_" + book.getBarcode());
+                    FileManager.getInstance().saveImage("qr_book_" + book.getBarcode(), qrcode);
+                    FileManager.getInstance().openImage("qr_book_" + book.getBarcode());
                     break;
                 case "barcode":
                     BufferedImage barcode = Barcode.encode(book.getBarcode());
-                    FileManager.getInstance().saveImage("BA_" + book.getBarcode(), barcode);
-                    FileManager.getInstance().openImage("BA_" + book.getBarcode());
+                    FileManager.getInstance().saveImage("ba_book_" + book.getBarcode(), barcode);
+                    FileManager.getInstance().openImage("ba_book_" + book.getBarcode());
                     break;
-
                 case "selectItem":
                     book = BookService.getInstance().getBookWithCode(dialog.getINPselectTargetBook().getModel().getSelectedItem().toString());
                     showData();
@@ -258,7 +343,7 @@ public class BookDetailController extends BaseController {
                 case "checkItem":
                     int isSure = JOptionPane.showInternalConfirmDialog(dialog.getContentPane(), "Opravdu chcete inventarozovat knihu " + book.getBarcode() + "?", "Potvrzení inventarizace", JOptionPane.OK_CANCEL_OPTION);
                     if (isSure == JOptionPane.OK_OPTION) {
-                        book.setInventoriedDate(new Date());
+                        book.setInventoriedDate(DateFormater.stringToDate(DateFormater.dateToString(new Date(), false), false));
                         if (book.isDeleted()) {
                             book.setDeleted(false);
                         }
@@ -334,6 +419,19 @@ public class BookDetailController extends BaseController {
 
             dialog.revalidate();
             dialog.repaint();
+        }
+
+        private void renew() {
+            int isSure = JOptionPane.showInternalConfirmDialog(dialog.getContentPane(), "Opravdu chcete obnovit knihu " + book.getTitle() + " (" + book.getBarcode() + ")?", "Opravdu obnovit?", JOptionPane.OK_CANCEL_OPTION);
+            if (isSure == JOptionPane.OK_OPTION) {
+                book.setDeleted(false);
+                BookService.getInstance().save(book);
+                ApplicationLog.getInstance().addMessage("Kniha " + book.getTitle() + " (" + book.getBarcode() + ") byla obnovena");
+                RefreshController.getInstance().refreshBookTab();
+                dialog.getBTNrenew().setVisible(false);
+                dialog.getBTNdelete().setVisible(true);
+                dialog.getBTNcheckItem().setVisible(true);
+            }
         }
 
         private void saveBook() {
@@ -435,6 +533,31 @@ public class BookDetailController extends BaseController {
                     errorOutput.append("Zkonrolujte zadaný počet stránek");
                 }
             }
+            //zanry
+            if (!dialog.getInfoGenre().getText().trim().isEmpty()) {
+                List<Genre> genres = new ArrayList<>();
+
+                String[] tempGenres = dialog.getInfoGenre().getText().split(";");
+
+                for (String s : tempGenres) {
+                    Genre g = GenreService.getInstance().findGenre(s);
+                    if (g == null) {
+                        errorOutput.append("žánr ").append(s).append(" neexistuje - přidat jej můžete v nastavení");
+                        break;
+                    }
+                    genres.add(g);
+                }
+                if (genres.isEmpty() && Configuration.getInstance().isRequireGenre()) {
+                    errorOutput.append("Vyplňte žánr");
+                } else {
+                    book.setGenres(genres);
+                }
+            } else {
+                if (Configuration.getInstance().isRequireGenre()) {
+                    errorOutput.append("Vyplňte žánr");
+                }
+            }
+
             // Check validation results
             if (errorOutput.length() == 0) {
                 BookService.getInstance().save(book);

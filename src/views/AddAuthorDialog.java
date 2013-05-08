@@ -42,17 +42,21 @@ public class AddAuthorDialog extends javax.swing.JDialog {
 
         cancelButton.setText("Zrušit");
         cancelButton.setName("cancelButton"); // NOI18N
+        cancelButton.setNextFocusableComponent(inputFName);
 
         saveButton.setText("Přidat");
         saveButton.setName("saveButton"); // NOI18N
+        saveButton.setNextFocusableComponent(cancelButton);
 
         jLabel1.setText("Jméno:");
 
         inputFName.setName("fname"); // NOI18N
+        inputFName.setNextFocusableComponent(inputLName);
 
         jLabel2.setText("Přijmení:");
 
         inputLName.setName("lname"); // NOI18N
+        inputLName.setNextFocusableComponent(saveButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

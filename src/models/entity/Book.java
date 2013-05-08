@@ -29,7 +29,7 @@ public class Book implements Serializable {
     private String language;
     private String publisher;
     private Date publishedYear;
-    private Set<Genre> genres = new HashSet<>();
+    private List<Genre> genres;
     private String sponsor;
     private Date addedDate;
     private String location;
@@ -38,6 +38,7 @@ public class Book implements Serializable {
     private String volumeCode;
     private boolean deleted;
     private Date inventoriedDate;
+
     /**
      * @return the id
      */
@@ -192,17 +193,11 @@ public class Book implements Serializable {
         this.publishedYear = publishedYear;
     }
 
-    /**
-     * @return the genres
-     */
-    public Set<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    /**
-     * @param genres the genres to set
-     */
-    public void setGenres(Set<Genre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
@@ -269,8 +264,6 @@ public class Book implements Serializable {
     public void setInventoriedDate(Date inventoriedDate) {
         this.inventoriedDate = inventoriedDate;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -356,7 +349,4 @@ public class Book implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-    
-    
-    
 }

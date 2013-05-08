@@ -1,5 +1,6 @@
 package models;
 
+import helpers.DateFormater;
 import io.Configuration;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import services.BookService;
 
 public class BookTableModel extends AbstractTableModel {
 
-    private List<Book> itemList;
+    private List<Book> bookList;
     private boolean showTitle;
     private boolean showAuthor;
     private boolean showPublisher;
@@ -21,17 +22,18 @@ public class BookTableModel extends AbstractTableModel {
     private boolean showPageCount;
     private boolean showLocation;
     private boolean showItemCount;
-    private String filterString = "";
     // Nastavení dotazu
     private int page = 1;
     private int maxRows = Configuration.getInstance().getMaxBookRowsCount();
     private String groupBy = "volumeCode";
     private List<String> resultOfSearch = new ArrayList<>();
+    private String filterString = "";
+    private boolean isSearching = false;
 
     public BookTableModel() {
         super();
         setParams();
-        itemList = BookService.getInstance().getBooks();
+        bookList = BookService.getInstance().getBooks();
     }
 
     public BookTableModel(List<Book> in) {
@@ -41,11 +43,11 @@ public class BookTableModel extends AbstractTableModel {
         showPublishedYear = true;
         showISBN10 = true;
         showISBN13 = true;
-        itemList = in;
+        bookList = in;
     }
 
     private void setParams() {
-        // SHOW     
+        //Nastavení viditelnosti  
         showTitle = Configuration.getInstance().isShowTitle();
         showAuthor = Configuration.getInstance().isShowAuthor();
         showPublisher = Configuration.getInstance().isShowPublisher();
@@ -58,7 +60,7 @@ public class BookTableModel extends AbstractTableModel {
         showItemCount = Configuration.getInstance().isShowCount();
 
         maxRows = Configuration.getInstance().getMaxBookRowsCount();
-        BookService.getInstance().setLimit(Configuration.getInstance().getMaxBookRowsCount());
+        BookService.getInstance().setLimit(maxRows);
         BookService.getInstance().setStart((page - 1) * maxRows);
         BookService.getInstance().setGroupBy(groupBy);
         BookService.getInstance().setOrderType(Configuration.getInstance().getBookOrderType());
@@ -68,16 +70,16 @@ public class BookTableModel extends AbstractTableModel {
             BookService.getInstance().setCondition("deleted = :deleted");
         }
         if (!filterString.isEmpty()) {
-            BookService.getInstance().setExactMatch("t.barcode", BookService.getInstance().criteriaSearch(filterString));
+            BookService.getInstance().setExactMatch("t.id", BookService.getInstance().criteriaSearch(filterString));
         }
         if (!resultOfSearch.isEmpty()) {
-            BookService.getInstance().setExactMatch("t.barcode", resultOfSearch);
+            BookService.getInstance().setExactMatch("t.id", resultOfSearch);
         }
     }
 
     @Override
     public int getRowCount() {
-        return itemList.size();
+        return bookList.size();
     }
 
     @Override
@@ -119,7 +121,7 @@ public class BookTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Book i = itemList.get(rowIndex);
+        Book i = bookList.get(rowIndex);
         ArrayList<String> tempValues = new ArrayList<>();
 
         if (showTitle) {
@@ -148,7 +150,7 @@ public class BookTableModel extends AbstractTableModel {
         }
         if (showPublishedYear) {
             if (i.getPublishedYear() != null) {
-                tempValues.add(String.valueOf(i.getPublishedYear().getYear()));
+                tempValues.add(String.valueOf(DateFormater.dateToString(i.getPublishedYear(), true)));
             } else {
                 tempValues.add("údaj chybí");
             }
@@ -218,7 +220,12 @@ public class BookTableModel extends AbstractTableModel {
 
     public void updateData() {
         setParams();
-        itemList = BookService.getInstance().getBooks();
+        if (isSearching && resultOfSearch.isEmpty()) {
+            bookList.clear();
+            isSearching = false;
+        } else {
+            bookList = BookService.getInstance().getBooks();
+        }
     }
 
     public int getPage() {
@@ -269,16 +276,25 @@ public class BookTableModel extends AbstractTableModel {
     }
 
     public Book getBook(int index) {
-        return itemList.get(index);
+        return bookList.get(index);
     }
 
     public void search(String barcode, String title, String author, String isbn10, String isbn13, String year) {
         resultOfSearch.clear();
         resultOfSearch = BookService.getInstance().extendedCriteriaSearch(barcode, title, author, isbn10, isbn13, year);
+        isSearching = true;
+    }
 
+    public void stopSearch() {
+        resultOfSearch.clear();
+        isSearching = false;
     }
 
     public void applyFilter(String filterString) {
         this.filterString = filterString;
+    }
+
+    public void stopSearchWithEmptyResult() {
+        isSearching = false;
     }
 }

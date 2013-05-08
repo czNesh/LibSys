@@ -34,7 +34,6 @@ public class DateFormater {
             } else {
                 date = new SimpleDateFormat("dd.MM.yyyy").parse(in);
             }
-
             return date;
         } catch (ParseException ex) {
             System.out.println("NELZE PARSOVAT DATUM");

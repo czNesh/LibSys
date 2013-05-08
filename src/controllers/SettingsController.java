@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import services.SystemUserService;
 import views.SettingsDialog;
 
 /**
@@ -56,7 +57,7 @@ public class SettingsController extends BaseController {
     }
 
     private void updateView() {
-        // BOOK TAB
+        // KNIHY
         dialog.getINPauthor().setSelected(c.isRequireAuthor());
         dialog.getINPcount().setSelected(c.isRequireCount());
         dialog.getINPisbn10().setSelected(c.isRequireISBN10());
@@ -69,6 +70,20 @@ public class SettingsController extends BaseController {
         dialog.getINPaddedDate().setSelected(c.isRequireAddedDate());
         dialog.getINPgenre().setSelected(c.isRequireGenre());
         dialog.getINPsponsor().setSelected(c.isRequireSponsor());
+
+        // ZÁKAZNÍCI
+        dialog.getINPcustomerFirstName().setSelected(c.isCustomerRequireFName());
+        dialog.getINPcustomerLastName().setSelected(c.isCustomerRequireLName());
+        dialog.getINPcustomerEmail().setSelected(c.isCustomerRequireEmail());
+        dialog.getINPcustomerPhone().setSelected(c.isCustomerRequirePhone());
+        dialog.getINPcustomerStreet().setSelected(c.isCustomerRequireStreet());
+        dialog.getINPcustomerCity().setSelected(c.isCustomerRequireCity());
+        dialog.getINPcustomerCountry().setSelected(c.isCustomerRequireCountry());
+        dialog.getINPcustomerPostcode().setSelected(c.isCustomerRequirePostcode());
+
+        // LibSys Server
+        dialog.getINPportNumber().setValue(Configuration.getInstance().getServerPort());
+        dialog.getINPautoStartServer().setSelected(Configuration.getInstance().isServerAutoStart());
 
         dialog.getINPmaxNotificationRows().setValue(c.getMaxNotificationRowsCount());
         dialog.getINPshowDeletedItems().setSelected(c.isDeletedItemVisible());
@@ -84,7 +99,12 @@ public class SettingsController extends BaseController {
         } else {
             c.setWorkcpace(dialog.getINPworkspace().getText());
         }
-        // BOOK TAB
+        if (SystemUserService.getInstance().isOnlyDefault() && !dialog.getINPskipLogging().isSelected()) {
+            JOptionPane.showMessageDialog(dialog, "- V aplikaci chybí uživatelé", "Nelze zapnout přihlašování", JOptionPane.ERROR_MESSAGE);
+        } else {
+            c.setSkipLogging(dialog.getINPskipLogging().isSelected());
+        }
+        // KNIHY
         c.setRequireAuthor(dialog.getINPauthor().isSelected());
         c.setRequireCount(dialog.getINPcount().isSelected());
         c.setRequireISBN10(dialog.getINPisbn10().isSelected());
@@ -98,8 +118,22 @@ public class SettingsController extends BaseController {
         c.setRequireSponsor(dialog.getINPsponsor().isSelected());
         c.setRequireGenre(dialog.getINPgenre().isSelected());
 
+        //ZÁKAZNÍCI
+        c.setCustomerRequireFName(dialog.getINPcustomerFirstName().isSelected());
+        c.setCustomerRequireLName(dialog.getINPcustomerLastName().isSelected());
+        c.setCustomerRequireEmail(dialog.getINPcustomerEmail().isSelected());
+        c.setCustomerRequirePhone(dialog.getINPcustomerPhone().isSelected());
+        c.setCustomerRequireStreet(dialog.getINPcustomerStreet().isSelected());
+        c.setCustomerRequireCity(dialog.getINPcustomerCity().isSelected());
+        c.setCustomerRequireCountry(dialog.getINPcustomerCountry().isSelected());
+        c.setCustomerRequirePostcode(dialog.getINPcustomerPostcode().isSelected());
+
+        // LIBSYS SERVER
+        c.setServerPort((int) dialog.getINPportNumber().getValue());
+        c.setServerAutoStart(dialog.getINPautoStartServer().isSelected());
+
         c.setDeletedItemVisible(dialog.getINPshowDeletedItems().isSelected());
-        c.setSkipLogging(dialog.getINPskipLogging().isSelected());
+
         RefreshController.getInstance().refreshAll();
         dispose();
     }
@@ -136,7 +170,7 @@ public class SettingsController extends BaseController {
                     f.setAcceptAllFileFilterUsed(false);
                     f.setDialogTitle("Zvolte složku");
                     if (f.showOpenDialog(dialog) == JFileChooser.APPROVE_OPTION) {
-                        dialog.getINPworkspace().setText(f.getCurrentDirectory().getAbsolutePath() +"\\"+ f.getSelectedFile().getName());
+                        dialog.getINPworkspace().setText(f.getCurrentDirectory().getAbsolutePath() + "\\" + f.getSelectedFile().getName());
                     }
 
                     break;

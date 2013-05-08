@@ -71,7 +71,9 @@ public class BookBorrowController extends BaseController {
                     CustomerListController clc = new CustomerListController(null, true);
                     clc.showView();
                     customer = clc.getSeletedCustomer();
-                    dialog.getInputCustomer().setText(customer.toString());
+                    if (customer != null) {
+                        dialog.getInputCustomer().setText(customer.toString());
+                    }
                     break;
                 case "dateFrom":
                     DatePicker dateFrom = new DatePicker(null, true);
@@ -98,6 +100,9 @@ public class BookBorrowController extends BaseController {
                 case "addBook":
                     BookListController blc = new BookListController(null, true);
                     blc.showView();
+                    if (blc.getBooks().isEmpty()) {
+                        return;
+                    }
                     for (Book b : blc.getBooks()) {
                         booksList.add(b);
                     }

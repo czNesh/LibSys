@@ -4,7 +4,6 @@
  */
 package models.dao;
 
-import io.Configuration;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -166,7 +165,6 @@ public abstract class BaseDAO<T> implements DAO<T> {
         // Add parameters
         for (Map.Entry<String, Object> entry : getParameters().entrySet()) {
             if (entry.getValue() instanceof List) {
-                System.out.println("je list");
                 query.setParameterList(entry.getKey(), (List) entry.getValue());
             } else {
                 query.setParameter(entry.getKey(), entry.getValue());

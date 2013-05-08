@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,12 +30,12 @@ public class FileManager {
     }
 
     private FileManager() {
-        workSpace = Configuration.getInstance().getWorkspace();
     }
 
     public void saveImage(String name, BufferedImage in) {
+        workSpace = Configuration.getInstance().getWorkspace();
         if (workSpace.trim().isEmpty()) {
-            ApplicationLog.getInstance().addMessage("Není nastavený workspace programu - nelze provést");
+            JOptionPane.showMessageDialog(null, "CHYBA: Není nastaven workspace", "Nastavit jej můžete v nasavení", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (in == null) {
@@ -50,22 +51,19 @@ public class FileManager {
     }
 
     public void openImage(String name) {
-        if (workSpace.trim().isEmpty()) {
-            ApplicationLog.getInstance().addMessage("Není nastavený workspace programu - nelze provést");
-            return;
-        }
+        workSpace = Configuration.getInstance().getWorkspace();
+
         try {
             File f = new File(workSpace + "/" + name + ".png");
             if (f.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(f);
                 } else {
-                    System.out.println("Soubor neexistuje - nelze otevřít");
+                    System.out.println("Soubor není podprován");
                 }
 
             }
         } catch (Exception ert) {
-            
         }
     }
 }

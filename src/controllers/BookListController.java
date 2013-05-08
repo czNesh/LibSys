@@ -4,7 +4,6 @@
  */
 package controllers;
 
-import helpers.DateFormater;
 import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,8 +48,6 @@ public class BookListController extends BaseController {
         setFilterData();
         initListeners();
         updateView();
-
-
     }
 
     private void initListeners() {
@@ -62,6 +59,7 @@ public class BookListController extends BaseController {
         dialog.getSearchButton().addActionListener(a);
         dialog.getBookTablePrevButton().addActionListener(a);
         dialog.getBookTableNextButton().addActionListener(a);
+        dialog.getBTNreset().addActionListener(a);
 
         // KeyListener
         BookListKeyListener k = new BookListKeyListener();
@@ -141,7 +139,6 @@ public class BookListController extends BaseController {
                 filter.getINPorderBy().setSelectedItem(entry.getKey());
             }
         }
-
 
         RefreshController.getInstance().refreshBookTab();
     }
@@ -321,6 +318,16 @@ public class BookListController extends BaseController {
                     dispose();
                     break;
 
+                case "reset":
+                    dialog.getInputAuthor().setText("");
+                    dialog.getInputBarcode().setText("");
+                    dialog.getInputISBN10().setText("");
+                    dialog.getInputISBN13().setText("");
+                    dialog.getInputPublishedYear().setText("");
+                    dialog.getInputTitle().setText("");
+                    updateView();
+                    break;
+
                 case "filter":
                     filter.getOkButton().addActionListener(this);
                     filter.setLocationRelativeTo(null);
@@ -355,6 +362,7 @@ public class BookListController extends BaseController {
                             dialog.getInputISBN10().getText().trim(),
                             dialog.getInputISBN13().getText().trim(),
                             dialog.getInputPublishedYear().getText().trim());
+                    tableModel.stopSearchWithEmptyResult();
                     updateView();
                     break;
 

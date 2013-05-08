@@ -45,7 +45,7 @@ public class MainView extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         newCustomerButton = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
+        BTNsearch = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -68,6 +68,9 @@ public class MainView extends javax.swing.JFrame {
         bookTablePrevButton = new javax.swing.JButton();
         bookTableTotalPage = new javax.swing.JLabel();
         bookTableInputNumber = new javax.swing.JTextField();
+        BTNstopBookSearch = new javax.swing.JButton();
+        BTNstopBookSearch.setVisible(false);
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 60), new java.awt.Dimension(0, 60), new java.awt.Dimension(32767, 60));
         jPanel4 = new javax.swing.JPanel();
         customerFilterButton = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -78,18 +81,22 @@ public class MainView extends javax.swing.JFrame {
         customerTableNextButton = new javax.swing.JButton();
         customerFilterInput = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 60), new java.awt.Dimension(0, 60), new java.awt.Dimension(32767, 60));
+        BTNstopCustomerSearch = new javax.swing.JButton();
+        BTNstopCustomerSearch.setVisible(false);
         jPanel2 = new javax.swing.JPanel();
         borrowFilterButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        INPborrowFilter = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         borrowTable = new javax.swing.JTable();
         borrowPrevButton = new javax.swing.JButton();
-        borrowInputPageNumber = new javax.swing.JTextField();
+        INPborrowPageNumber = new javax.swing.JTextField();
         borrowTotalPageNumber = new javax.swing.JLabel();
         borrowNextButton = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 32), new java.awt.Dimension(0, 32), new java.awt.Dimension(32767, 32));
+        BTNstopBorrowSearch = new javax.swing.JButton();
+        BTNstopBorrowSearch.setVisible(false);
         jPanel3 = new javax.swing.JPanel();
         filterButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -170,11 +177,12 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(newCustomerButton);
         jToolBar1.add(jSeparator2);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        BTNsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        BTNsearch.setFocusable(false);
+        BTNsearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTNsearch.setName("searchDialog"); // NOI18N
+        BTNsearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(BTNsearch);
         jToolBar1.add(jSeparator6);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/export-icon.png"))); // NOI18N
@@ -205,11 +213,13 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(QRCodeButton);
         jToolBar1.add(jSeparator4);
 
-        connectionButton.setText("Připojení");
+        connectionButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        connectionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/server-icon.png"))); // NOI18N
+        connectionButton.setText("LibSys Server");
+        connectionButton.setToolTipText("LibSys Server");
         connectionButton.setFocusable(false);
-        connectionButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        connectionButton.setIconTextGap(5);
         connectionButton.setName("connection"); // NOI18N
-        connectionButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(connectionButton);
         jToolBar1.add(filler2);
 
@@ -223,7 +233,7 @@ public class MainView extends javax.swing.JFrame {
 
         TabPanel.setName("bookFilterShow"); // NOI18N
 
-        jPanel1.setName("catalogTab"); // NOI18N
+        jPanel1.setName("bookTab"); // NOI18N
 
         catalogTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,8 +250,13 @@ public class MainView extends javax.swing.JFrame {
 
         bookFilterInput.setName("bookFilter"); // NOI18N
 
+        filterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view-icon.png"))); // NOI18N
         filterButton.setText("Volby zobrazení");
+        filterButton.setToolTipText("upravit způsob zobrazení");
+        filterButton.setMaximumSize(new java.awt.Dimension(107, 30));
+        filterButton.setMinimumSize(new java.awt.Dimension(107, 30));
         filterButton.setName("filter"); // NOI18N
+        filterButton.setPreferredSize(new java.awt.Dimension(107, 30));
 
         bookTableNextButton.setText(">");
         bookTableNextButton.setName("nextPage"); // NOI18N
@@ -256,6 +271,14 @@ public class MainView extends javax.swing.JFrame {
         bookTableInputNumber.setText("1");
         bookTableInputNumber.setName("bookPageNumber"); // NOI18N
 
+        BTNstopBookSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel_icon.png"))); // NOI18N
+        BTNstopBookSearch.setText("Zrušit hledání");
+        BTNstopBookSearch.setToolTipText("Přeruší vyhledávání");
+        BTNstopBookSearch.setMaximumSize(new java.awt.Dimension(121, 30));
+        BTNstopBookSearch.setMinimumSize(new java.awt.Dimension(121, 30));
+        BTNstopBookSearch.setName("stopSearch"); // NOI18N
+        BTNstopBookSearch.setPreferredSize(new java.awt.Dimension(121, 30));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -263,13 +286,7 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bookFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(bookTablePrevButton)
@@ -278,19 +295,32 @@ public class MainView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bookTableTotalPage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bookTableNextButton)))
+                        .addComponent(bookTableNextButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)
+                        .addComponent(BTNstopBookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bookFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filterButton)
-                    .addComponent(bookFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bookFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(filterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTNstopBookSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookTableNextButton)
@@ -304,8 +334,12 @@ public class MainView extends javax.swing.JFrame {
 
         jPanel4.setName("customerTab"); // NOI18N
 
+        customerFilterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view-icon.png"))); // NOI18N
         customerFilterButton.setText("Volby zobrazení");
+        customerFilterButton.setMaximumSize(new java.awt.Dimension(107, 30));
+        customerFilterButton.setMinimumSize(new java.awt.Dimension(107, 30));
         customerFilterButton.setName("filter"); // NOI18N
+        customerFilterButton.setPreferredSize(new java.awt.Dimension(107, 30));
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -331,9 +365,17 @@ public class MainView extends javax.swing.JFrame {
         customerTableNextButton.setText(">");
         customerTableNextButton.setName("nextPage"); // NOI18N
 
-        customerFilterInput.setName("bookFilter"); // NOI18N
+        customerFilterInput.setName("customerFilter"); // NOI18N
 
         jLabel2.setText("Rychlý filtr:");
+
+        BTNstopCustomerSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel_icon.png"))); // NOI18N
+        BTNstopCustomerSearch.setText("Zrušit hledání");
+        BTNstopCustomerSearch.setToolTipText("Přeruší vyhledávání");
+        BTNstopCustomerSearch.setMaximumSize(new java.awt.Dimension(121, 30));
+        BTNstopCustomerSearch.setMinimumSize(new java.awt.Dimension(121, 30));
+        BTNstopCustomerSearch.setName("stopSearch"); // NOI18N
+        BTNstopCustomerSearch.setPreferredSize(new java.awt.Dimension(121, 30));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -342,34 +384,41 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(customerFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 773, Short.MAX_VALUE)
                         .addComponent(customerTablePrevButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerTableInputNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerTableTotalPage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customerTableNextButton)))
+                        .addComponent(customerTableNextButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(customerFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filler4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(211, 211, 211)
+                        .addComponent(BTNstopCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerFilterButton)
-                    .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BTNstopCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(customerFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filler4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerTableNextButton)
@@ -383,10 +432,13 @@ public class MainView extends javax.swing.JFrame {
 
         jPanel2.setName("borrowTab"); // NOI18N
 
+        borrowFilterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view-icon.png"))); // NOI18N
         borrowFilterButton.setText("Volby zobrazení");
         borrowFilterButton.setName("filter"); // NOI18N
 
         jLabel3.setText("Rychlý filtr:");
+
+        INPborrowFilter.setName("borrowFilter"); // NOI18N
 
         borrowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -396,13 +448,15 @@ public class MainView extends javax.swing.JFrame {
 
             }
         ));
+        borrowTable.setName("borrowTable"); // NOI18N
         jScrollPane3.setViewportView(borrowTable);
 
         borrowPrevButton.setText("<");
         borrowPrevButton.setName("prevPage"); // NOI18N
 
-        borrowInputPageNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        borrowInputPageNumber.setText("1");
+        INPborrowPageNumber.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        INPborrowPageNumber.setText("1");
+        INPborrowPageNumber.setName("borrowPageNumber"); // NOI18N
 
         borrowTotalPageNumber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         borrowTotalPageNumber.setText("/ 5");
@@ -410,13 +464,14 @@ public class MainView extends javax.swing.JFrame {
         borrowNextButton.setText(">");
         borrowNextButton.setName("nextPage"); // NOI18N
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Příkaz:");
+        BTNstopBorrowSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel_icon.png"))); // NOI18N
+        BTNstopBorrowSearch.setText("Zrušit hledání");
+        BTNstopBorrowSearch.setToolTipText("Přeruší vyhledávání");
+        BTNstopBorrowSearch.setFocusable(false);
+        BTNstopBorrowSearch.setMaximumSize(new java.awt.Dimension(121, 30));
+        BTNstopBorrowSearch.setMinimumSize(new java.awt.Dimension(121, 30));
+        BTNstopBorrowSearch.setName("stopSearch"); // NOI18N
+        BTNstopBorrowSearch.setPreferredSize(new java.awt.Dimension(121, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -425,54 +480,53 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(borrowFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(borrowFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(211, 211, 211)
+                        .addComponent(BTNstopBorrowSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(INPborrowFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(borrowPrevButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(borrowInputPageNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPborrowPageNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(borrowTotalPageNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(borrowNextButton))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4)))
+                        .addComponent(borrowNextButton)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(borrowFilterButton)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filler5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(borrowFilterButton)
+                        .addComponent(BTNstopBorrowSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(INPborrowFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrowNextButton)
                     .addComponent(borrowPrevButton)
                     .addComponent(borrowTotalPageNumber)
-                    .addComponent(borrowInputPageNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(INPborrowPageNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
         );
 
         TabPanel.addTab("Půjčky", jPanel2);
 
-        jPanel3.setName("announcementTab"); // NOI18N
+        jPanel3.setName("notificationTab"); // NOI18N
 
         filterButton2.setText("Volby zobrazení");
 
@@ -515,7 +569,7 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(filterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -546,7 +600,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookTableNextButton2)
@@ -621,7 +675,7 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TabPanel)
+                .addComponent(TabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -635,14 +689,16 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNsearch;
+    private javax.swing.JButton BTNstopBookSearch;
+    private javax.swing.JButton BTNstopBorrowSearch;
+    private javax.swing.JButton BTNstopCustomerSearch;
+    private javax.swing.JTextField INPborrowFilter;
+    private javax.swing.JTextField INPborrowPageNumber;
     private javax.swing.JButton QRCodeButton;
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JButton barcodeButton;
@@ -656,7 +712,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel bookTableTotalPage;
     private javax.swing.JLabel bookTableTotalPage2;
     private javax.swing.JButton borrowFilterButton;
-    private javax.swing.JTextField borrowInputPageNumber;
     private javax.swing.JButton borrowNextButton;
     private javax.swing.JButton borrowPrevButton;
     private javax.swing.JTable borrowTable;
@@ -674,11 +729,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton customerTablePrevButton;
     private javax.swing.JLabel customerTableTotalPage;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
     private javax.swing.JButton filterButton;
     private javax.swing.JButton filterButton2;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JFrame jFrame1;
@@ -686,7 +743,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
@@ -709,8 +765,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JToolBar jToolBar1;
@@ -741,13 +795,16 @@ public class MainView extends javax.swing.JFrame {
     /*
      * MENU ITEMS
      */
-    
     public JButton getConnectionButton() {
         return connectionButton;
     }
 
     public JButton getNewItemButton() {
         return newItemButton;
+    }
+
+    public JButton getBTNsearch() {
+        return BTNsearch;
     }
 
     public JMenuItem getNewCustomerMenuItem() {
@@ -821,7 +878,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public JTextField getBorrowInputPageNumber() {
-        return borrowInputPageNumber;
+        return INPborrowPageNumber;
     }
 
     public JButton getBorrowNextButton() {
@@ -842,6 +899,18 @@ public class MainView extends javax.swing.JFrame {
 
     public JTextField getBookFilterInput() {
         return bookFilterInput;
+    }
+
+    public JButton getBTNstopBorrowSearch() {
+        return BTNstopBorrowSearch;
+    }
+
+    public JTextField getINPborrowFilter() {
+        return INPborrowFilter;
+    }
+
+    public JTextField getINPborrowPageNumber() {
+        return INPborrowPageNumber;
     }
 
     /*
@@ -874,4 +943,13 @@ public class MainView extends javax.swing.JFrame {
     public JLabel getCustomerTableTotalPage() {
         return customerTableTotalPage;
     }
+
+    public JButton getBTNstopBookSearch() {
+        return BTNstopBookSearch;
+    }
+
+    public JButton getBTNstopCustomerSearch() {
+        return BTNstopCustomerSearch;
+    }
+    
 }

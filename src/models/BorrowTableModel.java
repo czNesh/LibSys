@@ -5,11 +5,13 @@
 package models;
 
 import helpers.DateFormater;
+import io.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Book;
 import models.entity.Borrow;
+import models.entity.Customer;
 import services.BorrowService;
 
 /**
@@ -19,18 +21,18 @@ import services.BorrowService;
 public class BorrowTableModel extends AbstractTableModel {
 
     List<Borrow> borrowList;
-    // View filter settings
-    boolean showCustomer = true;
-    boolean showItem = true;
-    boolean showFrom = true;
-    boolean showTo = true;
-    boolean showReturned = true;
-    boolean showLibrarian = false;
-    //
-    boolean userGrouping = true;
-    // Paging settings
-    int page = 1;
-    int maxRows = 50;
+    boolean showCustomer;
+    boolean showItems;
+    boolean showFrom;
+    boolean showTo;
+    boolean showReturned;
+    boolean showLibrarian;
+    // Nastavení dotazu
+    private int page = 1;
+    private int maxRows = Configuration.getInstance().getMaxBorrowRowsCount();
+    private List<String> resultOfSearch = new ArrayList<>();
+    private String filterString = "";
+    private boolean isSearching = false;
 
     public BorrowTableModel() {
         super();
@@ -39,12 +41,39 @@ public class BorrowTableModel extends AbstractTableModel {
 
     public BorrowTableModel(List<Borrow> in) {
         super();
+        setParams();
         borrowList = in;
+    }
+
+    private void setParams() {
+        //Nastavení viditelnosti    
+        showCustomer = Configuration.getInstance().isBorrowShowCustomer();
+        showItems = Configuration.getInstance().isBorrowShowItems();
+        showFrom = Configuration.getInstance().isBorrowShowFrom();
+        showTo = Configuration.getInstance().isBorrowShowTo();
+        showReturned = Configuration.getInstance().isBorrowShowReturned();
+        showLibrarian = Configuration.getInstance().isBorrowShowLibrarian();
+
+        maxRows = Configuration.getInstance().getMaxBorrowRowsCount();
+        BorrowService.getInstance().setLimit(maxRows);
+        BorrowService.getInstance().setStart((page - 1) * maxRows);
+        BorrowService.getInstance().setOrderType(Configuration.getInstance().getBorrowOrderType());
+        BorrowService.getInstance().setOrderBy(Configuration.getInstance().getBorrowOrderBy());
+        if (!Configuration.getInstance().isDeletedItemVisible()) {
+            BorrowService.getInstance().getParameters().put("deleted", false);
+            BorrowService.getInstance().setCondition("deleted = :deleted");
+        }
+        if (!filterString.isEmpty()) {
+            BorrowService.getInstance().setExactMatch("t.id", BorrowService.getInstance().criteriaSearch(filterString));
+        }
+        if (!resultOfSearch.isEmpty()) {
+            BorrowService.getInstance().setExactMatch("t.id", resultOfSearch);
+        }
     }
 
     @Override
     public int getRowCount() {
-        return borrowList.size();
+        return (borrowList == null) ? 0 : borrowList.size();
     }
 
     @Override
@@ -54,7 +83,7 @@ public class BorrowTableModel extends AbstractTableModel {
         if (showCustomer) {
             i++;
         }
-        if (showItem) {
+        if (showItems) {
             i++;
         }
         if (showFrom) {
@@ -80,7 +109,7 @@ public class BorrowTableModel extends AbstractTableModel {
         if (showCustomer) {
             tempValues.add(b.getCustomer().getFullName());
         }
-        if (showItem) {
+        if (showItems) {
             StringBuilder books = new StringBuilder();
             for (Book temp : BorrowService.getInstance().getBooksOfBorrow(b.getBorrowCode())) {
                 if (books.length() > 0) {
@@ -118,7 +147,7 @@ public class BorrowTableModel extends AbstractTableModel {
         if (showCustomer) {
             tempValuesColumnNames.add("Zákazník");
         }
-        if (showItem) {
+        if (showItems) {
             tempValuesColumnNames.add("Kniha");
         }
         if (showFrom) {
@@ -139,7 +168,13 @@ public class BorrowTableModel extends AbstractTableModel {
     }
 
     public void updateData() {
-        borrowList = BorrowService.getInstance().getBorrows();
+        setParams();
+        if (isSearching && resultOfSearch.isEmpty()) {
+            borrowList.clear();
+            isSearching = false;
+        } else {
+            borrowList = BorrowService.getInstance().getBorrows();
+        }
     }
 
     public int getPage() {
@@ -186,7 +221,7 @@ public class BorrowTableModel extends AbstractTableModel {
     }
 
     public int getTotalPageCount() {
-        BorrowService.getInstance().setGroupBy("borrowCode");
+        setParams();
         return (int) Math.round((BorrowService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
     }
 
@@ -194,21 +229,25 @@ public class BorrowTableModel extends AbstractTableModel {
         return borrowList.get(index);
     }
 
-    public void setViewSettings(boolean showCustomer, boolean showItem, boolean showFrom, boolean showTo, boolean showReturned, boolean showLibrarian, boolean userGrouping) {
-        this.showCustomer = showCustomer;
-        this.showItem = showItem;
-        this.showFrom = showFrom;
-        this.showTo = showTo;
-        this.showReturned = showReturned;
-        this.showLibrarian = showLibrarian;
-        this.userGrouping = userGrouping;
+    public void applyFilter(String filterString) {
+        this.filterString = filterString;
     }
-    
-//        public ArrayList<Borrow> getRows(int[] selectedRows) {
-//        ArrayList<Borrow> list = new ArrayList<>();
-//        for (int i = selectedRows.length - 1; i > 0; i--) {
-//            list.add(itemList.get(selectedRows[i]));
-//        }
 
-  //  }
+    public List<Borrow> getBorrows(int[] selectedRows) {
+        List<Borrow> list = new ArrayList<>();
+        for (int i = 0; i < selectedRows.length; i++) {
+            list.add(borrowList.get(selectedRows[i]));
+        }
+        return list;
+    }
+
+    public void stopSearch() {
+        resultOfSearch.clear();
+        isSearching = false;
+    }
+
+    public void search(String borrowCode, String customer, String librarian, String item, String from, String to, int returned) {
+        resultOfSearch = BorrowService.getInstance().extendedCriteriaSearch(borrowCode, customer, librarian, item, from, to, returned);
+
+    }
 }

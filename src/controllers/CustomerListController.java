@@ -149,32 +149,30 @@ public class CustomerListController extends BaseController {
                     break;
 
                 case "filter":
-                    filterDialog.getFilterOKButton().addActionListener(this);
+                    filterDialog.getBTNok().addActionListener(this);
                     filterDialog.setLocationRelativeTo(null);
                     filterDialog.setVisible(true);
                     break;
 
                 case "filterConfirmed":
-                    tableModel.setVisibility(
-                            filterDialog.getSSNCheckBox().isSelected(),
-                            filterDialog.getNameCheckBox().isSelected(),
-                            filterDialog.getStreetCheckBox().isSelected(),
-                            filterDialog.getCityCheckBox().isSelected(),
-                            filterDialog.getCountryCheckBox().isSelected(),
-                            filterDialog.getEmailCheckBox().isSelected(),
-                            filterDialog.getPhoneCheckBox().isSelected(),
-                            filterDialog.getNotesCheckBox().isSelected());
+//                    tableModel.setVisibility(
+//                            filterDialog.getINPssn().isSelected(),
+//                            filterDialog.getINPname().isSelected(),
+//                            filterDialog.getINPadress().isSelected(),
+//                            filterDialog.getINPemail().isSelected(),
+//                            filterDialog.getINPphone().isSelected(),
+//                            filterDialog.getINPnotes().isSelected());
                     tableModel.fireTableStructureChanged();
                     filterDialog.setVisible(false);
                     break;
 
                 case "search":
-                    tableModel.setFilter(
-                            dialog.getInputSSN().getText().trim(),
-                            dialog.getInputFName().getText().trim(),
-                            dialog.getInputLName().getText().trim(),
-                            dialog.getInputEmail().getText().trim(),
-                            dialog.getInputPhone().getText().trim());
+//                    tableModel.setFilter(
+//                            dialog.getInputSSN().getText().trim(),
+//                            dialog.getInputFName().getText().trim(),
+//                            dialog.getInputLName().getText().trim(),
+//                            dialog.getInputEmail().getText().trim(),
+//                            dialog.getInputPhone().getText().trim());
                     tableModel.fireTableDataChanged();
                     break;
                 case "nextPage":

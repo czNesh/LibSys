@@ -4,12 +4,14 @@
  */
 package controllers;
 
+import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import models.CustomerTableModel;
@@ -17,6 +19,7 @@ import models.entity.Customer;
 import services.BorrowService;
 import services.CustomerService;
 import views.CustomerFilterDialog;
+import views.CustomerSearchDialog;
 import views.MainView;
 
 /**
@@ -27,33 +30,59 @@ public class CustomerTabController {
 
     MainView mainView;
     CustomerTableModel tableModel;
-    CustomerFilterDialog filterDialog;
+    CustomerFilterDialog filter;
+    Map<String, String> orderType = CustomerService.getInstance().getOrderTypeMap();
+    Map<String, String> orderBy = CustomerService.getInstance().getOrderByMap();
+    CustomerSearchDialog csd;
 
     CustomerTabController(MainView mainView) {
+        // MainView
         this.mainView = mainView;
 
+        //TableModel
         tableModel = new CustomerTableModel();
         mainView.getCustomerTable().setModel(tableModel);
 
-        filterDialog = new CustomerFilterDialog(null, true);
+        //FilterDialog
+        filter = new CustomerFilterDialog(null, true);
+        setFilterData();
 
+        // Customer Search Dialog
+        csd = new CustomerSearchDialog(mainView, true);
+
+        // INIT LISTENERS
         initListeners();
+
+        //updateView
         updateView();
     }
 
     private void initListeners() {
+        // MouseListener
         CustomerTabMouseListener m = new CustomerTabMouseListener();
         mainView.getCustomerTable().addMouseListener(m);
 
+        //ActionListener
         CustomerTabActionListener a = new CustomerTabActionListener();
-        mainView.getCustomerFilterButton().addActionListener(a);
         mainView.getCustomerTableNextButton().addActionListener(a);
         mainView.getCustomerTablePrevButton().addActionListener(a);
+        mainView.getCustomerFilterButton().addActionListener(a);
+        mainView.getBTNsearch().addActionListener(a);
+        mainView.getBTNstopCustomerSearch().addActionListener(a);
 
+        //KeyListener
         CustomerTabKeyListener k = new CustomerTabKeyListener();
         mainView.getCustomerTableInputNumber().addKeyListener(k);
         mainView.getCustomerFilterInput().addKeyListener(k);
         mainView.getCustomerTable().addKeyListener(k);
+
+        //FILTER listener 
+        filter.getBTNok().addActionListener(a);
+
+        //SEARCH listener
+        csd.getBTNsearch().addActionListener(a);
+        csd.getBTNcloseSearchDialog().addActionListener(a);
+        csd.getBTNreset().addActionListener(a);
     }
 
     public void updateView() {
@@ -81,6 +110,33 @@ public class CustomerTabController {
         }
     }
 
+    private void setFilterData() {
+        filter.getINPssn().setSelected(Configuration.getInstance().isCustomerShowSSN());
+        filter.getINPname().setSelected(Configuration.getInstance().isCustomerShowName());
+        filter.getINPemail().setSelected(Configuration.getInstance().isCustomerShowEmail());
+        filter.getINPadress().setSelected(Configuration.getInstance().isCustomerShowAdress());
+        filter.getINPphone().setSelected(Configuration.getInstance().isCustomerShowPhone());
+        filter.getINPnotes().setSelected(Configuration.getInstance().isCustomerShowNotes());
+
+        filter.getINPcustomerMaxRowsCount().setValue((int) Configuration.getInstance().getMaxCustomerRowsCount());
+
+        for (Map.Entry<String, String> entry : orderType.entrySet()) {
+            filter.getINPorderType().addItem(entry.getKey());
+            if (entry.getValue().equals(Configuration.getInstance().getCustomerOrderType())) {
+                filter.getINPorderType().setSelectedItem(entry.getKey());
+            }
+        }
+
+        for (Map.Entry<String, String> entry : orderBy.entrySet()) {
+            filter.getINPorderBy().addItem(entry.getKey());
+            if (entry.getValue().equals(Configuration.getInstance().getCustomerOrderBy())) {
+                filter.getINPorderBy().setSelectedItem(entry.getKey());
+            }
+        }
+        
+        updateView();
+    }
+
     private class CustomerTabKeyListener implements KeyListener {
 
         public CustomerTabKeyListener() {
@@ -100,16 +156,16 @@ public class CustomerTabController {
                 case "customerFilter":
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         if (mainView.getCustomerFilterInput().getText().trim().isEmpty()) {
-                            tableModel.resetFilter();
+                            tableModel.applyFilter("");
                         } else {
-                            tableModel.applyFilter(mainView.getBookFilterInput().getText().trim());
+                            tableModel.applyFilter(mainView.getCustomerFilterInput().getText().trim());
                         }
                         updateView();
                     }
                     break;
                 case "customerPageNumber":
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        String in = mainView.getBookTableInputNumber().getText();
+                        String in = mainView.getCustomerTableInputNumber().getText();
                         try {
                             tableModel.setPage(Integer.parseInt(in));
                         } catch (NumberFormatException ex) {
@@ -131,10 +187,8 @@ public class CustomerTabController {
                             } else {
                                 CustomerService.getInstance().delete(c);
                             }
-
                         }
                     }
-
                     break;
 
                 default:
@@ -152,23 +206,66 @@ public class CustomerTabController {
         public void actionPerformed(ActionEvent e) {
             switch (((JComponent) e.getSource()).getName()) {
                 case "filter":
-                    filterDialog.getFilterOKButton().addActionListener(this);
-                    filterDialog.setLocationRelativeTo(null);
-                    filterDialog.setVisible(true);
+                    filter.setLocationRelativeTo(null);
+                    filter.setVisible(true);
                     break;
 
                 case "filterConfirmed":
-                    tableModel.setVisibility(
-                            filterDialog.getSSNCheckBox().isSelected(),
-                            filterDialog.getNameCheckBox().isSelected(),
-                            filterDialog.getStreetCheckBox().isSelected(),
-                            filterDialog.getCityCheckBox().isSelected(),
-                            filterDialog.getCountryCheckBox().isSelected(),
-                            filterDialog.getEmailCheckBox().isSelected(),
-                            filterDialog.getPhoneCheckBox().isSelected(),
-                            filterDialog.getNotesCheckBox().isSelected());
+                    Configuration.getInstance().setCustomerShowSSN(filter.getINPssn().isSelected());
+                    Configuration.getInstance().setCustomerShowName(filter.getINPname().isSelected());
+                    Configuration.getInstance().setCustomerShowEmail(filter.getINPemail().isSelected());
+                    Configuration.getInstance().setCustomerShowPhone(filter.getINPphone().isSelected());
+                    Configuration.getInstance().setCustomerShowAdress(filter.getINPadress().isSelected());
+                    Configuration.getInstance().setCustomerShowNotes(filter.getINPnotes().isSelected());
+                    
+                    Configuration.getInstance().setCustomerOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
+                    Configuration.getInstance().setCustomerOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
+                    Configuration.getInstance().setMaxCustomerRowsCount((int) filter.getINPcustomerMaxRowsCount().getValue());
                     updateView();
-                    filterDialog.setVisible(false);
+                    filter.setVisible(false);
+                    break;
+                case "searchDialog":
+                    if (mainView.getTabPanel().getSelectedIndex() != 1) {
+                        break;
+                    }
+                    csd.setLocationRelativeTo(null);
+                    csd.setVisible(true);
+                    break;
+
+                case "closeSearchDialog":
+                    csd.setVisible(false);
+                    break;
+                case "resetSearchDialog":
+                    csd.getInputSSN().setText("");
+                    csd.getInputFName().setText("");
+                    csd.getInputLName().setText("");
+                    csd.getInputPhone().setText("");
+                    csd.getInputEmail().setText("");
+                    break;
+
+                case "stopSearch":
+                    csd.getInputSSN().setText("");
+                    csd.getInputFName().setText("");
+                    csd.getInputLName().setText("");
+                    csd.getInputPhone().setText("");
+                    csd.getInputEmail().setText("");
+                    tableModel.stopSearch();
+                    updateView();
+                    mainView.getBTNstopCustomerSearch().setVisible(false);
+                    break;
+
+                case "search":
+                    tableModel.search(
+                            csd.getInputSSN().getText().trim(),
+                            csd.getInputFName().getText().trim(),
+                            csd.getInputLName().getText().trim(),
+                            csd.getInputEmail().getText().trim(),
+                            csd.getInputPhone().getText().trim());
+                    updateView();
+                    csd.setVisible(false);
+
+                    mainView.getBTNstopCustomerSearch().setVisible(true);
+
                     break;
                 case "nextPage":
                     tableModel.nextPage();
@@ -181,7 +278,6 @@ public class CustomerTabController {
                 default:
                     break;
             }
-
         }
     }
 
@@ -195,6 +291,7 @@ public class CustomerTabController {
             if (e.getClickCount() == 2) {
                 Customer temp = tableModel.getCustomer(mainView.getCustomerTable().getSelectedRow());
                 CustomerDetailController c = new CustomerDetailController(temp);
+                c.showView();
             }
         }
 

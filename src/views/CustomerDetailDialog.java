@@ -5,6 +5,7 @@
 package views;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -33,49 +34,66 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        closeButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        barcodeButton = new javax.swing.JButton();
-        prntButton = new javax.swing.JButton();
-        qrcodeButton = new javax.swing.JButton();
+        BTNclose = new javax.swing.JButton();
+        BTNedit = new javax.swing.JButton();
+        BTNbarcode = new javax.swing.JButton();
+        BTNprint = new javax.swing.JButton();
+        BTNqrcode = new javax.swing.JButton();
+        BTNdelete = new javax.swing.JButton();
+        BTNrenew = new javax.swing.JButton();
+        BTNrenew.setVisible(false);
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        inputNotes = new javax.swing.JTextArea();
+        INPnotes = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        inputSSN = new javax.swing.JTextField();
-        inputFName = new javax.swing.JTextField();
-        inputAdress = new javax.swing.JTextField();
-        inputPhone = new javax.swing.JTextField();
-        inputEmail = new javax.swing.JTextField();
+        INPssn = new javax.swing.JTextField();
+        INPfirstName = new javax.swing.JTextField();
+        INPstreet = new javax.swing.JTextField();
+        INPphone = new javax.swing.JTextField();
+        INPemail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        inputLName = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        INPlastName = new javax.swing.JTextField();
+        INPcity = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        INPpostcode = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        INPcountry = new javax.swing.JComboBox();
+        panel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        borrowTable = new javax.swing.JTable();
+        TABborrows = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informace o uživateli");
         setMinimumSize(new java.awt.Dimension(752, 547));
 
-        closeButton.setText("Zavřít");
-        closeButton.setName("closeButton"); // NOI18N
+        BTNclose.setText("Zavřít");
+        BTNclose.setName("close"); // NOI18N
 
-        editButton.setText("Upravit");
-        editButton.setName("editButton"); // NOI18N
+        BTNedit.setText("Upravit");
+        BTNedit.setName("edit"); // NOI18N
 
-        barcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PDF417-Java-Barcode.icon.gif"))); // NOI18N
-        barcodeButton.setName("barcodeButton"); // NOI18N
+        BTNbarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PDF417-Java-Barcode.icon.gif"))); // NOI18N
+        BTNbarcode.setName("barcode"); // NOI18N
 
-        prntButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print-icon.png"))); // NOI18N
-        prntButton.setName("printButton"); // NOI18N
+        BTNprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print-icon.png"))); // NOI18N
+        BTNprint.setName("print"); // NOI18N
 
-        qrcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
-        qrcodeButton.setName("qrcodeButton"); // NOI18N
+        BTNqrcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
+        BTNqrcode.setName("qrcode"); // NOI18N
+
+        BTNdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trash-can-delete.png"))); // NOI18N
+        BTNdelete.setToolTipText("Smazat položku");
+        BTNdelete.setName("delete"); // NOI18N
+
+        BTNrenew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check-2-icon.png"))); // NOI18N
+        BTNrenew.setToolTipText("Invenatrizovat položku");
+        BTNrenew.setName("renew"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,53 +102,87 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(barcodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTNprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTNedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTNclose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTNbarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BTNrenew, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(qrcodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(prntButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(editButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTNdelete, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BTNqrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editButton)
+                .addComponent(BTNedit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(closeButton)
-                .addGap(53, 53, 53)
-                .addComponent(prntButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BTNclose)
+                .addGap(18, 18, 18)
+                .addComponent(BTNprint)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(barcodeButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(qrcodeButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(BTNdelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNrenew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTNbarcode, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BTNqrcode, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informace o zákazníkovi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
-        inputNotes.setColumns(20);
-        inputNotes.setRows(5);
-        jScrollPane2.setViewportView(inputNotes);
+        INPnotes.setEditable(false);
+        INPnotes.setBackground(new java.awt.Color(240, 240, 240));
+        INPnotes.setColumns(20);
+        INPnotes.setRows(5);
+        jScrollPane2.setViewportView(INPnotes);
 
         jLabel6.setText("Poznámky:");
 
-        jLabel5.setText("email:");
+        jLabel5.setText("Email:");
 
-        jLabel4.setText("Tel.:");
+        jLabel4.setText("Telefon:");
 
-        jLabel3.setText("Adresa:");
+        jLabel3.setText("Ulice a číslo:");
 
         jLabel2.setText("Jméno:");
 
         jLabel1.setText("SSN:");
 
+        INPssn.setEditable(false);
+
+        INPfirstName.setEditable(false);
+
+        INPstreet.setEditable(false);
+
+        INPphone.setEditable(false);
+
+        INPemail.setEditable(false);
+
         jLabel7.setText("Přijmení:");
+
+        INPlastName.setEditable(false);
+
+        INPcity.setEditable(false);
+
+        jLabel8.setText("Město");
+
+        jLabel9.setText("PSČ:");
+
+        INPpostcode.setEditable(false);
+
+        jLabel10.setText("Země:");
+
+        INPcountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -144,28 +196,34 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
+                            .addComponent(jLabel9)
                             .addComponent(jLabel4))
-                        .addGap(42, 42, 42)
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputPhone)
+                            .addComponent(INPssn)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(inputFName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(INPphone, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(INPpostcode, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(INPstreet, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(INPfirstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(inputLName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(inputSSN, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputAdress, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(INPcity)
+                                    .addComponent(INPlastName)
+                                    .addComponent(INPcountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(INPemail)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                        .addComponent(jLabel6)
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputEmail)
-                            .addComponent(jScrollPane2))))
-                .addGap(15, 15, 15))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,36 +231,41 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(inputSSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPssn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(inputFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(inputLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(INPfirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(INPlastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(inputAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPstreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(INPcity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(INPpostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(INPcountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(inputPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INPemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Výpůjčky uživatele"));
+        panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Výpůjčky uživatele"));
 
-        borrowTable.setModel(new javax.swing.table.DefaultTableModel(
+        TABborrows.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -213,17 +276,17 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(borrowTable);
+        jScrollPane1.setViewportView(TABborrows);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,107 +296,132 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton barcodeButton;
-    private javax.swing.JTable borrowTable;
-    private javax.swing.JButton closeButton;
-    private javax.swing.JButton editButton;
-    private javax.swing.JTextField inputAdress;
-    private javax.swing.JTextField inputEmail;
-    private javax.swing.JTextField inputFName;
-    private javax.swing.JTextField inputLName;
-    private javax.swing.JTextArea inputNotes;
-    private javax.swing.JTextField inputPhone;
-    private javax.swing.JTextField inputSSN;
+    private javax.swing.JButton BTNbarcode;
+    private javax.swing.JButton BTNclose;
+    private javax.swing.JButton BTNdelete;
+    private javax.swing.JButton BTNedit;
+    private javax.swing.JButton BTNprint;
+    private javax.swing.JButton BTNqrcode;
+    private javax.swing.JButton BTNrenew;
+    private javax.swing.JTextField INPcity;
+    private javax.swing.JComboBox INPcountry;
+    private javax.swing.JTextField INPemail;
+    private javax.swing.JTextField INPfirstName;
+    private javax.swing.JTextField INPlastName;
+    private javax.swing.JTextArea INPnotes;
+    private javax.swing.JTextField INPphone;
+    private javax.swing.JTextField INPpostcode;
+    private javax.swing.JTextField INPssn;
+    private javax.swing.JTextField INPstreet;
+    private javax.swing.JTable TABborrows;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton prntButton;
-    private javax.swing.JButton qrcodeButton;
+    private javax.swing.JPanel panel2;
     // End of variables declaration//GEN-END:variables
 
-// GET METHODS
-
-    public JButton getBarcodeButton() {
-        return barcodeButton;
+    public JButton getBTNbarcode() {
+        return BTNbarcode;
     }
 
-    public JTable getBorrowTable() {
-        return borrowTable;
+    public JButton getBTNclose() {
+        return BTNclose;
     }
 
-    public JButton getEditButton() {
-        return editButton;
+    public JButton getBTNedit() {
+        return BTNedit;
     }
 
-    public JTextField getInputAdress() {
-        return inputAdress;
+    public JButton getBTNprint() {
+        return BTNprint;
     }
 
-    public JTextField getInputEmail() {
-        return inputEmail;
+    public JButton getBTNqrcode() {
+        return BTNqrcode;
     }
 
-    public JTextField getInputFName() {
-        return inputFName;
+    public JTextField getINPstreet() {
+        return INPstreet;
     }
 
-    public JTextField getInputLName() {
-        return inputLName;
+    public JTextField getINPcity() {
+        return INPcity;
     }
 
-    public JTextArea getInputNotes() {
-        return inputNotes;
+    public JComboBox getINPcountry() {
+        return INPcountry;
     }
 
-    public JTextField getInputPhone() {
-        return inputPhone;
+    public JTextField getINPemail() {
+        return INPemail;
     }
 
-    public JTextField getInputSSN() {
-        return inputSSN;
+    public JTextField getINPfirstName() {
+        return INPfirstName;
     }
 
-    public JButton getCloseButton() {
-        return closeButton;
+    public JTextField getINPlastName() {
+        return INPlastName;
     }
 
-    public JButton getPrntButton() {
-        return prntButton;
+    public JTextArea getINPnotes() {
+        return INPnotes;
     }
 
-    public JButton getQrcodeButton() {
-        return qrcodeButton;
+    public JTextField getINPphone() {
+        return INPphone;
     }
-    
+
+    public JTextField getINPpostcode() {
+        return INPpostcode;
+    }
+
+    public JTextField getINPssn() {
+        return INPssn;
+    }
+
+    public JTable getTABborrows() {
+        return TABborrows;
+    }
+
+    public JButton getBTNdelete() {
+        return BTNdelete;
+    }
+
+    public JButton getBTNrenew() {
+        return BTNrenew;
+    }
 }

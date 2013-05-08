@@ -14,15 +14,20 @@ import services.SystemUserService;
  * @author eXtreme
  */
 public class LibSysStart {
-
+    
     public static void main(String[] args) {
         try {
-            
+
             AppController c = AppController.getInstance();
             if (Configuration.getInstance().isSkipLogging()) {
                 c.setLoggedUser(SystemUserService.getInstance().getDefaultSystemUser());
                 c.showMainFrame();
             } else {
+                if (SystemUserService.getInstance().isOnlyDefault()) {
+                    Configuration.getInstance().setSkipLogging(true);
+                    c.setLoggedUser(SystemUserService.getInstance().getDefaultSystemUser());
+                    c.showMainFrame();
+                }
                 c.go();
             }
 

@@ -17,6 +17,7 @@ import models.BookTableModel;
 import models.entity.Book;
 import services.BookService;
 import views.BookFilterDialog;
+import views.BookSearchDialog;
 import views.MainView;
 
 /**
@@ -30,6 +31,7 @@ public class BookTabController {
     private BookTableModel tableModel;
     Map<String, String> orderType = BookService.getInstance().getOrderTypeMap();
     Map<String, String> orderBy = BookService.getInstance().getOrderByMap();
+    BookSearchDialog bsd;
 
     public BookTabController(MainView mainView) {
         // MainView
@@ -43,6 +45,9 @@ public class BookTabController {
         filter = new BookFilterDialog(mainView, true);
         setFilterData();
 
+        // Book Search Dialog
+        bsd = new BookSearchDialog(mainView, true);
+
         // INIT LISTENERS
         initListeners();
 
@@ -51,7 +56,7 @@ public class BookTabController {
     }
 
     private void initListeners() {
-        // MouseListeners
+        // MouseListener
         mainView.getCatalogTable().addMouseListener(new BookTabMouseListener());
 
         // ActionListener
@@ -59,6 +64,8 @@ public class BookTabController {
         mainView.getBookTableNextButton().addActionListener(a);
         mainView.getBookTablePrevButton().addActionListener(a);
         mainView.getFilterButton().addActionListener(a);
+        mainView.getBTNsearch().addActionListener(a);
+        mainView.getBTNstopBookSearch().addActionListener(a);
 
         // KeyListener
         BookTabKeyListener b = new BookTabKeyListener();
@@ -67,6 +74,11 @@ public class BookTabController {
 
         // FILTER Listeners
         filter.getOkButton().addActionListener(a);
+
+        // SEARCH Listener
+        bsd.getSearchButton().addActionListener(a);
+        bsd.getBTNcloseSearchDialog().addActionListener(a);
+        bsd.getBTNreset().addActionListener(a);
 
     }
 
@@ -123,8 +135,7 @@ public class BookTabController {
             }
         }
 
-
-        RefreshController.getInstance().refreshBookTab();
+        updateView();
     }
 
     private class BookTabKeyListener implements KeyListener {
@@ -144,7 +155,6 @@ public class BookTabController {
                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                         if (mainView.getBookFilterInput().getText().trim().isEmpty()) {
                             tableModel.applyFilter("");
-                            tableModel.updateData();
                         } else {
                             tableModel.applyFilter(mainView.getBookFilterInput().getText().trim());
                         }
@@ -187,6 +197,52 @@ public class BookTabController {
                 case "filter":
                     filter.setLocationRelativeTo(null);
                     filter.setVisible(true);
+                    break;
+                case "searchDialog":
+                    if (mainView.getTabPanel().getSelectedIndex() != 0) {
+                        break;
+                    }
+                    bsd.setLocationRelativeTo(null);
+                    bsd.setVisible(true);
+                    break;
+
+                case "closeSearchDialog":
+                    bsd.setVisible(false);
+                    break;
+                case "resetSearchDialog":
+                    bsd.getInputAuthor().setText("");
+                    bsd.getInputBarcode().setText("");
+                    bsd.getInputISBN10().setText("");
+                    bsd.getInputISBN13().setText("");
+                    bsd.getInputPublishedYear().setText("");
+                    bsd.getInputTitle().setText("");
+                    break;
+
+                case "stopSearch":
+                    bsd.getInputAuthor().setText("");
+                    bsd.getInputBarcode().setText("");
+                    bsd.getInputISBN10().setText("");
+                    bsd.getInputISBN13().setText("");
+                    bsd.getInputPublishedYear().setText("");
+                    bsd.getInputTitle().setText("");
+                    tableModel.stopSearch();
+                    updateView();
+                    mainView.getBTNstopBookSearch().setVisible(false);
+                    break;
+
+                case "search":
+                    tableModel.search(
+                            bsd.getInputBarcode().getText().trim(),
+                            bsd.getInputTitle().getText().trim(),
+                            bsd.getInputAuthor().getText().trim(),
+                            bsd.getInputISBN10().getText().trim(),
+                            bsd.getInputISBN13().getText().trim(),
+                            bsd.getInputPublishedYear().getText().trim());
+                    updateView();
+                    bsd.setVisible(false);
+
+                    mainView.getBTNstopBookSearch().setVisible(true);
+
                     break;
 
                 case "filterConfirm":

@@ -14,10 +14,13 @@ public class Configuration {
 
     Preferences prefs;
     private static Configuration instance;
+    //Server
+    private static final int DEFAULT_SERVER_PORT = 6789;
+    private static final boolean DEFAULT_SERVER_AUTOSTART = false;
     // Knihy
     private static final int DEFAULT_MAX_BOOK_ROWS_COUNT = 30;
     private static final String DEFAULT_BOOK_ORDER_BY = "id";
-    private static final String DEFAULT_BOOK_ORDER_TYPE = "ASC";
+    private static final String DEFAULT_BOOK_ORDER_TYPE = "DESC";
     private static final boolean DEFAULT_SHOW_TITLE = true;
     private static final boolean DEFAULT_SHOW_AUTHOR = true;
     private static final boolean DEFAULT_SHOW_ISBN10 = false;
@@ -28,23 +31,51 @@ public class Configuration {
     private static final boolean DEFAULT_SHOW_PUBLISHER = false;
     private static final boolean DEFAULT_SHOW_PUBLISHED_YEAR = false;
     private static final boolean DEFAULT_SHOW_PAGE_COUNT = false;
-    private static final boolean DEFAULT_REQUIRE_AUTHOR = false;
-    private static final boolean DEFAULT_REQUIRE_ISBN10 = false;
-    private static final boolean DEFAULT_REQUIRE_ISBN13 = false;
-    private static final boolean DEFAULT_REQUIRE_COUNT = false;
-    private static final boolean DEFAULT_REQUIRE_LOCATION = false;
-    private static final boolean DEFAULT_REQUIRE_LANGUAGE = false;
-    private static final boolean DEFAULT_REQUIRE_PUBLISHER = false;
-    private static final boolean DEFAULT_REQUIRE_PUBLISHED_YEAR = false;
-    private static final boolean DEFAULT_REQUIRE_PAGE_COUNT = false;
-    private static final boolean DEFAULT_REQUIRE_SPONSOR = false;
-    private static final boolean DEFAULT_REQUIRE_GENRE = false;
-    private static final boolean DEFAULT_REQUIRE_ADDED_DATE = false;
-    
+    private static final boolean DEFAULT_REQUIRE_AUTHOR = true;
+    private static final boolean DEFAULT_REQUIRE_ISBN10 = true;
+    private static final boolean DEFAULT_REQUIRE_ISBN13 = true;
+    private static final boolean DEFAULT_REQUIRE_COUNT = true;
+    private static final boolean DEFAULT_REQUIRE_LOCATION = true;
+    private static final boolean DEFAULT_REQUIRE_LANGUAGE = true;
+    private static final boolean DEFAULT_REQUIRE_PUBLISHER = true;
+    private static final boolean DEFAULT_REQUIRE_PUBLISHED_YEAR = true;
+    private static final boolean DEFAULT_REQUIRE_PAGE_COUNT = true;
+    private static final boolean DEFAULT_REQUIRE_SPONSOR = true;
+    private static final boolean DEFAULT_REQUIRE_GENRE = true;
+    private static final boolean DEFAULT_REQUIRE_ADDED_DATE = true;
     //Uživatelé
-    private static final int DEFAULT_MAX_BORROW_ROWS_COUNT = 30;
     private static final int DEFAULT_MAX_CUSTOMER_ROWS_COUNT = 30;
+    private static final String DEFAULT_CUSTOMER_ORDER_BY = "id";
+    private static final String DEFAULT_CUSTOMER_ORDER_TYPE = "DESC";
+    private static final boolean DEFAULT_CUSTOMER_SHOW_SSN = true;
+    private static final boolean DEFAULT_CUSTOMER_SHOW_NAME = true;
+    private static final boolean DEFAULT_CUSTOMER_SHOW_EMAIL = true;
+    private static final boolean DEFAULT_CUSTOMER_SHOW_PHONE = false;
+    private static final boolean DEFAULT_CUSTOMER_SHOW_ADRESS = true;
+    private static final boolean DEFAULT_CUSTOMER_SHOW_NOTES = false;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_FNAME = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_LNAME = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_EMAIL = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_PHONE = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_STREET = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_CITY = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_POSTCODE = true;
+    private static final boolean DEFAULT_CUSTOMER_REQUIRE_COUNTRY = true;
+    //PŮJČKY
+    private static final int DEFAULT_MAX_BORROW_ROWS_COUNT = 30;
+    private static final String DEFAULT_BORROW_ORDER_BY = "id";
+    private static final String DEFAULT_BORROW_ORDER_TYPE = "DESC";
+    private static final boolean DEFAULT_BORROW_SHOW_CUSTOMER = true;
+    private static final boolean DEFAULT_BORROW_SHOW_LIBRARIAN = true;
+    private static final boolean DEFAULT_BORROW_SHOW_FROM = true;
+    private static final boolean DEFAULT_BORROW_SHOW_TO = true;
+    private static final boolean DEFAULT_BORROW_SHOW_ITEMS = true;
+    private static final boolean DEFAULT_BORROW_SHOW_RETURNED = true;
+    
+    //OZNÁMENÍ
     private static final int DEFAULT_MAX_NOTIFICATION_ROWS_COUNT = 30;
+    
+    //ZÁKLADNÍ
     private static final boolean DEFAULT_SHOW_DELETED_ITEMS = false;
     private static final boolean DEFAULT_SKIP_LOGGIN = false;
     private static final String DEFAULT_EMAIL = "hejhape1@ssps.cz";
@@ -63,69 +94,10 @@ public class Configuration {
         prefs = Preferences.userNodeForPackage(this.getClass());
     }
 
-    // Viditelnost smazaných položek
-    public boolean isDeletedItemVisible() {
-        return prefs.getBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED_ITEMS);
-    }
-
-    public void setDeletedItemVisible(boolean in) {
-        prefs.putBoolean("SHOW_DELETED", in);
-    }
-
-    // Přihlašování - on/off
-    public boolean isSkipLogging() {
-        return prefs.getBoolean("SKIP_LOGGING", DEFAULT_SKIP_LOGGIN);
-    }
-
-    public void setSkipLogging(boolean in) {
-        prefs.putBoolean("SKIP_LOGGING", in);
-    }
-
-    // Počet řádků v tabulce - Knihy
-    public int getMaxBookRowsCount() {
-        return prefs.getInt("MAX_BOOK_ROWS", DEFAULT_MAX_BOOK_ROWS_COUNT);
-    }
-
-    public void setMaxBookRowsCount(int in) {
-        prefs.putInt("MAX_BOOK_ROWS", in);
-    }
-
-    // Počet řádků v tabulce - Zákazníci
-    public int getMaxCustomerRowsCount() {
-        return prefs.getInt("MAX_CUSTOMER_ROWS", DEFAULT_MAX_CUSTOMER_ROWS_COUNT);
-    }
-
-    public void setMaxCustomerRowsCount(int in) {
-        prefs.putInt("MAX_CUSTOMER_ROWS", in);
-    }
-
-    // Počet řádků v tabulce - Půjčky
-    public int getMaxBorrowRowsCount() {
-        return prefs.getInt("MAX_BORROW_ROWS", DEFAULT_MAX_BORROW_ROWS_COUNT);
-    }
-
-    public void setMaxBorrowRowsCount(int in) {
-        prefs.putInt("MAX_BORROW_ROWS", in);
-    }
-
-    // Počet řádků v tabulce - Oznámení
-    public int getMaxNotificationRowsCount() {
-        return prefs.getInt("MAX_NOTIFICATION_ROWS", DEFAULT_MAX_NOTIFICATION_ROWS_COUNT);
-    }
-
-    public void setMaxNotificationRowsCount(int in) {
-        prefs.putInt("MAX_NOTIFICATION_ROWS", in);
-    }
-
-    // Defaultní email
-    public String getDefaultEmail() {
-        return prefs.get("DEFAULT_EMAIL", DEFAULT_EMAIL);
-    }
-
-    public void setDefaultEmail(String in) {
-        prefs.put("DEFAULT_EMAIL", in);
-    }
-
+    /*
+     * RESET NASTAVENI
+     * 
+     */
     public void setDefaultValues() {
         prefs.putInt("MAX_BOOK_ROWS", DEFAULT_MAX_BOOK_ROWS_COUNT);
         prefs.putInt("MAX_BORROW_ROWS", DEFAULT_MAX_BORROW_ROWS_COUNT);
@@ -137,12 +109,89 @@ public class Configuration {
         prefs.put("BOOK_ORDER_BY", DEFAULT_BOOK_ORDER_BY);
     }
 
+    /*
+     * Nastavení pro LibSys server
+     * autostart / port
+     */
+    public int getServerPort() {
+        return prefs.getInt("SERVER_PORT", DEFAULT_SERVER_PORT);
+    }
+
+    public void setServerPort(int in) {
+        prefs.putInt("SERVER_PORT", in);
+    }
+
+    public boolean isServerAutoStart() {
+        return prefs.getBoolean("SERVER_AUTOSTART", DEFAULT_SERVER_AUTOSTART);
+    }
+
+    public void setServerAutoStart(boolean in) {
+        prefs.putBoolean("SERVER_AUTOSTART", in);
+    }
+
+
+    /*
+     * Obecná nastavení
+     * Vypnutí loginu / Zobrazovat smazané položky / defaultní email / Workspace
+     */
+    public boolean isSkipLogging() {
+        return prefs.getBoolean("SKIP_LOGGING", DEFAULT_SKIP_LOGGIN);
+    }
+
+    public void setSkipLogging(boolean in) {
+        prefs.putBoolean("SKIP_LOGGING", in);
+    }
+
+    public boolean isDeletedItemVisible() {
+        return prefs.getBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED_ITEMS);
+    }
+
+    public void setDeletedItemVisible(boolean in) {
+        prefs.putBoolean("SHOW_DELETED", in);
+    }
+
+    public String getDefaultEmail() {
+        return prefs.get("DEFAULT_EMAIL", DEFAULT_EMAIL);
+    }
+
+    public void setDefaultEmail(String in) {
+        prefs.put("DEFAULT_EMAIL", in);
+    }
+
+    public void setWorkcpace(String in) {
+        prefs.put("WORKSPACE", in);
+    }
+
+    public String getWorkspace() {
+        return prefs.get("WORKSPACE", DEFAULT_WORKSPACE);
+    }
+
+    /*
+     * Nastavení pro knihy
+     * zobrazování položek / povinné položky / počet řádků / řazení
+     */
+    public int getMaxBookRowsCount() {
+        return prefs.getInt("MAX_BOOK_ROWS", DEFAULT_MAX_BOOK_ROWS_COUNT);
+    }
+
+    public void setMaxBookRowsCount(int in) {
+        prefs.putInt("MAX_BOOK_ROWS", in);
+    }
+
     public String getBookOrderBy() {
         return prefs.get("BOOK_ORDER_BY", DEFAULT_BOOK_ORDER_BY);
     }
 
     public void setBookOrderBy(String in) {
         prefs.put("BOOK_ORDER_BY", in);
+    }
+
+    public void setBookOrderType(String in) {
+        prefs.put("BOOK_ORDER_TYPE", in);
+    }
+
+    public String getBookOrderType() {
+        return prefs.get("BOOK_ORDER_TYPE", DEFAULT_BOOK_ORDER_TYPE);
     }
 
     public void setShowAuthor(boolean in) {
@@ -321,21 +370,231 @@ public class Configuration {
         return prefs.getBoolean("REQUIRE_GENRE", DEFAULT_REQUIRE_GENRE);
     }
 
-    public void setBookOrderType(String in) {
-        prefs.put("BOOK_ORDER_TYPE", in);
+    /*
+     * Nastavení pro zákazníky
+     * zobrazování položek / povinné položky / počet řádků / řazení
+     */
+    public int getMaxCustomerRowsCount() {
+        return prefs.getInt("MAX_CUSTOMER_ROWS", DEFAULT_MAX_CUSTOMER_ROWS_COUNT);
     }
 
-    public String getBookOrderType() {
-        return prefs.get("BOOK_ORDER_TYPE", DEFAULT_BOOK_ORDER_TYPE);
+    public void setMaxCustomerRowsCount(int in) {
+        prefs.putInt("MAX_CUSTOMER_ROWS", in);
     }
 
-    public void setWorkcpace(String in){
-        prefs.put("WORKSPACE", in);
+    public String getCustomerOrderBy() {
+        return prefs.get("CUSTOMER_ORDER_BY", DEFAULT_CUSTOMER_ORDER_BY);
     }
-    
-    public String getWorkspace() {
-        return prefs.get("WORKSPACE", DEFAULT_WORKSPACE);
+
+    public void setCustomerOrderBy(String in) {
+        prefs.put("CUSTOMER_ORDER_BY", in);
     }
-    
-    
+
+    public String getCustomerOrderType() {
+        return prefs.get("CUSTOMER_ORDER_TYPE", DEFAULT_CUSTOMER_ORDER_TYPE);
+    }
+
+    public void setCustomerOrderType(String in) {
+        prefs.put("CUSTOMER_ORDER_TYPE", in);
+    }
+
+    public boolean isCustomerShowSSN() {
+        return prefs.getBoolean("SHOW_CUSTOMER_SSN", DEFAULT_CUSTOMER_SHOW_SSN);
+    }
+
+    public void setCustomerShowSSN(boolean in) {
+        prefs.putBoolean("SHOW_CUSTOMER_SSN", in);
+    }
+
+    public boolean isCustomerShowName() {
+        return prefs.getBoolean("SHOW_CUSTOMER_NAME", DEFAULT_CUSTOMER_SHOW_NAME);
+    }
+
+    public void setCustomerShowName(boolean in) {
+        prefs.putBoolean("SHOW_CUSTOMER_NAME", in);
+    }
+
+    public boolean isCustomerShowEmail() {
+        return prefs.getBoolean("SHOW_CUSTOMER_EMAIL", DEFAULT_CUSTOMER_SHOW_EMAIL);
+    }
+
+    public void setCustomerShowEmail(boolean in) {
+        prefs.putBoolean("SHOW_CUSTOMER_EMAIL", in);
+    }
+
+    public void setCustomerShowPhone(boolean in) {
+        prefs.putBoolean("SHOW_CUSTOMER_PHONE", in);
+    }
+
+    public boolean isCustomerShowPhone() {
+        return prefs.getBoolean("SHOW_CUSTOMER_PHONE", DEFAULT_CUSTOMER_SHOW_PHONE);
+    }
+
+    public void setCustomerShowAdress(boolean in) {
+        prefs.putBoolean("SHOW_CUSTOMER_ADRESS", in);
+    }
+
+    public boolean isCustomerShowAdress() {
+        return prefs.getBoolean("SHOW_CUSTOMER_ADRESS", DEFAULT_CUSTOMER_SHOW_ADRESS);
+    }
+
+    public void setCustomerShowNotes(boolean in) {
+        prefs.putBoolean("SHOW_CUSTOMER_NOTES", in);
+    }
+
+    public boolean isCustomerShowNotes() {
+        return prefs.getBoolean("SHOW_CUSTOMER_NOTES", DEFAULT_CUSTOMER_SHOW_NOTES);
+    }
+
+    public void setCustomerRequireFName(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_FNAME", in);
+    }
+
+    public boolean isCustomerRequireFName() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_FNAME", DEFAULT_CUSTOMER_REQUIRE_FNAME);
+    }
+
+    public void setCustomerRequireLName(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_LNAME", in);
+    }
+
+    public boolean isCustomerRequireLName() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_LNAME", DEFAULT_CUSTOMER_REQUIRE_LNAME);
+    }
+
+    public void setCustomerRequirePhone(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_PHONE", in);
+    }
+
+    public boolean isCustomerRequirePhone() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_PHONE", DEFAULT_CUSTOMER_REQUIRE_PHONE);
+    }
+
+    public void setCustomerRequireEmail(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_EMAIL", in);
+    }
+
+    public boolean isCustomerRequireEmail() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_EMAIL", DEFAULT_CUSTOMER_REQUIRE_EMAIL);
+    }
+
+    public void setCustomerRequirePostcode(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_POSTCODE", in);
+    }
+
+    public boolean isCustomerRequirePostcode() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_POSTCODE", DEFAULT_CUSTOMER_REQUIRE_POSTCODE);
+    }
+
+    public void setCustomerRequireCity(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_CITY", in);
+    }
+
+    public boolean isCustomerRequireCity() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_CITY", DEFAULT_CUSTOMER_REQUIRE_CITY);
+    }
+
+    public void setCustomerRequireStreet(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_STREET", in);
+    }
+
+    public boolean isCustomerRequireStreet() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_STREET", DEFAULT_CUSTOMER_REQUIRE_STREET);
+    }
+
+    public void setCustomerRequireCountry(boolean in) {
+        prefs.putBoolean("REQUIRE_CUSTOMER_COUNTRY", in);
+    }
+
+    public boolean isCustomerRequireCountry() {
+        return prefs.getBoolean("REQUIRE_CUSTOMER_COUNTRY", DEFAULT_CUSTOMER_REQUIRE_COUNTRY);
+    }
+    /*
+     * Nastavení pro půjčky
+     * zobrazování položek / povinné položky / počet řádků / řazení
+     */
+
+    public int getMaxBorrowRowsCount() {
+        return prefs.getInt("MAX_BORROW_ROWS", DEFAULT_MAX_BORROW_ROWS_COUNT);
+    }
+
+    public void setMaxBorrowRowsCount(int in) {
+        prefs.putInt("MAX_BORROW_ROWS", in);
+    }
+
+    public String getBorrowOrderBy() {
+        return prefs.get("BORROW_ORDER_BY", DEFAULT_BORROW_ORDER_BY);
+    }
+
+    public void setBorrowOrderBy(String in) {
+        prefs.put("BORROW_ORDER_BY", in);
+    }
+
+    public String getBorrowOrderType() {
+        return prefs.get("BORROW_ORDER_TYPE", DEFAULT_BORROW_ORDER_TYPE);
+    }
+
+    public void setBorrowOrderType(String in) {
+        prefs.put("BORROW_ORDER_TYPE", in);
+    }
+
+    public boolean isBorrowShowCustomer() {
+        return prefs.getBoolean("SHOW_BORROW_CUSTOMER", DEFAULT_BORROW_SHOW_CUSTOMER);
+    }
+
+    public void setBorrowShowCustomer(boolean in) {
+        prefs.putBoolean("SHOW_BORROW_CUSTOMER", in);
+    }
+
+    public boolean isBorrowShowLibrarian() {
+        return prefs.getBoolean("SHOW_BORROW_LIBRARIAN", DEFAULT_BORROW_SHOW_LIBRARIAN);
+    }
+
+    public void setBorrowShowLibrarian(boolean in) {
+        prefs.putBoolean("SHOW_BORROW_LIBRARIAN", in);
+    }
+
+    public boolean isBorrowShowFrom() {
+        return prefs.getBoolean("SHOW_BORROW_FROM", DEFAULT_BORROW_SHOW_FROM);
+    }
+
+    public void setBorrowShowFrom(boolean in) {
+        prefs.putBoolean("SHOW_BORROW_FROM", in);
+    }
+
+    public void setBorrowShowTo(boolean in) {
+        prefs.putBoolean("SHOW_BORROW_TO", in);
+    }
+
+    public boolean isBorrowShowTo() {
+        return prefs.getBoolean("SHOW_BORROW_TO", DEFAULT_BORROW_SHOW_TO);
+    }
+
+    public void setBorrowShowItems(boolean in) {
+        prefs.putBoolean("SHOW_BORROW_ITEMS", in);
+    }
+
+    public boolean isBorrowShowItems() {
+        return prefs.getBoolean("SHOW_BORROW_ITEMS", DEFAULT_BORROW_SHOW_ITEMS);
+    }
+
+    public void setBorrowShowReturned(boolean in) {
+        prefs.putBoolean("SHOW_BORROW_RETURNED", in);
+    }
+
+    public boolean isBorrowShowReturned() {
+        return prefs.getBoolean("SHOW_BORROW_RETURNED", DEFAULT_BORROW_SHOW_RETURNED);
+    }
+
+    /*
+     * Nastavení pro oznámení
+     * zobrazování položek / povinné položky / počet řádků / řazení
+     */
+    public int getMaxNotificationRowsCount() {
+        return prefs.getInt("MAX_NOTIFICATION_ROWS", DEFAULT_MAX_NOTIFICATION_ROWS_COUNT);
+    }
+
+    public void setMaxNotificationRowsCount(int in) {
+        prefs.putInt("MAX_NOTIFICATION_ROWS", in);
+    }
 }

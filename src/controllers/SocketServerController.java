@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import io.Configuration;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,8 +32,6 @@ public class SocketServerController extends BaseController {
         }
         return instance;
     }
-    
-
 
     private SocketServerController() {
         dialog = new SocketServerDialog(null, false);
@@ -66,7 +65,7 @@ public class SocketServerController extends BaseController {
             dialog.getServerStatus().setText("SERVER ONLINE");
             dialog.getServerStatus().setForeground(Color.green);
             dialog.getServerSwitchButton().setText("Vypnout Server");
-            logMessage("Server naslouchá na portu " + String.valueOf(s.getPort()));
+            logMessage("Server naslouchá na portu " + String.valueOf(Configuration.getInstance().getServerPort()));
             isServerRunning = true;
 
         } else {

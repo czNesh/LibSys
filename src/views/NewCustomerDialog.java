@@ -71,7 +71,6 @@ public class NewCustomerDialog extends javax.swing.JDialog {
 
         jLabel7.setText("Telefon:");
 
-        inputFirstName.setBackground(new java.awt.Color(204, 255, 255));
         inputFirstName.setToolTipText("Vložte jméno a přijmení. Lze vložit i více jmen");
         inputFirstName.setName(""); // NOI18N
 
@@ -89,7 +88,6 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         inputCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         inputCountry.setToolTipText("Vyberte jednu ze zemí");
 
-        inputEmail.setBackground(new java.awt.Color(204, 255, 255));
         inputEmail.setToolTipText("Vložte email");
 
         inputPhone.setToolTipText("Vložte telefonní čislo, včetně předvolby");
@@ -109,8 +107,6 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(inputNotes);
 
         jLabel9.setText("Příijmení:");
-
-        inputLastName.setBackground(new java.awt.Color(204, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

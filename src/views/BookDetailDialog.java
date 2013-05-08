@@ -56,6 +56,8 @@ public class BookDetailDialog extends javax.swing.JDialog {
         BTNqrcode = new javax.swing.JButton();
         BTNprint = new javax.swing.JButton();
         BTNdelete = new javax.swing.JButton();
+        BTNdelete.setVisible(false);
+        BTNrenew = new javax.swing.JButton();
         BTNcheckItem = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -90,6 +92,9 @@ public class BookDetailDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informace o knize");
+        setMaximumSize(new java.awt.Dimension(1080, 650));
+        setMinimumSize(new java.awt.Dimension(840, 650));
+        setPreferredSize(new java.awt.Dimension(840, 650));
         setResizable(false);
 
         infoThumbnailImage.setBorder(javax.swing.BorderFactory.createTitledBorder("Náhled"));
@@ -172,9 +177,18 @@ public class BookDetailDialog extends javax.swing.JDialog {
         BTNdelete.setToolTipText("Smazat položku");
         BTNdelete.setName("delete"); // NOI18N
 
-        BTNcheckItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check-2-icon.png"))); // NOI18N
-        BTNcheckItem.setToolTipText("Invenatrizovat položku");
+        BTNrenew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check-2-icon.png"))); // NOI18N
+        BTNrenew.setToolTipText("Obnovit položku");
+        BTNrenew.setName("renew"); // NOI18N
+
+        BTNcheckItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/check-icon.png"))); // NOI18N
+        BTNcheckItem.setToolTipText("Inventura");
         BTNcheckItem.setName("checkItem"); // NOI18N
+        BTNcheckItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNcheckItemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -187,13 +201,16 @@ public class BookDetailDialog extends javax.swing.JDialog {
                     .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BTNqrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BTNcheckItem, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(BTNrenew, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(BTNdelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(BTNbarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BTNbarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BTNcheckItem, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -209,10 +226,12 @@ public class BookDetailDialog extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTNqrcode, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BTNbarcode, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNcheckItem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BTNcheckItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BTNdelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BTNdelete)
+                    .addComponent(BTNrenew))
                 .addContainerGap())
         );
 
@@ -241,6 +260,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
         infoGenre.setEditable(false);
         infoGenre.setMaximumSize(new java.awt.Dimension(312, 14));
         infoGenre.setMinimumSize(new java.awt.Dimension(312, 14));
+        infoGenre.setName("genres"); // NOI18N
         infoGenre.setPreferredSize(new java.awt.Dimension(312, 20));
 
         infoISBN10.setEditable(false);
@@ -512,6 +532,11 @@ public class BookDetailDialog extends javax.swing.JDialog {
     private void INPselectTargetBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPselectTargetBookActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_INPselectTargetBookActionPerformed
+
+    private void BTNcheckItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNcheckItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNcheckItemActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNaddAuthor;
     private javax.swing.JButton BTNbarcode;
@@ -520,6 +545,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
     private javax.swing.JButton BTNprint;
     private javax.swing.JButton BTNqrcode;
     private javax.swing.JButton BTNremoveAuthors;
+    private javax.swing.JButton BTNrenew;
     private javax.swing.JButton BTNsetPublishedYear;
     private javax.swing.JComboBox INPselectTargetBook;
     private javax.swing.JButton closeButton;
@@ -659,10 +685,6 @@ public class BookDetailDialog extends javax.swing.JDialog {
         return BTNsetPublishedYear;
     }
 
-    public JButton getBTNcheckItem() {
-        return BTNcheckItem;
-    }
-
     public JButton getBTNbarcode() {
         return BTNbarcode;
     }
@@ -674,5 +696,12 @@ public class BookDetailDialog extends javax.swing.JDialog {
     public JButton getBTNprint() {
         return BTNprint;
     }
-    
+
+    public JButton getBTNcheckItem() {
+        return BTNcheckItem;
+    }
+
+    public JButton getBTNrenew() {
+        return BTNrenew;
+    }
 }

@@ -212,21 +212,66 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         openSession();
         Session s = getSession();
         Criteria c = s.createCriteria(Book.class);
-
         Disjunction d = Restrictions.disjunction();
-        d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
-        d.add(Restrictions.ilike("publisher", in, MatchMode.ANYWHERE));
-        d.add(Restrictions.in("mainAuthor", AuthorService.getInstance().findAuthors(in)));
-        d.add(Restrictions.ilike("sponsor", in, MatchMode.ANYWHERE));
-        d.add(Restrictions.ilike("notes", in, MatchMode.ANYWHERE));
-        d.add(Restrictions.eq("barcode", in));
-        d.add(Restrictions.eq("location", in).ignoreCase());
-        d.add(Restrictions.eq("ISBN10", in));
-        d.add(Restrictions.eq("ISBN13", in));
-        c.add(d);
 
-        c.setProjection(Projections.projectionList().add(Property.forName("barcode")));
+
+        if (in.startsWith("inventura")) {
+            in = in.replace("inventura", "").trim();
+            boolean hasOperand = false;
+
+            if (in.contains(">=") && !hasOperand) {
+                in = in.replace(">=", "").trim();
+                d.add(Restrictions.ge("inventoriedDate", DateFormater.stringToDate(in, false)));
+                hasOperand = true;
+            }
+            if (in.contains("<=") && !hasOperand) {
+                in = in.replace("<=", "").trim();
+                d.add(Restrictions.le("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.isNull("inventoriedDate"));
+                hasOperand = true;
+            }
+            if (in.contains("!=") && !hasOperand) {
+                in = in.replace("!=", "").trim();
+                d.add(Restrictions.ne("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.isNull("inventoriedDate"));
+                hasOperand = true;
+            }
+
+            if (in.contains("=") && !hasOperand) {
+                in = in.replace("=", "").trim();
+                d.add(Restrictions.eq("inventoriedDate", DateFormater.stringToDate(in, false)));
+                hasOperand = true;
+            }
+
+            if (in.contains(">") && !hasOperand) {
+                in = in.replace(">", "").trim();
+                d.add(Restrictions.gt("inventoriedDate", DateFormater.stringToDate(in, false)));
+                hasOperand = true;
+            }
+            if (in.contains("<") && !hasOperand) {
+                in = in.replace("<", "").trim();
+                d.add(Restrictions.lt("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.isNull("inventoriedDate"));
+                hasOperand = true;
+            }
+
+        } else {
+            d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
+            d.add(Restrictions.ilike("publisher", in, MatchMode.ANYWHERE));
+            d.add(Restrictions.eq("publishedYear", DateFormater.stringToDate(in, true)));
+            d.add(Restrictions.eq("addedDate", DateFormater.stringToDate(in, false)));
+            d.add(Restrictions.in("mainAuthor", AuthorService.getInstance().findAuthors(in)));
+            d.add(Restrictions.ilike("sponsor", in, MatchMode.ANYWHERE));
+            d.add(Restrictions.ilike("notes", in, MatchMode.ANYWHERE));
+            d.add(Restrictions.eq("barcode", in));
+            d.add(Restrictions.eq("location", in).ignoreCase());
+            d.add(Restrictions.eq("ISBN10", in));
+            d.add(Restrictions.eq("ISBN13", in));
+        }
+        c.add(d);
+        c.setProjection(Projections.projectionList().add(Property.forName("id")));
         List<String> result = c.list();
+
         closeSession();
         return result;
     }
@@ -257,7 +302,7 @@ public class BookService extends BaseDAO<Book> implements Serializable {
             isRestrictionSet = true;
         }
         if (year != null && !year.isEmpty()) {
-            d.add(Restrictions.ilike("publishedYear", DateFormater.stringToDate(year, true)));
+            d.add(Restrictions.eq("publishedYear", DateFormater.stringToDate(year, true)));
             isRestrictionSet = true;
         }
         if (barcode != null && !barcode.isEmpty()) {
@@ -278,8 +323,25 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         }
         c.add(d);
 
-        c.setProjection(Projections.projectionList().add(Property.forName("barcode")));
+        c.setProjection(Projections.projectionList().add(Property.forName("id")));
         List<String> result = c.list();
+
+        closeSession();
+        return result;
+    }
+
+    public List<Book> findBooks(String in) {
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(Book.class);
+        Disjunction d = Restrictions.disjunction();
+
+        d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
+        d.add(Restrictions.eq("barcode", in));
+
+        c.add(d);
+
+        List<Book> result = c.list();
 
         closeSession();
         return result;

@@ -68,12 +68,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
         <Property name="name" type="java.lang.String" value="cancelButton" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="inputFName"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="P&#x159;idat"/>
         <Property name="name" type="java.lang.String" value="saveButton" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="cancelButton"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -84,6 +90,9 @@
     <Component class="javax.swing.JTextField" name="inputFName">
       <Properties>
         <Property name="name" type="java.lang.String" value="fname" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="inputLName"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -94,6 +103,9 @@
     <Component class="javax.swing.JTextField" name="inputLName">
       <Properties>
         <Property name="name" type="java.lang.String" value="lname" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="saveButton"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

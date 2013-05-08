@@ -4,6 +4,7 @@
  */
 package models;
 
+import io.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -16,29 +17,55 @@ import services.CustomerService;
  */
 public class CustomerTableModel extends AbstractTableModel {
 
-    private List<Customer> customersList;
+    private List<Customer> customerList;
     boolean showSSN;
     boolean showName;
-    boolean showStreet;
-    boolean showCity;
-    boolean showCountry;
+    boolean showAdress;
     boolean showEmail;
     boolean showPhone;
     boolean showNotes;
-    // Paging settings
-    int page = 1;
-    int maxRows = 50;
+    // Nastavení dotazu
+    private int page = 1;
+    private int maxRows = Configuration.getInstance().getMaxCustomerRowsCount();
+    private List<String> resultOfSearch = new ArrayList<>();
+    private String filterString = "";
+    private boolean isSearching = false;
 
     public CustomerTableModel() {
         super();
-        customersList = CustomerService.getInstance().getCustomers();
-        showName = true;
-        showCity = true;
+        setParams();
+        customerList = CustomerService.getInstance().getCustomers();
+    }
+
+    private void setParams() {
+        //Nastavení viditelnosti    
+        showSSN = Configuration.getInstance().isCustomerShowSSN();
+        showName = Configuration.getInstance().isCustomerShowName();
+        showAdress = Configuration.getInstance().isCustomerShowAdress();
+        showEmail = Configuration.getInstance().isCustomerShowEmail();
+        showPhone = Configuration.getInstance().isCustomerShowPhone();
+        showNotes = Configuration.getInstance().isCustomerShowNotes();
+
+        maxRows = Configuration.getInstance().getMaxCustomerRowsCount();
+        CustomerService.getInstance().setLimit(maxRows);
+        CustomerService.getInstance().setStart((page - 1) * maxRows);
+        CustomerService.getInstance().setOrderType(Configuration.getInstance().getCustomerOrderType());
+        CustomerService.getInstance().setOrderBy(Configuration.getInstance().getCustomerOrderBy());
+        if (!Configuration.getInstance().isDeletedItemVisible()) {
+            CustomerService.getInstance().getParameters().put("deleted", false);
+            CustomerService.getInstance().setCondition("deleted = :deleted");
+        }
+        if (!filterString.isEmpty()) {
+            CustomerService.getInstance().setExactMatch("t.id", CustomerService.getInstance().criteriaSearch(filterString));
+        }
+        if (!resultOfSearch.isEmpty()) {
+            CustomerService.getInstance().setExactMatch("t.id", resultOfSearch);
+        }
     }
 
     @Override
     public int getRowCount() {
-        return (customersList == null) ? 0 : customersList.size();
+        return (customerList == null) ? 0 : customerList.size();
     }
 
     @Override
@@ -50,13 +77,7 @@ public class CustomerTableModel extends AbstractTableModel {
         if (showName) {
             i++;
         }
-        if (showStreet) {
-            i++;
-        }
-        if (showCity) {
-            i++;
-        }
-        if (showCountry) {
+        if (showAdress) {
             i++;
         }
         if (showEmail) {
@@ -82,14 +103,8 @@ public class CustomerTableModel extends AbstractTableModel {
             tempValuesColumnNames.add("Jméno");
         }
 
-        if (showStreet) {
-            tempValuesColumnNames.add("Ulice");
-        }
-        if (showCity) {
-            tempValuesColumnNames.add("Město");
-        }
-        if (showCountry) {
-            tempValuesColumnNames.add("Stát");
+        if (showAdress) {
+            tempValuesColumnNames.add("Adresa");
         }
         if (showEmail) {
             tempValuesColumnNames.add("E-mail");
@@ -106,24 +121,19 @@ public class CustomerTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Customer c = customersList.get(rowIndex);
+        Customer c = customerList.get(rowIndex);
         ArrayList<String> tempValues = new ArrayList<>();
 
         if (showSSN) {
             tempValues.add(String.valueOf(c.getSSN()));
         }
         if (showName) {
-            tempValues.add(c.getFirstName() + " " + c.getLastName());
+            tempValues.add(c.getFullName());
         }
-        if (showStreet) {
-            tempValues.add(c.getStreet());
+        if (showAdress) {
+            tempValues.add(c.getFullAdress());
         }
-        if (showCity) {
-            tempValues.add(c.getCity());
-        }
-        if (showCountry) {
-            tempValues.add(c.getCountry());
-        }
+
         if (showEmail) {
             tempValues.add(c.getEmail());
         }
@@ -138,32 +148,17 @@ public class CustomerTableModel extends AbstractTableModel {
     }
 
     public void updateData() {
-        customersList = CustomerService.getInstance().getCustomers();
-    }
-
-    public void setVisibility(boolean showSSN, boolean showName, boolean showStreet, boolean showCity, boolean showCountry, boolean showEmail, boolean showPhone, boolean showNotes) {
-        this.showSSN = showSSN;
-        this.showName = showName;
-        this.showStreet = showStreet;
-        this.showCity = showCity;
-        this.showCountry = showCountry;
-        this.showEmail = showEmail;
-        this.showPhone = showPhone;
-        this.showNotes = showNotes;
-    }
-
-    public void setFilter(String ssn, String fname, String lname, String email, String phone) {
-        customersList = CustomerService.getInstance().getFilteredList(ssn, fname, lname, email, phone);
-        System.out.println("1");
-    }
-
-    public void removeFilter() {
-        customersList = CustomerService.getInstance().getCustomers();
-        System.out.println("2");
+        setParams();
+        if (isSearching && resultOfSearch.isEmpty()) {
+            customerList.clear();
+            isSearching = false;
+        } else {
+            customerList = CustomerService.getInstance().getCustomers();
+        }
     }
 
     public Customer getCustomer(int i) {
-        return customersList.get(i);
+        return customerList.get(i);
     }
 
     public int getPage() {
@@ -210,22 +205,34 @@ public class CustomerTableModel extends AbstractTableModel {
     }
 
     public int getTotalPageCount() {
+        setParams();
         return (int) Math.round((CustomerService.getInstance().getTotalCount() / maxRows) + 0.5); // round up
-    }
-
-    public void resetFilter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void applyFilter(String trim) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<Customer> getCustomers(int[] selectedRows) {
         List<Customer> list = new ArrayList<>();
         for (int i = 0; i < selectedRows.length; i++) {
-            list.add(customersList.get(selectedRows[i]));
+            list.add(customerList.get(selectedRows[i]));
         }
         return list;
+    }
+
+    public void search(String ssn, String fname, String lname, String email, String phone) {
+        resultOfSearch.clear();
+        resultOfSearch = CustomerService.getInstance().extendedCriteriaSearch(ssn, fname, lname, email, phone);
+        isSearching = true;
+    }
+
+    public void stopSearch() {
+        resultOfSearch.clear();
+        isSearching = false;
+    }
+
+    public void applyFilter(String filterString) {
+        this.filterString = filterString;
+    }
+
+    public void stopSearchWithEmptyResult() {
+        isSearching = false;
     }
 }

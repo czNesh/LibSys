@@ -9,8 +9,11 @@ import java.io.Serializable;
 import java.util.List;
 import models.dao.BaseDAO;
 import models.entity.SystemUser;
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -56,4 +59,26 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
         return s;
     }
 
+    public boolean isOnlyDefault() {
+        getParameters().put("login", "default");
+        setCondition("login != :login");
+        return (getList().isEmpty()) ? true : false;
+    }
+
+    public List<SystemUser> findSystemUsers(String in) {
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(SystemUser.class);
+        Disjunction d = Restrictions.disjunction();
+
+        d.add(Restrictions.ilike("firstName", in, MatchMode.ANYWHERE));
+        d.add(Restrictions.ilike("lastName", in, MatchMode.ANYWHERE));
+
+        c.add(d);
+
+        List<SystemUser> result = c.list();
+
+        closeSession();
+        return result;
+    }
 }

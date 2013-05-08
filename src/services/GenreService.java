@@ -29,4 +29,9 @@ public class GenreService extends BaseDAO<Genre> {
 
     }
 
+    public Genre findGenre(String s) {
+        getParameters().put("genre", s);
+        return getUnique("genre = :genre");
+    }
+
 }

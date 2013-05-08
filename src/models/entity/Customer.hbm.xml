@@ -4,15 +4,22 @@
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="models.entity.Customer" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
-        </id> 
-        <property name="firstName" not-null="true" type="string"/>
-        <property name="lastName" not-null="true" type="string"/>
+        </id>         
+        <list name="borrows" table="customer_borrows" lazy="false" fetch="select">
+            <key>
+                <column name="customer_id" not-null="true" />
+            </key>
+            <index column="borrow_id"/>
+            <one-to-many class="models.entity.Borrow" />
+        </list>
+        <property name="firstName" not-null="false" type="string"/>
+        <property name="lastName" not-null="false" type="string"/>
         <property name="SSN" not-null="true" type="integer"/>       
         <property name="street" not-null="false" type="string"/>
         <property name="city" not-null="false" type="string"/> 
         <property name="country" not-null="false" type="string"/>
         <property name="postcode" not-null="false" type="string"/>
-        <property name="email" not-null="true" type="string"/>
+        <property name="email" not-null="false" type="string"/>
         <property name="phone" not-null="false" type="string"/>
         <property name="notes" not-null="false" type="string"/>
         <property name="deleted" not-null="true" type="boolean"/>

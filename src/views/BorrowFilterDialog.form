@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Nastaven&#xed; zobrazen&#xed;"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -23,30 +24,36 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="BTNok" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="INPborrowMaxRowsCount" alignment="1" pref="85" max="32767" attributes="0"/>
+                          <Component id="INPorderBy" alignment="0" max="32767" attributes="0"/>
+                          <Component id="INPorderType" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="customerCheckBox" min="-2" max="-2" attributes="0"/>
-                          <Component id="itemCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPcustomer" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPitems" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPfrom" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="librarianCheckBox" min="-2" max="-2" attributes="0"/>
-                          <Component id="returnedCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPto" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPlibrarian" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPreturned" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="groupCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="fromCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="toCheckBox" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="okButton" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -57,74 +64,127 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="customerCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="returnedCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPcustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPreturned" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="librarianCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="itemCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPlibrarian" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPitems" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="fromCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="toCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPfrom" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="groupCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="okButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="INPborrowMaxRowsCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="INPorderBy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="INPorderType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <Component id="BTNok" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="okButton">
+    <Component class="javax.swing.JButton" name="BTNok">
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
-        <Property name="name" type="java.lang.String" value="filterConfirm" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="filterConfirmed" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="customerCheckBox">
+    <Component class="javax.swing.JCheckBox" name="INPcustomer">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Z&#xe1;kazn&#xed;k"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="librarianCheckBox">
+    <Component class="javax.swing.JCheckBox" name="INPlibrarian">
       <Properties>
         <Property name="text" type="java.lang.String" value="Knihovn&#xed;k"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="fromCheckBox">
+    <Component class="javax.swing.JCheckBox" name="INPfrom">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Datum od"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="toCheckBox">
+    <Component class="javax.swing.JCheckBox" name="INPto">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Datum do"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="returnedCheckBox">
+    <Component class="javax.swing.JCheckBox" name="INPreturned">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="Vr&#xe1;ceno"/>
+        <Property name="text" type="java.lang.String" value="Stav p&#x16f;j&#x10d;ky"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="itemCheckBox">
+    <Component class="javax.swing.JCheckBox" name="INPitems">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="Kniha"/>
+        <Property name="text" type="java.lang.String" value="P&#x16f;j&#x10d;en&#xe9; knihy"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="groupCheckBox">
+    <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Spojit v&#xfd;p&#x16f;j&#x10d;ky jednoho u&#x17e;ivatele"/>
+        <Property name="text" type="java.lang.String" value="Zp&#x16f;sob &#x159;azen&#xed;:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x158;adit podle:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zobrazit z&#xe1;znam&#x16f;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="INPborrowMaxRowsCount">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="10" maximum="100" minimum="10" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="INPborrowMaxRowsCount.setValue(Configuration.getInstance().getMaxBorrowRowsCount());&#xd;&#xa;        "/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="INPorderBy">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPorderByActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="INPorderType">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPorderTypeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
