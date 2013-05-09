@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import helpers.DateFormater;
+import helpers.DateHelper;
 import io.Configuration;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -205,7 +205,7 @@ public class NewBookController extends BaseController {
 
                     if (dp.getDate() != null) {
                         Date d = dp.getDate();
-                        dialog.getInputBuyedDate().setText(DateFormater.dateToString(d, false));
+                        dialog.getInputBuyedDate().setText(DateHelper.dateToString(d, false));
                     }
 
                     break;
@@ -289,7 +289,7 @@ public class NewBookController extends BaseController {
             }
 
             // datum pridani
-            Date d2 = DateFormater.stringToDate(dialog.getInputBuyedDate().getText(), false);
+            Date d2 = DateHelper.stringToDate(dialog.getInputBuyedDate().getText(), false);
             if (d2 == null) {
                 if (Configuration.getInstance().isRequireAddedDate()) {
                     errorOutput.append("- Zkontrolujte zadané datum přidání\n");

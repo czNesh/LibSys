@@ -4,13 +4,10 @@
  */
 package views;
 
+import helpers.DateHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
 import javax.swing.JComponent;
 import net.sourceforge.jdatepicker.JDateComponentFactory;
 import net.sourceforge.jdatepicker.JDatePanel;
@@ -22,6 +19,7 @@ import net.sourceforge.jdatepicker.JDatePanel;
 public class DatePicker extends javax.swing.JDialog {
 
     JDatePanel panel;
+    boolean dateSet = false;
 
     /**
      * Creates new form DatePicker
@@ -67,7 +65,11 @@ public class DatePicker extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public Date getDate() {
-        return new Date(panel.getModel().getYear()-1900,panel.getModel().getMonth(),panel.getModel().getDay());
+        if(!dateSet){
+            return null;
+        }
+        Date d = new Date(panel.getModel().getYear()-1900,panel.getModel().getMonth(),panel.getModel().getDay());
+        return DateHelper.stringToDate(DateHelper.dateToString(d, false), false); 
     }
 
     private class DateAction implements ActionListener {
@@ -77,6 +79,7 @@ public class DatePicker extends javax.swing.JDialog {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            dateSet = true;
             dispose();
         }
     }

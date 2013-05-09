@@ -1,6 +1,6 @@
 package models;
 
-import helpers.DateFormater;
+import helpers.DateHelper;
 import io.Configuration;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import models.entity.Author;
 import models.entity.Book;
 import services.BookService;
+import services.BorrowService;
 
 public class BookTableModel extends AbstractTableModel {
 
@@ -22,6 +23,7 @@ public class BookTableModel extends AbstractTableModel {
     private boolean showPageCount;
     private boolean showLocation;
     private boolean showItemCount;
+    private String borrowCode = null;
     // Nastavení dotazu
     private int page = 1;
     private int maxRows = Configuration.getInstance().getMaxBookRowsCount();
@@ -43,6 +45,17 @@ public class BookTableModel extends AbstractTableModel {
         showPublishedYear = true;
         showISBN10 = true;
         showISBN13 = true;
+        bookList = in;
+    }
+
+    public BookTableModel(List<Book> in, String borrowCode) {
+        super();
+        showTitle = true;
+        showAuthor = true;
+        showPublishedYear = true;
+        showISBN10 = true;
+        showISBN13 = true;
+        this.borrowCode = borrowCode;
         bookList = in;
     }
 
@@ -116,6 +129,10 @@ public class BookTableModel extends AbstractTableModel {
         if (showLocation) {
             i++;
         }
+
+        if (borrowCode != null) {
+            i++;
+        }
         return i;
     }
 
@@ -150,7 +167,7 @@ public class BookTableModel extends AbstractTableModel {
         }
         if (showPublishedYear) {
             if (i.getPublishedYear() != null) {
-                tempValues.add(String.valueOf(DateFormater.dateToString(i.getPublishedYear(), true)));
+                tempValues.add(String.valueOf(DateHelper.dateToString(i.getPublishedYear(), true)));
             } else {
                 tempValues.add("údaj chybí");
             }
@@ -175,6 +192,14 @@ public class BookTableModel extends AbstractTableModel {
         }
         if (showLocation) {
             tempValues.add(i.getLocation());
+        }
+
+        if (borrowCode != null) {
+            if (BorrowService.getInstance().isBookReturned(i,borrowCode)) {
+                tempValues.add("NEVRÁCENO");
+            } else {
+                tempValues.add("VRÁCENO");
+            }
         }
         return tempValues.get(columnIndex);
     }
@@ -213,6 +238,10 @@ public class BookTableModel extends AbstractTableModel {
         }
         if (showLocation) {
             tempValuesColumnNames.add("Umístění");
+        }
+        
+        if(borrowCode != null){
+            tempValuesColumnNames.add("Stav");
         }
 
         return tempValuesColumnNames.get(column);
@@ -296,5 +325,13 @@ public class BookTableModel extends AbstractTableModel {
 
     public void stopSearchWithEmptyResult() {
         isSearching = false;
+    }
+
+    public List<Book> getBooks(int[] selectedRows) {
+        List<Book> list = new ArrayList<>();
+        for (int i = 0; i < selectedRows.length; i++) {
+            list.add(bookList.get(selectedRows[i]));
+        }
+        return list;
     }
 }

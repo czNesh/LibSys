@@ -78,7 +78,7 @@ public class Borrow implements Serializable {
     /**
      * @param description the description to set
      */
-    public void setnotes(String notes) {
+    public void setNotes(String notes) {
         this.notes = notes;
     }
 
@@ -159,5 +159,5 @@ public class Borrow implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-    
+
 }

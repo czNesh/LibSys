@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import helpers.DateHelper;
 import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -19,6 +21,7 @@ import models.entity.Borrow;
 import services.BorrowService;
 import views.BorrowFilterDialog;
 import views.BorrowSearchDialog;
+import views.DatePicker;
 import views.MainView;
 
 /**
@@ -82,6 +85,8 @@ public class BorrowTabController {
         bsd.getBTNsearch().addActionListener(a);
         bsd.getBTNcloseSearchDialog().addActionListener(a);
         bsd.getBTNreset().addActionListener(a);
+        bsd.getBTNfromDate().addActionListener(a);
+        bsd.getBTNtoDate().addActionListener(a);
     }
 
     public void updateView() {
@@ -183,6 +188,24 @@ public class BorrowTabController {
                     tableModel.prevPage();
                     updateView();
                     break;
+                case "fromDate":
+                    DatePicker dp = new DatePicker(null, true);
+                    dp.setLocationRelativeTo(null);
+                    dp.setVisible(true);
+                    Date d = dp.getDate();
+                    if (d != null) {
+                        bsd.getINPfrom().setText(DateHelper.dateToString(d, false));
+                    }
+                    break;
+                case "toDate":
+                    DatePicker dp2 = new DatePicker(null, true);
+                    dp2.setLocationRelativeTo(null);
+                    dp2.setVisible(true);
+                    Date d2 = dp2.getDate();
+                    if (d2 != null) {
+                        bsd.getINPto().setText(DateHelper.dateToString(d2, false));
+                    }
+                    break;
                 case "filter":
                     filter.setLocationRelativeTo(null);
                     filter.setVisible(true);
@@ -226,9 +249,9 @@ public class BorrowTabController {
                             bsd.getINPborrowCode().getText().trim(),
                             bsd.getINPcustomer().getText().trim(),
                             bsd.getINPlibrarian().getText().trim(),
+                            bsd.getINPitem().getText().trim(),
                             bsd.getINPfrom().getText().trim(),
                             bsd.getINPto().getText().trim(),
-                            bsd.getINPitem().getText().trim(),
                             bsd.getINPstate().getSelectedIndex());
                     updateView();
                     bsd.setVisible(false);

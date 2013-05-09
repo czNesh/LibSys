@@ -4,11 +4,9 @@
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="models.entity.Borrow" optimistic-lock="version" polymorphism="implicit" select-before-update="false">
         <id name="id" type="long" unsaved-value="null">
             <generator class="identity"/>
-        </id>                 
-        <many-to-one name="customer" class="models.entity.Customer" fetch="select" lazy="false">
-                <column name="customer_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="librarian" class="models.entity.SystemUser" column="librarian_id" lazy="false" />
+        </id>     
+        <many-to-one name="customer" class="models.entity.Customer" column="customer" lazy="false" />        
+        <many-to-one name="librarian" class="models.entity.SystemUser" column="librarian" lazy="false" />
         <many-to-one name="item" class="models.entity.Book" column="item_id" lazy="false" />
         <property name="fromDate" not-null="true" type="timestamp"/>
         <property name="toDate" not-null="true" type="timestamp"/>

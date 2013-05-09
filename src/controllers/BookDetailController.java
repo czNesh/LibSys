@@ -6,7 +6,7 @@ package controllers;
 
 import coding.Barcode;
 import coding.QRCode;
-import helpers.DateFormater;
+import helpers.DateHelper;
 import io.ApplicationLog;
 import io.Configuration;
 import io.FileManager;
@@ -35,7 +35,6 @@ import remote.GoogleImageDownload;
 import services.AuthorService;
 import services.BookService;
 import services.BorrowService;
-import services.CustomerService;
 import services.GenreService;
 import views.BookDetailDialog;
 import views.DatePicker;
@@ -127,7 +126,7 @@ public class BookDetailController extends BaseController {
 
         // Vydáno roku
         if (book.getPublishedYear() != null) {
-            dialog.getInfoPublishedYear().setText(DateFormater.dateToString(book.getPublishedYear(), true));
+            dialog.getInfoPublishedYear().setText(DateHelper.dateToString(book.getPublishedYear(), true));
         } else {
             dialog.getInfoPublishedYear().setText("");
         }
@@ -156,7 +155,7 @@ public class BookDetailController extends BaseController {
         dialog.getInfoSponsor().setText(book.getSponsor());
 
         // Zakoupeno dne
-        dialog.getInfoBuyedDate().setText(DateFormater.dateToString(book.getAddedDate(), false));
+        dialog.getInfoBuyedDate().setText(DateHelper.dateToString(book.getAddedDate(), false));
 
         // Poznamky
         dialog.getInfoNotes().setText(book.getNotes());
@@ -328,7 +327,7 @@ public class BookDetailController extends BaseController {
 
                     if (dp.getDate() != null) {
                         Date d = dp.getDate();
-                        dialog.getInfoBuyedDate().setText(DateFormater.dateToString(d, false));
+                        dialog.getInfoBuyedDate().setText(DateHelper.dateToString(d, false));
                     }
                     break;
                 case "addAuthor":
@@ -343,7 +342,7 @@ public class BookDetailController extends BaseController {
                 case "checkItem":
                     int isSure = JOptionPane.showInternalConfirmDialog(dialog.getContentPane(), "Opravdu chcete inventarozovat knihu " + book.getBarcode() + "?", "Potvrzení inventarizace", JOptionPane.OK_CANCEL_OPTION);
                     if (isSure == JOptionPane.OK_OPTION) {
-                        book.setInventoriedDate(DateFormater.stringToDate(DateFormater.dateToString(new Date(), false), false));
+                        book.setInventoriedDate(DateHelper.stringToDate(DateHelper.dateToString(new Date(), false), false));
                         if (book.isDeleted()) {
                             book.setDeleted(false);
                         }
@@ -479,7 +478,7 @@ public class BookDetailController extends BaseController {
 
             //rok vydání
 
-            Date d = DateFormater.stringToDate(dialog.getInfoPublishedYear().getText(), true);
+            Date d = DateHelper.stringToDate(dialog.getInfoPublishedYear().getText(), true);
 
             if (d == null) {
                 if (Configuration.getInstance().isRequirePublishedYear()) {
@@ -507,7 +506,7 @@ public class BookDetailController extends BaseController {
             }
 
             // datum pridani
-            Date d2 = DateFormater.stringToDate(dialog.getInfoBuyedDate().getText(), false);
+            Date d2 = DateHelper.stringToDate(dialog.getInfoBuyedDate().getText(), false);
             if (d2 == null) {
                 if (Configuration.getInstance().isRequireAddedDate()) {
                     errorOutput.append("- Zkontrolujte zadané datum přidání\n");

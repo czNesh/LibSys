@@ -47,10 +47,10 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
         INPstate = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         INPfrom = new javax.swing.JTextField();
-        datePickerButton2 = new javax.swing.JButton();
+        BTNfromDate = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         INPto = new javax.swing.JTextField();
-        datePickerButton3 = new javax.swing.JButton();
+        BTNtoDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -109,13 +109,13 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
 
         jLabel11.setText("Datum vypůjčení:");
 
-        datePickerButton2.setText("...");
-        datePickerButton2.setName("datePickerButton"); // NOI18N
+        BTNfromDate.setText("...");
+        BTNfromDate.setName("fromDate"); // NOI18N
 
         jLabel12.setText("Datum vrácení:");
 
-        datePickerButton3.setText("...");
-        datePickerButton3.setName("datePickerButton"); // NOI18N
+        BTNtoDate.setText("...");
+        BTNtoDate.setName("toDate"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,8 +140,8 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
                             .addComponent(INPto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datePickerButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(datePickerButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(BTNfromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BTNtoDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(INPitem)
                     .addComponent(INPlibrarian)
                     .addComponent(INPcustomer)
@@ -173,12 +173,12 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(INPfrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datePickerButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BTNfromDate, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(INPto, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datePickerButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BTNtoDate, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -191,8 +191,10 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNcloseSearchDialog;
+    private javax.swing.JButton BTNfromDate;
     private javax.swing.JButton BTNreset;
     private javax.swing.JButton BTNsearch;
+    private javax.swing.JButton BTNtoDate;
     private javax.swing.JTextField INPborrowCode;
     private javax.swing.JTextField INPcustomer;
     private javax.swing.JTextField INPfrom;
@@ -200,8 +202,6 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
     private javax.swing.JTextField INPlibrarian;
     private javax.swing.JComboBox INPstate;
     private javax.swing.JTextField INPto;
-    private javax.swing.JButton datePickerButton2;
-    private javax.swing.JButton datePickerButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -251,4 +251,14 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
     public JTextField getINPto() {
         return INPto;
     }
+
+    public JButton getBTNfromDate() {
+        return BTNfromDate;
+    }
+
+    public JButton getBTNtoDate() {
+        return BTNtoDate;
+    }
+    
+    
 }

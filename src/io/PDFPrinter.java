@@ -17,15 +17,17 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
-import helpers.DateFormater;
+import helpers.DateHelper;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import models.entity.Author;
 import models.entity.Book;
+import models.entity.Borrow;
 import models.entity.Customer;
 import models.entity.Genre;
+import services.BorrowService;
 
 /**
  *
@@ -122,7 +124,7 @@ public class PDFPrinter extends PdfPageEventHelper {
 
             //Vydáno roku
             t.addCell(formatOutput("Vydáno roku", 11, true));
-            t.addCell(formatOutput(DateFormater.dateToString(book.getPublishedYear(), true), 10, false));
+            t.addCell(formatOutput(DateHelper.dateToString(book.getPublishedYear(), true), 10, false));
 
             //Sponzor
             t.addCell(formatOutput("Sponzor", 11, true));
@@ -130,7 +132,7 @@ public class PDFPrinter extends PdfPageEventHelper {
 
             //Zakoupeno dne
             t.addCell(formatOutput("Zakoupeno dne", 11, true));
-            t.addCell(formatOutput(DateFormater.dateToString(book.getAddedDate(), false), 10, false));
+            t.addCell(formatOutput(DateHelper.dateToString(book.getAddedDate(), false), 10, false));
 
             //Zakoupeno dne
             t.addCell(formatOutput("Poznámky", 11, true));
@@ -240,6 +242,105 @@ public class PDFPrinter extends PdfPageEventHelper {
             if (Desktop.isDesktopSupported()) {
                 try {
                     File myFile = new File(Configuration.getInstance().getWorkspace() + "\\PDF_CUSTOMER_" + customer.getStringSSN() + ".pdf");
+                    Desktop.getDesktop().open(myFile);
+                } catch (IOException ex) {
+                    // no application registered for PDFs
+                }
+            }
+        } catch (IOException | DocumentException ex) {
+            System.out.println("VYJIMKA: " + ex);
+        }
+    }
+
+    public void printBorrow(Borrow borrow) {
+        try {
+            Document document = new Document(PageSize.A4, 10, 10, 100, 10);
+            PdfWriter.getInstance(document, new FileOutputStream(Configuration.getInstance().getWorkspace() + "\\PDF_BORROW_" + borrow.getBorrowCode() + ".pdf"));
+
+            // open
+            document.open();
+
+            // write
+
+            PdfPTable t = new PdfPTable(2);
+            t.setTotalWidth(document.getPageSize().getWidth());
+            t.getDefaultCell().setColspan(2);
+            t.setWidths(new int[]{350, 1000});
+            t.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+            t.addCell(Image.getInstance(getClass().getResource("../images/header.jpg")));
+            t.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+            t.addCell(formatOutput("Záznam půjčky", 12, true));
+            t.getDefaultCell().setColspan(1);
+            t.getDefaultCell().setHorizontalAlignment(Element.ALIGN_LEFT);
+
+            // CISLO PUJCKY
+            t.addCell(formatOutput("Číslo půjčky", 11, true));
+            t.addCell(formatOutput(borrow.getBorrowCode(), 10, false));
+
+            // ZAKAZNIK
+            t.addCell(formatOutput("Zákazník", 11, true));
+            t.addCell(formatOutput(borrow.getCustomer().getFullName(), 10, false));
+
+            //KNIHOVNIK
+            t.addCell(formatOutput("Knihovník", 11, true));
+            t.addCell(formatOutput(borrow.getLibrarian().toString(), 10, false));
+
+            //OD
+            t.addCell(formatOutput("Od", 11, true));
+            t.addCell(formatOutput(DateHelper.dateToString(borrow.getFromDate(), false), 10, false));
+
+            // DO
+            t.addCell(formatOutput("Do", 11, true));
+            t.addCell(formatOutput(DateHelper.dateToString(borrow.getToDate(), false), 10, false));
+
+            //POZNAMKY
+            t.addCell(formatOutput("Poznámky", 11, true));
+            t.addCell(formatOutput(borrow.getNotes(), 10, false));
+
+            // POLOZKY
+            t.addCell(formatOutput("Seznam položek", 11, true));
+            String temp2 = "";
+            for (Borrow b : BorrowService.getInstance().getBorrows(borrow.getBorrowCode())) {
+                String returned = "";
+
+                if (b.getReturned().equals(Byte.valueOf("1"))) {
+                    returned = "VRÁCENO";
+                } else {
+                    returned = "NEVRÁCENO";
+                }
+
+                if (temp2.isEmpty()) {
+                    temp2 += b.getItem().getTitle() + "(" + b.getItem().getBarcode() + ") - " + returned;
+                } else {
+                    temp2 += "\n" + b.getItem().getTitle() + "(" + b.getItem().getBarcode() + ") - " + returned;
+                }
+            }
+            t.addCell(formatOutput(temp2, 10, false));
+
+            // Vlozit tabulku
+            document.add(t);
+
+            // Tabulka pro kódy
+            PdfPTable t2 = new PdfPTable(2);
+            t2.setTotalWidth(document.getPageSize().getWidth());
+            t2.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+            t2.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            java.awt.Image barcode = Barcode.encode(borrow.getBorrowCode());
+            java.awt.Image qrcode = QRCode.encode(borrow.getBorrowCode());
+
+            t2.addCell(Image.getInstance(barcode, null));
+            t2.addCell(Image.getInstance(qrcode, null));
+            document.add(t2);
+
+
+            // close
+            document.close();
+
+            // open
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    File myFile = new File(Configuration.getInstance().getWorkspace() + "\\PDF_BORROW_" + borrow.getBorrowCode() + ".pdf");
                     Desktop.getDesktop().open(myFile);
                 } catch (IOException ex) {
                     // no application registered for PDFs

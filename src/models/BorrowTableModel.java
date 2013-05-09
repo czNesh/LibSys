@@ -4,14 +4,13 @@
  */
 package models;
 
-import helpers.DateFormater;
+import helpers.DateHelper;
 import io.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import models.entity.Book;
 import models.entity.Borrow;
-import models.entity.Customer;
 import services.BorrowService;
 
 /**
@@ -30,9 +29,13 @@ public class BorrowTableModel extends AbstractTableModel {
     // Nastavení dotazu
     private int page = 1;
     private int maxRows = Configuration.getInstance().getMaxBorrowRowsCount();
+    private String groupBy = "borrowCode";
     private List<String> resultOfSearch = new ArrayList<>();
     private String filterString = "";
     private boolean isSearching = false;
+
+    
+
 
     public BorrowTableModel() {
         super();
@@ -57,6 +60,7 @@ public class BorrowTableModel extends AbstractTableModel {
         maxRows = Configuration.getInstance().getMaxBorrowRowsCount();
         BorrowService.getInstance().setLimit(maxRows);
         BorrowService.getInstance().setStart((page - 1) * maxRows);
+        BorrowService.getInstance().setGroupBy(groupBy);
         BorrowService.getInstance().setOrderType(Configuration.getInstance().getBorrowOrderType());
         BorrowService.getInstance().setOrderBy(Configuration.getInstance().getBorrowOrderBy());
         if (!Configuration.getInstance().isDeletedItemVisible()) {
@@ -121,10 +125,10 @@ public class BorrowTableModel extends AbstractTableModel {
             tempValues.add(b.getItem().toString());
         }
         if (showFrom) {
-            tempValues.add(DateFormater.dateToString(b.getFromDate(), false));
+            tempValues.add(DateHelper.dateToString(b.getFromDate(), false));
         }
         if (showTo) {
-            tempValues.add(DateFormater.dateToString(b.getToDate(), false));
+            tempValues.add(DateHelper.dateToString(b.getToDate(), false));
         }
         if (showReturned) {
             if (BorrowService.getInstance().isAllReturned(b.getBorrowCode())) {
@@ -247,7 +251,8 @@ public class BorrowTableModel extends AbstractTableModel {
     }
 
     public void search(String borrowCode, String customer, String librarian, String item, String from, String to, int returned) {
+        resultOfSearch.clear();
         resultOfSearch = BorrowService.getInstance().extendedCriteriaSearch(borrowCode, customer, librarian, item, from, to, returned);
-
+        isSearching = true;
     }
 }

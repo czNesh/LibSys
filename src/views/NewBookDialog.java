@@ -10,7 +10,7 @@ import javax.swing.JList;
 import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import helpers.DateFormater;
+import helpers.DateHelper;
 
 /**
  *
@@ -25,7 +25,7 @@ public class NewBookDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         getRootPane().setDefaultButton(saveButton);
-        inputBuyedDate.setText(DateFormater.dateToString(new Date(), false));
+        inputBuyedDate.setText(DateHelper.dateToString(new Date(), false));
     }
 
     /**

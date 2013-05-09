@@ -5,7 +5,7 @@
 package services;
 
 import controllers.RefreshController;
-import helpers.DateFormater;
+import helpers.DateHelper;
 import io.ApplicationLog;
 import io.Configuration;
 import java.io.Serializable;
@@ -222,6 +222,11 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
 
         d.add(Restrictions.ilike("firstName", in, MatchMode.ANYWHERE));
         d.add(Restrictions.ilike("lastName", in, MatchMode.ANYWHERE));
+        try {
+            d.add(Restrictions.eq("SSN", Integer.getInteger(in)));
+        } catch (NumberFormatException e) {
+            // DO OTHING SKIP
+        }
 
         c.add(d);
 

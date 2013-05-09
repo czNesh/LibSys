@@ -4,8 +4,8 @@
  */
 package views;
 
-import helpers.DateFormater;
-import java.util.Date;
+import helpers.DateHelper;
+import io.Configuration;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -14,16 +14,16 @@ import javax.swing.JTextField;
  *
  * @author Nesh
  */
-public class BookBorrowDialog extends javax.swing.JDialog {
+public class NewBorrowDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form BookBorrowDialog
+     * Creates new form NewBorrowDialog
      */
-    public BookBorrowDialog(java.awt.Frame parent, boolean modal) {
+    public NewBorrowDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        inputDateFrom.setText(DateFormater.dateToString(new Date(), false));
-        inputDateTo.setText(DateFormater.dateToString(new Date(), false));
+        inputDateFrom.setText(DateHelper.getCurrentDateString(false));
+        inputDateTo.setText(DateHelper.dateToString(DateHelper.plusDays(DateHelper.getCurrentDate(false),Configuration.getInstance().getBorrowDays()),false));
     }
 
     /**

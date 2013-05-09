@@ -5,7 +5,7 @@
 package io;
 
 import controllers.BaseController;
-import helpers.DateFormater;
+import helpers.DateHelper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +34,7 @@ public class ApplicationLog {
     }
 
     public void addMessage(String in) {
-        logList.add(DateFormater.dateToStringIncludingTime(new Date()) + ": "+ in);
+        logList.add(DateHelper.dateToStringIncludingTime(new Date()) + ": "+ in);
         
         // NOTIFY LISTENERS
         for(BaseController c : listeners){

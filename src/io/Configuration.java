@@ -71,14 +71,13 @@ public class Configuration {
     private static final boolean DEFAULT_BORROW_SHOW_TO = true;
     private static final boolean DEFAULT_BORROW_SHOW_ITEMS = true;
     private static final boolean DEFAULT_BORROW_SHOW_RETURNED = true;
-    
+    private static final int DEFAULT_BORROW_DAYS = 7;
     //OZNÁMENÍ
     private static final int DEFAULT_MAX_NOTIFICATION_ROWS_COUNT = 30;
-    
     //ZÁKLADNÍ
-    private static final boolean DEFAULT_SHOW_DELETED_ITEMS = false;
+    private static final boolean DEFAULT_SHOW_DELETED = false;
     private static final boolean DEFAULT_SKIP_LOGGIN = false;
-    private static final String DEFAULT_EMAIL = "hejhape1@ssps.cz";
+    private static final String DEFAULT_EMAIL = "mail@mailserver.com";
     private static final String DEFAULT_WORKSPACE = "";
 
     public static Configuration getInstance() {
@@ -99,14 +98,71 @@ public class Configuration {
      * 
      */
     public void setDefaultValues() {
-        prefs.putInt("MAX_BOOK_ROWS", DEFAULT_MAX_BOOK_ROWS_COUNT);
-        prefs.putInt("MAX_BORROW_ROWS", DEFAULT_MAX_BORROW_ROWS_COUNT);
-        prefs.putInt("MAX_CUSTOMER_ROWS", DEFAULT_MAX_CUSTOMER_ROWS_COUNT);
-        prefs.putInt("MAX_NOTIFICATION_ROWS", DEFAULT_MAX_NOTIFICATION_ROWS_COUNT);
-        prefs.putBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED_ITEMS);
-        prefs.putBoolean("SKIP_LOGGING", DEFAULT_SKIP_LOGGIN);
-
+        //Server
+        prefs.putInt("SERVER_PORT", DEFAULT_SERVER_PORT);
+        prefs.putBoolean("SERVER_AUTOSTART", DEFAULT_SERVER_AUTOSTART);
+        // Knihy
+        prefs.putInt("MAX_BOOK_ROWS_COUNT", DEFAULT_MAX_BOOK_ROWS_COUNT);
         prefs.put("BOOK_ORDER_BY", DEFAULT_BOOK_ORDER_BY);
+        prefs.put("BOOK_ORDER_TYPE", DEFAULT_BOOK_ORDER_TYPE);
+        prefs.putBoolean("SHOW_TITLE", DEFAULT_SHOW_TITLE);
+        prefs.putBoolean("SHOW_AUTHOR", DEFAULT_SHOW_AUTHOR);
+        prefs.putBoolean("SHOW_ISBN10", DEFAULT_SHOW_ISBN10);
+        prefs.putBoolean("SHOW_ISBN13", DEFAULT_SHOW_ISBN13);
+        prefs.putBoolean("SHOW_COUNT", DEFAULT_SHOW_COUNT);
+        prefs.putBoolean("SHOW_LOCATION", DEFAULT_SHOW_LOCATION);
+        prefs.putBoolean("SHOW_LANGUAGE", DEFAULT_SHOW_LANGUAGE);
+        prefs.putBoolean("SHOW_PUBLISHER", DEFAULT_SHOW_PUBLISHER);
+        prefs.putBoolean("SHOW_PUBLISHED_YEAR", DEFAULT_SHOW_PUBLISHED_YEAR);
+        prefs.putBoolean("SHOW_PAGE_COUNT", DEFAULT_SHOW_PAGE_COUNT);
+        prefs.putBoolean("REQUIRE_AUTHOR", DEFAULT_REQUIRE_AUTHOR);
+        prefs.putBoolean("REQUIRE_ISBN10", DEFAULT_REQUIRE_ISBN10);
+        prefs.putBoolean("REQUIRE_ISBN13", DEFAULT_REQUIRE_ISBN13);
+        prefs.putBoolean("REQUIRE_COUNT", DEFAULT_REQUIRE_COUNT);
+        prefs.putBoolean("REQUIRE_LOCATION", DEFAULT_REQUIRE_LOCATION);
+        prefs.putBoolean("REQUIRE_LANGUAGE", DEFAULT_REQUIRE_LANGUAGE);
+        prefs.putBoolean("REQUIRE_PUBLISHER", DEFAULT_REQUIRE_PUBLISHER);
+        prefs.putBoolean("REQUIRE_PUBLISHED_YEAR", DEFAULT_REQUIRE_PUBLISHED_YEAR);
+        prefs.putBoolean("REQUIRE_PAGE_COUNT", DEFAULT_REQUIRE_PAGE_COUNT);
+        prefs.putBoolean("REQUIRE_SPONSOR", DEFAULT_REQUIRE_SPONSOR);
+        prefs.putBoolean("REQUIRE_GENRE", DEFAULT_REQUIRE_GENRE);
+        prefs.putBoolean("REQUIRE_ADDED_DATE", DEFAULT_REQUIRE_ADDED_DATE);
+        //Uživatelé
+        prefs.putInt("MAX_CUSTOMER_ROWS_COUNT", DEFAULT_MAX_CUSTOMER_ROWS_COUNT);
+        prefs.put("CUSTOMER_ORDER_BY", DEFAULT_CUSTOMER_ORDER_BY);
+        prefs.put("CUSTOMER_ORDER_TYPE", DEFAULT_CUSTOMER_ORDER_TYPE);
+        prefs.putBoolean("CUSTOMER_SHOW_SSN", DEFAULT_CUSTOMER_SHOW_SSN);
+        prefs.putBoolean("CUSTOMER_SHOW_NAME", DEFAULT_CUSTOMER_SHOW_NAME);
+        prefs.putBoolean("CUSTOMER_SHOW_EMAIL", DEFAULT_CUSTOMER_SHOW_EMAIL);
+        prefs.putBoolean("CUSTOMER_SHOW_PHONE", DEFAULT_CUSTOMER_SHOW_PHONE);
+        prefs.putBoolean("CUSTOMER_SHOW_ADRESS", DEFAULT_CUSTOMER_SHOW_ADRESS);
+        prefs.putBoolean("CUSTOMER_SHOW_NOTES", DEFAULT_CUSTOMER_SHOW_NOTES);
+        prefs.putBoolean("CUSTOMER_REQUIRE_FNAME", DEFAULT_CUSTOMER_REQUIRE_FNAME);
+        prefs.putBoolean("CUSTOMER_REQUIRE_LNAME", DEFAULT_CUSTOMER_REQUIRE_LNAME);
+        prefs.putBoolean("CUSTOMER_REQUIRE_EMAIL", DEFAULT_CUSTOMER_REQUIRE_EMAIL);
+        prefs.putBoolean("CUSTOMER_REQUIRE_PHONE", DEFAULT_CUSTOMER_REQUIRE_PHONE);
+        prefs.putBoolean("CUSTOMER_REQUIRE_STREET", DEFAULT_CUSTOMER_REQUIRE_STREET);
+        prefs.putBoolean("CUSTOMER_REQUIRE_CITY", DEFAULT_CUSTOMER_REQUIRE_CITY);
+        prefs.putBoolean("CUSTOMER_REQUIRE_POSTCODE", DEFAULT_CUSTOMER_REQUIRE_POSTCODE);
+        prefs.putBoolean("CUSTOMER_REQUIRE_COUNTRY", DEFAULT_CUSTOMER_REQUIRE_COUNTRY);
+        //PŮJČKY
+        prefs.putInt("MAX_BORROW_ROWS_COUNT", DEFAULT_MAX_BORROW_ROWS_COUNT);
+        prefs.put("BORROW_ORDER_BY", DEFAULT_BORROW_ORDER_BY);
+        prefs.put("BORROW_ORDER_TYPE", DEFAULT_BORROW_ORDER_TYPE);
+        prefs.putBoolean("BORROW_SHOW_CUSTOMER", DEFAULT_BORROW_SHOW_CUSTOMER);
+        prefs.putBoolean("BORROW_SHOW_LIBRARIAN", DEFAULT_BORROW_SHOW_LIBRARIAN);
+        prefs.putBoolean("BORROW_SHOW_FROM", DEFAULT_BORROW_SHOW_FROM);
+        prefs.putBoolean("BORROW_SHOW_TO", DEFAULT_BORROW_SHOW_TO);
+        prefs.putBoolean("BORROW_SHOW_ITEMS", DEFAULT_BORROW_SHOW_ITEMS);
+        prefs.putBoolean("BORROW_SHOW_RETURNED", DEFAULT_BORROW_SHOW_RETURNED);
+        prefs.putInt("BORROW_DAYS", DEFAULT_BORROW_DAYS);
+        //OZNÁMENÍ
+        prefs.putInt("MAX_NOTIFICATION_ROWS_COUNT", DEFAULT_MAX_NOTIFICATION_ROWS_COUNT);
+        //ZÁKLADNÍ
+        prefs.putBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED);
+        prefs.putBoolean("SKIP_LOGGIN", DEFAULT_SKIP_LOGGIN);
+        prefs.put("DEFAULT_EMAIL", DEFAULT_EMAIL);
+        prefs.put("WORKSPACE", DEFAULT_WORKSPACE);
     }
 
     /*
@@ -143,7 +199,7 @@ public class Configuration {
     }
 
     public boolean isDeletedItemVisible() {
-        return prefs.getBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED_ITEMS);
+        return prefs.getBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED);
     }
 
     public void setDeletedItemVisible(boolean in) {
@@ -585,6 +641,15 @@ public class Configuration {
     public boolean isBorrowShowReturned() {
         return prefs.getBoolean("SHOW_BORROW_RETURNED", DEFAULT_BORROW_SHOW_RETURNED);
     }
+
+    public void setBorrowDays(int in) {
+        prefs.putInt("BORROW_DAYS", in);
+    }
+
+    public int getBorrowDays() {
+        return prefs.getInt("BORROW_DAYS", DEFAULT_BORROW_DAYS);
+    }
+
 
     /*
      * Nastavení pro oznámení

@@ -44,8 +44,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="datePickerButton2" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="datePickerButton3" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="BTNfromDate" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="BTNtoDate" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="INPitem" alignment="0" max="32767" attributes="0"/>
@@ -86,13 +86,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="INPfrom" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="datePickerButton2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="BTNfromDate" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="INPto" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="datePickerButton3" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="BTNtoDate" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -223,10 +223,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="INPfrom">
     </Component>
-    <Component class="javax.swing.JButton" name="datePickerButton2">
+    <Component class="javax.swing.JButton" name="BTNfromDate">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
-        <Property name="name" type="java.lang.String" value="datePickerButton" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="fromDate" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
@@ -236,10 +236,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="INPto">
     </Component>
-    <Component class="javax.swing.JButton" name="datePickerButton3">
+    <Component class="javax.swing.JButton" name="BTNtoDate">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
-        <Property name="name" type="java.lang.String" value="datePickerButton" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="toDate" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

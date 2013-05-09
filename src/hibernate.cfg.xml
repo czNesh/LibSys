@@ -8,7 +8,7 @@
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
         <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping resource="models/entity/Author.hbm.xml"/>
         <mapping resource="models/entity/Borrow.hbm.xml"/>
         <mapping resource="models/entity/Book.hbm.xml"/>

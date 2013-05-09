@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import helpers.DateFormater;
+import helpers.DateHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,21 +18,21 @@ import models.entity.Book;
 import models.entity.Borrow;
 import models.entity.Customer;
 import services.BorrowService;
-import views.BookBorrowDialog;
 import views.DatePicker;
+import views.NewBorrowDialog;
 
 /**
  *
  * @author Administrator
  */
-public class BookBorrowController extends BaseController {
+public class NewBorrowController extends BaseController {
 
-    BookBorrowDialog dialog;
+    NewBorrowDialog dialog;
     Customer customer;
     List<Book> booksList = new ArrayList<>();
 
-    public BookBorrowController(JFrame parent) {
-        dialog = new BookBorrowDialog(parent, true);
+    public NewBorrowController(JFrame parent) {
+        dialog = new NewBorrowDialog(parent, true);
         initListeners();
     }
 
@@ -82,7 +82,7 @@ public class BookBorrowController extends BaseController {
 
                     if (dateFrom.getDate() != null) {
                         Date d = dateFrom.getDate();
-                        dialog.getInputDateFrom().setText(DateFormater.dateToString(d, false));
+                        dialog.getInputDateFrom().setText(DateHelper.dateToString(d, false));
                     }
 
                     break;
@@ -93,7 +93,7 @@ public class BookBorrowController extends BaseController {
 
                     if (dateTo.getDate() != null) {
                         Date d = dateTo.getDate();
-                        dialog.getInputDateTo().setText(DateFormater.dateToString(d, false));
+                        dialog.getInputDateTo().setText(DateHelper.dateToString(d, false));
                     }
 
                     break;
@@ -112,8 +112,8 @@ public class BookBorrowController extends BaseController {
                 case "confirm":
                     StringBuilder validationLog = new StringBuilder();
 
-                    Date from = DateFormater.stringToDate(dialog.getInputDateFrom().getText(), false);
-                    Date to = DateFormater.stringToDate(dialog.getInputDateTo().getText(), false);
+                    Date from = DateHelper.stringToDate(dialog.getInputDateFrom().getText(), false);
+                    Date to = DateHelper.stringToDate(dialog.getInputDateTo().getText(), false);
 
                     if (booksList.isEmpty()) {
                         validationLog.append("Žádná položka k vypujčení\n");
@@ -127,6 +127,10 @@ public class BookBorrowController extends BaseController {
 
                     if (customer == null) {
                         validationLog.append("Nebyl vybrán žádný zákazník\n");
+                    }
+                    
+                    if(!DateHelper.compareGE(to, from)){
+                        validationLog.append("Vypůjčka musí být minimálně na jeden den\n");
                     }
 
                     if (validationLog.length() > 0) {

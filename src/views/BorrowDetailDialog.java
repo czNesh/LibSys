@@ -40,19 +40,44 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        customerSSNTextField = new javax.swing.JTextField();
-        customerNameTextField = new javax.swing.JTextField();
-        customerAdressTextField = new javax.swing.JTextField();
-        customerEmailTextField = new javax.swing.JTextField();
-        customerPhoneTextField = new javax.swing.JTextField();
+        INPcustomerSsn = new javax.swing.JTextField();
+        INPcustomerName = new javax.swing.JTextField();
+        INPcustomerAdress = new javax.swing.JTextField();
+        INPcutomerEmail = new javax.swing.JTextField();
+        INPcustomerPhone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        customerNotesTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
+        INPcustomerNotes = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        bookListTable = new javax.swing.JTable();
-        cancelButton = new javax.swing.JButton();
-        returnSelectedBooksButton = new javax.swing.JButton();
+        TABbooks = new javax.swing.JTable();
+        BTNreturnSelectedBooks = new javax.swing.JButton();
+        BTNeditSelectedBooksTerm = new javax.swing.JButton();
+        BTNnotReturned = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        BTNclose = new javax.swing.JButton();
+        BTNedit = new javax.swing.JButton();
+        BTNprint = new javax.swing.JButton();
+        BTNqrcode = new javax.swing.JButton();
+        BTNbarcode = new javax.swing.JButton();
+        BTNcompleteBorrow = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        INPborrowCode = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        INPlibrarian = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        INPfrom = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        INPto = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        INPstate = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        INPnotes = new javax.swing.JTextArea();
+        BTNfrom = new javax.swing.JButton();
+        BTNfrom.setVisible(false);
+        BTNto = new javax.swing.JButton();
+        BTNto.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,6 +92,8 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informace o půjčce");
+        setMaximumSize(new java.awt.Dimension(936, 579));
+        setMinimumSize(new java.awt.Dimension(936, 579));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Údaje o zákazníkovi"));
 
@@ -82,30 +109,31 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
 
         jLabel6.setText("Poznámky:");
 
-        customerSSNTextField.setEditable(false);
-        customerSSNTextField.setText("ssn");
-        customerSSNTextField.setBorder(null);
+        INPcustomerSsn.setEditable(false);
+        INPcustomerSsn.setBorder(null);
 
-        customerNameTextField.setEditable(false);
-        customerNameTextField.setText("name");
-        customerNameTextField.setBorder(null);
+        INPcustomerName.setEditable(false);
+        INPcustomerName.setBorder(null);
+        INPcustomerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPcustomerNameActionPerformed(evt);
+            }
+        });
 
-        customerAdressTextField.setEditable(false);
-        customerAdressTextField.setText("adress");
-        customerAdressTextField.setBorder(null);
+        INPcustomerAdress.setEditable(false);
+        INPcustomerAdress.setBorder(null);
 
-        customerEmailTextField.setEditable(false);
-        customerEmailTextField.setText("mail");
-        customerEmailTextField.setBorder(null);
+        INPcutomerEmail.setEditable(false);
+        INPcutomerEmail.setBorder(null);
 
-        customerPhoneTextField.setEditable(false);
-        customerPhoneTextField.setText("phone");
-        customerPhoneTextField.setBorder(null);
+        INPcustomerPhone.setEditable(false);
+        INPcustomerPhone.setBorder(null);
 
-        customerNotesTextArea.setEditable(false);
-        customerNotesTextArea.setColumns(20);
-        customerNotesTextArea.setRows(5);
-        jScrollPane1.setViewportView(customerNotesTextArea);
+        INPcustomerNotes.setEditable(false);
+        INPcustomerNotes.setBackground(new java.awt.Color(240, 240, 240));
+        INPcustomerNotes.setColumns(20);
+        INPcustomerNotes.setRows(5);
+        jScrollPane1.setViewportView(INPcustomerNotes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -120,14 +148,14 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
-                    .addComponent(customerEmailTextField)
-                    .addComponent(customerSSNTextField)
-                    .addComponent(customerNameTextField)
-                    .addComponent(customerAdressTextField)
-                    .addComponent(customerPhoneTextField))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(INPcustomerName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPcustomerAdress, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPcustomerPhone, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPcutomerEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addComponent(INPcustomerSsn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -136,38 +164,33 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(customerSSNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPcustomerSsn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(customerNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPcustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(customerAdressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPcustomerAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(customerPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPcustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(customerEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPcutomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-
-        okButton.setText("Ok");
-        okButton.setName("ok"); // NOI18N
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Vypůjčené knihy"));
 
-        bookListTable.setModel(new javax.swing.table.DefaultTableModel(
+        TABbooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -178,128 +201,395 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(bookListTable);
+        TABbooks.setName("bookTable"); // NOI18N
+        jScrollPane2.setViewportView(TABbooks);
+
+        BTNreturnSelectedBooks.setText("Vrátit");
+        BTNreturnSelectedBooks.setName("return"); // NOI18N
+
+        BTNeditSelectedBooksTerm.setText("Upravit termín");
+        BTNeditSelectedBooksTerm.setName("editTerm"); // NOI18N
+
+        BTNnotReturned.setText("Nevráceno");
+        BTNnotReturned.setName("notReturn"); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BTNreturnSelectedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNnotReturned, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189)
+                        .addComponent(BTNeditSelectedBooksTerm)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNreturnSelectedBooks)
+                    .addComponent(BTNeditSelectedBooksTerm)
+                    .addComponent(BTNnotReturned))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
-        cancelButton.setText("Cancel");
-        cancelButton.setName("cancel"); // NOI18N
+        BTNclose.setText("Zavřít");
+        BTNclose.setName("close"); // NOI18N
 
-        returnSelectedBooksButton.setText("Vrátiti označené");
-        returnSelectedBooksButton.setName("return"); // NOI18N
+        BTNedit.setText("Upravit");
+        BTNedit.setName("edit"); // NOI18N
+
+        BTNprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print-icon.png"))); // NOI18N
+        BTNprint.setToolTipText("Tisknout detail knihy");
+        BTNprint.setName("printPDF"); // NOI18N
+
+        BTNqrcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
+        BTNqrcode.setToolTipText("QR kód");
+        BTNqrcode.setName("qrcode"); // NOI18N
+
+        BTNbarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PDF417-Java-Barcode.icon.gif"))); // NOI18N
+        BTNbarcode.setToolTipText("Čárový kód");
+        BTNbarcode.setName("barcode"); // NOI18N
+
+        BTNcompleteBorrow.setText("Dokončit půjčku");
+        BTNcompleteBorrow.setName("completeBorrow"); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BTNqrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BTNbarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BTNclose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNcompleteBorrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(BTNedit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BTNclose)
+                .addGap(54, 54, 54)
+                .addComponent(BTNprint, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTNqrcode)
+                    .addComponent(BTNbarcode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addComponent(BTNcompleteBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Údaje o půjčce"));
+
+        jLabel7.setText("Kód výpůjčky:");
+
+        INPborrowCode.setEditable(false);
+        INPborrowCode.setBorder(null);
+
+        jLabel8.setText("Knihy vypůjčil:");
+
+        INPlibrarian.setEditable(false);
+        INPlibrarian.setBorder(null);
+
+        jLabel9.setText("Od:");
+
+        INPfrom.setEditable(false);
+        INPfrom.setBorder(null);
+
+        jLabel10.setText("Do:");
+
+        INPto.setEditable(false);
+        INPto.setBorder(null);
+
+        jLabel11.setText("Stav výpůjčky:");
+
+        INPstate.setEditable(false);
+        INPstate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        INPstate.setBorder(null);
+        INPstate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INPstateActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Poznámky:");
+
+        INPnotes.setEditable(false);
+        INPnotes.setBackground(new java.awt.Color(240, 240, 240));
+        INPnotes.setColumns(20);
+        INPnotes.setRows(5);
+        jScrollPane3.setViewportView(INPnotes);
+
+        BTNfrom.setText("...");
+        BTNfrom.setName("dateFrom"); // NOI18N
+
+        BTNto.setText("...");
+        BTNto.setName("dateTo"); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(INPlibrarian, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPstate, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(INPborrowCode)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(INPto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                            .addComponent(INPfrom, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BTNfrom, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BTNto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(INPborrowCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(INPlibrarian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(INPfrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNfrom, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(INPto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNto, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(INPstate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(returnSelectedBooksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(okButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton)
-                        .addGap(33, 33, 33)
-                        .addComponent(returnSelectedBooksButton))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void INPstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPstateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPstateActionPerformed
+
+    private void INPcustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPcustomerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_INPcustomerNameActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable bookListTable;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JTextField customerAdressTextField;
-    private javax.swing.JTextField customerEmailTextField;
-    private javax.swing.JTextField customerNameTextField;
-    private javax.swing.JTextArea customerNotesTextArea;
-    private javax.swing.JTextField customerPhoneTextField;
-    private javax.swing.JTextField customerSSNTextField;
+    private javax.swing.JButton BTNbarcode;
+    private javax.swing.JButton BTNclose;
+    private javax.swing.JButton BTNcompleteBorrow;
+    private javax.swing.JButton BTNedit;
+    private javax.swing.JButton BTNeditSelectedBooksTerm;
+    private javax.swing.JButton BTNfrom;
+    private javax.swing.JButton BTNnotReturned;
+    private javax.swing.JButton BTNprint;
+    private javax.swing.JButton BTNqrcode;
+    private javax.swing.JButton BTNreturnSelectedBooks;
+    private javax.swing.JButton BTNto;
+    private javax.swing.JTextField INPborrowCode;
+    private javax.swing.JTextField INPcustomerAdress;
+    private javax.swing.JTextField INPcustomerName;
+    private javax.swing.JTextArea INPcustomerNotes;
+    private javax.swing.JTextField INPcustomerPhone;
+    private javax.swing.JTextField INPcustomerSsn;
+    private javax.swing.JTextField INPcutomerEmail;
+    private javax.swing.JTextField INPfrom;
+    private javax.swing.JTextField INPlibrarian;
+    private javax.swing.JTextArea INPnotes;
+    private javax.swing.JTextField INPstate;
+    private javax.swing.JTextField INPto;
+    private javax.swing.JTable TABbooks;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton okButton;
-    private javax.swing.JButton returnSelectedBooksButton;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getCustomerAdressTextField() {
-        return customerAdressTextField;
+    public JButton getBTNbarcode() {
+        return BTNbarcode;
     }
 
-    public JTextField getCustomerEmailTextField() {
-        return customerEmailTextField;
+    public JButton getBTNclose() {
+        return BTNclose;
     }
 
-    public JTextField getCustomerNameTextField() {
-        return customerNameTextField;
+    public JButton getBTNcompleteBorrow() {
+        return BTNcompleteBorrow;
     }
 
-    public JTextArea getCustomerNotesTextArea() {
-        return customerNotesTextArea;
+    public JButton getBTNedit() {
+        return BTNedit;
     }
 
-    public JTextField getCustomerPhoneTextField() {
-        return customerPhoneTextField;
+    public JButton getBTNeditSelectedBooksTerm() {
+        return BTNeditSelectedBooksTerm;
     }
 
-    public JTextField getCustomerSSNTextField() {
-        return customerSSNTextField;
+    public JButton getBTNprint() {
+        return BTNprint;
     }
 
-    public JTable getBookListTable() {
-        return bookListTable;
+    public JButton getBTNqrcode() {
+        return BTNqrcode;
     }
 
-    public JButton getCancelButton() {
-        return cancelButton;
+    public JButton getBTNreturnSelectedBooks() {
+        return BTNreturnSelectedBooks;
     }
 
-    public JButton getOkButton() {
-        return okButton;
+    public JTextField getINPborrowCode() {
+        return INPborrowCode;
     }
 
-    public JButton getReturnSelectedBooksButton() {
-        return returnSelectedBooksButton;
+    public JTextField getINPcustomerAdress() {
+        return INPcustomerAdress;
     }
-    
-    
+
+    public JTextField getINPcustomerName() {
+        return INPcustomerName;
+    }
+
+    public JTextArea getINPcustomerNotes() {
+        return INPcustomerNotes;
+    }
+
+    public JTextField getINPcustomerPhone() {
+        return INPcustomerPhone;
+    }
+
+    public JTextField getINPcustomerSsn() {
+        return INPcustomerSsn;
+    }
+
+    public JTextField getINPcutomerEmail() {
+        return INPcutomerEmail;
+    }
+
+    public JTextField getINPfrom() {
+        return INPfrom;
+    }
+
+    public JTextField getINPlibrarian() {
+        return INPlibrarian;
+    }
+
+    public JTextArea getINPnotes() {
+        return INPnotes;
+    }
+
+    public JTextField getINPstate() {
+        return INPstate;
+    }
+
+    public JTextField getINPto() {
+        return INPto;
+    }
+
+    public JTable getTABbooks() {
+        return TABbooks;
+    }
+
+    public JButton getBTNfrom() {
+        return BTNfrom;
+    }
+
+    public JButton getBTNto() {
+        return BTNto;
+    }
+
+    public JButton getBTNnotReturned() {
+        return BTNnotReturned;
+    }
 }

@@ -6,10 +6,8 @@ package models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *
@@ -267,12 +265,10 @@ public class Book implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.title);
-        hash = 37 * hash + Objects.hashCode(this.mainAuthor);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.barcode);
         hash = 37 * hash + Objects.hashCode(this.ISBN10);
-        hash = 37 * hash + Objects.hashCode(this.ISBN13);
-        hash = 37 * hash + Objects.hashCode(this.publisher);
         return hash;
     }
 
@@ -285,23 +281,19 @@ public class Book implements Serializable {
             return false;
         }
         final Book other = (Book) obj;
-        if (!Objects.equals(this.title, other.title)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.mainAuthor, other.mainAuthor)) {
+        if (!Objects.equals(this.barcode, other.barcode)) {
             return false;
         }
         if (!Objects.equals(this.ISBN10, other.ISBN10)) {
             return false;
         }
-        if (!Objects.equals(this.ISBN13, other.ISBN13)) {
-            return false;
-        }
-        if (!Objects.equals(this.publisher, other.publisher)) {
-            return false;
-        }
         return true;
     }
+
+
 
     @Override
     public String toString() {

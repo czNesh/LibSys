@@ -4,10 +4,12 @@
  */
 package controllers;
 
+import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import sun.security.krb5.Config;
 import views.MainView;
 
 /**
@@ -46,7 +48,7 @@ public class MenuController implements ActionListener {
                 RefreshController.getInstance().refreshBookTab();
                 break;
             case "newBorrow":
-                BookBorrowController bookBorrowController = new BookBorrowController(view);
+                NewBorrowController bookBorrowController = new NewBorrowController(view);
                 bookBorrowController.showView();
                 break;
             case "newCustomer":
@@ -72,10 +74,12 @@ public class MenuController implements ActionListener {
             case "settings":
                 SettingsController sc = new SettingsController();
                 sc.showView();
+                view.getLogoutMenuItem().setVisible(!Configuration.getInstance().isSkipLogging());
                 break;
             case "logout":
                 int logout = JOptionPane.showInternalConfirmDialog(view.getContentPane(), "Opravdu se chcete odhlásit?", "Odhlásit?", JOptionPane.OK_CANCEL_OPTION);
                 if (logout == JOptionPane.OK_OPTION) {
+                    SocketServerController.getInstance().setServerStatus(false);
                     AppController.getInstance().setLoggedUser(null);
                     AppController.getInstance().showLoginFrame();
                 }

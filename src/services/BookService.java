@@ -5,7 +5,7 @@
 package services;
 
 import controllers.RefreshController;
-import helpers.DateFormater;
+import helpers.DateHelper;
 import io.ApplicationLog;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -221,36 +221,36 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
             if (in.contains(">=") && !hasOperand) {
                 in = in.replace(">=", "").trim();
-                d.add(Restrictions.ge("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.ge("inventoriedDate", DateHelper.stringToDate(in, false)));
                 hasOperand = true;
             }
             if (in.contains("<=") && !hasOperand) {
                 in = in.replace("<=", "").trim();
-                d.add(Restrictions.le("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.le("inventoriedDate", DateHelper.stringToDate(in, false)));
                 d.add(Restrictions.isNull("inventoriedDate"));
                 hasOperand = true;
             }
             if (in.contains("!=") && !hasOperand) {
                 in = in.replace("!=", "").trim();
-                d.add(Restrictions.ne("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.ne("inventoriedDate", DateHelper.stringToDate(in, false)));
                 d.add(Restrictions.isNull("inventoriedDate"));
                 hasOperand = true;
             }
 
             if (in.contains("=") && !hasOperand) {
                 in = in.replace("=", "").trim();
-                d.add(Restrictions.eq("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.eq("inventoriedDate", DateHelper.stringToDate(in, false)));
                 hasOperand = true;
             }
 
             if (in.contains(">") && !hasOperand) {
                 in = in.replace(">", "").trim();
-                d.add(Restrictions.gt("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.gt("inventoriedDate", DateHelper.stringToDate(in, false)));
                 hasOperand = true;
             }
             if (in.contains("<") && !hasOperand) {
                 in = in.replace("<", "").trim();
-                d.add(Restrictions.lt("inventoriedDate", DateFormater.stringToDate(in, false)));
+                d.add(Restrictions.lt("inventoriedDate", DateHelper.stringToDate(in, false)));
                 d.add(Restrictions.isNull("inventoriedDate"));
                 hasOperand = true;
             }
@@ -258,8 +258,8 @@ public class BookService extends BaseDAO<Book> implements Serializable {
         } else {
             d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
             d.add(Restrictions.ilike("publisher", in, MatchMode.ANYWHERE));
-            d.add(Restrictions.eq("publishedYear", DateFormater.stringToDate(in, true)));
-            d.add(Restrictions.eq("addedDate", DateFormater.stringToDate(in, false)));
+            d.add(Restrictions.eq("publishedYear", DateHelper.stringToDate(in, true)));
+            d.add(Restrictions.eq("addedDate", DateHelper.stringToDate(in, false)));
             d.add(Restrictions.in("mainAuthor", AuthorService.getInstance().findAuthors(in)));
             d.add(Restrictions.ilike("sponsor", in, MatchMode.ANYWHERE));
             d.add(Restrictions.ilike("notes", in, MatchMode.ANYWHERE));
@@ -302,7 +302,7 @@ public class BookService extends BaseDAO<Book> implements Serializable {
             isRestrictionSet = true;
         }
         if (year != null && !year.isEmpty()) {
-            d.add(Restrictions.eq("publishedYear", DateFormater.stringToDate(year, true)));
+            d.add(Restrictions.eq("publishedYear", DateHelper.stringToDate(year, true)));
             isRestrictionSet = true;
         }
         if (barcode != null && !barcode.isEmpty()) {
@@ -338,7 +338,7 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
         d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
         d.add(Restrictions.eq("barcode", in));
-
+        System.out.println(in);
         c.add(d);
 
         List<Book> result = c.list();

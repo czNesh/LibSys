@@ -81,6 +81,9 @@ public class SettingsController extends BaseController {
         dialog.getINPcustomerCountry().setSelected(c.isCustomerRequireCountry());
         dialog.getINPcustomerPostcode().setSelected(c.isCustomerRequirePostcode());
 
+        //VÝPŮJČKY
+        dialog.getINPborrowDays().setValue(c.getBorrowDays());
+
         // LibSys Server
         dialog.getINPportNumber().setValue(Configuration.getInstance().getServerPort());
         dialog.getINPautoStartServer().setSelected(Configuration.getInstance().isServerAutoStart());
@@ -128,6 +131,9 @@ public class SettingsController extends BaseController {
         c.setCustomerRequireCountry(dialog.getINPcustomerCountry().isSelected());
         c.setCustomerRequirePostcode(dialog.getINPcustomerPostcode().isSelected());
 
+        //VÝPŮJČKY
+        c.setBorrowDays((int) dialog.getINPborrowDays().getValue());
+        
         // LIBSYS SERVER
         c.setServerPort((int) dialog.getINPportNumber().getValue());
         c.setServerAutoStart(dialog.getINPautoStartServer().isSelected());
