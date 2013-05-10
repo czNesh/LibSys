@@ -18,23 +18,23 @@ import views.SettingsDialog;
  * @author Nesh
  */
 public class SettingsController extends BaseController {
-
+    
     SettingsDialog dialog;
     Configuration c;
-
+    
     public SettingsController() {
         c = Configuration.getInstance();
         dialog = new SettingsDialog(null, true);
-
+        
         if (!AppController.getInstance().getLoggedUser().isMaster()) {
             dialog.getCMPtabbedPanel().remove(5);
             dialog.repaint();
         }
-
+        
         initListeners();
         updateView();
     }
-
+    
     private void initListeners() {
         // Action Listener        
         SettingsActionListener a = new SettingsActionListener();
@@ -43,19 +43,19 @@ public class SettingsController extends BaseController {
         dialog.getBTNcancel().addActionListener(a);
         dialog.getBTNworkspace().addActionListener(a);
     }
-
+    
     @Override
     void showView() {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
-
+    
     @Override
     void dispose() {
         dialog.dispose();
         dialog = null;
     }
-
+    
     private void updateView() {
         // KNIHY
         dialog.getINPauthor().setSelected(c.isRequireAuthor());
@@ -85,16 +85,18 @@ public class SettingsController extends BaseController {
         dialog.getINPborrowDays().setValue(c.getBorrowDays());
 
         // LibSys Server
-        dialog.getINPportNumber().setValue(Configuration.getInstance().getServerPort());
-        dialog.getINPautoStartServer().setSelected(Configuration.getInstance().isServerAutoStart());
+        dialog.getINPportNumber().setValue(c.getServerPort());
+        dialog.getINPautoStartServer().setSelected(c.isServerAutoStart());
 
-        dialog.getINPmaxNotificationRows().setValue(c.getMaxNotificationRowsCount());
+        //oznámení 
+        dialog.getINPlongBorrowDays().setValue(c.getLongBorrowDays());
+        // základní
         dialog.getINPshowDeletedItems().setSelected(c.isDeletedItemVisible());
         dialog.getINPdefaultEmail().setText(c.getDefaultEmail());
         dialog.getINPskipLogging().setSelected(c.isSkipLogging());
         dialog.getINPworkspace().setText(c.getWorkspace());
     }
-
+    
     private void saveSettings() {
         // WORKSPACE
         if (dialog.getINPworkspace().getText().trim().isEmpty()) {
@@ -102,11 +104,17 @@ public class SettingsController extends BaseController {
         } else {
             c.setWorkcpace(dialog.getINPworkspace().getText());
         }
+
+        //SKIP LOGGING
         if (SystemUserService.getInstance().isOnlyDefault() && !dialog.getINPskipLogging().isSelected()) {
             JOptionPane.showMessageDialog(dialog, "- V aplikaci chybí uživatelé", "Nelze zapnout přihlašování", JOptionPane.ERROR_MESSAGE);
         } else {
             c.setSkipLogging(dialog.getINPskipLogging().isSelected());
         }
+
+        // SHOW DELETED
+        c.setDeletedItemVisible(dialog.getINPshowDeletedItems().isSelected());
+
         // KNIHY
         c.setRequireAuthor(dialog.getINPauthor().isSelected());
         c.setRequireCount(dialog.getINPcount().isSelected());
@@ -133,17 +141,18 @@ public class SettingsController extends BaseController {
 
         //VÝPŮJČKY
         c.setBorrowDays((int) dialog.getINPborrowDays().getValue());
-        
+
+        //OZNÁMENÍ
+        c.setLongBorrowDays((int) dialog.getINPlongBorrowDays().getValue());
+
         // LIBSYS SERVER
         c.setServerPort((int) dialog.getINPportNumber().getValue());
         c.setServerAutoStart(dialog.getINPautoStartServer().isSelected());
-
-        c.setDeletedItemVisible(dialog.getINPshowDeletedItems().isSelected());
-
+        
         RefreshController.getInstance().refreshAll();
         dispose();
     }
-
+    
     private void restoreDefaultSettings() {
         int result = JOptionPane.showInternalConfirmDialog(dialog.getContentPane(), "Chcete opravdu načíst defaultní nastavení??", "Opravdu provést?", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
@@ -151,12 +160,12 @@ public class SettingsController extends BaseController {
             updateView();
         }
     }
-
+    
     private class SettingsActionListener implements ActionListener {
-
+        
         public SettingsActionListener() {
         }
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (((JComponent) e.getSource()).getName()) {
@@ -170,7 +179,7 @@ public class SettingsController extends BaseController {
                     restoreDefaultSettings();
                     break;
                 case "workspace":
-
+                    
                     JFileChooser f = new JFileChooser(".");
                     f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                     f.setAcceptAllFileFilterUsed(false);
@@ -178,9 +187,9 @@ public class SettingsController extends BaseController {
                     if (f.showOpenDialog(dialog) == JFileChooser.APPROVE_OPTION) {
                         dialog.getINPworkspace().setText(f.getCurrentDirectory().getAbsolutePath() + "\\" + f.getSelectedFile().getName());
                     }
-
+                    
                     break;
-
+                
             }
         }
     }

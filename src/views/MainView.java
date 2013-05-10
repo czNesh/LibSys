@@ -95,16 +95,17 @@ public class MainView extends javax.swing.JFrame {
         BTNstopBorrowSearch = new javax.swing.JButton();
         BTNstopBorrowSearch.setVisible(false);
         jPanel3 = new javax.swing.JPanel();
-        filterButton2 = new javax.swing.JButton();
+        BTNnotificationFilter = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        INPnotificationFilter = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        catalogTable2 = new javax.swing.JTable();
-        bookTablePrevButton2 = new javax.swing.JButton();
-        bookTableInputNumber2 = new javax.swing.JTextField();
-        bookTableTotalPage2 = new javax.swing.JLabel();
-        bookTableNextButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        TABnotification = new javax.swing.JTable();
+        BTNnotificationPrev = new javax.swing.JButton();
+        INPnotificationPage = new javax.swing.JTextField();
+        INPnotificationTotalPage = new javax.swing.JLabel();
+        BTNnotificationNext = new javax.swing.JButton();
+        BTNnotificationStopSearch = new javax.swing.JButton();
+        BTNnotificationStopSearch.setVisible(false);
         jScrollPane2 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -227,7 +228,7 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(systemUserLabel);
         jToolBar1.add(filler3);
 
-        TabPanel.setName("bookFilterShow"); // NOI18N
+        TabPanel.setName(""); // NOI18N
 
         jPanel1.setName("bookTab"); // NOI18N
 
@@ -512,12 +513,15 @@ public class MainView extends javax.swing.JFrame {
 
         jPanel3.setName("notificationTab"); // NOI18N
 
-        filterButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view-icon.png"))); // NOI18N
-        filterButton2.setText("Volby zobrazení");
+        BTNnotificationFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view-icon.png"))); // NOI18N
+        BTNnotificationFilter.setText("Volby zobrazení");
+        BTNnotificationFilter.setName("filter"); // NOI18N
 
         jLabel5.setText("Rychlý filtr:");
 
-        catalogTable2.setModel(new javax.swing.table.DefaultTableModel(
+        INPnotificationFilter.setName("filter"); // NOI18N
+
+        TABnotification.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -525,25 +529,28 @@ public class MainView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane4.setViewportView(catalogTable2);
+        TABnotification.setName("notificationTable"); // NOI18N
+        jScrollPane4.setViewportView(TABnotification);
 
-        bookTablePrevButton2.setText("<");
-        bookTablePrevButton2.setName("bookTablePrevPage"); // NOI18N
+        BTNnotificationPrev.setText("<");
+        BTNnotificationPrev.setName("prevPage"); // NOI18N
 
-        bookTableInputNumber2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        bookTableInputNumber2.setText("1");
+        INPnotificationPage.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        INPnotificationPage.setText("1");
+        INPnotificationPage.setName("page"); // NOI18N
 
-        bookTableTotalPage2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        bookTableTotalPage2.setText("/ 5");
+        INPnotificationTotalPage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        INPnotificationTotalPage.setText("/ 5");
 
-        bookTableNextButton2.setText(">");
-        bookTableNextButton2.setName("bookTableNextPage"); // NOI18N
+        BTNnotificationNext.setText(">");
+        BTNnotificationNext.setName("nextPage"); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel_icon.png"))); // NOI18N
-        jButton1.setText("Zrušit hledání");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BTNnotificationStopSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel_icon.png"))); // NOI18N
+        BTNnotificationStopSearch.setText("Zrušit hledání");
+        BTNnotificationStopSearch.setName("stop"); // NOI18N
+        BTNnotificationStopSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BTNnotificationStopSearchActionPerformed(evt);
             }
         });
 
@@ -557,21 +564,21 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(jScrollPane4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bookTablePrevButton2)
+                        .addComponent(BTNnotificationPrev)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bookTableInputNumber2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPnotificationPage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bookTableTotalPage2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPnotificationTotalPage, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bookTableNextButton2))
+                        .addComponent(BTNnotificationNext))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(filterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTNnotificationFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTNnotificationStopSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(INPnotificationFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -579,18 +586,18 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filterButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNnotificationFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNnotificationStopSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INPnotificationFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bookTableNextButton2)
-                    .addComponent(bookTablePrevButton2)
-                    .addComponent(bookTableTotalPage2)
-                    .addComponent(bookTableInputNumber2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BTNnotificationNext)
+                    .addComponent(BTNnotificationPrev)
+                    .addComponent(INPnotificationTotalPage)
+                    .addComponent(INPnotificationPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6))
         );
 
@@ -670,36 +677,38 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BTNnotificationStopSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNnotificationStopSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_BTNnotificationStopSearchActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNnotificationFilter;
+    private javax.swing.JButton BTNnotificationNext;
+    private javax.swing.JButton BTNnotificationPrev;
+    private javax.swing.JButton BTNnotificationStopSearch;
     private javax.swing.JButton BTNsearch;
     private javax.swing.JButton BTNstopBookSearch;
     private javax.swing.JButton BTNstopBorrowSearch;
     private javax.swing.JButton BTNstopCustomerSearch;
     private javax.swing.JTextField INPborrowFilter;
     private javax.swing.JTextField INPborrowPageNumber;
+    private javax.swing.JTextField INPnotificationFilter;
+    private javax.swing.JTextField INPnotificationPage;
+    private javax.swing.JLabel INPnotificationTotalPage;
     private javax.swing.JButton QRCodeButton;
+    private javax.swing.JTable TABnotification;
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JButton barcodeButton;
     private javax.swing.JTextField bookFilterInput;
     private javax.swing.JTextField bookTableInputNumber;
-    private javax.swing.JTextField bookTableInputNumber2;
     private javax.swing.JButton bookTableNextButton;
-    private javax.swing.JButton bookTableNextButton2;
     private javax.swing.JButton bookTablePrevButton;
-    private javax.swing.JButton bookTablePrevButton2;
     private javax.swing.JLabel bookTableTotalPage;
-    private javax.swing.JLabel bookTableTotalPage2;
     private javax.swing.JButton borrowFilterButton;
     private javax.swing.JButton borrowNextButton;
     private javax.swing.JButton borrowPrevButton;
     private javax.swing.JTable borrowTable;
     private javax.swing.JLabel borrowTotalPageNumber;
     private javax.swing.JTable catalogTable;
-    private javax.swing.JTable catalogTable2;
     private javax.swing.JButton connectionButton;
     private javax.swing.JTextArea console;
     private javax.swing.JButton customerFilterButton;
@@ -714,8 +723,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton filterButton;
-    private javax.swing.JButton filterButton2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JFrame jFrame1;
@@ -744,7 +751,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JButton newBorrowButton;
@@ -929,5 +935,39 @@ public class MainView extends javax.swing.JFrame {
     public JButton getBTNstopCustomerSearch() {
         return BTNstopCustomerSearch;
     }
-    
+
+    public JTable getTABnotification() {
+        return TABnotification;
+    }
+
+    /*
+     * NOTIFICATION TAB
+     */
+    public JButton getBTNnotificationFilter() {
+        return BTNnotificationFilter;
+    }
+
+    public JButton getBTNnotificationNext() {
+        return BTNnotificationNext;
+    }
+
+    public JButton getBTNnotificationPrev() {
+        return BTNnotificationPrev;
+    }
+
+    public JButton getBTNnotificationStopSearch() {
+        return BTNnotificationStopSearch;
+    }
+
+    public JTextField getINPnotificationFilter() {
+        return INPnotificationFilter;
+    }
+
+    public JTextField getINPnotificationPage() {
+        return INPnotificationPage;
+    }
+
+    public JLabel getINPnotificationTotalPage() {
+        return INPnotificationTotalPage;
+    }
 }

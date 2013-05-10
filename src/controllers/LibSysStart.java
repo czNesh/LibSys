@@ -14,10 +14,9 @@ import services.SystemUserService;
  * @author eXtreme
  */
 public class LibSysStart {
-    
+
     public static void main(String[] args) {
         try {
-
             AppController c = AppController.getInstance();
             if (Configuration.getInstance().isSkipLogging()) {
                 c.setLoggedUser(SystemUserService.getInstance().getDefaultSystemUser());

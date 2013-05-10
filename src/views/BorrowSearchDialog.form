@@ -54,7 +54,7 @@
                   <Component id="INPborrowCode" alignment="0" max="32767" attributes="0"/>
                   <Component id="INPstate" alignment="0" pref="152" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -89,10 +89,12 @@
                   <Component id="BTNfromDate" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="INPto" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="BTNtoDate" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BTNtoDate" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -218,7 +220,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Datum vyp&#x16f;j&#x10d;en&#xed;:"/>
+        <Property name="text" type="java.lang.String" value="Datum od:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="INPfrom">
@@ -231,7 +233,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Datum vr&#xe1;cen&#xed;:"/>
+        <Property name="text" type="java.lang.String" value="Datum do:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="INPto">

@@ -20,12 +20,12 @@ import services.BorrowService;
 public class BorrowTableModel extends AbstractTableModel {
 
     List<Borrow> borrowList;
-    boolean showCustomer;
-    boolean showItems;
-    boolean showFrom;
-    boolean showTo;
-    boolean showReturned;
-    boolean showLibrarian;
+    private boolean showCustomer;
+    private boolean showItems;
+    private boolean showFrom;
+    private boolean showTo;
+    private boolean showReturned;
+    private boolean showLibrarian;
     // Nastavení dotazu
     private int page = 1;
     private int maxRows = Configuration.getInstance().getMaxBorrowRowsCount();
@@ -33,9 +33,6 @@ public class BorrowTableModel extends AbstractTableModel {
     private List<String> resultOfSearch = new ArrayList<>();
     private String filterString = "";
     private boolean isSearching = false;
-
-    
-
 
     public BorrowTableModel() {
         super();
@@ -117,12 +114,12 @@ public class BorrowTableModel extends AbstractTableModel {
             StringBuilder books = new StringBuilder();
             for (Book temp : BorrowService.getInstance().getBooksOfBorrow(b.getBorrowCode())) {
                 if (books.length() > 0) {
-                    books.append("; ");
+                    books.append(", ");
                 }
                 books.append(temp.getTitle());
             }
 
-            tempValues.add(b.getItem().toString());
+            tempValues.add(books.toString());
         }
         if (showFrom) {
             tempValues.add(DateHelper.dateToString(b.getFromDate(), false));

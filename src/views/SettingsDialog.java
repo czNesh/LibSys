@@ -74,9 +74,10 @@ public class SettingsDialog extends javax.swing.JDialog {
         INPborrowDays = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        INPmaxNotificationRows = new javax.swing.JSpinner();
         jPanel12 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        INPlongBorrowDays = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         INPdefaultEmail = new javax.swing.JTextField();
@@ -113,7 +114,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(INPportNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(INPautoStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE))
+                    .addComponent(INPautoStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -324,7 +325,7 @@ public class SettingsDialog extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,7 +402,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addComponent(INPcustomerCity)
                     .addComponent(INPcustomerStreet)
                     .addComponent(INPcustomerPostcode))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,7 +467,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addComponent(INPborrowDays, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,20 +499,36 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         CMPtabbedPanel.addTab("Výpůjčky", jPanel2);
 
-        jLabel5.setText("Záznamů na stránku:");
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Nastavení oznámení"));
 
-        INPmaxNotificationRows.setModel(new javax.swing.SpinnerNumberModel(30, 10, 100, 1));
-        INPmaxNotificationRows.setToolTipText("Vložte číslo od 10 do 100");
+        jLabel5.setText("Upozorňovat na dlouhodobě vypůjčené knihy jsou po");
+
+        INPlongBorrowDays.setModel(new javax.swing.SpinnerNumberModel(1, 1, 5000, 1));
+
+        jLabel8.setText("( dnech )");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(INPlongBorrowDays, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(INPlongBorrowDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -520,23 +537,13 @@ public class SettingsDialog extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(INPmaxNotificationRows, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(INPmaxNotificationRows, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -576,7 +583,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(INPskipLogging)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -652,7 +659,6 @@ public class SettingsDialog extends javax.swing.JDialog {
     private void INPcustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPcustomerEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_INPcustomerEmailActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNcancel;
     private javax.swing.JButton BTNdefault;
@@ -678,7 +684,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox INPisbn13;
     private javax.swing.JCheckBox INPlanguage;
     private javax.swing.JCheckBox INPlocation;
-    private javax.swing.JSpinner INPmaxNotificationRows;
+    private javax.swing.JSpinner INPlongBorrowDays;
     private javax.swing.JCheckBox INPpageCount;
     private javax.swing.JSpinner INPportNumber;
     private javax.swing.JCheckBox INPpublishedYear;
@@ -693,6 +699,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
@@ -727,10 +734,6 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     public JSpinner getINPborrowDays() {
         return INPborrowDays;
-    }
-    
-    public JSpinner getINPmaxNotificationRows() {
-        return INPmaxNotificationRows;
     }
 
     public JSpinner getINPportNumber() {
@@ -807,7 +810,7 @@ public class SettingsDialog extends javax.swing.JDialog {
 
     public JTextField getINPworkspace() {
         return INPworkspace;
-    } 
+    }
 
     public JCheckBox getINPcustomerCity() {
         return INPcustomerCity;
@@ -840,5 +843,8 @@ public class SettingsDialog extends javax.swing.JDialog {
     public JCheckBox getINPcustomerStreet() {
         return INPcustomerStreet;
     }
-    
+
+    public JSpinner getINPlongBorrowDays() {
+        return INPlongBorrowDays;
+    }
 }

@@ -77,4 +77,11 @@ public class DateHelper {
         cal.add(Calendar.DATE, days);
         return cal.getTime();
     }
+
+    public static int dayDiff(Date d1, Date d2) {
+        final long DAY_MILLIS = 1000 * 60 * 60 * 24;
+        long day1 = d1.getTime() / DAY_MILLIS;
+        long day2 = d2.getTime() / DAY_MILLIS;
+        return ((int) (day2 - day1));
+    }
 }

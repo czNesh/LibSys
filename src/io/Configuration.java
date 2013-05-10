@@ -74,6 +74,13 @@ public class Configuration {
     private static final int DEFAULT_BORROW_DAYS = 7;
     //OZNÁMENÍ
     private static final int DEFAULT_MAX_NOTIFICATION_ROWS_COUNT = 30;
+    private static final int DEFAULT_LONG_BORROW_DAYS = 30;
+    private static final boolean DEFAULT_NOTIFICATION_SHOW_TYPE = true;
+    private static final boolean DEFAULT_NOTIFICATION_SHOW_CUSTOMER = true;
+    private static final boolean DEFAULT_NOTIFICATION_SHOW_BORROW_CODE = true;
+    private static final boolean DEFAULT_NOTIFICATION_SHOW_ITEM = true;
+    private static final boolean DEFAULT_NOTIFICATION_SHOW_FROM_DATE = true;
+    private static final boolean DEFAULT_NOTIFICATION_SHOW_TO_DATE = true;
     //ZÁKLADNÍ
     private static final boolean DEFAULT_SHOW_DELETED = false;
     private static final boolean DEFAULT_SKIP_LOGGIN = false;
@@ -158,6 +165,14 @@ public class Configuration {
         prefs.putInt("BORROW_DAYS", DEFAULT_BORROW_DAYS);
         //OZNÁMENÍ
         prefs.putInt("MAX_NOTIFICATION_ROWS_COUNT", DEFAULT_MAX_NOTIFICATION_ROWS_COUNT);
+        prefs.putInt("LONG_BORROW_DAYS", DEFAULT_LONG_BORROW_DAYS);
+        prefs.putBoolean("NOTIFICATION_SHOW_TYPE", DEFAULT_NOTIFICATION_SHOW_TYPE);
+        prefs.putBoolean("NOTIFICATION_SHOW_CUSTOMER", DEFAULT_NOTIFICATION_SHOW_CUSTOMER);
+        prefs.putBoolean("NOTIFICATION_SHOW_BORROW_CODE", DEFAULT_NOTIFICATION_SHOW_BORROW_CODE);
+        prefs.putBoolean("NOTIFICATION_SHOW_ITEM", DEFAULT_NOTIFICATION_SHOW_ITEM);
+        prefs.putBoolean("NOTIFICATION_SHOW_FROM_DATE", DEFAULT_NOTIFICATION_SHOW_FROM_DATE);
+        prefs.putBoolean("NOTIFICATION_SHOW_TO_DATE", DEFAULT_NOTIFICATION_SHOW_TO_DATE);
+
         //ZÁKLADNÍ
         prefs.putBoolean("SHOW_DELETED", DEFAULT_SHOW_DELETED);
         prefs.putBoolean("SKIP_LOGGIN", DEFAULT_SKIP_LOGGIN);
@@ -661,5 +676,67 @@ public class Configuration {
 
     public void setMaxNotificationRowsCount(int in) {
         prefs.putInt("MAX_NOTIFICATION_ROWS", in);
+    }
+
+    public int getLongBorrowDays() {
+        return prefs.getInt("LONG_BORROW_DAYS", DEFAULT_LONG_BORROW_DAYS);
+    }
+
+    public void setLongBorrowDays(int in) {
+        prefs.putInt("LONG_BORROW_DAYS", in);
+    }
+
+    public boolean isNotificationShowType() {
+        return prefs.getBoolean("NOTIFICATION_SHOW_TYPE", DEFAULT_NOTIFICATION_SHOW_TYPE);
+
+    }
+
+    public void setNotificationShowType(boolean in) {
+        prefs.putBoolean("NOTIFICATION_SHOW_TYPE", in);
+    }
+
+    public boolean isNotificationShowCustomer() {
+        return prefs.getBoolean("NOTIFICATION_SHOW_CUSTOMER", DEFAULT_NOTIFICATION_SHOW_CUSTOMER);
+
+    }
+
+    public void setNotificationShowCustomer(boolean in) {
+        prefs.putBoolean("NOTIFICATION_SHOW_CUSTOMER", in);
+    }
+
+    public boolean isNotificationShowBorrowCode() {
+        return prefs.getBoolean("NOTIFICATION_SHOW_BORROW_CODE", DEFAULT_NOTIFICATION_SHOW_BORROW_CODE);
+
+    }
+
+    public void setNotificationShowBorrowCode(boolean in) {
+        prefs.putBoolean("NOTIFICATION_SHOW_BORROW_CODE", in);
+    }
+
+    public boolean isNotificationsShowItem() {
+        return prefs.getBoolean("NOTIFICATION_SHOW_ITEM", DEFAULT_NOTIFICATION_SHOW_ITEM);
+
+    }
+
+    public void setNotificationsShowItem(boolean in) {
+        prefs.putBoolean("NOTIFICATION_SHOW_ITEM", in);
+    }
+
+    public boolean isNotificationShowFrom() {
+        return prefs.getBoolean("NOTIFICATION_SHOW_FROM_DATE", DEFAULT_NOTIFICATION_SHOW_FROM_DATE);
+
+    }
+
+    public void setNotificationShowFrom(boolean in) {
+        prefs.putBoolean("NOTIFICATION_SHOW_FROM_DATE", in);
+    }
+
+    public boolean isNotificationShowTo() {
+        return prefs.getBoolean("NOTIFICATION_SHOW_TO_DATE", DEFAULT_NOTIFICATION_SHOW_TO_DATE);
+
+    }
+
+    public void setNotificationShowTo(boolean in) {
+        prefs.putBoolean("NOTIFICATION_SHOW_TO_DATE", in);
     }
 }

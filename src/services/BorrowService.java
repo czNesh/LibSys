@@ -4,11 +4,11 @@
  */
 package services;
 
-import coding.Barcode;
 import controllers.AppController;
 import io.ApplicationLog;
 import controllers.RefreshController;
 import helpers.DateHelper;
+import io.Configuration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +20,7 @@ import models.entity.Borrow;
 import models.entity.Customer;
 import models.entity.SystemUser;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Projections;
@@ -316,6 +317,7 @@ public class BorrowService extends BaseDAO<Borrow> {
                 save(b);
             }
         }
+        RefreshController.getInstance().refreshNotificationTab();
     }
 
     public void notReturnBorrows(List<Book> tempList, String borrowCode) {
@@ -341,14 +343,35 @@ public class BorrowService extends BaseDAO<Borrow> {
         closeSession();
         return result;
     }
-    
-    public void splitBorrows(Date from,Date to,List<Borrow> tempBorrow){
+
+    public void splitBorrows(Date from, Date to, List<Borrow> tempBorrow) {
         String newBorrowCode = getFreeBorrowedCode();
-        for(Borrow b : tempBorrow){
+        for (Borrow b : tempBorrow) {
             b.setFromDate(from);
             b.setToDate(to);
             b.setBorrowCode(newBorrowCode);
             save(b);
         }
+    }
+
+    public List<Borrow> getLateBorrows() {
+        openSession();
+        Date currentDate = DateHelper.getCurrentDate(false);
+        Query q = getSession().createQuery("SELECT t FROM Borrow t WHERE :currentDate > t.toDate AND t.returned = :returned ORDER BY t.id ASC");
+        q.setParameter("currentDate", currentDate);
+        q.setParameter("returned", false);
+        List<Borrow> result = q.list();
+        closeSession();
+        return result;
+    }
+
+    public List<Borrow> getLongBorrows() {
+        openSession();
+        int days = Configuration.getInstance().getLongBorrowDays();
+        Query q = getSession().createQuery("SELECT t FROM Borrow t WHERE ((t.toDate - t.fromDate)/86400000) > :days ORDER BY t.id ASC");
+        q.setParameter("days", days);
+        List<Borrow> result = q.list();
+        closeSession();
+        return result;
     }
 }

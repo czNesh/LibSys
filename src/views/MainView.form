@@ -313,7 +313,7 @@
     </Container>
     <Container class="javax.swing.JTabbedPane" name="TabPanel">
       <Properties>
-        <Property name="name" type="java.lang.String" value="bookFilterShow" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Knihovna"/>
@@ -839,22 +839,22 @@
                           <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="bookTablePrevButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNnotificationPrev" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bookTableInputNumber2" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="INPnotificationPage" min="-2" pref="36" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bookTableTotalPage2" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="INPnotificationTotalPage" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bookTableNextButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNnotificationNext" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="filterButton2" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Component id="BTNnotificationFilter" min="-2" pref="164" max="-2" attributes="0"/>
                               <EmptySpace pref="260" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="BTNnotificationStopSearch" min="-2" pref="160" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField5" min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="INPnotificationFilter" min="-2" pref="204" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -866,19 +866,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="filterButton2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BTNnotificationFilter" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="BTNnotificationStopSearch" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="INPnotificationFilter" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane4" pref="407" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bookTableNextButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bookTablePrevButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bookTableTotalPage2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="bookTableInputNumber2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BTNnotificationNext" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BTNnotificationPrev" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPnotificationTotalPage" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPnotificationPage" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
@@ -886,12 +886,13 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="filterButton2">
+            <Component class="javax.swing.JButton" name="BTNnotificationFilter">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/view-icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Volby zobrazen&#xed;"/>
+                <Property name="name" type="java.lang.String" value="filter" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -899,7 +900,10 @@
                 <Property name="text" type="java.lang.String" value="Rychl&#xfd; filtr:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField5">
+            <Component class="javax.swing.JTextField" name="INPnotificationFilter">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="filter" noResource="true"/>
+              </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane4">
               <AuxValues>
@@ -908,7 +912,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="catalogTable2">
+                <Component class="javax.swing.JTable" name="TABnotification">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="0"/>
@@ -916,6 +920,7 @@
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0"/>
                     </Property>
+                    <Property name="name" type="java.lang.String" value="notificationTable" noResource="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -923,40 +928,45 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="bookTablePrevButton2">
+            <Component class="javax.swing.JButton" name="BTNnotificationPrev">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;"/>
-                <Property name="name" type="java.lang.String" value="bookTablePrevPage" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="prevPage" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="bookTableInputNumber2">
+            <Component class="javax.swing.JTextField" name="INPnotificationPage">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="1"/>
+                <Property name="name" type="java.lang.String" value="page" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="bookTableTotalPage2">
+            <Component class="javax.swing.JLabel" name="INPnotificationTotalPage">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="text" type="java.lang.String" value="/ 5"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="bookTableNextButton2">
+            <Component class="javax.swing.JButton" name="BTNnotificationNext">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;"/>
-                <Property name="name" type="java.lang.String" value="bookTableNextPage" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="nextPage" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="BTNnotificationStopSearch">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/cancel_icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Zru&#x161;it hled&#xe1;n&#xed;"/>
+                <Property name="name" type="java.lang.String" value="stop" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNnotificationStopSearchActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="BTNnotificationStopSearch.setVisible(false);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
