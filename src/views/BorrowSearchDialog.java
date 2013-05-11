@@ -20,6 +20,7 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
     public BorrowSearchDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNsearch);
     }
 
     /**
@@ -53,6 +54,7 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
         BTNtoDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vyhledání půjček");
         setResizable(false);
 
         BTNsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.gif"))); // NOI18N

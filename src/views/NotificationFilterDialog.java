@@ -20,6 +20,7 @@ public class NotificationFilterDialog extends javax.swing.JDialog {
     public NotificationFilterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNok);
     }
 
     /**
@@ -42,6 +43,7 @@ public class NotificationFilterDialog extends javax.swing.JDialog {
         BTNok = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Nastavení zobrazení");
         setResizable(false);
 
         INPmaxRows.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));

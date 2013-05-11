@@ -56,6 +56,7 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         inputLastName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Přidání uživatele");
         setResizable(false);
 
         jLabel1.setText("Jméno:");
@@ -74,12 +75,16 @@ public class NewCustomerDialog extends javax.swing.JDialog {
 
         inputFirstName.setToolTipText("Vložte jméno a přijmení. Lze vložit i více jmen");
         inputFirstName.setName(""); // NOI18N
+        inputFirstName.setNextFocusableComponent(inputLastName);
 
         inputStreet.setToolTipText("Vložte prosím název ulice a orientační číslo budovy");
+        inputStreet.setNextFocusableComponent(inputCity);
 
         inputCity.setToolTipText("Vložte město");
+        inputCity.setNextFocusableComponent(inputPostcode);
 
         inputPostcode.setToolTipText("Vložte poštovní směrovací číslo");
+        inputPostcode.setNextFocusableComponent(inputCountry);
         inputPostcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputPostcodeActionPerformed(evt);
@@ -88,26 +93,34 @@ public class NewCustomerDialog extends javax.swing.JDialog {
 
         inputCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         inputCountry.setToolTipText("Vyberte jednu ze zemí");
+        inputCountry.setNextFocusableComponent(inputEmail);
 
         inputEmail.setToolTipText("Vložte email");
+        inputEmail.setNextFocusableComponent(inputPhone);
 
         inputPhone.setToolTipText("Vložte telefonní čislo, včetně předvolby");
+        inputPhone.setNextFocusableComponent(inputNotes);
 
         saveButton.setText("Uložit");
         saveButton.setToolTipText("Stiskněte pro uložení nového uživatele");
         saveButton.setName("save"); // NOI18N
+        saveButton.setNextFocusableComponent(cancelButton);
 
         cancelButton.setText("Zrušit");
         cancelButton.setToolTipText("Zruší operaci a zavře okno");
         cancelButton.setName("cancel"); // NOI18N
+        cancelButton.setNextFocusableComponent(inputFirstName);
 
         jLabel8.setText("Poznámky:");
 
         inputNotes.setColumns(20);
         inputNotes.setRows(5);
+        inputNotes.setNextFocusableComponent(saveButton);
         jScrollPane1.setViewportView(inputNotes);
 
         jLabel9.setText("Příijmení:");
+
+        inputLastName.setNextFocusableComponent(inputStreet);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

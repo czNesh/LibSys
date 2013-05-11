@@ -25,6 +25,7 @@ public class BookDetailDialog extends javax.swing.JDialog {
     public BookDetailDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(closeButton);
     }
 
     /**

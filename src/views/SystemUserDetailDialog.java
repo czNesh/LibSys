@@ -22,6 +22,7 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
     public SystemUserDetailDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNcancel);
     }
 
     /**
@@ -51,37 +52,45 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
         INPpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detail uživatele");
         setResizable(false);
 
         jLabel1.setText("Jméno:");
 
         INPfirstName.setEditable(false);
+        INPfirstName.setNextFocusableComponent(INPlastName);
 
         jLabel2.setText("Přijmení:");
 
         INPlastName.setEditable(false);
+        INPlastName.setNextFocusableComponent(INPlogin);
 
         jLabel3.setText("Login:");
 
         INPlogin.setEditable(false);
+        INPlogin.setNextFocusableComponent(INPpassword);
 
         jLabel4.setText("Heslo:");
 
         jLabel5.setText("Email:");
 
         INPemail.setEditable(false);
+        INPemail.setNextFocusableComponent(INPmaster);
 
         INPmaster.setText("Správce:");
         INPmaster.setEnabled(false);
         INPmaster.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         INPmaster.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         INPmaster.setIconTextGap(120);
+        INPmaster.setNextFocusableComponent(BTNsave);
 
         BTNsave.setText("Upravit");
         BTNsave.setName("edit"); // NOI18N
+        BTNsave.setNextFocusableComponent(BTNcancel);
 
         BTNcancel.setText("Zrušit");
         BTNcancel.setName("cancel"); // NOI18N
+        BTNcancel.setNextFocusableComponent(INPfirstName);
 
         BTNdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trash-can-delete.png"))); // NOI18N
         BTNdelete.setToolTipText("Smazat uživatele");
@@ -120,6 +129,8 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
                 .addComponent(BTNdelete)
                 .addContainerGap())
         );
+
+        INPpassword.setNextFocusableComponent(INPemail);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

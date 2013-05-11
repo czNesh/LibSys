@@ -22,6 +22,7 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
     public CustomerDetailDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNclose);
     }
 
     /**
@@ -69,7 +70,7 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
         TABborrows = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Informace o uživateli");
+        setTitle("Detail zákazníka");
         setMinimumSize(new java.awt.Dimension(752, 547));
         setResizable(false);
 

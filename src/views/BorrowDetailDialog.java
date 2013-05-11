@@ -21,6 +21,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
     public BorrowDetailDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNclose);
     }
 
     /**

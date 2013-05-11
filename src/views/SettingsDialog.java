@@ -24,6 +24,7 @@ public class SettingsDialog extends javax.swing.JDialog {
     public SettingsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNsave);
     }
 
     /**
@@ -97,7 +98,7 @@ public class SettingsDialog extends javax.swing.JDialog {
         BTNdefault = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nastavení");
+        setTitle("Nastavení programu");
         setResizable(false);
 
         CMPtabbedPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);

@@ -22,6 +22,7 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
     public CustomerFilterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNok);
     }
 
     /**
@@ -50,7 +51,7 @@ public class CustomerFilterDialog extends javax.swing.JDialog {
         INPorderType = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Zobrazit");
+        setTitle("Nastavení zobrazení");
         setResizable(false);
 
         INPssn.setText("Číslo uživatele");

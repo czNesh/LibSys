@@ -22,6 +22,7 @@ public class BorrowSplitDialog extends javax.swing.JDialog {
     public BorrowSplitDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNok);
     }
 
     /**
@@ -52,9 +53,11 @@ public class BorrowSplitDialog extends javax.swing.JDialog {
 
         BTNto.setText("...");
         BTNto.setName("dateTo"); // NOI18N
+        BTNto.setNextFocusableComponent(BTNok);
 
         BTNfrom.setText("...");
         BTNfrom.setName("dateFrom"); // NOI18N
+        BTNfrom.setNextFocusableComponent(BTNto);
 
         INPfrom.setEditable(false);
         INPfrom.setBorder(null);
@@ -64,9 +67,11 @@ public class BorrowSplitDialog extends javax.swing.JDialog {
 
         BTNok.setText("Ok");
         BTNok.setName("ok"); // NOI18N
+        BTNok.setNextFocusableComponent(BTNcancel);
 
         BTNcancel.setText("Zrušit");
         BTNcancel.setName("cancel"); // NOI18N
+        BTNcancel.setNextFocusableComponent(BTNfrom);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

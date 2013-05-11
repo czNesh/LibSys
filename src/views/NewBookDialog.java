@@ -7,7 +7,6 @@ package views;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import helpers.DateHelper;
@@ -25,7 +24,7 @@ public class NewBookDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         getRootPane().setDefaultButton(saveButton);
-        inputBuyedDate.setText(DateHelper.dateToString(new Date(), false));
+        inputBuyedDate.setText(DateHelper.getCurrentDateString(false));
     }
 
     /**
@@ -77,7 +76,7 @@ public class NewBookDialog extends javax.swing.JDialog {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Přidání nového titulu");
+        setTitle("Přidání knih");
         setResizable(false);
 
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/we-search.png"))); // NOI18N

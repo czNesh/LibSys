@@ -10,7 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="P&#x159;id&#xe1;n&#xed; nov&#xe9;ho titulu"/>
+    <Property name="title" type="java.lang.String" value="P&#x159;id&#xe1;n&#xed; knih"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

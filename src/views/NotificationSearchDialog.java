@@ -20,6 +20,7 @@ public class NotificationSearchDialog extends javax.swing.JDialog {
     public NotificationSearchDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNsearch);
     }
 
     /**
@@ -51,6 +52,7 @@ public class NotificationSearchDialog extends javax.swing.JDialog {
         BTNfrom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vyhledávání oznámení");
         setResizable(false);
 
         jLabel6.setText("Oznámení:");

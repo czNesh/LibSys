@@ -93,12 +93,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
         <Property name="name" type="java.lang.String" value="dateTo" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="BTNok"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BTNfrom">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
         <Property name="name" type="java.lang.String" value="dateFrom" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="BTNto"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="INPfrom">
@@ -121,12 +127,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ok"/>
         <Property name="name" type="java.lang.String" value="ok" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="BTNcancel"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="BTNcancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
         <Property name="name" type="java.lang.String" value="cancel" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="BTNfrom"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

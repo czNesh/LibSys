@@ -21,6 +21,7 @@ public class NotificationDetailDialog extends javax.swing.JDialog {
     public NotificationDetailDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNclose);
     }
 
     /**
@@ -57,6 +58,7 @@ public class NotificationDetailDialog extends javax.swing.JDialog {
         TABbooks = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detail oznámení");
         setResizable(false);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Údaje o oznámení"));

@@ -19,6 +19,7 @@ public class BookSearchDialog extends javax.swing.JDialog {
     public BookSearchDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(searchButton);
     }
 
     /**

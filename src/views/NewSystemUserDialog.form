@@ -96,8 +96,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BTNsave" pref="108" max="32767" attributes="0"/>
-                      <Component id="BTNcancel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="BTNcancel" pref="108" max="32767" attributes="0"/>
+                      <Component id="BTNsave" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -110,22 +110,21 @@
                   <Component id="BTNsave" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BTNcancel" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="116" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JToggleButton" name="BTNsave">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ulo&#x17e;it"/>
-            <Property name="name" type="java.lang.String" value="save" noResource="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="BTNcancel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
             <Property name="name" type="java.lang.String" value="cancel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="BTNsave">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ulo&#x17e;it"/>
           </Properties>
         </Component>
       </SubComponents>

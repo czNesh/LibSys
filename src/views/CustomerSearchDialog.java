@@ -19,6 +19,7 @@ public class CustomerSearchDialog extends javax.swing.JDialog {
     public CustomerSearchDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(BTNsearch);
     }
 
     /**

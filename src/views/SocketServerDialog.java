@@ -21,6 +21,7 @@ public class SocketServerDialog extends javax.swing.JDialog {
     public SocketServerDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(hideButton);
     }
 
     /**
@@ -57,9 +58,11 @@ public class SocketServerDialog extends javax.swing.JDialog {
 
         hideButton.setText("Schovat");
         hideButton.setName("hideButton"); // NOI18N
+        hideButton.setNextFocusableComponent(serverSwitchButton);
 
         serverSwitchButton.setText("Zapnout server");
         serverSwitchButton.setName("switchButton"); // NOI18N
+        serverSwitchButton.setNextFocusableComponent(hideButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

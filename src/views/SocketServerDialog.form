@@ -95,12 +95,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Schovat"/>
         <Property name="name" type="java.lang.String" value="hideButton" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="serverSwitchButton"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="serverSwitchButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zapnout server"/>
         <Property name="name" type="java.lang.String" value="switchButton" noResource="true"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="hideButton"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

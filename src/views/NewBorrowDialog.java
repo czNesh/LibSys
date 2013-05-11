@@ -22,6 +22,7 @@ public class NewBorrowDialog extends javax.swing.JDialog {
     public NewBorrowDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(confirmButton);
         inputDateFrom.setText(DateHelper.getCurrentDateString(false));
         inputDateTo.setText(DateHelper.dateToString(DateHelper.plusDays(DateHelper.getCurrentDate(false), Configuration.getInstance().getBorrowDays()), false));
     }
@@ -69,6 +70,7 @@ public class NewBorrowDialog extends javax.swing.JDialog {
 
             }
         ));
+        selectedBooksTable.setNextFocusableComponent(addBookButton);
         jScrollPane1.setViewportView(selectedBooksTable);
 
         jLabel1.setText("Zákazník:");
@@ -80,6 +82,7 @@ public class NewBorrowDialog extends javax.swing.JDialog {
 
         searchCustomerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.gif"))); // NOI18N
         searchCustomerButton.setName("searchCustomer"); // NOI18N
+        searchCustomerButton.setNextFocusableComponent(dateFromButton);
 
         jLabel4.setText("Do:");
 
@@ -92,12 +95,15 @@ public class NewBorrowDialog extends javax.swing.JDialog {
         addBookButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icon_mini_add.png"))); // NOI18N
         addBookButton.setText("Přidat knihu");
         addBookButton.setName("addBook"); // NOI18N
+        addBookButton.setNextFocusableComponent(BTNremove);
 
         confirmButton.setText("OK");
         confirmButton.setName("confirm"); // NOI18N
+        confirmButton.setNextFocusableComponent(cancelButton);
 
         cancelButton.setText("Zrušit");
         cancelButton.setName("cancel"); // NOI18N
+        cancelButton.setNextFocusableComponent(searchCustomerButton);
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -106,14 +112,17 @@ public class NewBorrowDialog extends javax.swing.JDialog {
 
         dateFromButton.setText("...");
         dateFromButton.setName("dateFrom"); // NOI18N
+        dateFromButton.setNextFocusableComponent(dateToButton);
 
         dateToButton.setText("...");
         dateToButton.setName("dateTo"); // NOI18N
+        dateToButton.setNextFocusableComponent(selectedBooksTable);
 
         BTNremove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel_icon.png"))); // NOI18N
         BTNremove.setText("Odebrat");
         BTNremove.setToolTipText("");
         BTNremove.setName("removeBook"); // NOI18N
+        BTNremove.setNextFocusableComponent(confirmButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
