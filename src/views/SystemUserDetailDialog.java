@@ -121,8 +121,6 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        INPpassword.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

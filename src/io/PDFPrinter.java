@@ -65,7 +65,7 @@ public class PDFPrinter extends PdfPageEventHelper {
             t.getDefaultCell().setColspan(2);
             t.setWidths(new int[]{350, 1000});
             t.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-            t.addCell(Image.getInstance(getClass().getResource("../images/header.jpg")));
+            t.addCell(Image.getInstance(getClass().getResource("/images/header.jpg")));
             t.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             t.addCell(formatOutput("Záznam knihy", 12, true));
             t.getDefaultCell().setColspan(1);
@@ -188,7 +188,7 @@ public class PDFPrinter extends PdfPageEventHelper {
             t.getDefaultCell().setColspan(2);
             t.setWidths(new int[]{350, 1000});
             t.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-            t.addCell(Image.getInstance(getClass().getResource("../images/header.jpg")));
+            t.addCell(Image.getInstance(getClass().getResource("/images/header.jpg")));
             t.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             t.addCell(formatOutput("Záznam uživatele", 12, true));
             t.getDefaultCell().setColspan(1);
@@ -268,7 +268,7 @@ public class PDFPrinter extends PdfPageEventHelper {
             t.getDefaultCell().setColspan(2);
             t.setWidths(new int[]{350, 1000});
             t.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-            t.addCell(Image.getInstance(getClass().getResource("../images/header.jpg")));
+            t.addCell(Image.getInstance(getClass().getResource("/images/header.jpg")));
             t.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             t.addCell(formatOutput("Záznam půjčky", 12, true));
             t.getDefaultCell().setColspan(1);
@@ -368,7 +368,7 @@ public class PDFPrinter extends PdfPageEventHelper {
             t.getDefaultCell().setColspan(2);
             t.setWidths(new int[]{350, 1000});
             t.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-            t.addCell(Image.getInstance(getClass().getResource("../images/header.jpg")));
+            t.addCell(Image.getInstance(getClass().getResource("/images/header.jpg")));
             t.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             t.addCell(formatOutput("Záznam oznámení", 12, true));
             t.getDefaultCell().setColspan(1);
@@ -475,9 +475,9 @@ public class PDFPrinter extends PdfPageEventHelper {
 
         BaseFont bf;
         if (bold) {
-            bf = BaseFont.createFont("timesbd.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            bf = BaseFont.createFont("font/timesbd.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         } else {
-            bf = BaseFont.createFont("times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            bf = BaseFont.createFont("font/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         }
         Phrase p = new Phrase();
         p.setFont(new Font(bf, size));

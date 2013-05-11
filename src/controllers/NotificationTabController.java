@@ -251,9 +251,15 @@ public class NotificationTabController {
                     updateView();
                     break;
                 case "barcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 3) {
+                        break;
+                    }
                     JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do BARCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case "qrcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 3) {
+                        break;
+                    }
                     JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do QRCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 default:

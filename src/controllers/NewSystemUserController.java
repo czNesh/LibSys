@@ -78,7 +78,7 @@ public class NewSystemUserController extends BaseController {
         if (password == null || password.isEmpty()) {
             validationLog.append("Vyplňte heslo\n");
         } else {
-            u.setPassword(password);
+            u.setPassword(SystemUserService.getInstance().getHash(password));
         }
         if (email == null || !email.matches(".+@.+\\.[a-z]+")) {
             validationLog.append("Neplatný email\n");

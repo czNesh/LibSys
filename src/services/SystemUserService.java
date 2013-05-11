@@ -6,7 +6,12 @@ package services;
 
 import io.Configuration;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.dao.BaseDAO;
 import models.entity.SystemUser;
 import org.hibernate.Criteria;
@@ -38,7 +43,7 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
 
     public SystemUser login(String login, String password) {
         getParameters().put("login", login);
-        getParameters().put("password", password);
+        getParameters().put("password", getHash(password));
         return getUnique("login = :login AND password = :password");
     }
 
@@ -52,7 +57,7 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
             s.setDeleted(false);
             s.setFirstName("Defaultní");
             s.setLastName("uživatel");
-            s.setPassword("y6c1y5x4c5y4x2c45asvxcv");
+            s.setPassword(getHash("y6c1y5x4c5y4x2c45asvxcv"));
             s.setEmail(Configuration.getInstance().getDefaultEmail());
             create(s);
         }
@@ -98,5 +103,16 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
         SystemUser u = (SystemUser) c.uniqueResult();
         closeSession();
         return (u == null);
+    }
+
+    public String getHash(String in) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(in.getBytes("UTF-8")); // Change this to "UTF-16" if needed
+            byte[] digest = md.digest();
+            return String.valueOf(digest);
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            return null;
+        }
     }
 }

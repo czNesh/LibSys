@@ -85,7 +85,7 @@ public class SystemUserDetailController extends BaseController {
                     dialog.getINPpassword().setText("");
                     return;
                 }
-                user.setPassword(password);
+                user.setPassword(SystemUserService.getInstance().getHash(password));
             }
             user.setFirstName(firstName);
             user.setLastName(lastName);
