@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import views.HelpDialog;
 import views.MainView;
 
 /**
@@ -16,31 +17,29 @@ import views.MainView;
  * @author Nesh
  */
 public class MenuController implements ActionListener {
-
+    
     private MainView view;
-
+    
     public MenuController(MainView view) {
         this.view = view;
         initListeners();
     }
-
+    
     private void initListeners() {
         view.getNewItemButton().addActionListener(this);
-        view.getNewCustomerMenuItem().addActionListener(this);
-        view.getCustomerListMenuItem().addActionListener(this);
         view.getNewBorrowButton().addActionListener(this);
         view.getLogoutMenuItem().addActionListener(this);
         view.getExitMenuItem().addActionListener(this);
         view.getNewCustomerButton().addActionListener(this);
-        view.getQRCodeButton().addActionListener(this);
-        view.getBarcodeButton().addActionListener(this);
         view.getConnectionButton().addActionListener(this);
         view.getSettingsMenuItem().addActionListener(this);
+        view.getHelpMenuItem().addActionListener(this);
     }
-
+    
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { 
         switch (((JComponent) e.getSource()).getName()) {
+          
             case "newItem":
                 NewBookController newItemController = new NewBookController(view);
                 newItemController.showView();
@@ -50,11 +49,6 @@ public class MenuController implements ActionListener {
                 NewBorrowController bookBorrowController = new NewBorrowController(view);
                 bookBorrowController.showView();
                 break;
-            case "newCustomer":
-                NewCustomerController newCustomerController = new NewCustomerController(view);
-                newCustomerController.showView();
-
-                break;
             case "newCustomerButton":
                 NewCustomerController newCustomerController2 = new NewCustomerController(view);
                 newCustomerController2.showView();
@@ -62,10 +56,6 @@ public class MenuController implements ActionListener {
             case "browseCustomers":
                 CustomerListController customerListController = new CustomerListController(view, false);
                 customerListController.showView();
-                break;
-            case "importItems":
-                break;
-            case "exportItems":
                 break;
             case "connection":
                 SocketServerController.getInstance().showView();
@@ -89,6 +79,10 @@ public class MenuController implements ActionListener {
                     System.exit(1);
                 }
                 break;
+            case "help":
+                HelpDialog dialog = new HelpDialog(view, false);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
             default:
                 System.out.println("Žádná akce");
                 break;

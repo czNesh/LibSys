@@ -94,6 +94,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         setTitle("Informace o půjčce");
         setMaximumSize(new java.awt.Dimension(936, 579));
         setMinimumSize(new java.awt.Dimension(936, 579));
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Údaje o zákazníkovi"));
 

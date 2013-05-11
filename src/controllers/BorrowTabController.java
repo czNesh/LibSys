@@ -4,8 +4,11 @@
  */
 package controllers;
 
+import coding.Barcode;
+import coding.QRCode;
 import helpers.DateHelper;
 import io.Configuration;
+import io.FileManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,6 +16,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -71,12 +75,13 @@ public class BorrowTabController {
         mainView.getBorrowFilterButton().addActionListener(a);
         mainView.getBTNsearch().addActionListener(a);
         mainView.getBTNstopBorrowSearch().addActionListener(a);
+        mainView.getQrcodeButton().addActionListener(a);
+        mainView.getBarcodeButton().addActionListener(a);
 
         // KeyListener
         BorrowTabKeyListener k = new BorrowTabKeyListener();
         mainView.getINPborrowFilter().addKeyListener(k);
         mainView.getINPborrowPageNumber().addKeyListener(k);
-        mainView.getBorrowTable().addKeyListener(k);
 
         // FILTER Listeners
         filter.getBTNok().addActionListener(a);
@@ -273,6 +278,40 @@ public class BorrowTabController {
                     updateView();
                     filter.setVisible(false);
                     break;
+                case "barcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 2) {
+                        break;
+                    }
+                    if (mainView.getBorrowTable().getSelectedRowCount() > 0) {
+                        List<Borrow> borrows = tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows());
+                        String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
+                        FileManager.getInstance().createDir(folderName);
+
+                        for (Borrow b : borrows) {
+                            FileManager.getInstance().saveImage(folderName + "/" + b.getBorrowCode(), Barcode.encode(b.getBorrowCode()));
+                        }
+                        FileManager.getInstance().open(folderName + "/");
+                    } else {
+                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "qrcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 2) {
+                        break;
+                    }
+                    if (mainView.getBorrowTable().getSelectedRowCount() > 0) {
+                        List<Borrow> borrows = tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows());
+                        String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
+                        FileManager.getInstance().createDir(folderName);
+
+                        for (Borrow b : borrows) {
+                            FileManager.getInstance().saveImage(folderName + "/" + b.getBorrowCode(), QRCode.encode(b.getBorrowCode()));
+                        }
+                        FileManager.getInstance().open(folderName + "/");
+                    } else {
+                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -316,26 +355,6 @@ public class BorrowTabController {
                         updateView();
                     }
                     break;
-                case "borrowTable":
-
-                    if (mainView.getBorrowTable().getSelectedRows().length == 0) {
-                        return;
-                    }
-                    int isSure = JOptionPane.showInternalConfirmDialog(mainView.getContentPane(), "Opravdu chcete smazat záznamy o půjčce?", "Opravdu smazat?", JOptionPane.OK_CANCEL_OPTION);
-                    if (isSure == JOptionPane.OK_OPTION) {
-                        for (Borrow b : tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows())) {
-                            if (BorrowService.getInstance().isAllReturned(b.getBorrowCode())) {
-                                BorrowService.getInstance().delete(b);
-                            } else {
-                                int isSure2 = JOptionPane.showInternalConfirmDialog(mainView.getContentPane(), "Výpůjčka je aktivní, opravdu smazat?", "Opravdu smazat", JOptionPane.ERROR_MESSAGE);
-                                if (isSure2 == JOptionPane.OK_OPTION) {
-                                    BorrowService.getInstance().delete(b);
-                                }
-                            }
-                        }
-                    }
-                    break;
-
                 default:
                     break;
             }

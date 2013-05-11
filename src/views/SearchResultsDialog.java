@@ -39,6 +39,7 @@ public class SearchResultsDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         resultsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

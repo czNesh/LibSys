@@ -54,6 +54,7 @@ public class BookSearchDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vyledávání knih");
+        setResizable(false);
 
         jLabel5.setText("Rok vydání:");
 

@@ -100,7 +100,7 @@ public class BookDetailController extends BaseController {
 
         // Stejné položky        
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
-        List<Book> books = BookService.getInstance().getBooksByVolumeCode(book.getVolumeCode(), false);
+        List<Book> books = BookService.getInstance().getBooksByVolumeCode(book.getVolumeCode(), true);
 
         for (Book b : books) {
             comboBoxModel.addElement(b.getBarcode());
@@ -182,14 +182,16 @@ public class BookDetailController extends BaseController {
             }
         }
 
-        if (book.isDeleted()) {
-            dialog.getBTNrenew().setVisible(true);
-            dialog.getBTNdelete().setVisible(false);
-            dialog.getBTNcheckItem().setVisible(false);
-        }
+
+        dialog.getBTNrenew().setVisible(book.isDeleted());
+        dialog.getBTNdelete().setVisible(!book.isDeleted());
+        dialog.getBTNcheckItem().setVisible(!book.isDeleted());
+
 
         // Posledni výpůjčky
         dialog.getLastBorrowTable().setModel(tableModel);
+        tableModel.fireTableDataChanged();
+
     }
 
     private class BookDetailKeyListener implements KeyListener {
@@ -213,6 +215,12 @@ public class BookDetailController extends BaseController {
             switch (((JComponent) e.getSource()).getName()) {
 
                 case "genres":
+                    //potlaceni mezer
+                    if (dialog.getInfoGenre().getText().endsWith(" ")) {
+                        dialog.getInfoGenre().setText(dialog.getInfoGenre().getText().trim());
+                        return;
+                    }
+
                     // pokud se nezapise znak - hned skonci
                     if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
                         return;
@@ -263,6 +271,7 @@ public class BookDetailController extends BaseController {
                 Borrow b = (Borrow) tableModel.getBorrow(dialog.getLastBorrowTable().getSelectedRow());
                 BorrowDetailController bdc = new BorrowDetailController(b);
                 bdc.showView();
+                showData();
             }
         }
 
@@ -431,6 +440,7 @@ public class BookDetailController extends BaseController {
                 dialog.getBTNdelete().setVisible(true);
                 dialog.getBTNcheckItem().setVisible(true);
             }
+            showData();
         }
 
         private void saveBook() {

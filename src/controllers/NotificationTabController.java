@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import helpers.DateHelper;
 import io.Configuration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +12,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import models.NotificationTableModel;
+import models.entity.Notification;
+import views.DatePicker;
 import views.MainView;
 import views.NotificationFilterDialog;
 import views.NotificationSearchDialog;
@@ -62,6 +67,8 @@ public class NotificationTabController {
         mainView.getBTNnotificationPrev().addActionListener(a);
         mainView.getBTNnotificationStopSearch().addActionListener(a);
         mainView.getBTNsearch().addActionListener(a);
+        mainView.getQrcodeButton().addActionListener(a);
+        mainView.getBarcodeButton().addActionListener(a);
 
         // FILTER
         filter.getBTNok().addActionListener(a);
@@ -70,7 +77,9 @@ public class NotificationTabController {
         nsd.getBTNsearch().addActionListener(a);
         nsd.getBTNreset().addActionListener(a);
         nsd.getBTNclose().addActionListener(a);
-        
+        nsd.getBTNfrom().addActionListener(a);
+        nsd.getBTNto().addActionListener(a);
+
         NotificationTabMouseListener m = new NotificationTabMouseListener();
         mainView.getTABnotification().addMouseListener(m);
     }
@@ -120,6 +129,11 @@ public class NotificationTabController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                Notification temp = tableModel.getNotification(mainView.getTABnotification().getSelectedRow());
+                NotificationDetailController ndc = new NotificationDetailController(temp);
+                ndc.showView();
+            }
         }
 
         @Override
@@ -196,7 +210,26 @@ public class NotificationTabController {
                     updateView();
                     mainView.getBTNnotificationStopSearch().setVisible(false);
                     break;
+                case "fromDate":
+                    DatePicker dp = new DatePicker(null, true);
+                    dp.setLocationRelativeTo(null);
+                    dp.setVisible(true);
 
+                    if (dp.getDate() != null) {
+                        Date d = dp.getDate();
+                        nsd.getINPfrom().setText(DateHelper.dateToString(d, false));
+                    }
+                    break;
+                case "toDate":
+                    DatePicker dp2 = new DatePicker(null, true);
+                    dp2.setLocationRelativeTo(null);
+                    dp2.setVisible(true);
+
+                    if (dp2.getDate() != null) {
+                        Date d2 = dp2.getDate();
+                        nsd.getINPto().setText(DateHelper.dateToString(d2, false));
+                    }
+                    break;
                 case "search":
                     tableModel.search(
                             nsd.getINPborrowCode().getText(),
@@ -216,6 +249,12 @@ public class NotificationTabController {
                 case "prevPage":
                     tableModel.prevPage();
                     updateView();
+                    break;
+                case "barcode":
+                    JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do BARCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case "qrcode":
+                    JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do QRCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 default:
                     break;

@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 import models.BorrowTableModel;
 import models.entity.Borrow;
 import models.entity.Customer;
-import services.BookService;
 import services.BorrowService;
 import services.CustomerService;
 import views.CustomerDetailDialog;
@@ -51,6 +50,7 @@ public class CustomerDetailController extends BaseController {
     private void showData() {
         tableModel = new BorrowTableModel(BorrowService.getInstance().getBorrowsOfCustomer(customer.getId()));
         dialog.getTABborrows().setModel(tableModel);
+        tableModel.fireTableDataChanged();
 
         dialog.getINPssn().setText(String.valueOf(customer.getSSN()));
         dialog.getINPfirstName().setText(customer.getFirstName());
@@ -312,6 +312,8 @@ public class CustomerDetailController extends BaseController {
                 Borrow b = (Borrow) tableModel.getBorrow(dialog.getTABborrows().getSelectedRow());
                 BorrowDetailController bdc = new BorrowDetailController(b);
                 bdc.showView();
+                
+                showData();
             }
         }
 

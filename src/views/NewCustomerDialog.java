@@ -56,6 +56,7 @@ public class NewCustomerDialog extends javax.swing.JDialog {
         inputLastName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Jméno:");
 

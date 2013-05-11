@@ -42,6 +42,7 @@ public class NotificationFilterDialog extends javax.swing.JDialog {
         BTNok = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         INPmaxRows.setModel(new javax.swing.SpinnerNumberModel(10, 10, 100, 1));
 

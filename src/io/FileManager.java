@@ -66,4 +66,31 @@ public class FileManager {
         } catch (Exception ert) {
         }
     }
+
+    public void open(String path) {
+        workSpace = Configuration.getInstance().getWorkspace();
+
+        try {
+            File f = new File(workSpace + "/" + path);
+            if (f.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(f);
+                } else {
+                    System.out.println("Soubor není podprován");
+                }
+
+            }
+        } catch (Exception ert) {
+        }
+    }
+
+    public void createDir(String folderName) {
+        workSpace = Configuration.getInstance().getWorkspace();
+        File theDir = new File(workSpace + "/"+folderName);
+
+        // if the directory does not exist, create it
+        if (!theDir.exists()) {
+            theDir.mkdir();
+        }
+    }
 }

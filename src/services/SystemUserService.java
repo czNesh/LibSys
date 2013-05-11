@@ -81,4 +81,22 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
         closeSession();
         return result;
     }
+
+    public List<SystemUser> getSystemUsers() {
+        return getList();
+    }
+
+    public boolean isSavePossible(String login) {
+        if ("default".equals(login)) {
+            return false;
+        }
+
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(SystemUser.class);
+        c.add(Restrictions.eq("login", login).ignoreCase());
+        SystemUser u = (SystemUser) c.uniqueResult();
+        closeSession();
+        return (u == null);
+    }
 }

@@ -44,6 +44,7 @@ public class BorrowSplitDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový termín");
+        setResizable(false);
 
         jLabel9.setText("Od:");
 

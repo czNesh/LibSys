@@ -31,7 +31,6 @@ public class GoogleSearch extends Thread {
     private Image thumbnail;
     // Connection
     URLConnection conn;
-    
     // New Book Controller
     NewBookController controller;
 
@@ -76,8 +75,9 @@ public class GoogleSearch extends Thread {
             System.out.println(urlString);
             URL url = new URL(urlString);
             conn = url.openConnection();
-            conn.setConnectTimeout(10000);
+            conn.setConnectTimeout(5000);
         } catch (IOException ex) {
+                 controller.searchFail();
         }
     }
 
@@ -233,11 +233,12 @@ public class GoogleSearch extends Thread {
             if (tempBook != null) {
                 results.add(tempBook);
             }
-
+            showResults();
         } catch (IOException ex) {
+            controller.searchFail();
         }
-        
-        showResults();
+
+
     }
 
     public String clearSpaces(String in) {
@@ -254,8 +255,8 @@ public class GoogleSearch extends Thread {
     public int getResultsCount() {
         return (results == null) ? 0 : results.size();
     }
-    
-    private void showResults(){
+
+    private void showResults() {
         controller.showResults();
     }
 

@@ -293,7 +293,6 @@ public class NotificationTableModel extends AbstractTableModel {
     }
 
     public void search(String borrowCode, String customer, String book, String from, String to, int type) {
-        System.out.println("aa");
         isSearching = true;
         borrowCode = borrowCode.toLowerCase().trim();
         customer = customer.toLowerCase().trim();
@@ -341,21 +340,34 @@ public class NotificationTableModel extends AbstractTableModel {
                 }
             }
             //kontrola podle datum
+
             if (!from.isEmpty()) {
+
                 Date d = DateHelper.stringToDate(from, false);
-                if (d != null || !DateHelper.compareEQ(d, n.getBorrow().getFromDate())) {
+
+                if (d == null || !DateHelper.compareEQ(d, n.getBorrow().getFromDate())) {
                     continue;
                 }
             }
+            System.out.println("2");
             if (!to.isEmpty()) {
                 Date d2 = DateHelper.stringToDate(to, false);
 
-                if (d2 != null || !DateHelper.compareEQ(d2, n.getBorrow().getToDate())) {
+                if (d2 == null || !DateHelper.compareEQ(d2, n.getBorrow().getToDate())) {
                     continue;
                 }
             }
+            System.out.println("3");
             notifications.add(n);
         }
         setPage(1);
+    }
+
+    public Notification getNotification(int selectedRow) {
+        if (exactNotifications.isEmpty()) {
+            return notifications.get(moveByPage() + selectedRow);
+        } else {
+            return exactNotifications.get(moveByPage() + selectedRow);
+        }
     }
 }

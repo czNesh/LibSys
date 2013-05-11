@@ -71,6 +71,7 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Informace o uživateli");
         setMinimumSize(new java.awt.Dimension(752, 547));
+        setResizable(false);
 
         BTNclose.setText("Zavřít");
         BTNclose.setName("close"); // NOI18N

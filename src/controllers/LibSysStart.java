@@ -16,6 +16,8 @@ import services.SystemUserService;
 public class LibSysStart {
 
     public static void main(String[] args) {
+
+
         try {
             AppController c = AppController.getInstance();
             if (Configuration.getInstance().isSkipLogging()) {
@@ -31,7 +33,9 @@ public class LibSysStart {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(LibSysStart.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("CHYBA V PROGRAMU:");
+            ex.printStackTrace();
+            System.exit(-1);
         }
     }
 }

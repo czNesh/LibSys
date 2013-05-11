@@ -22,7 +22,7 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         getRootPane().setDefaultButton(loginButton);
-        setIconImage(new ImageIcon(getClass().getResource("../images/LSIcon.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/LSIcon.png")).getImage());
     }
 
     /**
@@ -46,6 +46,7 @@ public class LoginView extends javax.swing.JFrame {
         infoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel3.setText("Heslo: ");
 

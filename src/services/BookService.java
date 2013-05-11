@@ -9,13 +9,13 @@ import helpers.DateHelper;
 import io.ApplicationLog;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import models.dao.BaseDAO;
 import models.entity.Author;
 import models.entity.Book;
+import models.entity.Genre;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Disjunction;
@@ -84,10 +84,19 @@ public class BookService extends BaseDAO<Book> implements Serializable {
     }
 
     public void saveBook(Book b, int count) {
-        b.setVolumeCode(getFreeVolumeCode());
+        Book exist = findExisting(b);
+        if (exist == null) {
+            b.setVolumeCode(getFreeVolumeCode());
+        } else {
+            b.setVolumeCode(exist.getVolumeCode());
+        }
+        List<Genre> genres = b.getGenres();
+        List<Author> authors = b.getAuthors();
         b.setBorrowed(0);
         b.setDeleted(false);
         for (int i = 0; i < count; i++) {
+            b.setAuthors(authors);
+            b.setGenres(genres);
             b.setBarcode(getFreeBarcode());
             create(b);
         }
@@ -100,65 +109,6 @@ public class BookService extends BaseDAO<Book> implements Serializable {
     }
 
     public List<Book> getBooks() {
-        return getList();
-    }
-
-    public List<Book> getFilteredList(String barcode, String title, String author, String isbn10, String isbn13, Date year) {
-        StringBuilder conditionStringBuilder = new StringBuilder();
-        getParameters().clear();
-
-        if (barcode != null && !barcode.isEmpty()) {
-            conditionStringBuilder.append("barcode = :barcode");
-            getParameters().put("barcode", barcode);
-        }
-
-        if (title != null && !title.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("title = :title");
-            getParameters().put("title", title);
-        }
-
-        if (author != null && !author.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-
-            List<Author> findedAuthors = AuthorService.getInstance().findAuthors(author);
-            conditionStringBuilder.append("authors in :findedAuthors");
-            getParameters().put("findedAuthors", findedAuthors);
-        }
-
-        if (isbn10 != null && !isbn10.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("isbn10 = :isbn10");
-            getParameters().put("isbn10", isbn10);
-        }
-
-        if (isbn13 != null && !isbn13.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("isbn13 = :isbn13");
-            getParameters().put("isbn13", isbn13);
-        }
-
-        if (year != null) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("publishedYear = :year");
-            getParameters().put("year", year);
-        }
-
-        if (conditionStringBuilder.length() > 0) {
-            setCondition(conditionStringBuilder.toString());
-        }
-        setGroupBy("volumeCode");
-
         return getList();
     }
 
@@ -338,12 +288,23 @@ public class BookService extends BaseDAO<Book> implements Serializable {
 
         d.add(Restrictions.ilike("title", in, MatchMode.ANYWHERE));
         d.add(Restrictions.eq("barcode", in));
-        System.out.println(in);
         c.add(d);
 
         List<Book> result = c.list();
 
         closeSession();
         return result;
+    }
+
+    private Book findExisting(Book b) {
+        openSession();
+        Session s = getSession();
+        Criteria c = s.createCriteria(Book.class);
+        c.add(Restrictions.eq("title", b.getTitle()).ignoreCase());
+
+        List<Book> result = c.list();
+
+        closeSession();
+        return (result.isEmpty()) ? null : result.get(0);
     }
 }

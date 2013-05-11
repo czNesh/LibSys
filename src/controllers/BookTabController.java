@@ -4,15 +4,21 @@
  */
 package controllers;
 
+import coding.Barcode;
+import coding.QRCode;
+import helpers.DateHelper;
 import io.Configuration;
+import io.FileManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import models.BookTableModel;
 import models.entity.Book;
 import services.BookService;
@@ -66,6 +72,8 @@ public class BookTabController {
         mainView.getFilterButton().addActionListener(a);
         mainView.getBTNsearch().addActionListener(a);
         mainView.getBTNstopBookSearch().addActionListener(a);
+        mainView.getBarcodeButton().addActionListener(a);
+        mainView.getQrcodeButton().addActionListener(a);
 
         // KeyListener
         BookTabKeyListener b = new BookTabKeyListener();
@@ -262,6 +270,44 @@ public class BookTabController {
                     Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
                     updateView();
                     filter.setVisible(false);
+                    break;
+                case "barcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 0) {
+                        break;
+                    }
+                    if (mainView.getCatalogTable().getSelectedRowCount() > 0) {
+                        List<Book> books = tableModel.getBooks(mainView.getCatalogTable().getSelectedRows());
+                        String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
+                        FileManager.getInstance().createDir(folderName);
+
+                        for (Book bx : books) {
+                            for (Book b : BookService.getInstance().getBooksByVolumeCode(bx.getVolumeCode(), false)) {
+                                FileManager.getInstance().saveImage(folderName + "/" + b.getBarcode(), Barcode.encode(b.getBarcode()));
+                            }
+                        }
+                        FileManager.getInstance().open(folderName + "/");
+                    } else {
+                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "qrcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 0) {
+                        break;
+                    }
+                    if (mainView.getCatalogTable().getSelectedRowCount() > 0) {
+                        List<Book> books = tableModel.getBooks(mainView.getCatalogTable().getSelectedRows());
+                        String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
+                        FileManager.getInstance().createDir(folderName);
+
+                        for (Book bx : books) {
+                            for (Book b : BookService.getInstance().getBooksByVolumeCode(bx.getVolumeCode(), false)) {
+                                FileManager.getInstance().saveImage(folderName + "/" + b.getBarcode(), QRCode.encode(b.getBarcode()));
+                            }
+                        }
+                        FileManager.getInstance().open(folderName + "/");
+                    } else {
+                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 default:
                     break;

@@ -54,6 +54,7 @@ public class BookFilterDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nastavení zobrazení");
+        setResizable(false);
 
         titleCheckbox.setSelected(true);
         titleCheckbox.setText("Název");

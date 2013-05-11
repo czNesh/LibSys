@@ -46,4 +46,8 @@ public class Genre implements Serializable {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    public String toString() {
+        return genre;
+    }
 }

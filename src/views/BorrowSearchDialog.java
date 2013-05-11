@@ -53,6 +53,7 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
         BTNtoDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         BTNsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.gif"))); // NOI18N
         BTNsearch.setText("Hledat");
@@ -109,10 +110,14 @@ public class BorrowSearchDialog extends javax.swing.JDialog {
 
         jLabel11.setText("Datum od:");
 
+        INPfrom.setEditable(false);
+
         BTNfromDate.setText("...");
         BTNfromDate.setName("fromDate"); // NOI18N
 
         jLabel12.setText("Datum do:");
+
+        INPto.setEditable(false);
 
         BTNtoDate.setText("...");
         BTNtoDate.setName("toDate"); // NOI18N

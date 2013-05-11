@@ -298,6 +298,7 @@ public class BorrowDetailController extends BaseController {
                     BorrowService.getInstance().notReturnBorrows(tempList, borrow.getBorrowCode());
                     showData();
                     RefreshController.getInstance().refreshBorrowTab();
+                    RefreshController.getInstance().refreshNotificationTab();
                 }
             } else {
                 JOptionPane.showMessageDialog(dialog, "Nejprve vyberte knihy", "Není označena žádná kniha", JOptionPane.ERROR_MESSAGE);

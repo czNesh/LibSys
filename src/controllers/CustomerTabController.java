@@ -4,13 +4,18 @@
  */
 package controllers;
 
+import coding.Barcode;
+import coding.QRCode;
+import helpers.DateHelper;
 import io.Configuration;
+import io.FileManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -69,6 +74,8 @@ public class CustomerTabController {
         mainView.getCustomerFilterButton().addActionListener(a);
         mainView.getBTNsearch().addActionListener(a);
         mainView.getBTNstopCustomerSearch().addActionListener(a);
+        mainView.getBarcodeButton().addActionListener(a);
+        mainView.getQrcodeButton().addActionListener(a);
 
         //KeyListener
         CustomerTabKeyListener k = new CustomerTabKeyListener();
@@ -133,7 +140,7 @@ public class CustomerTabController {
                 filter.getINPorderBy().setSelectedItem(entry.getKey());
             }
         }
-        
+
         updateView();
     }
 
@@ -175,17 +182,18 @@ public class CustomerTabController {
                     }
                     break;
                 case "customerTable":
-
-                    if (mainView.getCustomerTable().getSelectedRows().length == 0) {
-                        return;
-                    }
-                    int isSure = JOptionPane.showInternalConfirmDialog(mainView.getContentPane(), "Opravdu chcete smazat vybrané položky?", "Opravdu smazat?", JOptionPane.OK_CANCEL_OPTION);
-                    if (isSure == JOptionPane.OK_OPTION) {
-                        for (Customer c : tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows())) {
-                            if (BorrowService.getInstance().activeBorrowsOfCustomer(c).size() > 0) {
-                                JOptionPane.showMessageDialog(mainView, "Uživatel má aktivní výpůjčky", "Nelze smazat", JOptionPane.ERROR_MESSAGE);
-                            } else {
-                                CustomerService.getInstance().delete(c);
+                    if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+                        if (mainView.getCustomerTable().getSelectedRows().length == 0) {
+                            return;
+                        }
+                        int isSure = JOptionPane.showInternalConfirmDialog(mainView.getContentPane(), "Opravdu chcete smazat vybrané položky?", "Opravdu smazat?", JOptionPane.OK_CANCEL_OPTION);
+                        if (isSure == JOptionPane.OK_OPTION) {
+                            for (Customer c : tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows())) {
+                                if (BorrowService.getInstance().activeBorrowsOfCustomer(c).size() > 0) {
+                                    JOptionPane.showMessageDialog(mainView, "Uživatel má aktivní výpůjčky", "Nelze smazat", JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    CustomerService.getInstance().delete(c);
+                                }
                             }
                         }
                     }
@@ -217,7 +225,7 @@ public class CustomerTabController {
                     Configuration.getInstance().setCustomerShowPhone(filter.getINPphone().isSelected());
                     Configuration.getInstance().setCustomerShowAdress(filter.getINPadress().isSelected());
                     Configuration.getInstance().setCustomerShowNotes(filter.getINPnotes().isSelected());
-                    
+
                     Configuration.getInstance().setCustomerOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
                     Configuration.getInstance().setCustomerOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
                     Configuration.getInstance().setMaxCustomerRowsCount((int) filter.getINPcustomerMaxRowsCount().getValue());
@@ -274,6 +282,40 @@ public class CustomerTabController {
                 case "prevPage":
                     tableModel.prevPage();
                     updateView();
+                    break;
+                case "barcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 1) {
+                        break;
+                    }
+                    if (mainView.getCustomerTable().getSelectedRowCount() > 0) {
+                        List<Customer> customers = tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows());
+                        String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
+                        FileManager.getInstance().createDir(folderName);
+
+                        for (Customer c : customers) {
+                            FileManager.getInstance().saveImage(folderName + "/" + c.getStringSSN(), Barcode.encode(c.getStringSSN()));
+                        }
+                        FileManager.getInstance().open(folderName + "/");
+                    } else {
+                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case "qrcode":
+                    if (mainView.getTabPanel().getSelectedIndex() != 1) {
+                        break;
+                    }
+                    if (mainView.getCustomerTable().getSelectedRowCount() > 0) {
+                        List<Customer> customers = tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows());
+                        String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
+                        FileManager.getInstance().createDir(folderName);
+
+                        for (Customer c : customers) {
+                            FileManager.getInstance().saveImage(folderName + "/" + c.getStringSSN(), QRCode.encode(c.getStringSSN()));
+                        }
+                        FileManager.getInstance().open(folderName + "/");
+                    } else {
+                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 default:
                     break;

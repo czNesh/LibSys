@@ -43,6 +43,7 @@ public class SocketServerDialog extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(430, 800));
         setMinimumSize(new java.awt.Dimension(430, 250));
         setPreferredSize(new java.awt.Dimension(430, 250));
+        setResizable(false);
 
         logOutput.setEditable(false);
         logOutput.setColumns(20);

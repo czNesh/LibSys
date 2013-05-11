@@ -12,16 +12,17 @@ import java.util.Objects;
  * @author Nesh
  */
 public class SystemUser implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private Long id;
     private String login;
-    private String password;    
+    private String password;
     private String firstName;
     private String lastName;
     private String email;
     private boolean master;
     private boolean deleted;
-    
+
     /**
      * @return the id
      */
@@ -34,8 +35,8 @@ public class SystemUser implements Serializable {
      */
     private void setId(Long id) {
         this.id = id;
-    }    
-            
+    }
+
     /**
      * @return the login
      */
@@ -164,7 +165,20 @@ public class SystemUser implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-    
-    
-    
+
+    public String getFullName() {
+        String temp = "";
+        if (firstName != null && !firstName.isEmpty()) {
+            temp = firstName;
+        }
+        if (lastName != null && !lastName.isEmpty()) {
+            if (temp.isEmpty()) {
+                temp = lastName;
+            } else {
+                temp += " " + lastName;
+            }
+
+        }
+        return temp;
+    }
 }

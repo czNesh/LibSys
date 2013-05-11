@@ -47,6 +47,7 @@ public class CustomerSearchDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vyhledávání uživatelů");
+        setResizable(false);
 
         jLabel4.setText("E-mail:");
 
@@ -164,19 +165,7 @@ public class CustomerSearchDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JButton searchButton1;
-    private javax.swing.JButton searchButton2;
-    private javax.swing.JButton searchButton3;
-    private javax.swing.JButton searchButton4;
-    private javax.swing.JButton searchButton5;
     // End of variables declaration//GEN-END:variables
 
     public JButton getBTNcloseSearchDialog() {

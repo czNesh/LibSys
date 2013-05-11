@@ -7,6 +7,7 @@ package views;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -24,7 +25,7 @@ public class MainView extends javax.swing.JFrame {
      */
     public MainView() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("../images/LSIcon.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/images/LSIcon.png")).getImage());
     }
 
     /**
@@ -47,11 +48,8 @@ public class MainView extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         BTNsearch = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
         barcodeButton = new javax.swing.JButton();
-        QRCodeButton = new javax.swing.JButton();
+        qrcodeButton = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         connectionButton = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -112,12 +110,10 @@ public class MainView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         logoutMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        newCustomerMenuItem = new javax.swing.JMenuItem();
-        customerListMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         settingsMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        helpMenuItem = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -182,19 +178,6 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(BTNsearch);
         jToolBar1.add(jSeparator6);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/export-icon.png"))); // NOI18N
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/import-icon.png"))); // NOI18N
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
-        jToolBar1.add(jSeparator3);
-
         barcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/barcode-icon.png"))); // NOI18N
         barcodeButton.setFocusable(false);
         barcodeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -202,12 +185,12 @@ public class MainView extends javax.swing.JFrame {
         barcodeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(barcodeButton);
 
-        QRCodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
-        QRCodeButton.setFocusable(false);
-        QRCodeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        QRCodeButton.setName("qrcode"); // NOI18N
-        QRCodeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(QRCodeButton);
+        qrcodeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/qr-icon.png"))); // NOI18N
+        qrcodeButton.setFocusable(false);
+        qrcodeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        qrcodeButton.setName("qrcode"); // NOI18N
+        qrcodeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(qrcodeButton);
         jToolBar1.add(jSeparator4);
 
         connectionButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -313,7 +296,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNstopBookSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookTableNextButton)
@@ -407,7 +390,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(customerFilterInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerTableNextButton)
@@ -499,7 +482,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(INPborrowFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrowNextButton)
@@ -591,7 +574,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(INPnotificationFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNnotificationNext)
@@ -624,18 +607,6 @@ public class MainView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Zákazníci");
-
-        newCustomerMenuItem.setText("Přidat zákazníka");
-        newCustomerMenuItem.setName("newCustomer"); // NOI18N
-        jMenu3.add(newCustomerMenuItem);
-
-        customerListMenuItem.setText("Procházet zákazníky");
-        customerListMenuItem.setName("browseCustomers"); // NOI18N
-        jMenu3.add(customerListMenuItem);
-
-        jMenuBar1.add(jMenu3);
-
         jMenu4.setText("Nástroje");
 
         settingsMenuItem.setText("Nastavení");
@@ -645,6 +616,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Nápověda");
+
+        helpMenuItem.setText("Nápověda");
+        helpMenuItem.setName("help"); // NOI18N
+        jMenu2.add(helpMenuItem);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -662,10 +638,9 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TabPanel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         TabPanel.getAccessibleContext().setAccessibleName("Knihovna");
@@ -694,7 +669,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField INPnotificationFilter;
     private javax.swing.JTextField INPnotificationPage;
     private javax.swing.JLabel INPnotificationTotalPage;
-    private javax.swing.JButton QRCodeButton;
     private javax.swing.JTable TABnotification;
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JButton barcodeButton;
@@ -713,7 +687,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextArea console;
     private javax.swing.JButton customerFilterButton;
     private javax.swing.JTextField customerFilterInput;
-    private javax.swing.JMenuItem customerListMenuItem;
     private javax.swing.JTable customerTable;
     private javax.swing.JTextField customerTableInputNumber;
     private javax.swing.JButton customerTableNextButton;
@@ -723,8 +696,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.JButton filterButton;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JMenuItem helpMenuItem;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
@@ -733,7 +705,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -747,7 +718,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
@@ -755,8 +725,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JButton newBorrowButton;
     private javax.swing.JButton newCustomerButton;
-    private javax.swing.JMenuItem newCustomerMenuItem;
     private javax.swing.JButton newItemButton;
+    private javax.swing.JButton qrcodeButton;
     private javax.swing.JMenuItem settingsMenuItem;
     private javax.swing.JLabel systemUserLabel;
     // End of variables declaration//GEN-END:variables
@@ -779,6 +749,10 @@ public class MainView extends javax.swing.JFrame {
     /*
      * MENU ITEMS
      */
+    public JButton getQrcodeButton() {
+        return qrcodeButton;
+    }
+
     public JButton getConnectionButton() {
         return connectionButton;
     }
@@ -789,14 +763,6 @@ public class MainView extends javax.swing.JFrame {
 
     public JButton getBTNsearch() {
         return BTNsearch;
-    }
-
-    public JMenuItem getNewCustomerMenuItem() {
-        return newCustomerMenuItem;
-    }
-
-    public JMenuItem getCustomerListMenuItem() {
-        return customerListMenuItem;
     }
 
     public JButton getNewBorrowButton() {
@@ -815,16 +781,16 @@ public class MainView extends javax.swing.JFrame {
         return newCustomerButton;
     }
 
-    public JButton getQRCodeButton() {
-        return QRCodeButton;
-    }
-
     public JButton getBarcodeButton() {
         return barcodeButton;
     }
 
     public JMenuItem getSettingsMenuItem() {
         return settingsMenuItem;
+    }
+
+    public JMenuItem getHelpMenuItem() {
+        return helpMenuItem;
     }
 
     /*

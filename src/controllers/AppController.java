@@ -24,7 +24,7 @@ public class AppController {
         }
         return instance;
     }
-    
+
     private AppController() {
         actual = new LoginController();
     }
@@ -38,7 +38,7 @@ public class AppController {
         actual = new MainController();
         actual.showView();
     }
-    
+
     void showLoginFrame() {
         actual.dispose();
         actual = new LoginController();

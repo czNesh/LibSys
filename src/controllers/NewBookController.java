@@ -79,7 +79,11 @@ public class NewBookController extends BaseController {
     }
 
     public void showResults() {
-
+        // Znovu zpristupni tlacitko pro hledaní
+        dialog.getSearchButton().setEnabled(true);
+        dialog.getSearchButton().setText("Hledat znovu");
+        dialog.getSearchButton().setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/we-search.png")));
+       
         if (gbs.getResultsCount() > 0) {
 
             // Pripravi dialog pro zobrazení výsledku
@@ -96,13 +100,16 @@ public class NewBookController extends BaseController {
             resOut.getResultsTable().setModel(ctm);
             resOut.setLocationRelativeTo(null);
             resOut.setVisible(true);
-
         }
 
-        // Znovu zpristupni tlacitko pro hledaní
-        dialog.getSearchButton().setEnabled(true);
-        dialog.getSearchButton().setText("Hledat znovu");
+
         gbs = new GoogleSearch(this);
+    }
+
+    public void searchFail() {
+        dialog.getSearchButton().setEnabled(true);
+        dialog.getSearchButton().setText("Chyba: Opakovat?");
+        dialog.getSearchButton().setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/we-search.png")));
     }
 
     private class NewBookKeyListener implements KeyListener {
@@ -131,6 +138,12 @@ public class NewBookController extends BaseController {
                     }
                     break;
                 case "genres":
+                    //potlaceni mezer
+                    if (dialog.getInputGenres().getText().endsWith(" ")) {
+                        dialog.getInputGenres().setText(dialog.getInputGenres().getText().trim());
+                        return;
+                    }
+
                     // pokud se nezapise znak - hned skonci
                     if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
                         return;
@@ -142,6 +155,7 @@ public class NewBookController extends BaseController {
 
                     // priprava promennych 
                     String in = dialog.getInputGenres().getText().trim();
+
                     String before = "";
 
                     if (in.contains(";")) {
@@ -150,6 +164,8 @@ public class NewBookController extends BaseController {
                         in = in.substring(lastNewWord + 1);
                     }
 
+                    System.out.println("BEFORE " + before);
+                    System.out.println("in " + in);
                     int start = in.length();
 
                     // zadany aspon 2 znaky
@@ -418,6 +434,8 @@ public class NewBookController extends BaseController {
         public void actionPerformed(ActionEvent e) {
             // Zamezí opětovnému spuštění
             dialog.getSearchButton().setEnabled(false);
+            dialog.getSearchButton().setText("Hledám...");
+            dialog.getSearchButton().setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiting.gif")));
 
             // Nastavý hodnoty pro vyhledávání
             for (int i = 0; i < authorListModel.getSize(); i++) {
@@ -428,6 +446,8 @@ public class NewBookController extends BaseController {
             gbs.setISBN(dialog.getInputISBN10().getText());
 
             if (gbs.getQuery().isEmpty()) {
+                dialog.getSearchButton().setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/we-search.png")));
+                dialog.getSearchButton().setText("Hledat znovu");
                 dialog.getSearchButton().setEnabled(true);
                 return;
             }

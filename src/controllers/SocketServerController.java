@@ -69,6 +69,9 @@ public class SocketServerController extends BaseController {
             isServerRunning = true;
 
         } else {
+            if (s == null) {
+                return;
+            }
             s.closeSocket();
             s = null;
             dialog.getServerStatus().setText("SERVER OFFLINE");
@@ -78,8 +81,8 @@ public class SocketServerController extends BaseController {
             isServerRunning = false;
         }
     }
-    
-    public void serverFail(String err){
+
+    public void serverFail(String err) {
         logMessage(err);
         setServerStatus(false);
     }

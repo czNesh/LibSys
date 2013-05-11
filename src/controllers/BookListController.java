@@ -77,6 +77,7 @@ public class BookListController extends BaseController {
 
     private void updateView() {
         // UPDATE DATA
+        tableModel.setForBorrow(true);
         tableModel.updateData();
 
         // Update table

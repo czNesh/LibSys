@@ -39,6 +39,7 @@ public class AddAuthorDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Přidat autora");
+        setResizable(false);
 
         cancelButton.setText("Zrušit");
         cancelButton.setName("cancelButton"); // NOI18N

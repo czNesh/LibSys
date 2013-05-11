@@ -31,6 +31,7 @@ public class BookTableModel extends AbstractTableModel {
     private List<String> resultOfSearch = new ArrayList<>();
     private String filterString = "";
     private boolean isSearching = false;
+    private boolean forBorrow = false;
 
     public BookTableModel() {
         super();
@@ -75,11 +76,16 @@ public class BookTableModel extends AbstractTableModel {
         maxRows = Configuration.getInstance().getMaxBookRowsCount();
         BookService.getInstance().setLimit(maxRows);
         BookService.getInstance().setStart((page - 1) * maxRows);
-        BookService.getInstance().setGroupBy(groupBy);
+        
         BookService.getInstance().setOrderType(Configuration.getInstance().getBookOrderType());
         BookService.getInstance().setOrderBy(Configuration.getInstance().getBookOrderBy());
-        if (!Configuration.getInstance().isDeletedItemVisible()) {
-            BookService.getInstance().getParameters().put("deleted", false);
+
+        BookService.getInstance().getParameters().put("deleted", false);
+        if (forBorrow) {
+            BookService.getInstance().getParameters().put("borrowed", false);
+            BookService.getInstance().setCondition("deleted = :deleted AND borrowed = :borrowed");
+        } else {
+            BookService.getInstance().setGroupBy(groupBy);
             BookService.getInstance().setCondition("deleted = :deleted");
         }
         if (!filterString.isEmpty()) {
@@ -195,7 +201,7 @@ public class BookTableModel extends AbstractTableModel {
         }
 
         if (borrowCode != null) {
-            if (BorrowService.getInstance().isBookReturned(i,borrowCode)) {
+            if (BorrowService.getInstance().isBookReturned(i, borrowCode)) {
                 tempValues.add("NEVRÁCENO");
             } else {
                 tempValues.add("VRÁCENO");
@@ -239,8 +245,8 @@ public class BookTableModel extends AbstractTableModel {
         if (showLocation) {
             tempValuesColumnNames.add("Umístění");
         }
-        
-        if(borrowCode != null){
+
+        if (borrowCode != null) {
             tempValuesColumnNames.add("Stav");
         }
 
@@ -333,5 +339,9 @@ public class BookTableModel extends AbstractTableModel {
             list.add(bookList.get(selectedRows[i]));
         }
         return list;
+    }
+
+    public void setForBorrow(boolean in) {
+        this.forBorrow = in;
     }
 }

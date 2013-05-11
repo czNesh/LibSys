@@ -58,6 +58,7 @@ public class BookListDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vyhledat uživatele");
+        setResizable(false);
 
         resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

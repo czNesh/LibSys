@@ -56,7 +56,7 @@ public class NewBorrowController extends BaseController {
         dialog.getAddBookButton().addActionListener(a);
         dialog.getCancelButton().addActionListener(a);
         dialog.getConfirmButton().addActionListener(a);
-
+        dialog.getBTNremove().addActionListener(a);
     }
 
     private class BookBorrowActionListener implements ActionListener {
@@ -104,11 +104,21 @@ public class NewBorrowController extends BaseController {
                         return;
                     }
                     for (Book b : blc.getBooks()) {
+                        if (booksList.contains(b)) {
+                            JOptionPane.showMessageDialog(dialog, "Kniha " + b.getTitle() + " (" + b.getBarcode() + ") je již v seznamu", "Kniha nebude přidána", JOptionPane.ERROR_MESSAGE);
+                            continue;
+                        }
                         booksList.add(b);
                     }
                     dialog.getSelectedBooksTable().setModel(new BookTableModel(booksList));
                     break;
-
+                case "removeBook":
+                    int[] indexes = dialog.getSelectedBooksTable().getSelectedRows();
+                    for (int i = indexes.length - 1; i >= 0; i--) {
+                        booksList.remove(indexes[i]);
+                    }
+                    dialog.getSelectedBooksTable().setModel(new BookTableModel(booksList));
+                    break;
                 case "confirm":
                     StringBuilder validationLog = new StringBuilder();
 
@@ -128,8 +138,8 @@ public class NewBorrowController extends BaseController {
                     if (customer == null) {
                         validationLog.append("Nebyl vybrán žádný zákazník\n");
                     }
-                    
-                    if(!DateHelper.compareGE(to, from)){
+
+                    if (!DateHelper.compareGE(to, from)) {
                         validationLog.append("Vypůjčka musí být minimálně na jeden den\n");
                     }
 

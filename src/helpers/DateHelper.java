@@ -84,4 +84,9 @@ public class DateHelper {
         long day2 = d2.getTime() / DAY_MILLIS;
         return ((int) (day2 - day1));
     }
+
+    public static String getCurrentDateIncludingTimeString() {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        return df.format(new Date());
+    }
 }
