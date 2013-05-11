@@ -20,6 +20,7 @@ import models.SystemUserTableModel;
 import models.entity.Genre;
 import models.entity.SystemUser;
 import services.GenreService;
+import services.SystemUserService;
 import views.SettingsDialog;
 
 /**
@@ -138,6 +139,16 @@ public class SettingsController extends BaseController {
     }
 
     private void saveSettings() {
+        String email = dialog.getINPdefaultEmail().getText();
+        if (email.matches(".+@.+\\.[a-z]+")) {
+            c.setDefaultEmail(email);
+            SystemUserService.getInstance().setDefaultEmail(email);
+            
+        } else {
+            JOptionPane.showMessageDialog(dialog, "Defaultní email nemá správný tvar", "Chyba", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // WORKSPACE
         if (dialog.getINPworkspace().getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(dialog, "Nemáte zvolen žádný pracovní prostor", "- Funkce generování kódu a tisku do PDF budou nefunkční", JOptionPane.ERROR_MESSAGE);

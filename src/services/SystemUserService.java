@@ -121,4 +121,13 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
         }
 
     }
+
+    public void setDefaultEmail(String email) {
+        getParameters().put("default", "default");
+        SystemUser s = getUnique("login = :default");
+        if (s != null) {
+            s.setEmail(email);
+            save(s);
+        }
+    }
 }

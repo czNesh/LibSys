@@ -26,12 +26,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Component id="CMPtabbedPanel" max="32767" attributes="0"/>
+              <Component id="CMPtabbedPanel" pref="629" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="BTNcancel" max="32767" attributes="0"/>
                   <Component id="BTNsave" max="32767" attributes="0"/>
-                  <Component id="BTNdefault" alignment="1" pref="147" max="32767" attributes="0"/>
+                  <Component id="BTNdefault" alignment="1" pref="113" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -115,7 +115,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="INPportNumber" min="-2" pref="74" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="INPautoStartServer" alignment="0" pref="475" max="32767" attributes="0"/>
+                              <Component id="INPautoStartServer" alignment="0" pref="509" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -170,22 +170,26 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="INPworkspace" min="-2" pref="196" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BTNworkspace" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                                  <Component id="INPshowDeletedItems" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Component id="INPshowDeletedItems" min="-2" pref="242" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="INPdefaultEmail" min="-2" pref="185" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="INPworkspace" min="-2" pref="196" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="BTNworkspace" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="152" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -198,9 +202,14 @@
                               <Component id="INPworkspace" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="BTNworkspace" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPdefaultEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="INPshowDeletedItems" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace pref="9" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -228,6 +237,13 @@
                     <Property name="text" type="java.lang.String" value="Zvolit"/>
                     <Property name="name" type="java.lang.String" value="workspace" noResource="true"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Defaultn&#xed; email:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="INPdefaultEmail">
                 </Component>
               </SubComponents>
             </Container>
@@ -299,7 +315,7 @@
                               <Component id="INPsponsor" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="INPaddedDate" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="153" max="32767" attributes="0"/>
+                          <EmptySpace pref="187" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -584,7 +600,7 @@
                               <Component id="INPcustomerStreet" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="INPcustomerPostcode" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="189" max="32767" attributes="0"/>
+                          <EmptySpace pref="223" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -739,7 +755,7 @@
                           <Component id="INPborrowDays" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="202" max="32767" attributes="0"/>
+                          <EmptySpace pref="236" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -828,7 +844,7 @@
                           <Component id="INPlongBorrowDays" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="99" max="32767" attributes="0"/>
+                          <EmptySpace pref="133" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -883,19 +899,14 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="INPskipLogging" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="248" max="32767" attributes="0"/>
-                              <Component id="INPdefaultEmail" min="-2" pref="185" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane1" pref="541" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="BTNaddSystemUser" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="INPskipLogging" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -905,14 +916,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="INPdefaultEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Component id="INPskipLogging" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="BTNaddSystemUser" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="306" max="32767" attributes="0"/>
@@ -922,13 +928,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Defaultn&#xed; email:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="INPdefaultEmail">
-            </Component>
             <Component class="javax.swing.JCheckBox" name="INPskipLogging">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Vypnout p&#x159;ihla&#x161;ov&#xe1;n&#xed;:"/>

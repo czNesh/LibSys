@@ -47,6 +47,8 @@ public class SettingsDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         INPworkspace = new javax.swing.JTextField();
         BTNworkspace = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        INPdefaultEmail = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         INPauthor = new javax.swing.JCheckBox();
@@ -87,8 +89,6 @@ public class SettingsDialog extends javax.swing.JDialog {
         INPlongBorrowDays = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        INPdefaultEmail = new javax.swing.JTextField();
         INPskipLogging = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         TABsystemUsers = new javax.swing.JTable();
@@ -124,7 +124,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(INPportNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(INPautoStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
+                    .addComponent(INPautoStartServer, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -152,23 +152,28 @@ public class SettingsDialog extends javax.swing.JDialog {
         BTNworkspace.setText("Zvolit");
         BTNworkspace.setName("workspace"); // NOI18N
 
+        jLabel6.setText("Defaultní email:");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(INPworkspace, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTNworkspace))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(INPshowDeletedItems, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(INPshowDeletedItems, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(INPdefaultEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(INPworkspace, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(BTNworkspace))))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,9 +183,13 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(INPworkspace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNworkspace))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(INPdefaultEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(INPshowDeletedItems)
-                .addGap(24, 24, 24))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -294,7 +303,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addComponent(INPpageCount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(INPsponsor)
                     .addComponent(INPaddedDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,7 +467,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                     .addComponent(INPcustomerCity)
                     .addComponent(INPcustomerStreet)
                     .addComponent(INPcustomerPostcode))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +532,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addComponent(INPborrowDays, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,7 +583,7 @@ public class SettingsDialog extends javax.swing.JDialog {
                 .addComponent(INPlongBorrowDays, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,8 +615,6 @@ public class SettingsDialog extends javax.swing.JDialog {
 
         CMPtabbedPanel.addTab("Oznámení", jPanel6);
 
-        jLabel6.setText("Defaultní email:");
-
         INPskipLogging.setText("Vypnout přihlašování:");
         INPskipLogging.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         INPskipLogging.setIconTextGap(90);
@@ -637,29 +644,21 @@ public class SettingsDialog extends javax.swing.JDialog {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(INPskipLogging)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
-                        .addComponent(INPdefaultEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BTNaddSystemUser)))
+                        .addComponent(BTNaddSystemUser))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(INPskipLogging)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(INPdefaultEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addComponent(INPskipLogging)
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
                 .addComponent(BTNaddSystemUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
@@ -688,12 +687,12 @@ public class SettingsDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(CMPtabbedPanel)
+                .addComponent(CMPtabbedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTNcancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BTNsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BTNdefault, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                    .addComponent(BTNdefault, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
