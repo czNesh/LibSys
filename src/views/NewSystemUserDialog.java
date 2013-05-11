@@ -6,6 +6,7 @@ package views;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
@@ -44,8 +45,8 @@ public class NewSystemUserDialog extends javax.swing.JDialog {
         INPfirstName = new javax.swing.JTextField();
         INPlastName = new javax.swing.JTextField();
         INPlogin = new javax.swing.JTextField();
-        INPpassword = new javax.swing.JTextField();
         INPemail = new javax.swing.JTextField();
+        INPpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nový uživatel");
@@ -112,8 +113,8 @@ public class NewSystemUserDialog extends javax.swing.JDialog {
                             .addComponent(INPfirstName)
                             .addComponent(INPlastName)
                             .addComponent(INPlogin)
-                            .addComponent(INPpassword)
-                            .addComponent(INPemail, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)))
+                            .addComponent(INPemail, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(INPpassword)))
                     .addComponent(INPmaster, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -157,7 +158,7 @@ public class NewSystemUserDialog extends javax.swing.JDialog {
     private javax.swing.JTextField INPlastName;
     private javax.swing.JTextField INPlogin;
     private javax.swing.JCheckBox INPmaster;
-    private javax.swing.JTextField INPpassword;
+    private javax.swing.JPasswordField INPpassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -194,7 +195,7 @@ public class NewSystemUserDialog extends javax.swing.JDialog {
         return INPmaster;
     }
 
-    public JTextField getINPpassword() {
+    public JPasswordField getINPpassword() {
         return INPpassword;
     }
 }

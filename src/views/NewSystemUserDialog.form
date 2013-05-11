@@ -40,8 +40,8 @@
                           <Component id="INPfirstName" max="32767" attributes="0"/>
                           <Component id="INPlastName" max="32767" attributes="0"/>
                           <Component id="INPlogin" alignment="0" max="32767" attributes="0"/>
-                          <Component id="INPpassword" alignment="0" max="32767" attributes="0"/>
                           <Component id="INPemail" alignment="0" pref="153" max="32767" attributes="0"/>
+                          <Component id="INPpassword" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="INPmaster" min="-2" pref="205" max="-2" attributes="0"/>
@@ -169,9 +169,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="INPlogin">
     </Component>
-    <Component class="javax.swing.JTextField" name="INPpassword">
-    </Component>
     <Component class="javax.swing.JTextField" name="INPemail">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="INPpassword">
     </Component>
   </SubComponents>
 </Form>
