@@ -44,6 +44,7 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
     public SystemUser login(String login, String password) {
         getParameters().put("login", login);
         getParameters().put("password", getHash(password));
+        System.out.println(getHash(password));
         return getUnique("login = :login AND password = :password");
     }
 
@@ -106,13 +107,28 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
     }
 
     public String getHash(String in) {
+
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(in.getBytes("UTF-8")); // Change this to "UTF-16" if needed
-            byte[] digest = md.digest();
-            return String.valueOf(digest);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            MessageDigest md;
+            md= MessageDigest.getInstance("SHA-256");
+
+            md.update(in.getBytes());
+            byte[] mb = md.digest();
+            String out = "";
+            for (int i = 0; i < mb.length; i++) {
+                byte temp = mb[i];
+                String s = Integer.toHexString(new Byte(temp));
+                while (s.length() < 2) {
+                    s = "0" + s;
+                }
+                s = s.substring(s.length() - 2);
+                out += s;
+            }
+            
+            return out;
+        } catch (Exception ex) {
             return null;
         }
+    
     }
 }
