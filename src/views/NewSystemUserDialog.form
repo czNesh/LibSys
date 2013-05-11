@@ -125,6 +125,7 @@
         <Component class="javax.swing.JButton" name="BTNsave">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ulo&#x17e;it"/>
+            <Property name="name" type="java.lang.String" value="save" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>

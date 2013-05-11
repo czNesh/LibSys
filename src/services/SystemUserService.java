@@ -44,8 +44,8 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
     public SystemUser login(String login, String password) {
         getParameters().put("login", login);
         getParameters().put("password", getHash(password));
-        System.out.println(getHash(password));
-        return getUnique("login = :login AND password = :password");
+        getParameters().put("deleted", false);
+        return getUnique("login = :login AND password = :password AND deleted = :deleted");
     }
 
     public SystemUser getDefaultSystemUser() {
@@ -58,17 +58,11 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
             s.setDeleted(false);
             s.setFirstName("Defaultní");
             s.setLastName("uživatel");
-            s.setPassword(getHash("y6c1y5x4c5y4x2c45asvxcv"));
+            s.setPassword(getHash("default"));
             s.setEmail(Configuration.getInstance().getDefaultEmail());
             create(s);
         }
         return s;
-    }
-
-    public boolean isOnlyDefault() {
-        getParameters().put("login", "default");
-        setCondition("login != :login");
-        return (getList().isEmpty()) ? true : false;
     }
 
     public List<SystemUser> findSystemUsers(String in) {
@@ -93,10 +87,6 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
     }
 
     public boolean isSavePossible(String login) {
-        if ("default".equals(login)) {
-            return false;
-        }
-
         openSession();
         Session s = getSession();
         Criteria c = s.createCriteria(SystemUser.class);
@@ -110,7 +100,7 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
 
         try {
             MessageDigest md;
-            md= MessageDigest.getInstance("SHA-256");
+            md = MessageDigest.getInstance("SHA-256");
 
             md.update(in.getBytes());
             byte[] mb = md.digest();
@@ -124,11 +114,11 @@ public class SystemUserService extends BaseDAO<SystemUser> implements Serializab
                 s = s.substring(s.length() - 2);
                 out += s;
             }
-            
+
             return out;
         } catch (Exception ex) {
             return null;
         }
-    
+
     }
 }

@@ -56,6 +56,7 @@ public class NewSystemUserDialog extends javax.swing.JDialog {
         BTNcancel.setName("cancel"); // NOI18N
 
         BTNsave.setText("Uložit");
+        BTNsave.setName("save"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

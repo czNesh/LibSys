@@ -20,7 +20,6 @@ import models.SystemUserTableModel;
 import models.entity.Genre;
 import models.entity.SystemUser;
 import services.GenreService;
-import services.SystemUserService;
 import views.SettingsDialog;
 
 /**
@@ -147,11 +146,7 @@ public class SettingsController extends BaseController {
         }
 
         //SKIP LOGGING
-        if (SystemUserService.getInstance().isOnlyDefault() && !dialog.getINPskipLogging().isSelected()) {
-            JOptionPane.showMessageDialog(dialog, "- V aplikaci chybí uživatelé", "Nelze zapnout přihlašování", JOptionPane.ERROR_MESSAGE);
-        } else {
-            c.setSkipLogging(dialog.getINPskipLogging().isSelected());
-        }
+        c.setSkipLogging(dialog.getINPskipLogging().isSelected());
 
         // SHOW DELETED
         c.setDeletedItemVisible(dialog.getINPshowDeletedItems().isSelected());

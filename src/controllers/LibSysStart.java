@@ -5,8 +5,7 @@
 package controllers;
 
 import io.Configuration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import models.entity.SystemUser;
 import services.SystemUserService;
 
 /**
@@ -20,15 +19,11 @@ public class LibSysStart {
 
         try {
             AppController c = AppController.getInstance();
+            SystemUser defaultUser = SystemUserService.getInstance().getDefaultSystemUser();
             if (Configuration.getInstance().isSkipLogging()) {
-                c.setLoggedUser(SystemUserService.getInstance().getDefaultSystemUser());
+                c.setLoggedUser(defaultUser);
                 c.showMainFrame();
             } else {
-                if (SystemUserService.getInstance().isOnlyDefault()) {
-                    Configuration.getInstance().setSkipLogging(true);
-                    c.setLoggedUser(SystemUserService.getInstance().getDefaultSystemUser());
-                    c.showMainFrame();
-                }
                 c.go();
             }
 

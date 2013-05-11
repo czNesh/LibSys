@@ -153,7 +153,7 @@
         <Property name="horizontalTextPosition" type="int" value="2"/>
         <Property name="iconTextGap" type="int" value="120"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="BTNsave"/>
+          <ComponentRef name="BTNedit"/>
         </Property>
       </Properties>
     </Component>
@@ -162,13 +162,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BTNcancel" max="32767" attributes="0"/>
-                      <Component id="BTNsave" pref="100" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="BTNedit" max="32767" attributes="0"/>
+                      <Component id="BTNcancel" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="BTNdelete" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="BTNrenew" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -183,12 +183,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="BTNsave" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="BTNedit" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BTNcancel" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BTNrenew" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
                   <Component id="BTNdelete" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -196,18 +196,9 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JToggleButton" name="BTNsave">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Upravit"/>
-            <Property name="name" type="java.lang.String" value="edit" noResource="true"/>
-            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="BTNcancel"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="BTNcancel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
+            <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
             <Property name="name" type="java.lang.String" value="cancel" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="INPfirstName"/>
@@ -232,10 +223,17 @@
             <Property name="name" type="java.lang.String" value="renew" noResource="true"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="BTNedit">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Upravit"/>
+            <Property name="name" type="java.lang.String" value="edit" noResource="true"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JPasswordField" name="INPpassword">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="INPemail"/>
         </Property>

@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 
 /**
  *
@@ -45,10 +44,10 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
         INPemail = new javax.swing.JTextField();
         INPmaster = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
-        BTNsave = new javax.swing.JToggleButton();
         BTNcancel = new javax.swing.JButton();
         BTNdelete = new javax.swing.JButton();
         BTNrenew = new javax.swing.JButton();
+        BTNedit = new javax.swing.JButton();
         INPpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -82,13 +81,9 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
         INPmaster.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         INPmaster.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         INPmaster.setIconTextGap(120);
-        INPmaster.setNextFocusableComponent(BTNsave);
+        INPmaster.setNextFocusableComponent(BTNedit);
 
-        BTNsave.setText("Upravit");
-        BTNsave.setName("edit"); // NOI18N
-        BTNsave.setNextFocusableComponent(BTNcancel);
-
-        BTNcancel.setText("Zrušit");
+        BTNcancel.setText("Zavřít");
         BTNcancel.setName("cancel"); // NOI18N
         BTNcancel.setNextFocusableComponent(INPfirstName);
 
@@ -100,17 +95,20 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
         BTNrenew.setToolTipText("Obnovit uživatele");
         BTNrenew.setName("renew"); // NOI18N
 
+        BTNedit.setText("Upravit");
+        BTNedit.setName("edit"); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BTNcancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BTNsave, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BTNedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNcancel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 35, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BTNdelete, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BTNrenew, javax.swing.GroupLayout.Alignment.TRAILING))))
@@ -120,16 +118,17 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BTNsave, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTNedit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTNcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTNrenew)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(BTNdelete)
                 .addContainerGap())
         );
 
+        INPpassword.setEditable(false);
         INPpassword.setNextFocusableComponent(INPemail);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,8 +190,8 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNcancel;
     private javax.swing.JButton BTNdelete;
+    private javax.swing.JButton BTNedit;
     private javax.swing.JButton BTNrenew;
-    private javax.swing.JToggleButton BTNsave;
     private javax.swing.JTextField INPemail;
     private javax.swing.JTextField INPfirstName;
     private javax.swing.JTextField INPlastName;
@@ -211,8 +210,8 @@ public class SystemUserDetailDialog extends javax.swing.JDialog {
         return BTNcancel;
     }
 
-    public JToggleButton getBTNedit() {
-        return BTNsave;
+    public JButton getBTNedit() {
+        return BTNedit;
     }
 
     public JTextField getINPemail() {
