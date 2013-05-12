@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import io.ApplicationLog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
@@ -96,6 +97,7 @@ public class NewSystemUserController extends BaseController {
                 return;
             }
             SystemUserService.getInstance().save(u);
+            ApplicationLog.getInstance().addMessage("Vytvoření uživatele "+u.getFullName()+" úspěšně uložena");
             success = true;
             dispose();
         }

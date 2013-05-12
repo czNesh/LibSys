@@ -6,12 +6,8 @@ package services;
 
 import io.Configuration;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.dao.BaseDAO;
 import models.entity.SystemUser;
 import org.hibernate.Criteria;

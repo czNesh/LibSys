@@ -51,7 +51,7 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
             long timeSeed = System.nanoTime();
             double randSeed = Math.random() * 1000;
             long midSeed = (long) (timeSeed * randSeed);
-            String s = "5" + midSeed;
+            String s = "3" + midSeed;
             String subStr = s.substring(0, 9);
             int finalSeed = Integer.parseInt(subStr);
 
