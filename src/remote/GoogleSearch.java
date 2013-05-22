@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package remote;
 
 import controllers.NewBookController;
@@ -18,8 +15,9 @@ import models.entity.Author;
 import models.entity.Book;
 
 /**
+ * Třída - vyhledává knihy na internetu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class GoogleSearch extends Thread {
     // QUERY

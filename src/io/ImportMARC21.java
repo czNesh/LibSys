@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package io;
 
 import java.io.IOException;
@@ -21,8 +17,9 @@ import services.AuthorService;
 import services.BookService;
 
 /**
+ * Třída importu z MARC21 (Jen pro testy)
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class ImportMARC21 {
 
@@ -42,6 +39,9 @@ public class ImportMARC21 {
     }
 }
 
+/**
+ * Třída pro parsování
+ */
 class Parse implements ContentHandler {
 
     Locator locator;

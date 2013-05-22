@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package remote;
 
 import java.awt.Image;
@@ -10,15 +6,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
+ * Třída - vyhledává náhledy knih
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class GoogleImageDownload extends Thread {
 

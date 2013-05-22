@@ -23,8 +23,8 @@ public class NewBookDialog extends javax.swing.JDialog {
     public NewBookDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        getRootPane().setDefaultButton(saveButton);
-        inputBuyedDate.setText(DateHelper.getCurrentDateString(false));
+        getRootPane().setDefaultButton(BTNsave);
+        INPbuyedDate.setText(DateHelper.getCurrentDateString(false));
     }
 
     /**
@@ -38,27 +38,27 @@ public class NewBookDialog extends javax.swing.JDialog {
 
         jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        searchButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
+        BTNsearch = new javax.swing.JButton();
+        BTNcancel = new javax.swing.JButton();
+        BTNsave = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        inputTitle = new javax.swing.JTextField();
-        addAuthorButton = new javax.swing.JButton();
+        INPtitle = new javax.swing.JTextField();
+        BTNaddAuthor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        inputAuthors = new javax.swing.JList();
-        inputISBN10 = new javax.swing.JTextField();
-        inputISBN13 = new javax.swing.JTextField();
-        inputPageCount = new javax.swing.JSpinner();
-        inputLanguage = new javax.swing.JTextField();
-        inputLocation = new javax.swing.JTextField();
-        inputCount = new javax.swing.JSpinner();
-        inputBuyedDate = new javax.swing.JTextField();
-        datePickerButton2 = new javax.swing.JButton();
-        inputSponsor = new javax.swing.JTextField();
-        inputGenres = new javax.swing.JTextField();
-        inputPublishedDate = new javax.swing.JSpinner();
-        inputPublisher = new javax.swing.JTextField();
+        INPauthors = new javax.swing.JList();
+        INPisbn10 = new javax.swing.JTextField();
+        INPisbn13 = new javax.swing.JTextField();
+        INPpageCount = new javax.swing.JSpinner();
+        INPlanguage = new javax.swing.JTextField();
+        INPlocation = new javax.swing.JTextField();
+        INPcount = new javax.swing.JSpinner();
+        INPbuyedDate = new javax.swing.JTextField();
+        BTNbuyedDate = new javax.swing.JButton();
+        INPsponsor = new javax.swing.JTextField();
+        INPgenres = new javax.swing.JTextField();
+        INPpublishedDate = new javax.swing.JSpinner();
+        INPpublisher = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -71,7 +71,7 @@ public class NewBookDialog extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        removeAuthorButton = new javax.swing.JButton();
+        BTNremoveAuthor = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -79,26 +79,26 @@ public class NewBookDialog extends javax.swing.JDialog {
         setTitle("Přidání knih");
         setResizable(false);
 
-        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/we-search.png"))); // NOI18N
-        searchButton.setText("Dohledat informace");
-        searchButton.setToolTipText("Pokusí se dle zadaných údajů doplnit informace o knize (CTRL+D)");
-        searchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        searchButton.setName("searchButton"); // NOI18N
-        searchButton.setNextFocusableComponent(saveButton);
-        searchButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BTNsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/we-search.png"))); // NOI18N
+        BTNsearch.setText("Dohledat informace");
+        BTNsearch.setToolTipText("Pokusí se dle zadaných údajů doplnit informace o knize (CTRL+D)");
+        BTNsearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BTNsearch.setName("search"); // NOI18N
+        BTNsearch.setNextFocusableComponent(BTNsave);
+        BTNsearch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        cancelButton.setText("Zrušit");
-        cancelButton.setName("removeButton"); // NOI18N
-        cancelButton.setNextFocusableComponent(inputTitle);
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        BTNcancel.setText("Zrušit");
+        BTNcancel.setName("removeButton"); // NOI18N
+        BTNcancel.setNextFocusableComponent(INPtitle);
+        BTNcancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                BTNcancelActionPerformed(evt);
             }
         });
 
-        saveButton.setText("Uložit");
-        saveButton.setName("saveButton"); // NOI18N
-        saveButton.setNextFocusableComponent(cancelButton);
+        BTNsave.setText("Uložit");
+        BTNsave.setName("saveButton"); // NOI18N
+        BTNsave.setNextFocusableComponent(BTNcancel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,71 +107,71 @@ public class NewBookDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BTNsearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                    .addComponent(BTNcancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTNsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTNsave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTNcancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
-                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTNsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jLabel1.setText("Titul:");
 
-        inputTitle.setNextFocusableComponent(addAuthorButton);
-        inputTitle.addActionListener(new java.awt.event.ActionListener() {
+        INPtitle.setNextFocusableComponent(BTNaddAuthor);
+        INPtitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputTitleActionPerformed(evt);
+                INPtitleActionPerformed(evt);
             }
         });
 
-        addAuthorButton.setText("+");
-        addAuthorButton.setName("addAuthorButton"); // NOI18N
-        addAuthorButton.setNextFocusableComponent(inputISBN10);
+        BTNaddAuthor.setText("+");
+        BTNaddAuthor.setName("addAuthor"); // NOI18N
+        BTNaddAuthor.setNextFocusableComponent(INPisbn10);
 
-        inputAuthors.setName("authors"); // NOI18N
-        jScrollPane1.setViewportView(inputAuthors);
+        INPauthors.setName("authors"); // NOI18N
+        jScrollPane1.setViewportView(INPauthors);
 
-        inputISBN10.setNextFocusableComponent(inputISBN13);
+        INPisbn10.setNextFocusableComponent(INPisbn13);
 
-        inputISBN13.setNextFocusableComponent(inputPageCount);
+        INPisbn13.setNextFocusableComponent(INPpageCount);
 
-        inputPageCount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        inputPageCount.setNextFocusableComponent(inputLanguage);
+        INPpageCount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        INPpageCount.setNextFocusableComponent(INPlanguage);
 
-        inputLanguage.setNextFocusableComponent(inputPublisher);
+        INPlanguage.setNextFocusableComponent(INPpublisher);
 
-        inputLocation.setNextFocusableComponent(searchButton);
+        INPlocation.setNextFocusableComponent(BTNsearch);
 
-        inputCount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        inputCount.setNextFocusableComponent(inputLocation);
-        inputCount.setValue(1);
+        INPcount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        INPcount.setNextFocusableComponent(INPlocation);
+        INPcount.setValue(1);
 
-        inputBuyedDate.setFocusable(false);
+        INPbuyedDate.setFocusable(false);
 
-        datePickerButton2.setText("...");
-        datePickerButton2.setName("datePickerButton"); // NOI18N
-        datePickerButton2.setNextFocusableComponent(inputCount);
+        BTNbuyedDate.setText("...");
+        BTNbuyedDate.setName("datePickerButton"); // NOI18N
+        BTNbuyedDate.setNextFocusableComponent(INPcount);
 
-        inputSponsor.setNextFocusableComponent(datePickerButton2);
+        INPsponsor.setNextFocusableComponent(BTNbuyedDate);
 
-        inputGenres.setName("genres"); // NOI18N
-        inputGenres.setNextFocusableComponent(inputSponsor);
+        INPgenres.setName("genres"); // NOI18N
+        INPgenres.setNextFocusableComponent(INPsponsor);
 
-        inputPublishedDate.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(), java.util.Calendar.YEAR));
-        inputPublishedDate.setEditor(new javax.swing.JSpinner.DateEditor(inputPublishedDate, "yyyy"));
-        inputPublishedDate.setNextFocusableComponent(inputGenres);
-        inputPublishedDate.setOpaque(false);
+        INPpublishedDate.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.YEAR));
+        INPpublishedDate.setEditor(new javax.swing.JSpinner.DateEditor(INPpublishedDate, "yyyy"));
+        INPpublishedDate.setNextFocusableComponent(INPgenres);
+        INPpublishedDate.setOpaque(false);
 
-        inputPublisher.setNextFocusableComponent(inputPublishedDate);
+        INPpublisher.setNextFocusableComponent(INPpublishedDate);
 
         jLabel13.setText("Umístění:");
 
@@ -197,11 +197,11 @@ public class NewBookDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Autor(ři):");
 
-        removeAuthorButton.setText("-");
-        removeAuthorButton.setName("removeAuthorButton"); // NOI18N
-        removeAuthorButton.addActionListener(new java.awt.event.ActionListener() {
+        BTNremoveAuthor.setText("-");
+        BTNremoveAuthor.setName("removeAuthor"); // NOI18N
+        BTNremoveAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeAuthorButtonActionPerformed(evt);
+                BTNremoveAuthorActionPerformed(evt);
             }
         });
 
@@ -228,28 +228,28 @@ public class NewBookDialog extends javax.swing.JDialog {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(inputLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPlocation, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(inputBuyedDate, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(inputCount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(INPbuyedDate, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(INPcount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(datePickerButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(inputSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputPageCount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputPublishedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputGenres, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputISBN13, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputISBN10, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BTNbuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(INPsponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPpageCount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPpublishedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPgenres, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPpublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPlanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPisbn13, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPisbn10, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPtitle, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeAuthorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BTNaddAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BTNremoveAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -258,62 +258,62 @@ public class NewBookDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPtitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(inputISBN10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(INPisbn10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(inputISBN13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPisbn13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(inputPageCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPpageCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(inputLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPlanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(inputPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPpublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(inputPublishedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPpublishedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(inputGenres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPgenres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(inputSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(INPsponsor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(inputBuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(datePickerButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(INPbuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BTNbuyedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
-                            .addComponent(inputCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(INPcount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(addAuthorButton))
+                            .addComponent(BTNaddAuthor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removeAuthorButton)))
+                        .addComponent(BTNremoveAuthor)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INPlocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addContainerGap())
         );
@@ -336,35 +336,38 @@ public class NewBookDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void BTNcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNcancelActionPerformed
         dispose();
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_BTNcancelActionPerformed
 
-    private void removeAuthorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAuthorButtonActionPerformed
+    private void BTNremoveAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNremoveAuthorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_removeAuthorButtonActionPerformed
+    }//GEN-LAST:event_BTNremoveAuthorActionPerformed
 
-    private void inputTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTitleActionPerformed
+    private void INPtitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INPtitleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputTitleActionPerformed
+    }//GEN-LAST:event_INPtitleActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addAuthorButton;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JButton datePickerButton2;
-    private javax.swing.JList inputAuthors;
-    private javax.swing.JTextField inputBuyedDate;
-    private javax.swing.JSpinner inputCount;
-    private javax.swing.JTextField inputGenres;
-    private javax.swing.JTextField inputISBN10;
-    private javax.swing.JTextField inputISBN13;
-    private javax.swing.JTextField inputLanguage;
-    private javax.swing.JTextField inputLocation;
-    private javax.swing.JSpinner inputPageCount;
-    private javax.swing.JSpinner inputPublishedDate;
-    private javax.swing.JTextField inputPublisher;
-    private javax.swing.JTextField inputSponsor;
-    private javax.swing.JTextField inputTitle;
+    private javax.swing.JButton BTNaddAuthor;
+    private javax.swing.JButton BTNbuyedDate;
+    private javax.swing.JButton BTNcancel;
+    private javax.swing.JButton BTNremoveAuthor;
+    private javax.swing.JButton BTNsave;
+    private javax.swing.JButton BTNsearch;
+    private javax.swing.JList INPauthors;
+    private javax.swing.JTextField INPbuyedDate;
+    private javax.swing.JSpinner INPcount;
+    private javax.swing.JTextField INPgenres;
+    private javax.swing.JTextField INPisbn10;
+    private javax.swing.JTextField INPisbn13;
+    private javax.swing.JTextField INPlanguage;
+    private javax.swing.JTextField INPlocation;
+    private javax.swing.JSpinner INPpageCount;
+    private javax.swing.JSpinner INPpublishedDate;
+    private javax.swing.JTextField INPpublisher;
+    private javax.swing.JTextField INPsponsor;
+    private javax.swing.JTextField INPtitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -382,84 +385,81 @@ public class NewBookDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton removeAuthorButton;
-    private javax.swing.JButton saveButton;
-    private javax.swing.JButton searchButton;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getInputTitle() {
-        return inputTitle;
+    public JButton getBTNaddAuthor() {
+        return BTNaddAuthor;
     }
 
-    public JList getInputAuthors() {
-        return inputAuthors;
+    public JButton getBTNbuyedDate() {
+        return BTNbuyedDate;
     }
 
-    public JButton getAddAuthorButton() {
-        return addAuthorButton;
+    public JButton getBTNcancel() {
+        return BTNcancel;
     }
 
-    public JButton getRemoveAuthorButton() {
-        return removeAuthorButton;
+    public JButton getBTNremoveAuthor() {
+        return BTNremoveAuthor;
     }
 
-    public JButton getCancelButton() {
-        return cancelButton;
+    public JButton getBTNsave() {
+        return BTNsave;
     }
 
-    public JTextField getInputISBN10() {
-        return inputISBN10;
+    public JButton getBTNsearch() {
+        return BTNsearch;
     }
 
-    public JTextField getInputISBN13() {
-        return inputISBN13;
+    public JList getINPauthors() {
+        return INPauthors;
     }
 
-    public JTextField getInputBuyedDate() {
-        return inputBuyedDate;
+    public JTextField getINPbuyedDate() {
+        return INPbuyedDate;
     }
 
-    public JTextField getInputGenres() {
-        return inputGenres;
+    public JSpinner getINPcount() {
+        return INPcount;
     }
 
-    public JTextField getInputLanguage() {
-        return inputLanguage;
+    public JTextField getINPgenres() {
+        return INPgenres;
     }
 
-    public JSpinner getInputPageCount() {
-        return inputPageCount;
+    public JTextField getINPisbn10() {
+        return INPisbn10;
     }
 
-    public JSpinner getInputPublishedDate() {
-        return inputPublishedDate;
+    public JTextField getINPisbn13() {
+        return INPisbn13;
     }
 
-    public JButton getDatePickerButton() {
-        return datePickerButton2;
+    public JTextField getINPlanguage() {
+        return INPlanguage;
     }
 
-    public JTextField getInputPublisher() {
-        return inputPublisher;
+    public JTextField getINPlocation() {
+        return INPlocation;
     }
 
-    public JButton getSaveButton() {
-        return saveButton;
+    public JSpinner getINPpageCount() {
+        return INPpageCount;
     }
 
-    public JButton getSearchButton() {
-        return searchButton;
+    public JSpinner getINPpublishedDate() {
+        return INPpublishedDate;
     }
 
-    public JSpinner getInputCount() {
-        return inputCount;
+    public JTextField getINPpublisher() {
+        return INPpublisher;
     }
 
-    public JTextField getInputLocation() {
-        return inputLocation;
+    public JTextField getINPsponsor() {
+        return INPsponsor;
     }
 
-    public JTextField getInputSponsor() {
-        return inputSponsor;
+    public JTextField getINPtitle() {
+        return INPtitle;
     }
 }

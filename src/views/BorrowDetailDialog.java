@@ -247,7 +247,7 @@ public class BorrowDetailDialog extends javax.swing.JDialog {
         BTNclose.setName("close"); // NOI18N
 
         BTNedit.setText("Upravit");
-        BTNedit.setName("edit"); // NOI18N
+        BTNedit.setName("editButton"); // NOI18N
 
         BTNprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print-icon.png"))); // NOI18N
         BTNprint.setToolTipText("Tisknout detail knihy");

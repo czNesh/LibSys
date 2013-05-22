@@ -104,11 +104,7 @@ public class Validator {
      * @return indikace zda je text formátu ISBN10
      */
     public static boolean isValidISBN10(String in) {
-        if (in.matches("[0-9]{10}$")) {
-            System.out.println("a" + in + "a");
-            return false;
-        }
-        return (in.length() == 10) ? true : false;
+        return (in.matches("[0-9]{10}$"));
     }
 
     /**
@@ -118,10 +114,7 @@ public class Validator {
      * @return indikace zda je text formátu ISBN13
      */
     public static boolean isValidISBN13(String in) {
-        if (!isValidNumber(in)) {
-            return false;
-        }
-        return (in.length() == 13) ? true : false;
+        return (in.matches("[0-9]{13}$"));
     }
 
     /**

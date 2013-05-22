@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import io.ApplicationLog;
@@ -14,8 +10,9 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
+ * Třída - service starající se o entitu žánry
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class GenreService extends BaseDAO<Genre> {
 

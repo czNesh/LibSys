@@ -1,15 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import models.dao.BaseDAO;
 import models.entity.Author;
-import models.entity.Customer;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Disjunction;
@@ -17,8 +11,9 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
+ * Třída - service starající se o entitu autorů
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class AuthorService extends BaseDAO<Author> implements Serializable {
 

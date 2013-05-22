@@ -73,23 +73,23 @@ public class SystemUserDetailController extends BaseController {
         String lastName = dialog.getINPlastName().getText().trim();
         String email = dialog.getINPemail().getText().trim();
         String login = dialog.getINPlogin().getText().trim();
-        String password = dialog.getINPpassword().getPassword().toString().trim();
+        String password = dialog.getINPpassword().getText().toString().trim();
         boolean master = dialog.getINPmaster().isSelected();
 
-        if (Validator.isValidString(firstName)) {
+        if (!Validator.isValidString(firstName)) {
             validationLog.append("Vyplňte jméno\n");
         }
 
-        if (Validator.isValidString(lastName)) {
+        if (!Validator.isValidString(lastName)) {
             validationLog.append("Vyplňte přijmení\n");
         }
 
-        if (Validator.isValidString(login)) {
+        if (!Validator.isValidString(login)) {
             validationLog.append("Vyplňte login\n");
         }
 
 
-        if (Validator.isValidEmail(email)) {
+        if (!Validator.isValidEmail(email)) {
             validationLog.append("Neplatný email\n");
         }
 

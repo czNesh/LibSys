@@ -146,7 +146,7 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         newItemButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book_add2.gif"))); // NOI18N
-        newItemButton.setToolTipText("Přidat novou položku (CTRL+N)");
+        newItemButton.setToolTipText("Přidat novou položku");
         newItemButton.setFocusable(false);
         newItemButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         newItemButton.setName("newItem"); // NOI18N
@@ -154,7 +154,7 @@ public class MainView extends javax.swing.JFrame {
         jToolBar1.add(newItemButton);
 
         newBorrowButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/borrow-icon.png"))); // NOI18N
-        newBorrowButton.setToolTipText("Vytvoření nové půjčky (CTRL+B)");
+        newBorrowButton.setToolTipText("Vytvoření nové půjčky");
         newBorrowButton.setFocusable(false);
         newBorrowButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         newBorrowButton.setName("newBorrow"); // NOI18N

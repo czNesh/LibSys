@@ -392,7 +392,7 @@
         <Component class="javax.swing.JButton" name="BTNedit">
           <Properties>
             <Property name="text" type="java.lang.String" value="Upravit"/>
-            <Property name="name" type="java.lang.String" value="edit" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="editButton" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BTNprint">

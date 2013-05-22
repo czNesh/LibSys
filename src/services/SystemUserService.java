@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import io.Configuration;
@@ -17,8 +13,9 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
+ * Třída - service starající se o entitu uživatelů
  *
- * @author Administrator
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class SystemUserService extends BaseDAO<SystemUser> implements Serializable {
 

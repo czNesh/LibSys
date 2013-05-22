@@ -114,14 +114,14 @@ class NewCustomerController extends BaseController {
 
         // Validace emailu
         if (Validator.isValidString(email)) {
-            if (cfg.isCustomerRequireEmail()) {
-                validationLog.append("Email je povinná položka\n");
-            }
-        } else {
             if (Validator.isValidEmail(email)) {
                 c.setEmail(email);
             } else {
                 validationLog.append("Neplatný email\n");
+            }
+        } else {
+            if (cfg.isCustomerRequireEmail()) {
+                validationLog.append("Email je povinná položka\n");
             }
         }
 
@@ -171,7 +171,7 @@ class NewCustomerController extends BaseController {
 
         // nepoviné položky
         c.setNotes(notes);
-        
+
         // Validní? uložení : chyba
         if (validationLog.length() > 0) {
             JOptionPane.showMessageDialog(view, validationLog.toString(), "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);

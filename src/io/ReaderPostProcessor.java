@@ -78,7 +78,6 @@ public class ReaderPostProcessor implements KeyEventPostProcessor {
     private void selectAction() {
 
         String code = input.toString().trim();
-        System.out.println(input.length());
         if (input.length() < 9) {
             return;
         }
@@ -88,9 +87,10 @@ public class ReaderPostProcessor implements KeyEventPostProcessor {
             List<Borrow> borrows = BorrowService.getInstance().getBorrows(code);
             if (borrows != null && !borrows.isEmpty()) {
                 ApplicationLog.getInstance().addMessage("Čtečka: Půjčka rozpoznána - " + borrows.get(0).getCustomer().getFullName() + " (" + borrows.get(0).getBorrowCode() + ")");
+
+                BorrowDetailController brwdc = new BorrowDetailController(borrows.get(0));
+                brwdc.showView();
             }
-            BorrowDetailController brwdc = new BorrowDetailController(borrows.get(0));
-            brwdc.showView();
         }
 
         // Kniha
@@ -98,9 +98,10 @@ public class ReaderPostProcessor implements KeyEventPostProcessor {
             Book b = BookService.getInstance().getBookWithCode(code);
             if (b != null) {
                 ApplicationLog.getInstance().addMessage("Čtečka: Kniha rozpoznána - " + b.getTitle() + " (" + b.getBarcode() + ")");
+
+                BookDetailController bdc = new BookDetailController(b);
+                bdc.showView();
             }
-            BookDetailController bdc = new BookDetailController(b);
-            bdc.showView();
         }
 
         //Zákazník
@@ -108,9 +109,10 @@ public class ReaderPostProcessor implements KeyEventPostProcessor {
             Customer c = CustomerService.getInstance().getCustomerWithCode(code);
             if (c != null) {
                 ApplicationLog.getInstance().addMessage("Čtečka: Zákazník rozpoznán - " + c.getFullName() + " (" + c.getSSN() + ")");
+
+                CustomerDetailController cdc = new CustomerDetailController(c);
+                cdc.showView();
             }
-            CustomerDetailController cdc = new CustomerDetailController(c);
-            cdc.showView();
         }
     }
 

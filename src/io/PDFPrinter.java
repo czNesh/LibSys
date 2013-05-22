@@ -31,13 +31,19 @@ import models.entity.Notification;
 import services.BorrowService;
 
 /**
+ * Třída pro tisk do PDF
  *
- * @author petr.hejhal
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class PDFPrinter extends PdfPageEventHelper {
 
-    private static PDFPrinter instance;
+    private static PDFPrinter instance; // instance této třídy
 
+    /**
+     * SINGLETON
+     *
+     * @return instance
+     */
     public static PDFPrinter getInstance() {
         synchronized (PDFPrinter.class) {
             if (instance == null) {
@@ -48,8 +54,14 @@ public class PDFPrinter extends PdfPageEventHelper {
     }
 
     private PDFPrinter() {
+        //SINGLETON
     }
 
+    /**
+     * Tisk záznamu knihy
+     *
+     * @param book kniha
+     */
     public void printBook(Book book) {
         try {
             Document document = new Document(PageSize.A4, 10, 10, 100, 10);
@@ -173,6 +185,11 @@ public class PDFPrinter extends PdfPageEventHelper {
         }
     }
 
+    /**
+     * Tisk záznamu zákazníka
+     *
+     * @param customer zákazník
+     */
     public void printCustomer(Customer customer) {
         try {
             Document document = new Document(PageSize.A4, 10, 10, 100, 10);
@@ -253,6 +270,11 @@ public class PDFPrinter extends PdfPageEventHelper {
         }
     }
 
+    /**
+     * Tisk záznamu půjčky
+     *
+     * @param borrow půjčka
+     */
     public void printBorrow(Borrow borrow) {
         try {
             Document document = new Document(PageSize.A4, 10, 10, 100, 10);
@@ -352,6 +374,11 @@ public class PDFPrinter extends PdfPageEventHelper {
         }
     }
 
+    /**
+     * Tisk oznámení
+     *
+     * @param notification oznámení
+     */
     public void printNotification(Notification notification) {
         try {
             Document document = new Document(PageSize.A4, 10, 10, 100, 10);
@@ -468,6 +495,16 @@ public class PDFPrinter extends PdfPageEventHelper {
         }
     }
 
+    /**
+     * Formátování pro text
+     *
+     * @param in text
+     * @param size velikost
+     * @param bold tučné
+     * @return formátovaný text
+     * @throws IOException
+     * @throws DocumentException
+     */
     private Phrase formatOutput(String in, int size, boolean bold) throws IOException, DocumentException {
         if (in == null) {
             return new Phrase("");

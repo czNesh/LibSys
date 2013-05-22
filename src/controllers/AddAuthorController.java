@@ -71,7 +71,7 @@ public class AddAuthorController extends BaseController {
         String lName = dialog.getInputLName().getText().trim();
 
         // VALIDACE (jeden ze dvou)
-        if (Validator.isOneOfTheTwoFilled(fName, lName)) {
+        if (!Validator.isOneOfTheTwoFilled(fName, lName)) {
             JOptionPane.showMessageDialog(dialog, "Alespoň jeden údaj musí být zadaný", "Zkontrolujte zadané údaje", JOptionPane.ERROR_MESSAGE);
             return;
         }

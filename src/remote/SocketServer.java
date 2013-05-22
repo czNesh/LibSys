@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package remote;
 
 import controllers.SocketServerController;
@@ -24,8 +20,9 @@ import models.entity.Book;
 import services.BookService;
 
 /**
+ * Třída - serveru
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class SocketServer extends Thread {
 

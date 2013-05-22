@@ -72,32 +72,32 @@ public class NewSystemUserController extends BaseController {
         SystemUser u = new SystemUser();
 
         if (Validator.isValidString(firstName)) {
-            validationLog.append("Vyplňte jméno\n");
-        } else {
             u.setFirstName(firstName);
+        } else {
+            validationLog.append("Vyplňte jméno\n");
         }
 
         if (Validator.isValidString(lastName)) {
-            validationLog.append("Vyplňte přijmení\n");
-        } else {
             u.setLastName(lastName);
+        } else {
+            validationLog.append("Vyplňte přijmení\n");
         }
 
         if (Validator.isValidString(login)) {
-            validationLog.append("Vyplňte login\n");
-        } else {
             u.setLogin(login);
+        } else {
+            validationLog.append("Vyplňte login\n");
         }
 
         if (Validator.isValidString(password)) {
-            validationLog.append("Vyplňte heslo\n");
-        } else {
             u.setPassword(SystemUserService.getInstance().getHash(password));
+        } else {
+            validationLog.append("Vyplňte heslo\n");
         }
         if (Validator.isValidEmail(email)) {
-            validationLog.append("Neplatný email\n");
-        } else {
             u.setEmail(email);
+        } else {
+            validationLog.append("Neplatný email\n");
         }
 
         u.setMaster(master);
@@ -110,7 +110,7 @@ public class NewSystemUserController extends BaseController {
                 return;
             }
             SystemUserService.getInstance().save(u);
-            ApplicationLog.getInstance().addMessage("Vytvoření uživatele " + u.getFullName() + " úspěšně uložena");
+            ApplicationLog.getInstance().addMessage("Vytvoření uživatele " + u.getFullName() + " proběhlo úspěšně");
             success = true;
             dispose();
         }

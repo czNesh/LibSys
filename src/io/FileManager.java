@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package io;
 
 import java.awt.Desktop;
@@ -12,14 +8,20 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
+ * Třída starající s o soubory
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class FileManager {
 
-    private static FileManager instance;
-    private String workSpace;
+    private static FileManager instance; // instance této třídy
+    private String workSpace; // workspace
 
+    /**
+     * SINGLETON
+     *
+     * @return instance
+     */
     public static FileManager getInstance() {
         synchronized (FileManager.class) {
             if (instance == null) {
@@ -30,8 +32,15 @@ public class FileManager {
     }
 
     private FileManager() {
+        // SINGLETON
     }
 
+    /**
+     * Uložení obrázku
+     *
+     * @param name jméno
+     * @param in obrázek
+     */
     public void saveImage(String name, BufferedImage in) {
         workSpace = Configuration.getInstance().getWorkspace();
         if (workSpace.trim().isEmpty()) {
@@ -50,6 +59,11 @@ public class FileManager {
 
     }
 
+    /**
+     * Otevření obrázku
+     *
+     * @param name jméno
+     */
     public void openImage(String name) {
         workSpace = Configuration.getInstance().getWorkspace();
 
@@ -67,6 +81,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * Otevření složky
+     *
+     * @param path cesta
+     *
+     */
     public void open(String path) {
         workSpace = Configuration.getInstance().getWorkspace();
 
@@ -84,9 +104,13 @@ public class FileManager {
         }
     }
 
+    /**
+     * Vytvoření složky
+     * @param folderName jméno složky 
+     */
     public void createDir(String folderName) {
         workSpace = Configuration.getInstance().getWorkspace();
-        File theDir = new File(workSpace + "/"+folderName);
+        File theDir = new File(workSpace + "/" + folderName);
 
         // if the directory does not exist, create it
         if (!theDir.exists()) {

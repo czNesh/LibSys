@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import io.Configuration;
@@ -12,8 +8,9 @@ import models.entity.SystemUser;
 import services.SystemUserService;
 
 /**
+ * Třída - model tabulky uživatelů
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class SystemUserTableModel extends AbstractTableModel {
 
@@ -28,16 +25,32 @@ public class SystemUserTableModel extends AbstractTableModel {
         userList = SystemUserService.getInstance().getSystemUsers();
     }
 
+    /**
+     * Vrítí počet řádků
+     *
+     * @return počet řádků
+     */
     @Override
     public int getRowCount() {
         return userList.size();
     }
 
+    /**
+     * Vrtí počet sloupců
+     *
+     * @return počet sloupců
+     */
     @Override
     public int getColumnCount() {
         return 5;
     }
 
+    /**
+     * Vrátí jméno sloupce
+     *
+     * @param column sloupec
+     * @return jméno
+     */
     @Override
     public String getColumnName(int column) {
         ArrayList<String> tempValuesColumnNames = new ArrayList<>();
@@ -49,6 +62,13 @@ public class SystemUserTableModel extends AbstractTableModel {
         return tempValuesColumnNames.get(column);
     }
 
+    /**
+     * Vrátí hodnotu na řádku a sloupci
+     *
+     * @param rowIndex řádek
+     * @param columnIndex sloupec
+     * @return hodnota
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         SystemUser u = userList.get(rowIndex);

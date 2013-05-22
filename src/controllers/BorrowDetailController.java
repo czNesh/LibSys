@@ -137,12 +137,12 @@ public class BorrowDetailController extends BaseController {
      */
     private void switchEditMode() {
         if (editMode) {
-            dialog.getBTNedit().setName("edit");
+            dialog.getBTNedit().setName("editButton");
             dialog.getBTNedit().setText("Upravit");
             dialog.getINPcustomerNotes().setBackground(new Color(240, 240, 240));
             dialog.getINPnotes().setBackground(new Color(240, 240, 240));
         } else {
-            dialog.getBTNedit().setName("save");
+            dialog.getBTNedit().setName("saveButton");
             dialog.getBTNedit().setText("Uložit");
             dialog.getINPcustomerNotes().setBackground(Color.white);
             dialog.getINPnotes().setBackground(Color.white);
@@ -185,10 +185,13 @@ public class BorrowDetailController extends BaseController {
                 b.setToDate(to);
                 CustomerService.getInstance().save(c);
                 BorrowService.getInstance().save(b);
-                switchEditMode();
+
             }
         }
+        switchEditMode();
         updateView();
+        RefreshController.getInstance().refreshBookTab();
+        RefreshController.getInstance().refreshBorrowTab();
     }
 
     /**
@@ -381,10 +384,10 @@ public class BorrowDetailController extends BaseController {
         public void actionPerformed(ActionEvent e) {
 
             switch (((JComponent) e.getSource()).getName()) {
-                case "edit":
+                case "editButton":
                     switchEditMode();
                     break;
-                case "save":
+                case "saveButton":
                     saveBorrow();
                     break;
                 case "close":

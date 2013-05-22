@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import io.Configuration;
@@ -12,8 +8,9 @@ import models.entity.Customer;
 import services.CustomerService;
 
 /**
+ * Třída - model tabulky zákazníků
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class CustomerTableModel extends AbstractTableModel {
 
@@ -31,12 +28,18 @@ public class CustomerTableModel extends AbstractTableModel {
     private String filterString = "";
     private boolean isSearching = false;
 
+    /**
+     * Defaultní konstruktor třídy
+     */
     public CustomerTableModel() {
         super();
         setParams();
         customerList = CustomerService.getInstance().getCustomers();
     }
 
+    /**
+     * nastavení parametrů pro vyhledání
+     */
     private void setParams() {
         //Nastavení viditelnosti    
         showSSN = Configuration.getInstance().isCustomerShowSSN();
@@ -63,11 +66,21 @@ public class CustomerTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Vrítí počet řádků
+     *
+     * @return počet řádků
+     */
     @Override
     public int getRowCount() {
         return (customerList == null) ? 0 : customerList.size();
     }
 
+    /**
+     * Vrtí počet sloupců
+     *
+     * @return počet sloupců
+     */
     @Override
     public int getColumnCount() {
         int i = 0;
@@ -92,6 +105,12 @@ public class CustomerTableModel extends AbstractTableModel {
         return i;
     }
 
+    /**
+     * Vrátí jméno sloupce
+     *
+     * @param column sloupec
+     * @return jméno
+     */
     @Override
     public String getColumnName(int column) {
         ArrayList<String> tempValuesColumnNames = new ArrayList<>();
@@ -119,6 +138,13 @@ public class CustomerTableModel extends AbstractTableModel {
         return tempValuesColumnNames.get(column);
     }
 
+    /**
+     * Vrátí hodnotu na řádku a sloupci
+     *
+     * @param rowIndex řádek
+     * @param columnIndex sloupec
+     * @return hodnota
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Customer c = customerList.get(rowIndex);

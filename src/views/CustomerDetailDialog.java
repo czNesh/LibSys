@@ -78,7 +78,7 @@ public class CustomerDetailDialog extends javax.swing.JDialog {
         BTNclose.setName("close"); // NOI18N
 
         BTNedit.setText("Upravit");
-        BTNedit.setName("edit"); // NOI18N
+        BTNedit.setName("editButton"); // NOI18N
 
         BTNbarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PDF417-Java-Barcode.icon.gif"))); // NOI18N
         BTNbarcode.setName("barcode"); // NOI18N

@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package services;
 
 import controllers.RefreshController;
@@ -17,18 +14,17 @@ import models.entity.Author;
 import models.entity.Book;
 import models.entity.Genre;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
 
 /**
+ * Třída - service starající se o entitu knih
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class BookService extends BaseDAO<Book> implements Serializable {
 

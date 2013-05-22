@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import controllers.AppController;
-import io.ApplicationLog;
 import controllers.RefreshController;
 import helpers.DateHelper;
+import io.ApplicationLog;
 import io.Configuration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,8 +24,9 @@ import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
 /**
+ * Třída - service starající se o entitu půjček
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class BorrowService extends BaseDAO<Borrow> {
 
@@ -147,9 +144,9 @@ public class BorrowService extends BaseDAO<Borrow> {
     }
 
     public List<Borrow> activeBorrowsOfCustomer(Customer c) {
-        getParameters().put("customer_id", c.getId());
+        getParameters().put("customer", c.getId());
         getParameters().put("returned", false);
-        setCondition("customer_id = :customer_id AND returned = :returned");
+        setCondition("customer = :customer AND returned = :returned");
         return getList();
     }
 

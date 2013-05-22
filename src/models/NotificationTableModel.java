@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import helpers.DateHelper;
@@ -16,8 +12,9 @@ import models.entity.NotificationType;
 import services.BorrowService;
 
 /**
+ * Třída - model tabulky oznámení
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class NotificationTableModel extends AbstractTableModel {
 
@@ -36,6 +33,9 @@ public class NotificationTableModel extends AbstractTableModel {
     private String filterString = "";
     private boolean isSearching = false;
 
+    /**
+     * Defaultní konstruktor třídy
+     */
     public NotificationTableModel() {
         notifications = new ArrayList<>();
         exactNotifications = new ArrayList<>();
@@ -71,6 +71,11 @@ public class NotificationTableModel extends AbstractTableModel {
 
     }
 
+    /**
+     * Vrítí počet řádků
+     *
+     * @return počet řádků
+     */
     @Override
     public int getRowCount() {
         if (exactNotifications.isEmpty()) {
@@ -94,6 +99,11 @@ public class NotificationTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Vrtí počet sloupců
+     *
+     * @return počet sloupců
+     */
     @Override
     public int getColumnCount() {
         int i = 0;
@@ -119,6 +129,13 @@ public class NotificationTableModel extends AbstractTableModel {
         return i;
     }
 
+    /**
+     * Vrátí hodnotu na řádku a sloupci
+     *
+     * @param rowIndex řádek
+     * @param columnIndex sloupec
+     * @return hodnota
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Notification n;
@@ -157,6 +174,12 @@ public class NotificationTableModel extends AbstractTableModel {
         return tempValues.get(columnIndex);
     }
 
+    /**
+     * Vrátí jméno sloupce
+     *
+     * @param column sloupec
+     * @return jméno
+     */
     @Override
     public String getColumnName(int column) {
         ArrayList<String> tempValuesColumnNames = new ArrayList<>();

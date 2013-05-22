@@ -54,9 +54,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="searchButton" alignment="1" pref="157" max="32767" attributes="0"/>
-                      <Component id="cancelButton" max="32767" attributes="0"/>
-                      <Component id="saveButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="BTNsearch" alignment="1" pref="157" max="32767" attributes="0"/>
+                      <Component id="BTNcancel" max="32767" attributes="0"/>
+                      <Component id="BTNsave" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -66,18 +66,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="saveButton" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="BTNsave" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="cancelButton" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="BTNcancel" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace pref="276" max="32767" attributes="0"/>
-                  <Component id="searchButton" min="-2" pref="84" max="-2" attributes="0"/>
+                  <Component id="BTNsearch" min="-2" pref="84" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="searchButton">
+        <Component class="javax.swing.JButton" name="BTNsearch">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/we-search.png"/>
@@ -85,31 +85,31 @@
             <Property name="text" type="java.lang.String" value="Dohledat informace"/>
             <Property name="toolTipText" type="java.lang.String" value="Pokus&#xed; se dle zadan&#xfd;ch &#xfa;daj&#x16f; doplnit informace o knize (CTRL+D)"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="name" type="java.lang.String" value="searchButton" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="search" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="saveButton"/>
+              <ComponentRef name="BTNsave"/>
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="cancelButton">
+        <Component class="javax.swing.JButton" name="BTNcancel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
             <Property name="name" type="java.lang.String" value="removeButton" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputTitle"/>
+              <ComponentRef name="INPtitle"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNcancelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="saveButton">
+        <Component class="javax.swing.JButton" name="BTNsave">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ulo&#x17e;it"/>
             <Property name="name" type="java.lang.String" value="saveButton" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="cancelButton"/>
+              <ComponentRef name="BTNcancel"/>
             </Property>
           </Properties>
         </Component>
@@ -140,31 +140,31 @@
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="inputLocation" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPlocation" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="inputBuyedDate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="inputCount" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                                  <Component id="INPbuyedDate" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="INPcount" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="datePickerButton2" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="BTNbuyedDate" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="inputSponsor" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="inputPageCount" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                          <Component id="inputPublishedDate" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="inputGenres" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="inputPublisher" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="inputLanguage" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="inputISBN13" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="inputISBN10" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="inputTitle" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPsponsor" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPpageCount" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                          <Component id="INPpublishedDate" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="INPgenres" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPpublisher" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPlanguage" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPisbn13" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPisbn10" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
+                          <Component id="INPtitle" alignment="0" min="-2" pref="218" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="168" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="addAuthorButton" min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="removeAuthorButton" min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="BTNaddAuthor" min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="BTNremoveAuthor" min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -178,7 +178,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inputTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPtitle" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -186,70 +186,70 @@
                           <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="inputISBN10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPisbn10" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputISBN13" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPisbn13" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputPageCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPpageCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPlanguage" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPpublisher" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputPublishedDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPpublishedDate" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputGenres" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPgenres" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputSponsor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPsponsor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="inputBuyedDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="datePickerButton2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="INPbuyedDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BTNbuyedDate" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputCount" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPcount" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <Component id="addAuthorButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNaddAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="removeAuthorButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="BTNremoveAuthor" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="inputLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPlocation" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -263,22 +263,22 @@
             <Property name="text" type="java.lang.String" value="Titul:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputTitle">
+        <Component class="javax.swing.JTextField" name="INPtitle">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="addAuthorButton"/>
+              <ComponentRef name="BTNaddAuthor"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputTitleActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPtitleActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="addAuthorButton">
+        <Component class="javax.swing.JButton" name="BTNaddAuthor">
           <Properties>
             <Property name="text" type="java.lang.String" value="+"/>
-            <Property name="name" type="java.lang.String" value="addAuthorButton" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="addAuthor" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputISBN10"/>
+              <ComponentRef name="INPisbn10"/>
             </Property>
           </Properties>
         </Component>
@@ -289,7 +289,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="inputAuthors">
+            <Component class="javax.swing.JList" name="INPauthors">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="0"/>
@@ -299,104 +299,104 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="inputISBN10">
+        <Component class="javax.swing.JTextField" name="INPisbn10">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputISBN13"/>
+              <ComponentRef name="INPisbn13"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputISBN13">
+        <Component class="javax.swing.JTextField" name="INPisbn13">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputPageCount"/>
+              <ComponentRef name="INPpageCount"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="inputPageCount">
+        <Component class="javax.swing.JSpinner" name="INPpageCount">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputLanguage"/>
+              <ComponentRef name="INPlanguage"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputLanguage">
+        <Component class="javax.swing.JTextField" name="INPlanguage">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputPublisher"/>
+              <ComponentRef name="INPpublisher"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputLocation">
+        <Component class="javax.swing.JTextField" name="INPlocation">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="searchButton"/>
+              <ComponentRef name="BTNsearch"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="inputCount">
+        <Component class="javax.swing.JSpinner" name="INPcount">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputLocation"/>
+              <ComponentRef name="INPlocation"/>
             </Property>
             <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="1" type="code"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputBuyedDate">
+        <Component class="javax.swing.JTextField" name="INPbuyedDate">
           <Properties>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="datePickerButton2">
+        <Component class="javax.swing.JButton" name="BTNbuyedDate">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
             <Property name="name" type="java.lang.String" value="datePickerButton" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputCount"/>
+              <ComponentRef name="INPcount"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputSponsor">
+        <Component class="javax.swing.JTextField" name="INPsponsor">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="datePickerButton2"/>
+              <ComponentRef name="BTNbuyedDate"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputGenres">
+        <Component class="javax.swing.JTextField" name="INPgenres">
           <Properties>
             <Property name="name" type="java.lang.String" value="genres" noResource="true"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputSponsor"/>
+              <ComponentRef name="INPsponsor"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="inputPublishedDate">
+        <Component class="javax.swing.JSpinner" name="INPpublishedDate">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="now" maximum="now" stepSize="1" type="date"/>
+              <SpinnerModel initial="now" stepSize="1" type="date"/>
             </Property>
             <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
               <SpinnerEditor format="yyyy" type="1"/>
             </Property>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputGenres"/>
+              <ComponentRef name="INPgenres"/>
             </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="inputPublisher">
+        <Component class="javax.swing.JTextField" name="INPpublisher">
           <Properties>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="inputPublishedDate"/>
+              <ComponentRef name="INPpublishedDate"/>
             </Property>
           </Properties>
         </Component>
@@ -460,13 +460,13 @@
             <Property name="text" type="java.lang.String" value="Autor(&#x159;i):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="removeAuthorButton">
+        <Component class="javax.swing.JButton" name="BTNremoveAuthor">
           <Properties>
             <Property name="text" type="java.lang.String" value="-"/>
-            <Property name="name" type="java.lang.String" value="removeAuthorButton" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="removeAuthor" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeAuthorButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNremoveAuthorActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

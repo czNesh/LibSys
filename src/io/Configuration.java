@@ -1,19 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package io;
 
 import java.util.prefs.Preferences;
 
 /**
+ * Třída ukládající nastavení na počítač
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class Configuration {
 
     Preferences prefs;
-    private static Configuration instance;
+    private static Configuration instance; // instance této třídy
     //Server
     private static final int DEFAULT_SERVER_PORT = 6789;
     private static final boolean DEFAULT_SERVER_AUTOSTART = false;
@@ -87,6 +84,7 @@ public class Configuration {
     private static final String DEFAULT_EMAIL = "mail@mailserver.com";
     private static final String DEFAULT_WORKSPACE = "";
 
+    // SINGLETON
     public static Configuration getInstance() {
         synchronized (Configuration.class) {
             if (instance == null) {
@@ -96,13 +94,15 @@ public class Configuration {
         return instance;
     }
 
+    /**
+     * Třídní konsruktor
+     */
     private Configuration() {
         prefs = Preferences.userNodeForPackage(this.getClass());
     }
 
-    /*
-     * RESET NASTAVENI
-     * 
+    /**
+     * Reset na defaultní hodnoty
      */
     public void setDefaultValues() {
         //Server
@@ -180,30 +180,45 @@ public class Configuration {
         prefs.put("WORKSPACE", DEFAULT_WORKSPACE);
     }
 
-    /*
-     * Nastavení pro LibSys server
-     * autostart / port
+    /**
+     * Vrátí číslo portu serveru
+     *
+     * @return číslo portu
      */
     public int getServerPort() {
         return prefs.getInt("SERVER_PORT", DEFAULT_SERVER_PORT);
     }
 
+    /**
+     * Nastavení LibSys server port
+     *
+     * @param port číslo portu
+     */
     public void setServerPort(int in) {
         prefs.putInt("SERVER_PORT", in);
     }
 
+    /**
+     * Vrátí indikaci zda serverběží
+     *
+     * @return indikace zda server běží
+     */
     public boolean isServerAutoStart() {
         return prefs.getBoolean("SERVER_AUTOSTART", DEFAULT_SERVER_AUTOSTART);
     }
 
+    /**
+     * Zapne / Vypne server
+     *
+     * @param in stav
+     */
     public void setServerAutoStart(boolean in) {
         prefs.putBoolean("SERVER_AUTOSTART", in);
     }
 
-
-    /*
-     * Obecná nastavení
-     * Vypnutí loginu / Zobrazovat smazané položky / defaultní email / Workspace
+    /**
+     * Obecná nastavení Vypnutí loginu / Zobrazovat smazané položky / defaultní
+     * email / Workspace
      */
     public boolean isSkipLogging() {
         return prefs.getBoolean("SKIP_LOGGING", DEFAULT_SKIP_LOGGIN);

@@ -23,7 +23,7 @@ import views.CustomerListDialog;
  * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class CustomerListController extends BaseController {
-    
+
     CustomerListDialog dialog; // připojený pohled
     CustomerTableModel tableModel; // model tabulky zákazníků
     CustomerFilterDialog filterDialog; // filtr zobrazení tabulky
@@ -102,13 +102,13 @@ public class CustomerListController extends BaseController {
         // Update page counting 
         dialog.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
         dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
-        
+
         if (tableModel.getPage() == 1) {
             dialog.getBookTablePrevButton().setEnabled(false);
         } else {
             dialog.getBookTablePrevButton().setEnabled(true);
         }
-        
+
         if (tableModel.getPage() == tableModel.getTotalPageCount()) {
             dialog.getBookTableNextButton().setEnabled(false);
         } else {
@@ -161,29 +161,32 @@ public class CustomerListController extends BaseController {
      * pohledu
      */
     private class CustomerMouseListener implements MouseListener {
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
                 Point p = e.getPoint();
                 JTable t = dialog.getResultTable();
                 customer = (Customer) tableModel.getCustomer(t.getSelectedRow());
+                if (customer != null) {
+                    dialog.dispose();
+                }
             }
-            dialog.dispose();
+
         }
-        
+
         @Override
         public void mousePressed(MouseEvent e) {
         }
-        
+
         @Override
         public void mouseReleased(MouseEvent e) {
         }
-        
+
         @Override
         public void mouseEntered(MouseEvent e) {
         }
-        
+
         @Override
         public void mouseExited(MouseEvent e) {
         }
@@ -193,19 +196,19 @@ public class CustomerListController extends BaseController {
      * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
      */
     private class CustomerListButtonListener implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton) e.getSource();
             String buttonName = b.getName();
-            
+
             switch (buttonName) {
                 case "confirm":
-                    selectUser();                    
+                    selectUser();
                     break;
                 case "cancel":
                     dispose();
-                    break;                
+                    break;
                 case "filter":
                     filterDialog.getBTNok().addActionListener(this);
                     filterDialog();
@@ -228,7 +231,7 @@ public class CustomerListController extends BaseController {
                     // DOO NOTHING
                     break;
             }
-            
+
         }
     }
 
@@ -237,21 +240,21 @@ public class CustomerListController extends BaseController {
      * pohledu
      */
     private class CustomerListKeyListener implements KeyListener {
-        
+
         List<Customer> customers;
-        
+
         public CustomerListKeyListener() {
             customers = CustomerService.getInstance().getCustomers();
         }
-        
+
         @Override
         public void keyTyped(KeyEvent e) {
         }
-        
+
         @Override
         public void keyPressed(KeyEvent e) {
         }
-        
+
         @Override
         public void keyReleased(KeyEvent e) {
             // pokud se nezapise znak - hned skonci
@@ -310,7 +313,7 @@ public class CustomerListController extends BaseController {
                     dialog.getInputLName().setSelectionStart(start);
                     dialog.getInputLName().setSelectionEnd(dialog.getInputLName().getText().length());
                     break;
-                
+
                 case "ssn":
                     in = dialog.getInputSSN().getText().trim();
                     start = in.length();

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package services;
 
 import controllers.RefreshController;
@@ -23,8 +19,9 @@ import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
 /**
+ * Třída - service starající se o entitu zákazník
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class CustomerService extends BaseDAO<Customer> implements Serializable {
 

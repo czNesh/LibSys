@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import helpers.DateHelper;
@@ -14,8 +10,9 @@ import models.entity.Borrow;
 import services.BorrowService;
 
 /**
+ * Třída - model tabulky půjčky
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class BorrowTableModel extends AbstractTableModel {
 
@@ -34,17 +31,28 @@ public class BorrowTableModel extends AbstractTableModel {
     private String filterString = "";
     private boolean isSearching = false;
 
+    /**
+     * Defaultní konstruktor třídy
+     */
     public BorrowTableModel() {
         super();
         borrowList = BorrowService.getInstance().getBorrows();
     }
 
+    /**
+     * konstruktor třídy a naplnění dat z listu
+     *
+     * @param in list
+     */
     public BorrowTableModel(List<Borrow> in) {
         super();
         setParams();
         borrowList = in;
     }
 
+    /**
+     * nastavení parametrů pro vyhledání
+     */
     private void setParams() {
         //Nastavení viditelnosti    
         showCustomer = Configuration.getInstance().isBorrowShowCustomer();
@@ -72,11 +80,21 @@ public class BorrowTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Vrítí počet řádků
+     *
+     * @return počet řádků
+     */
     @Override
     public int getRowCount() {
         return (borrowList == null) ? 0 : borrowList.size();
     }
 
+    /**
+     * Vrtí počet sloupců
+     *
+     * @return počet sloupců
+     */
     @Override
     public int getColumnCount() {
         int i = 0;
@@ -102,6 +120,13 @@ public class BorrowTableModel extends AbstractTableModel {
         return i;
     }
 
+    /**
+     * Vrátí hodnotu na řádku a sloupci
+     *
+     * @param rowIndex řádek
+     * @param columnIndex sloupec
+     * @return hodnota
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Borrow b = borrowList.get(rowIndex);
@@ -141,6 +166,12 @@ public class BorrowTableModel extends AbstractTableModel {
         return tempValues.get(columnIndex);
     }
 
+    /**
+     * Vrátí jméno sloupce
+     *
+     * @param column sloupec
+     * @return jméno
+     */
     @Override
     public String getColumnName(int column) {
         ArrayList<String> tempValuesColumnNames = new ArrayList<>();

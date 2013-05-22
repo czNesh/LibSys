@@ -33,12 +33,20 @@ public class BookTableModel extends AbstractTableModel {
     private boolean isSearching = false;
     private boolean forBorrow = false;
 
+    /**
+     * Defaultní konstruktor třídy
+     */
     public BookTableModel() {
         super();
         setParams();
         bookList = BookService.getInstance().getBooks();
     }
 
+    /**
+     * Konstruktor třídy a naplnění dat z listu
+     *
+     * @param in list
+     */
     public BookTableModel(List<Book> in) {
         super();
         showTitle = true;
@@ -49,6 +57,12 @@ public class BookTableModel extends AbstractTableModel {
         bookList = in;
     }
 
+    /**
+     * Konstruktor třídy a naplnění dat z listu
+     *
+     * @param in list
+     * @param borrowCode kód
+     */
     public BookTableModel(List<Book> in, String borrowCode) {
         super();
         showTitle = true;
@@ -60,6 +74,9 @@ public class BookTableModel extends AbstractTableModel {
         bookList = in;
     }
 
+    /**
+     * nastavení parametrů pro vyhledání
+     */
     private void setParams() {
         //Nastavení viditelnosti  
         showTitle = Configuration.getInstance().isShowTitle();
@@ -76,17 +93,25 @@ public class BookTableModel extends AbstractTableModel {
         maxRows = Configuration.getInstance().getMaxBookRowsCount();
         BookService.getInstance().setLimit(maxRows);
         BookService.getInstance().setStart((page - 1) * maxRows);
-        
+
         BookService.getInstance().setOrderType(Configuration.getInstance().getBookOrderType());
         BookService.getInstance().setOrderBy(Configuration.getInstance().getBookOrderBy());
 
-        BookService.getInstance().getParameters().put("deleted", false);
+
         if (forBorrow) {
             BookService.getInstance().getParameters().put("borrowed", false);
-            BookService.getInstance().setCondition("deleted = :deleted AND borrowed = :borrowed");
+            if (!Configuration.getInstance().isDeletedItemVisible()) {
+                BookService.getInstance().getParameters().put("deleted", false);
+                BookService.getInstance().setCondition("deleted = :deleted AND borrowed = :borrowed");
+            } else {
+                BookService.getInstance().setCondition("borrowed = :borrowed");
+            }
         } else {
             BookService.getInstance().setGroupBy(groupBy);
-            BookService.getInstance().setCondition("deleted = :deleted");
+            if (!Configuration.getInstance().isDeletedItemVisible()) {
+                BookService.getInstance().getParameters().put("deleted", false);
+                BookService.getInstance().setCondition("deleted = :deleted");
+            }
         }
         if (!filterString.isEmpty()) {
             BookService.getInstance().setExactMatch("t.id", BookService.getInstance().criteriaSearch(filterString));
@@ -96,11 +121,21 @@ public class BookTableModel extends AbstractTableModel {
         }
     }
 
+    /**
+     * Vrítí počet řádků
+     *
+     * @return počet řádků
+     */
     @Override
     public int getRowCount() {
         return bookList.size();
     }
 
+    /**
+     * Vrtí počet sloupců
+     *
+     * @return počet sloupců
+     */
     @Override
     public int getColumnCount() {
         int i = 0;
@@ -142,6 +177,13 @@ public class BookTableModel extends AbstractTableModel {
         return i;
     }
 
+    /**
+     * Vrátí hodnotu na řádku a sloupci
+     *
+     * @param rowIndex řádek
+     * @param columnIndex sloupec
+     * @return hodnota
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Book i = bookList.get(rowIndex);
@@ -210,6 +252,11 @@ public class BookTableModel extends AbstractTableModel {
         return tempValues.get(columnIndex);
     }
 
+    /**
+     * Vrátí jméno sloupce
+     * @param column sloupec
+     * @return jméno
+     */
     @Override
     public String getColumnName(int column) {
         ArrayList<String> tempValuesColumnNames = new ArrayList<>();
