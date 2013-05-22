@@ -88,7 +88,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="infoThumb" min="-2" pref="173" max="-2" attributes="0"/>
+                  <Component id="INPthumbnail" min="-2" pref="173" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -96,14 +96,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="infoThumb" min="-2" pref="263" max="-2" attributes="0"/>
+                  <Component id="INPthumbnail" min="-2" pref="263" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="infoThumb">
+        <Component class="javax.swing.JLabel" name="INPthumbnail">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Hled&#xe1;m n&#xe1;hled..."/>
@@ -141,15 +141,15 @@
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="infoPublisher" pref="365" max="32767" attributes="0"/>
-                      <Component id="infoSponsor" max="32767" attributes="0"/>
-                      <Component id="infoTitle" alignment="0" max="32767" attributes="0"/>
-                      <Component id="infoISBN10" alignment="0" max="32767" attributes="0"/>
-                      <Component id="infoISBN13" alignment="0" max="32767" attributes="0"/>
+                      <Component id="INPpublisher" pref="365" max="32767" attributes="0"/>
+                      <Component id="INPsponsor" max="32767" attributes="0"/>
+                      <Component id="INPtitle" alignment="0" max="32767" attributes="0"/>
+                      <Component id="INPisbn10" alignment="0" max="32767" attributes="0"/>
+                      <Component id="INPisbn13" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
-                      <Component id="infoPageCount" alignment="1" max="32767" attributes="0"/>
-                      <Component id="infoLanguage" alignment="1" max="32767" attributes="0"/>
-                      <Component id="infoGenre" max="32767" attributes="0"/>
+                      <Component id="INPpageCount" alignment="1" max="32767" attributes="0"/>
+                      <Component id="INPlanguage" alignment="1" max="32767" attributes="0"/>
+                      <Component id="INPgenre" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -161,11 +161,11 @@
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="infoBuyedDate" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <Component id="INPaddedDate" min="-2" pref="125" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="BTNsetPublishedYear" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="infoPublishedYear" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                              <Component id="INPpublishedYear" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="filler1" min="-2" pref="24" max="-2" attributes="0"/>
@@ -182,7 +182,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel8" max="32767" attributes="0"/>
-                      <Component id="infoTitle" max="32767" attributes="0"/>
+                      <Component id="INPtitle" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -203,41 +203,41 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPlanguage" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoPageCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPpageCount" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoGenre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPgenre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoISBN10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPisbn10" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoISBN13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPisbn13" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPpublisher" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="infoPublishedYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPpublishedYear" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="infoSponsor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="INPsponsor" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -245,7 +245,7 @@
                       <Component id="BTNsetPublishedYear" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="infoBuyedDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="INPaddedDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -349,8 +349,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="BTNprint" alignment="1" max="32767" attributes="0"/>
-                          <Component id="closeButton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="editButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="BTNclose" alignment="0" max="32767" attributes="0"/>
+                          <Component id="BTNedit" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="BTNqrcode" min="-2" pref="46" max="-2" attributes="0"/>
@@ -375,9 +375,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="editButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="BTNedit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="BTNclose" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="BTNprint" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -398,14 +398,14 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="editButton">
+            <Component class="javax.swing.JButton" name="BTNedit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Upravit"/>
                 <Property name="toolTipText" type="java.lang.String" value="Upravit knihu"/>
                 <Property name="name" type="java.lang.String" value="editButton" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="closeButton">
+            <Component class="javax.swing.JButton" name="BTNclose">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Zav&#x159;&#xed;t"/>
                 <Property name="toolTipText" type="java.lang.String" value="Zav&#x159;e dialog"/>
@@ -490,7 +490,7 @@
             <Property name="text" type="java.lang.String" value="Zakoupeno dne:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoTitle">
+        <Component class="javax.swing.JTextField" name="INPtitle">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -505,7 +505,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoLanguage">
+        <Component class="javax.swing.JTextField" name="INPlanguage">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -519,7 +519,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoPageCount">
+        <Component class="javax.swing.JTextField" name="INPpageCount">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -533,7 +533,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoGenre">
+        <Component class="javax.swing.JTextField" name="INPgenre">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -548,7 +548,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoISBN10">
+        <Component class="javax.swing.JTextField" name="INPisbn10">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -562,7 +562,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoISBN13">
+        <Component class="javax.swing.JTextField" name="INPisbn13">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -576,7 +576,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoPublisher">
+        <Component class="javax.swing.JTextField" name="INPpublisher">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -590,7 +590,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoSponsor">
+        <Component class="javax.swing.JTextField" name="INPsponsor">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -604,7 +604,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoBuyedDate">
+        <Component class="javax.swing.JTextField" name="INPaddedDate">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -625,7 +625,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="infoNotes">
+            <Component class="javax.swing.JTextArea" name="INPnotes">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -653,7 +653,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="infoAuthors">
+            <Component class="javax.swing.JList" name="INPauthors">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f0" green="f0" red="f0" type="rgb"/>
@@ -705,7 +705,7 @@
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="BTNsetPublishedYear.setVisible(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoPublishedYear">
+        <Component class="javax.swing.JTextField" name="INPpublishedYear">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -741,7 +741,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="lastBorrowTable">
+            <Component class="javax.swing.JTable" name="TABlastBorrow">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
@@ -769,12 +769,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="infoStock" max="32767" attributes="0"/>
+              <Component id="INPstock" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="INPselectTargetBook" max="32767" attributes="0"/>
-                      <Component id="infoLocation" max="32767" attributes="0"/>
+                      <Component id="INPlocation" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -784,9 +784,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="infoStock" min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="INPstock" min="-2" pref="18" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="infoLocation" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPlocation" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="INPselectTargetBook" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -795,7 +795,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="infoStock">
+        <Component class="javax.swing.JLabel" name="INPstock">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -820,7 +820,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INPselectTargetBookActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="infoLocation">
+        <Component class="javax.swing.JTextField" name="INPlocation">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

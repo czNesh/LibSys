@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import helpers.DateHelper;
@@ -23,17 +19,23 @@ import views.NotificationFilterDialog;
 import views.NotificationSearchDialog;
 
 /**
+ * Třída (controller) starající se o záložku oznámení na hlavním pohledu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class NotificationTabController {
 
-    private MainView mainView;
-    private NotificationTableModel tableModel;
-    private NotificationSearchDialog nsd;
-    private NotificationFilterDialog filter;
-    Configuration c = Configuration.getInstance();
+    private MainView mainView; // hlavní pohled
+    private NotificationTableModel tableModel; // model tabulky oznámení
+    private NotificationSearchDialog nsd; // dialog pro vyhledávání
+    private NotificationFilterDialog filter; // filtr zobrazení
+    Configuration c = Configuration.getInstance(); // nastavení
 
+    /**
+     * Třídní konstruktor
+     *
+     * @param mainView hlavní pohled
+     */
     public NotificationTabController(MainView mainView) {
         // MainView
         this.mainView = mainView;
@@ -56,6 +58,9 @@ public class NotificationTabController {
         updateView();
     }
 
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         NotificationTabKeyListener k = new NotificationTabKeyListener();
         mainView.getINPnotificationPage().addKeyListener(k);
@@ -84,6 +89,9 @@ public class NotificationTabController {
         mainView.getTABnotification().addMouseListener(m);
     }
 
+    /**
+     * update dat pohledu
+     */
     public void updateView() {
         // TableModel
         tableModel.updateData();
@@ -111,6 +119,9 @@ public class NotificationTabController {
         }
     }
 
+    /**
+     * Nastavení filtru zobrazení
+     */
     private void setFilterData() {
         filter.getINPborrowCode().setSelected(c.isNotificationShowBorrowCode());
         filter.getINPcustomer().setSelected(c.isNotificationShowCustomer());
@@ -122,6 +133,138 @@ public class NotificationTabController {
 
     }
 
+    /**
+     * Zobrazí filter zobrazení
+     */
+    private void showFilter() {
+        filter.setLocationRelativeTo(null);
+        filter.setVisible(true);
+    }
+
+    /**
+     * nastaví filtr zobrazení
+     */
+    private void setFilter() {
+
+        c.setNotificationShowBorrowCode(filter.getINPborrowCode().isSelected());
+        c.setNotificationShowCustomer(filter.getINPcustomer().isSelected());
+        c.setNotificationShowFrom(filter.getINPfrom().isSelected());
+        c.setNotificationShowTo(filter.getINPto().isSelected());
+        c.setNotificationShowType(filter.getINPtype().isSelected());
+        c.setNotificationsShowItem(filter.getINPitem().isSelected());
+
+
+        c.setMaxNotificationRowsCount((int) filter.getINPmaxRows().getValue());
+        updateView();
+        filter.setVisible(false);
+    }
+
+    /**
+     * zobrazí dialog hledání
+     */
+    private void searchDialog() {
+        if (mainView.getTabPanel().getSelectedIndex() != 3) {
+            return;
+        }
+        nsd.setLocationRelativeTo(null);
+        nsd.setVisible(true);
+    }
+
+    /**
+     * smaže vstupy vyhledávání
+     */
+    private void resetSearch() {
+        nsd.getINPborrowCode().setText("");
+        nsd.getINPcustomer().setText("");
+        nsd.getINPbook().setText("");
+        nsd.getINPfrom().setText("");
+        nsd.getINPto().setText("");
+        nsd.getINPtype().setSelectedIndex(0);
+    }
+
+    /**
+     * zastaví vyhledávání
+     */
+    private void stopSearch() {
+        nsd.getINPborrowCode().setText("");
+        nsd.getINPcustomer().setText("");
+        nsd.getINPbook().setText("");
+        nsd.getINPfrom().setText("");
+        nsd.getINPto().setText("");
+        nsd.getINPtype().setSelectedIndex(0);
+        tableModel.stopSearch();
+        updateView();
+        mainView.getBTNnotificationStopSearch().setVisible(false);
+    }
+
+    /**
+     * nastaví datum od
+     */
+    private void seDateFrom() {
+        DatePicker dp = new DatePicker(null, true);
+        dp.setLocationRelativeTo(null);
+        dp.setVisible(true);
+
+        if (dp.getDate() != null) {
+            Date d = dp.getDate();
+            nsd.getINPfrom().setText(DateHelper.dateToString(d, false));
+        }
+    }
+
+    /**
+     * Nastaví datum do
+     */
+    private void setDateTo() {
+        DatePicker dp2 = new DatePicker(null, true);
+        dp2.setLocationRelativeTo(null);
+        dp2.setVisible(true);
+
+        if (dp2.getDate() != null) {
+            Date d2 = dp2.getDate();
+            nsd.getINPto().setText(DateHelper.dateToString(d2, false));
+        }
+    }
+
+    /**
+     * Vyhledá oznámení
+     */
+    private void search() {
+        tableModel.search(
+                nsd.getINPborrowCode().getText(),
+                nsd.getINPcustomer().getText(),
+                nsd.getINPbook().getText(),
+                nsd.getINPfrom().getText(),
+                nsd.getINPto().getText(),
+                nsd.getINPtype().getSelectedIndex());
+        updateView();
+        nsd.setVisible(false);
+        mainView.getBTNnotificationStopSearch().setVisible(true);
+    }
+
+    /**
+     * není implementováno
+     */
+    private void generateBarcode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 3) {
+            return;
+        }
+        JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do BARCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * není implementováno
+     */
+    private void generateQRCode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 3) {
+            return;
+        }
+        JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do QRCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
     private class NotificationTabMouseListener implements MouseListener {
 
         public NotificationTabMouseListener() {
@@ -153,6 +296,9 @@ public class NotificationTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class NotificationTabActionListerner implements ActionListener {
 
         public NotificationTabActionListerner() {
@@ -162,85 +308,33 @@ public class NotificationTabController {
         public void actionPerformed(ActionEvent e) {
             switch (((JComponent) e.getSource()).getName()) {
                 case "filter":
-                    filter.setLocationRelativeTo(null);
-                    filter.setVisible(true);
+                    showFilter();
                     break;
 
                 case "filterConfirmed":
-
-                    c.setNotificationShowBorrowCode(filter.getINPborrowCode().isSelected());
-                    c.setNotificationShowCustomer(filter.getINPcustomer().isSelected());
-                    c.setNotificationShowFrom(filter.getINPfrom().isSelected());
-                    c.setNotificationShowTo(filter.getINPto().isSelected());
-                    c.setNotificationShowType(filter.getINPtype().isSelected());
-                    c.setNotificationsShowItem(filter.getINPitem().isSelected());
-
-
-                    c.setMaxNotificationRowsCount((int) filter.getINPmaxRows().getValue());
-                    updateView();
-                    filter.setVisible(false);
+                    setFilter();
                     break;
                 case "searchDialog":
-                    if (mainView.getTabPanel().getSelectedIndex() != 3) {
-                        break;
-                    }
-                    nsd.setLocationRelativeTo(null);
-                    nsd.setVisible(true);
+                    searchDialog();
                     break;
 
                 case "close":
                     nsd.setVisible(false);
                     break;
                 case "reset":
-                    nsd.getINPborrowCode().setText("");
-                    nsd.getINPcustomer().setText("");
-                    nsd.getINPbook().setText("");
-                    nsd.getINPfrom().setText("");
-                    nsd.getINPto().setText("");
-                    nsd.getINPtype().setSelectedIndex(0);
+                    resetSearch();
                     break;
                 case "stop":
-                    nsd.getINPborrowCode().setText("");
-                    nsd.getINPcustomer().setText("");
-                    nsd.getINPbook().setText("");
-                    nsd.getINPfrom().setText("");
-                    nsd.getINPto().setText("");
-                    nsd.getINPtype().setSelectedIndex(0);
-                    tableModel.stopSearch();
-                    updateView();
-                    mainView.getBTNnotificationStopSearch().setVisible(false);
+                    stopSearch();
                     break;
                 case "fromDate":
-                    DatePicker dp = new DatePicker(null, true);
-                    dp.setLocationRelativeTo(null);
-                    dp.setVisible(true);
-
-                    if (dp.getDate() != null) {
-                        Date d = dp.getDate();
-                        nsd.getINPfrom().setText(DateHelper.dateToString(d, false));
-                    }
+                    seDateFrom();
                     break;
                 case "toDate":
-                    DatePicker dp2 = new DatePicker(null, true);
-                    dp2.setLocationRelativeTo(null);
-                    dp2.setVisible(true);
-
-                    if (dp2.getDate() != null) {
-                        Date d2 = dp2.getDate();
-                        nsd.getINPto().setText(DateHelper.dateToString(d2, false));
-                    }
+                    setDateTo();
                     break;
                 case "search":
-                    tableModel.search(
-                            nsd.getINPborrowCode().getText(),
-                            nsd.getINPcustomer().getText(),
-                            nsd.getINPbook().getText(),
-                            nsd.getINPfrom().getText(),
-                            nsd.getINPto().getText(),
-                            nsd.getINPtype().getSelectedIndex());
-                    updateView();
-                    nsd.setVisible(false);
-                    mainView.getBTNnotificationStopSearch().setVisible(true);
+                    search();
                     break;
                 case "nextPage":
                     tableModel.nextPage();
@@ -251,16 +345,10 @@ public class NotificationTabController {
                     updateView();
                     break;
                 case "barcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 3) {
-                        break;
-                    }
-                    JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do BARCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
+                    generateBarcode();
                     break;
                 case "qrcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 3) {
-                        break;
-                    }
-                    JOptionPane.showMessageDialog(mainView, "Oznámení nelze tisknout do QRCODE", "Informace", JOptionPane.INFORMATION_MESSAGE);
+                    generateQRCode();
                     break;
                 default:
                     break;
@@ -269,6 +357,10 @@ public class NotificationTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
     private class NotificationTabKeyListener implements KeyListener {
 
         public NotificationTabKeyListener() {

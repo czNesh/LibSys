@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import coding.Barcode;
@@ -29,18 +25,25 @@ import views.DatePicker;
 import views.MainView;
 
 /**
+ * Třída (controller) starající se o záložku půjček v hlavním pohledu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class BorrowTabController {
 
-    MainView mainView;
-    BorrowTableModel tableModel;
-    BorrowFilterDialog filter;
+    MainView mainView; // hlavní pohled
+    BorrowTableModel tableModel; // tabulka půjček
+    BorrowFilterDialog filter; // filtr zobrazení tabulky
+    BorrowSearchDialog bsd; // vyhledávací dialog
+    // Řazení
     Map<String, String> orderType = BorrowService.getInstance().getOrderTypeMap();
     Map<String, String> orderBy = BorrowService.getInstance().getOrderByMap();
-    BorrowSearchDialog bsd;
 
+    /**
+     * Konstruktor třídy nastaví hlavní pohled
+     *
+     * @param mainView hlavní pohled
+     */
     public BorrowTabController(MainView mainView) {
         // MainView
         this.mainView = mainView;
@@ -63,6 +66,9 @@ public class BorrowTabController {
         updateView();
     }
 
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         // MouseListeners
         BorrowTabMouseListener m = new BorrowTabMouseListener();
@@ -94,6 +100,9 @@ public class BorrowTabController {
         bsd.getBTNtoDate().addActionListener(a);
     }
 
+    /**
+     * Update dat v pohledu
+     */
     public void updateView() {
         // UPDATE DATA
         tableModel.updateData();
@@ -119,6 +128,9 @@ public class BorrowTabController {
         }
     }
 
+    /**
+     * Metoda měnící zobrazení v tabulce
+     */
     private void setFilterData() {
         filter.getINPcustomer().setSelected(Configuration.getInstance().isBorrowShowCustomer());
         filter.getINPitems().setSelected(Configuration.getInstance().isBorrowShowItems());
@@ -146,6 +158,52 @@ public class BorrowTabController {
         updateView();
     }
 
+    /**
+     * Metoda pro generování QR kódů
+     */
+    private void generateQRCode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 2) {
+            return;
+        }
+        if (mainView.getBorrowTable().getSelectedRowCount() > 0) {
+            List<Borrow> borrows = tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows());
+            String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
+            FileManager.getInstance().createDir(folderName);
+
+            for (Borrow b : borrows) {
+                FileManager.getInstance().saveImage(folderName + "/" + b.getBorrowCode(), QRCode.encode(b.getBorrowCode()));
+            }
+            FileManager.getInstance().open(folderName + "/");
+        } else {
+            JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Metoda pro generování čárových kódů
+     */
+    private void generateBarcode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 2) {
+            return;
+        }
+        if (mainView.getBorrowTable().getSelectedRowCount() > 0) {
+            List<Borrow> borrows = tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows());
+            String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
+            FileManager.getInstance().createDir(folderName);
+
+            for (Borrow b : borrows) {
+                FileManager.getInstance().saveImage(folderName + "/" + b.getBorrowCode(), Barcode.encode(b.getBorrowCode()));
+            }
+            FileManager.getInstance().open(folderName + "/");
+        } else {
+            JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
     private class BorrowTabMouseListener implements MouseListener {
 
         public BorrowTabMouseListener() {
@@ -177,6 +235,9 @@ public class BorrowTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class BorrowTabActionListener implements ActionListener {
 
         public BorrowTabActionListener() {
@@ -279,38 +340,10 @@ public class BorrowTabController {
                     filter.setVisible(false);
                     break;
                 case "barcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 2) {
-                        break;
-                    }
-                    if (mainView.getBorrowTable().getSelectedRowCount() > 0) {
-                        List<Borrow> borrows = tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows());
-                        String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
-                        FileManager.getInstance().createDir(folderName);
-
-                        for (Borrow b : borrows) {
-                            FileManager.getInstance().saveImage(folderName + "/" + b.getBorrowCode(), Barcode.encode(b.getBorrowCode()));
-                        }
-                        FileManager.getInstance().open(folderName + "/");
-                    } else {
-                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    }
+                    generateBarcode();
                     break;
                 case "qrcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 2) {
-                        break;
-                    }
-                    if (mainView.getBorrowTable().getSelectedRowCount() > 0) {
-                        List<Borrow> borrows = tableModel.getBorrows(mainView.getBorrowTable().getSelectedRows());
-                        String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
-                        FileManager.getInstance().createDir(folderName);
-
-                        for (Borrow b : borrows) {
-                            FileManager.getInstance().saveImage(folderName + "/" + b.getBorrowCode(), QRCode.encode(b.getBorrowCode()));
-                        }
-                        FileManager.getInstance().open(folderName + "/");
-                    } else {
-                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    }
+                    generateQRCode();
                     break;
                 default:
                     break;
@@ -318,6 +351,10 @@ public class BorrowTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
     private class BorrowTabKeyListener implements KeyListener {
 
         public BorrowTabKeyListener() {

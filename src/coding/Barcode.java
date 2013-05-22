@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package coding;
 
 import com.google.zxing.BarcodeFormat;
@@ -13,18 +9,27 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
+ * Třída pro generování čárových kódů
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class Barcode {
-    private static final int WIDTH = 300;
-    private static final int HEIGHT = 100;
 
-    public static BufferedImage encode(String input){
+    private static final int WIDTH = 300; // Šířka kódu
+    private static final int HEIGHT = 100; // Výška kódu
+
+    /**
+     * Generuje jeden kód na základě vstupního řetězce
+     *
+     * @param input vstupní kód který bude přveden
+     * @return vygenerovaný obrázek
+     */
+    public static BufferedImage encode(String input) {
         UPCAWriter writer = new UPCAWriter();
-        BitMatrix bitMatrix = null;
+        BitMatrix bitMatrix;
+
         try {
-            bitMatrix = writer.encode(input+"00", BarcodeFormat.UPC_A, WIDTH, HEIGHT);
+            bitMatrix = writer.encode(input + "00", BarcodeFormat.UPC_A, WIDTH, HEIGHT);
             return MatrixToImageWriter.toBufferedImage(bitMatrix);
         } catch (WriterException e) {
             e.printStackTrace();
@@ -32,13 +37,20 @@ public class Barcode {
         }
     }
 
-    public static ArrayList<BufferedImage> encode(ArrayList<String> inputs){
+    /**
+     * Generuje kódy na základě vstupního pole řetězců
+     *
+     * @param input vstupní kódy které budou přvedeny
+     * @return vygenerované obrázky
+     */
+    public static ArrayList<BufferedImage> encode(ArrayList<String> inputs) {
         UPCAWriter writer = new UPCAWriter();
-        BitMatrix bitMatrix = null;
+        BitMatrix bitMatrix;
         ArrayList<BufferedImage> list = new ArrayList<>();
+
         try {
             for (String s : inputs) {
-                bitMatrix = writer.encode(s+"00", BarcodeFormat.UPC_A, WIDTH, HEIGHT);
+                bitMatrix = writer.encode(s + "00", BarcodeFormat.UPC_A, WIDTH, HEIGHT);
                 list.add(MatrixToImageWriter.toBufferedImage(bitMatrix));
             }
         } catch (WriterException e) {

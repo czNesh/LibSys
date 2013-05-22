@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import coding.Barcode;
@@ -27,18 +23,25 @@ import views.BookSearchDialog;
 import views.MainView;
 
 /**
+ * Třída (controller) starající se o záložku knih na hlavním pohledu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class BookTabController {
 
-    private MainView mainView;
-    private BookFilterDialog filter;
-    private BookTableModel tableModel;
+    private MainView mainView; // hlavní pohled
+    private BookFilterDialog filter; // filtr zobrazení
+    private BookTableModel tableModel; // model tabulky knih
+    private BookSearchDialog bsd; // dialog pro vyhledávání
+    // ŘAZENÍ
     Map<String, String> orderType = BookService.getInstance().getOrderTypeMap();
     Map<String, String> orderBy = BookService.getInstance().getOrderByMap();
-    BookSearchDialog bsd;
 
+    /**
+     * Třídní konstruktor
+     *
+     * @param mainView hlavní pohled
+     */
     public BookTabController(MainView mainView) {
         // MainView
         this.mainView = mainView;
@@ -61,6 +64,9 @@ public class BookTabController {
         updateView();
     }
 
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         // MouseListener
         mainView.getCatalogTable().addMouseListener(new BookTabMouseListener());
@@ -90,6 +96,9 @@ public class BookTabController {
 
     }
 
+    /**
+     * update dat pohledu
+     */
     public void updateView() {
         // UPDATE DATA
         tableModel.updateData();
@@ -115,6 +124,9 @@ public class BookTabController {
         }
     }
 
+    /**
+     * Nastavení filtru zobrazení
+     */
     private void setFilterData() {
         filter.getTitleCheckbox().setSelected(Configuration.getInstance().isShowTitle());
         filter.getAuthorCheckbox().setSelected(Configuration.getInstance().isShowAuthor());
@@ -146,6 +158,141 @@ public class BookTabController {
         updateView();
     }
 
+    /**
+     * Zobrazí filter
+     */
+    private void showFilter() {
+        filter.setLocationRelativeTo(null);
+        filter.setVisible(true);
+    }
+
+    /**
+     * Zobrazí vyhledávání
+     */
+    private void searchDialog() {
+        if (mainView.getTabPanel().getSelectedIndex() != 0) {
+            return;
+        }
+        bsd.setLocationRelativeTo(null);
+        bsd.setVisible(true);
+    }
+
+    /**
+     * smaže vstupy vyhledávání
+     */
+    private void resetSearch() {
+        bsd.getInputAuthor().setText("");
+        bsd.getInputBarcode().setText("");
+        bsd.getInputISBN10().setText("");
+        bsd.getInputISBN13().setText("");
+        bsd.getInputPublishedYear().setText("");
+        bsd.getInputTitle().setText("");
+    }
+
+    /**
+     * Zastaví vyhledávání
+     */
+    private void stopSearch() {
+        bsd.getInputAuthor().setText("");
+        bsd.getInputBarcode().setText("");
+        bsd.getInputISBN10().setText("");
+        bsd.getInputISBN13().setText("");
+        bsd.getInputPublishedYear().setText("");
+        bsd.getInputTitle().setText("");
+        tableModel.stopSearch();
+        updateView();
+        mainView.getBTNstopBookSearch().setVisible(false);
+    }
+
+    /**
+     * Vyhledá knihy
+     */
+    private void search() {
+        tableModel.search(
+                bsd.getInputBarcode().getText().trim(),
+                bsd.getInputTitle().getText().trim(),
+                bsd.getInputAuthor().getText().trim(),
+                bsd.getInputISBN10().getText().trim(),
+                bsd.getInputISBN13().getText().trim(),
+                bsd.getInputPublishedYear().getText().trim());
+        updateView();
+        bsd.setVisible(false);
+
+        mainView.getBTNstopBookSearch().setVisible(true);
+    }
+
+    /**
+     * Nastaví filter
+     */
+    private void setFilter() {
+        Configuration.getInstance().setShowTitle(filter.getTitleCheckbox().isSelected());
+        Configuration.getInstance().setShowAuthor(filter.getAuthorCheckbox().isSelected());
+        Configuration.getInstance().setShowPublisher(filter.getPublisherCheckbox().isSelected());
+        Configuration.getInstance().setShowPublishedYear(filter.getPublishedDateCheckbox().isSelected());
+        Configuration.getInstance().setShowLanguage(filter.getLanguageCheckbox().isSelected());
+        Configuration.getInstance().setShowISBN10(filter.getISBN10Checkbox().isSelected());
+        Configuration.getInstance().setShowISBN13(filter.getISBN13Checkbox().isSelected());
+        Configuration.getInstance().setShowPageCount(filter.getPageCountCheckbox().isSelected());
+        Configuration.getInstance().setShowCount(filter.getCountCheckbox().isSelected());
+        Configuration.getInstance().setShowLocation(filter.getLocationCheckbox().isSelected());
+
+        Configuration.getInstance().setBookOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
+        Configuration.getInstance().setBookOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
+        Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
+        updateView();
+        filter.setVisible(false);
+    }
+
+    /**
+     * vygeneruje čárové kódy
+     */
+    private void generateBarcode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 0) {
+            return;
+        }
+        if (mainView.getCatalogTable().getSelectedRowCount() > 0) {
+            List<Book> books = tableModel.getBooks(mainView.getCatalogTable().getSelectedRows());
+            String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
+            FileManager.getInstance().createDir(folderName);
+
+            for (Book bx : books) {
+                for (Book b : BookService.getInstance().getBooksByVolumeCode(bx.getVolumeCode(), false)) {
+                    FileManager.getInstance().saveImage(folderName + "/" + b.getBarcode(), Barcode.encode(b.getBarcode()));
+                }
+            }
+            FileManager.getInstance().open(folderName + "/");
+        } else {
+            JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * vygeneruje QR kódy
+     */
+    private void generateQRCode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 0) {
+            return;
+        }
+        if (mainView.getCatalogTable().getSelectedRowCount() > 0) {
+            List<Book> books = tableModel.getBooks(mainView.getCatalogTable().getSelectedRows());
+            String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
+            FileManager.getInstance().createDir(folderName);
+
+            for (Book bx : books) {
+                for (Book b : BookService.getInstance().getBooksByVolumeCode(bx.getVolumeCode(), false)) {
+                    FileManager.getInstance().saveImage(folderName + "/" + b.getBarcode(), QRCode.encode(b.getBarcode()));
+                }
+            }
+            FileManager.getInstance().open(folderName + "/");
+        } else {
+            JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
     private class BookTabKeyListener implements KeyListener {
 
         @Override
@@ -186,6 +333,9 @@ public class BookTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class BookTabActionListener implements ActionListener {
 
         public BookTabActionListener() {
@@ -203,111 +353,31 @@ public class BookTabController {
                     updateView();
                     break;
                 case "filter":
-                    filter.setLocationRelativeTo(null);
-                    filter.setVisible(true);
+                    showFilter();
                     break;
                 case "searchDialog":
-                    if (mainView.getTabPanel().getSelectedIndex() != 0) {
-                        break;
-                    }
-                    bsd.setLocationRelativeTo(null);
-                    bsd.setVisible(true);
+                    searchDialog();
                     break;
-
                 case "closeSearchDialog":
                     bsd.setVisible(false);
                     break;
                 case "resetSearchDialog":
-                    bsd.getInputAuthor().setText("");
-                    bsd.getInputBarcode().setText("");
-                    bsd.getInputISBN10().setText("");
-                    bsd.getInputISBN13().setText("");
-                    bsd.getInputPublishedYear().setText("");
-                    bsd.getInputTitle().setText("");
+                    resetSearch();
                     break;
-
                 case "stopSearch":
-                    bsd.getInputAuthor().setText("");
-                    bsd.getInputBarcode().setText("");
-                    bsd.getInputISBN10().setText("");
-                    bsd.getInputISBN13().setText("");
-                    bsd.getInputPublishedYear().setText("");
-                    bsd.getInputTitle().setText("");
-                    tableModel.stopSearch();
-                    updateView();
-                    mainView.getBTNstopBookSearch().setVisible(false);
+                    stopSearch();
                     break;
-
                 case "search":
-                    tableModel.search(
-                            bsd.getInputBarcode().getText().trim(),
-                            bsd.getInputTitle().getText().trim(),
-                            bsd.getInputAuthor().getText().trim(),
-                            bsd.getInputISBN10().getText().trim(),
-                            bsd.getInputISBN13().getText().trim(),
-                            bsd.getInputPublishedYear().getText().trim());
-                    updateView();
-                    bsd.setVisible(false);
-
-                    mainView.getBTNstopBookSearch().setVisible(true);
-
+                    search();
                     break;
-
                 case "filterConfirm":
-                    Configuration.getInstance().setShowTitle(filter.getTitleCheckbox().isSelected());
-                    Configuration.getInstance().setShowAuthor(filter.getAuthorCheckbox().isSelected());
-                    Configuration.getInstance().setShowPublisher(filter.getPublisherCheckbox().isSelected());
-                    Configuration.getInstance().setShowPublishedYear(filter.getPublishedDateCheckbox().isSelected());
-                    Configuration.getInstance().setShowLanguage(filter.getLanguageCheckbox().isSelected());
-                    Configuration.getInstance().setShowISBN10(filter.getISBN10Checkbox().isSelected());
-                    Configuration.getInstance().setShowISBN13(filter.getISBN13Checkbox().isSelected());
-                    Configuration.getInstance().setShowPageCount(filter.getPageCountCheckbox().isSelected());
-                    Configuration.getInstance().setShowCount(filter.getCountCheckbox().isSelected());
-                    Configuration.getInstance().setShowLocation(filter.getLocationCheckbox().isSelected());
-
-                    Configuration.getInstance().setBookOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
-                    Configuration.getInstance().setBookOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
-                    Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
-                    updateView();
-                    filter.setVisible(false);
+                    setFilter();
                     break;
                 case "barcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 0) {
-                        break;
-                    }
-                    if (mainView.getCatalogTable().getSelectedRowCount() > 0) {
-                        List<Book> books = tableModel.getBooks(mainView.getCatalogTable().getSelectedRows());
-                        String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
-                        FileManager.getInstance().createDir(folderName);
-
-                        for (Book bx : books) {
-                            for (Book b : BookService.getInstance().getBooksByVolumeCode(bx.getVolumeCode(), false)) {
-                                FileManager.getInstance().saveImage(folderName + "/" + b.getBarcode(), Barcode.encode(b.getBarcode()));
-                            }
-                        }
-                        FileManager.getInstance().open(folderName + "/");
-                    } else {
-                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    }
+                    generateBarcode();
                     break;
                 case "qrcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 0) {
-                        break;
-                    }
-                    if (mainView.getCatalogTable().getSelectedRowCount() > 0) {
-                        List<Book> books = tableModel.getBooks(mainView.getCatalogTable().getSelectedRows());
-                        String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
-                        FileManager.getInstance().createDir(folderName);
-
-                        for (Book bx : books) {
-                            for (Book b : BookService.getInstance().getBooksByVolumeCode(bx.getVolumeCode(), false)) {
-                                FileManager.getInstance().saveImage(folderName + "/" + b.getBarcode(), QRCode.encode(b.getBarcode()));
-                            }
-                        }
-                        FileManager.getInstance().open(folderName + "/");
-                    } else {
-                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    }
+                    generateQRCode();
                     break;
                 default:
                     break;
@@ -315,6 +385,10 @@ public class BookTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
     private class BookTabMouseListener implements MouseListener {
 
         public BookTabMouseListener() {

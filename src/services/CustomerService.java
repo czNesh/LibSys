@@ -5,7 +5,6 @@
 package services;
 
 import controllers.RefreshController;
-import helpers.DateHelper;
 import io.ApplicationLog;
 import io.Configuration;
 import java.io.Serializable;
@@ -45,13 +44,18 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
         // SINGLETON
     }
 
+    public Customer getCustomerWithCode(String code) {
+        getParameters().put("SSN", code);
+        return getUnique("SSN = :SSN");
+    }
+
     private int getFreeSSN() {
         while (true) {
             // vygeneruje SSN
             long timeSeed = System.nanoTime();
             double randSeed = Math.random() * 1000;
             long midSeed = (long) (timeSeed * randSeed);
-            String s = "3" + midSeed;
+            String s = "7" + midSeed;
             String subStr = s.substring(0, 9);
             int finalSeed = Integer.parseInt(subStr);
 
@@ -77,53 +81,6 @@ public class CustomerService extends BaseDAO<Customer> implements Serializable {
             setCondition("deleted = :false");
         }
         return getList();
-    }
-
-    public List<Customer> getFilteredList(String ssn, String fname, String lname, String email, String phone) {
-        StringBuilder conditionStringBuilder = new StringBuilder();
-        getParameters().clear();
-        if (ssn != null && !ssn.isEmpty()) {
-            conditionStringBuilder.append("SSN = :SSN");
-            getParameters().put("SSN", ssn);
-        }
-
-        if (fname != null && !fname.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("firstName = :firstName");
-            getParameters().put("firstName", fname);
-        }
-
-        if (lname != null && !lname.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("lastName = :lastName");
-            getParameters().put("lastName", lname);
-        }
-
-        if (email != null && !email.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("email = :email");
-            getParameters().put("email", email);
-        }
-
-        if (phone != null && !phone.isEmpty()) {
-            if (conditionStringBuilder.length() > 0) {
-                conditionStringBuilder.append(" AND ");
-            }
-            conditionStringBuilder.append("phone = :phone");
-            getParameters().put("phone", phone);
-        }
-
-        if (conditionStringBuilder.length() > 0) {
-            setCondition(conditionStringBuilder.toString());
-        }
-        return getList();
-
     }
 
     @Override

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import io.Configuration;
@@ -24,17 +20,20 @@ import services.SystemUserService;
 import views.SettingsDialog;
 
 /**
+ * Třída (controller) starající se o nastavení programu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class SettingsController extends BaseController {
 
-    SettingsDialog dialog;
-    Configuration c;
-    DefaultListModel<Genre> genreListModel;
-    SystemUserTableModel tableModel;
+    SettingsDialog dialog; // připojený pohled
+    Configuration c; // instance pro ukládání  nastavení
+    DefaultListModel<Genre> genreListModel; // seznam žánrů
+    SystemUserTableModel tableModel; // tabulka uživatelů
 
-    //
+    /**
+     * Třídní konstruktor
+     */
     public SettingsController() {
         c = Configuration.getInstance();
         dialog = new SettingsDialog(null, true);
@@ -51,6 +50,27 @@ public class SettingsController extends BaseController {
         updateView();
     }
 
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
+    @Override
+    void showView() {
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    /**
+     * Zrušení pohledu
+     */
+    @Override
+    void dispose() {
+        dialog.dispose();
+        dialog = null;
+    }
+
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         // Action Listener        
         SettingsActionListener a = new SettingsActionListener();
@@ -71,18 +91,9 @@ public class SettingsController extends BaseController {
         dialog.getTABsystemUsers().addMouseListener(m);
     }
 
-    @Override
-    void showView() {
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-
-    @Override
-    void dispose() {
-        dialog.dispose();
-        dialog = null;
-    }
-
+    /**
+     * update dat pohledu
+     */
     private void updateView() {
         // KNIHY
         dialog.getINPauthor().setSelected(c.isRequireAuthor());
@@ -138,12 +149,15 @@ public class SettingsController extends BaseController {
 
     }
 
+    /**
+     * Uložení změny nastavení
+     */
     private void saveSettings() {
         String email = dialog.getINPdefaultEmail().getText();
         if (email.matches(".+@.+\\.[a-z]+")) {
             c.setDefaultEmail(email);
             SystemUserService.getInstance().setDefaultEmail(email);
-            
+
         } else {
             JOptionPane.showMessageDialog(dialog, "Defaultní email nemá správný tvar", "Chyba", JOptionPane.ERROR_MESSAGE);
             return;
@@ -200,6 +214,9 @@ public class SettingsController extends BaseController {
         dispose();
     }
 
+    /**
+     * Obnoví defaultní nastavení
+     */
     private void restoreDefaultSettings() {
         int result = JOptionPane.showInternalConfirmDialog(dialog.getContentPane(), "Chcete opravdu načíst defaultní nastavení??", "Opravdu provést?", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
@@ -208,6 +225,9 @@ public class SettingsController extends BaseController {
         }
     }
 
+    /**
+     * Přidá uživatele
+     */
     private void addSystemUser() {
         NewSystemUserController nsuc = new NewSystemUserController();
         nsuc.showView();
@@ -217,18 +237,65 @@ public class SettingsController extends BaseController {
         }
     }
 
-    private class SettingMouseListener implements MouseListener {
+    /**
+     * Zobrazí detail uživatele
+     */
+    private void systemUserDetail() {
+        SystemUser u = tableModel.getSystemUser(dialog.getTABsystemUsers().getSelectedRow());
+        SystemUserDetailController sudc = new SystemUserDetailController(u);
+        sudc.showView();
+        updateView();
+    }
 
-        public SettingMouseListener() {
+    /**
+     * Nastavení pracovního prostoru
+     */
+    private void setWorkspace() {
+        JFileChooser f = new JFileChooser(".");
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        f.setAcceptAllFileFilterUsed(false);
+        f.setDialogTitle("Zvolte složku");
+        if (f.showOpenDialog(dialog) == JFileChooser.APPROVE_OPTION) {
+            dialog.getINPworkspace().setText(f.getCurrentDirectory().getAbsolutePath() + "\\" + f.getSelectedFile().getName());
         }
+    }
+
+    /**
+     * Přidání žánru
+     */
+    private void addGenre() {
+        String s = JOptionPane.showInternalInputDialog(dialog.getContentPane(), "Žánr", "Vyplňte žánr", JOptionPane.QUESTION_MESSAGE);
+        if (s == null || s.isEmpty()) {
+            return;
+        }
+        Genre g = new Genre();
+        g.setGenre(s);
+        GenreService.getInstance().saveGenre(g);
+        updateView();
+    }
+
+    /**
+     * odstranění žánru
+     */
+    private void removeGenre() {
+
+        List<Genre> selectedGenres = (List<Genre>) dialog.getINPgenres().getSelectedValuesList();
+        for (Genre g2 : selectedGenres) {
+            GenreService.getInstance().deleteGenre(g2);
+        }
+        updateView();
+    }
+
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
+    private class SettingMouseListener implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-                SystemUser u = tableModel.getSystemUser(dialog.getTABsystemUsers().getSelectedRow());
-                SystemUserDetailController sudc = new SystemUserDetailController(u);
-                sudc.showView();
-                updateView();
+                systemUserDetail();
             }
         }
 
@@ -249,10 +316,11 @@ public class SettingsController extends BaseController {
         }
     }
 
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
     private class SettingKeyListener implements KeyListener {
-
-        public SettingKeyListener() {
-        }
 
         @Override
         public void keyTyped(KeyEvent e) {
@@ -278,6 +346,9 @@ public class SettingsController extends BaseController {
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class SettingsActionListener implements ActionListener {
 
         public SettingsActionListener() {
@@ -296,37 +367,20 @@ public class SettingsController extends BaseController {
                     restoreDefaultSettings();
                     break;
                 case "workspace":
-
-                    JFileChooser f = new JFileChooser(".");
-                    f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                    f.setAcceptAllFileFilterUsed(false);
-                    f.setDialogTitle("Zvolte složku");
-                    if (f.showOpenDialog(dialog) == JFileChooser.APPROVE_OPTION) {
-                        dialog.getINPworkspace().setText(f.getCurrentDirectory().getAbsolutePath() + "\\" + f.getSelectedFile().getName());
-                    }
-
+                    setWorkspace();
                     break;
                 case "addGenre":
-                    String s = JOptionPane.showInternalInputDialog(dialog.getContentPane(), "Žánr", "Vyplňte žánr", JOptionPane.QUESTION_MESSAGE);
-                    if (s == null || s.isEmpty()) {
-                        return;
-                    }
-                    Genre g = new Genre();
-                    g.setGenre(s);
-                    GenreService.getInstance().saveGenre(g);
-                    updateView();
+                    addGenre();
                     break;
                 case "removeGenre":
-                    List<Genre> selectedGenres = (List<Genre>) dialog.getINPgenres().getSelectedValuesList();
-                    for (Genre g2 : selectedGenres) {
-                        GenreService.getInstance().deleteGenre(g2);
-                    }
-                    updateView();
+                    removeGenre();
                     break;
                 case "addSystemUser":
                     addSystemUser();
                     break;
-
+                default:
+                    // DO NOTHING
+                    break;
             }
         }
     }

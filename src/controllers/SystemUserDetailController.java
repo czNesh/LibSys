@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
+import helpers.Validator;
 import io.ApplicationLog;
 import io.Configuration;
 import java.awt.event.ActionEvent;
@@ -11,20 +8,25 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import models.entity.SystemUser;
-import org.omg.CORBA.portable.ApplicationException;
 import services.SystemUserService;
 import views.SystemUserDetailDialog;
 
 /**
+ * Třída (controller) starající se o pohled na uživatele
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class SystemUserDetailController extends BaseController {
 
-    private SystemUserDetailDialog dialog;
-    private SystemUser user;
-    private boolean editMode;
+    private SystemUserDetailDialog dialog; // připojený pohled
+    private SystemUser user; // zobrazený uživatel
+    private boolean editMode; // indikace editace záznamu
 
+    /**
+     * Třídní konstruktor nastaví uživatele
+     *
+     * @param user nastaví uživatele
+     */
     public SystemUserDetailController(SystemUser user) {
         dialog = new SystemUserDetailDialog(null, true);
         this.user = user;
@@ -32,6 +34,27 @@ public class SystemUserDetailController extends BaseController {
         initListeners();
     }
 
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
+    @Override
+    void showView() {
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    /**
+     * Zrušení pohledu
+     */
+    @Override
+    void dispose() {
+        dialog.dispose();
+        dialog = null;
+    }
+
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         SystemUserDetailActionListener a = new SystemUserDetailActionListener();
         dialog.getBTNedit().addActionListener(a);
@@ -40,18 +63,9 @@ public class SystemUserDetailController extends BaseController {
         dialog.getBTNdelete().addActionListener(a);
     }
 
-    @Override
-    void showView() {
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-
-    @Override
-    void dispose() {
-        dialog.dispose();
-        dialog = null;
-    }
-
+    /**
+     * Uloží změny v editovaném uživateli
+     */
     private void saveSystemUser() {
         StringBuilder validationLog = new StringBuilder();
 
@@ -59,23 +73,23 @@ public class SystemUserDetailController extends BaseController {
         String lastName = dialog.getINPlastName().getText().trim();
         String email = dialog.getINPemail().getText().trim();
         String login = dialog.getINPlogin().getText().trim();
-        String password = dialog.getINPpassword().getText().trim();
+        String password = dialog.getINPpassword().getPassword().toString().trim();
         boolean master = dialog.getINPmaster().isSelected();
 
-        if (firstName == null || firstName.isEmpty()) {
+        if (Validator.isValidString(firstName)) {
             validationLog.append("Vyplňte jméno\n");
         }
 
-        if (lastName == null || lastName.isEmpty()) {
+        if (Validator.isValidString(lastName)) {
             validationLog.append("Vyplňte přijmení\n");
         }
 
-        if (login == null || login.isEmpty()) {
+        if (Validator.isValidString(login)) {
             validationLog.append("Vyplňte login\n");
         }
 
 
-        if (email == null || !email.matches(".+@.+\\.[a-z]+")) {
+        if (Validator.isValidEmail(email)) {
             validationLog.append("Neplatný email\n");
         }
 
@@ -102,9 +116,12 @@ public class SystemUserDetailController extends BaseController {
             ApplicationLog.getInstance().addMessage("Změna uživatele " + user.getFullName() + " úspěšně uložena");
             switchMode();
         }
-
+        updateData();
     }
 
+    /**
+     * Přepnutí pohledu z prohlížení do editace a zpět
+     */
     private void switchMode() {
         if (editMode) {
             dialog.getBTNedit().setName("edit");
@@ -133,10 +150,11 @@ public class SystemUserDetailController extends BaseController {
 
         dialog.revalidate();
         dialog.repaint();
-
-
     }
 
+    /**
+     * Update dat v pohledu
+     */
     private void updateData() {
         dialog.getINPfirstName().setText(user.getFirstName());
         dialog.getINPlastName().setText(user.getLastName());
@@ -152,32 +170,45 @@ public class SystemUserDetailController extends BaseController {
         }
     }
 
-    private class SystemUserDetailActionListener implements ActionListener {
+    /**
+     * Smaže uživatele
+     */
+    private void deleteSystemUser() {
+        user.setDeleted(true);
+        SystemUserService.getInstance().save(user);
+        ApplicationLog.getInstance().addMessage("Uživatel " + user.getFullName() + " úspěšně odebrán");
+        updateData();
+    }
 
-        public SystemUserDetailActionListener() {
-        }
+    /**
+     * Obnoví smazaného uživatele
+     */
+    private void renewSystemUser() {
+        user.setDeleted(false);
+        SystemUserService.getInstance().save(user);
+        ApplicationLog.getInstance().addMessage("Uživatel " + user.getFullName() + " úspěšně obnoven");
+        updateData();
+    }
+
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
+    private class SystemUserDetailActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (((JComponent) e.getSource()).getName()) {
                 case "delete":
-                    user.setDeleted(true);
-                    SystemUserService.getInstance().save(user);
-                    ApplicationLog.getInstance().addMessage("Uživatel " + user.getFullName() + " úspěšně odebrán");
-                    updateData();
+                    deleteSystemUser();
                     break;
                 case "renew":
-                    user.setDeleted(false);
-                    SystemUserService.getInstance().save(user);
-                    ApplicationLog.getInstance().addMessage("Uživatel " + user.getFullName() + " úspěšně obnoven");
-                    updateData();
+                    renewSystemUser();
                     break;
                 case "edit":
                     switchMode();
                     break;
                 case "save":
                     saveSystemUser();
-                    updateData();
                     break;
                 case "cancel":
                     dispose();

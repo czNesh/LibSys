@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import helpers.DateHelper;
@@ -20,15 +16,21 @@ import services.BorrowService;
 import views.NotificationDetailDialog;
 
 /**
+ * Třída (controller) starající se o detail oznámení
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class NotificationDetailController extends BaseController {
 
-    private Notification notification;
-    private NotificationDetailDialog dialog;
-    private BookTableModel tableModel;
+    private Notification notification; // zobrazené oznámení
+    private NotificationDetailDialog dialog; // připojený pohled
+    private BookTableModel tableModel; // seznam knih kterých se oznámení týká
 
+    /**
+     * Třídní konstruktor nastaví oznámení
+     *
+     * @param notification oznámení
+     */
     public NotificationDetailController(Notification notification) {
         // Notification
         this.notification = notification;
@@ -43,6 +45,27 @@ public class NotificationDetailController extends BaseController {
         initListeners();
     }
 
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
+    @Override
+    void showView() {
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    /**
+     * Zrušení pohledu
+     */
+    @Override
+    void dispose() {
+        dialog.dispose();
+        dialog = null;
+    }
+
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         NotificationDialogActionListener a = new NotificationDialogActionListener();
         dialog.getBTNprint().addActionListener(a);
@@ -53,6 +76,9 @@ public class NotificationDetailController extends BaseController {
         dialog.getTABbooks().addMouseListener(m);
     }
 
+    /**
+     * update dat pohledu
+     */
     private void updateData() {
         // Knihy
         List<Book> books = BorrowService.getInstance().getBooksOfBorrow(notification.getBorrow().getBorrowCode());
@@ -86,22 +112,11 @@ public class NotificationDetailController extends BaseController {
         dialog.getINPstate().setText("Vráceno " + returned + " / " + totalCount + " položek");
     }
 
-    @Override
-    void showView() {
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-
-    @Override
-    void dispose() {
-        dialog.dispose();
-        dialog = null;
-    }
-
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
     private class NotificationDialogMouseListerner implements MouseListener {
-
-        public NotificationDialogMouseListerner() {
-        }
 
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -131,10 +146,10 @@ public class NotificationDetailController extends BaseController {
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class NotificationDialogActionListener implements ActionListener {
-
-        public NotificationDialogActionListener() {
-        }
 
         @Override
         public void actionPerformed(ActionEvent e) {

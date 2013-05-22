@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import io.Configuration;
@@ -9,14 +5,17 @@ import models.entity.SystemUser;
 import services.SystemUserService;
 
 /**
+ * Spoštěcí třída
  *
- * @author eXtreme
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class LibSysStart {
 
+    /**
+     * Start aplikace
+     * @param args parametry 
+     */
     public static void main(String[] args) {
-
-
         try {
             AppController c = AppController.getInstance();
             SystemUser defaultUser = SystemUserService.getInstance().getDefaultSystemUser();
@@ -28,9 +27,8 @@ public class LibSysStart {
             }
 
         } catch (Exception ex) {
-            System.out.println("CHYBA V PROGRAMU:");
-            ex.printStackTrace();
-            System.exit(-1);
+            System.err.print("CHYBA V PROGRAMU:" + ex.getLocalizedMessage());
+            System.exit(-1); // "vybublá-li" výjimka až sem - skonči
         }
     }
 }

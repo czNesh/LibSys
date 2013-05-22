@@ -1,24 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import io.ApplicationLog;
 import io.Configuration;
+import io.ReaderPostProcessor;
+import java.awt.KeyEventPostProcessor;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 import views.MainView;
 
 /**
+ * Třída (controller) hlavního pohledu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class MainController extends BaseController {
 
-    private MainView mainView;
-    private MenuController menuController;
+    private MainView mainView; // hlavní pohled
+    private MenuController menuController; // menu controller 
     /*
      * TABs controllers
      */
@@ -27,6 +28,9 @@ public class MainController extends BaseController {
     private NotificationTabController notificationTabController;
     private CustomerTabController customerTabController;
 
+    /**
+     * Konstruktor třídy
+     */
     public MainController() {
         // Hlavní pohled
         mainView = new MainView();
@@ -57,19 +61,29 @@ public class MainController extends BaseController {
         if (Configuration.getInstance().isSkipLogging()) {
             mainView.getLogoutMenuItem().setVisible(false);
         }
-        
+
         // LibSysServer Autostart
-        if(Configuration.getInstance().isServerAutoStart()){
+        if (Configuration.getInstance().isServerAutoStart()) {
             SocketServerController.getInstance().setServerStatus(true);
         }
+
+        // Reader listener
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventPostProcessor(new ReaderPostProcessor());
     }
 
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
     @Override
     void showView() {
         mainView.setLocationRelativeTo(null);
         mainView.setVisible(true);
     }
 
+    /**
+     * Zrušení pohledu
+     */
     @Override
     void dispose() {
         ApplicationLog.getInstance().removeListener(this);
@@ -77,6 +91,9 @@ public class MainController extends BaseController {
         mainView = null;
     }
 
+    /**
+     * Detekce nových zpráv do logu
+     */
     @Override
     public void logChanged() {
         if (mainView.getConsole().getText().isEmpty()) {
@@ -87,6 +104,9 @@ public class MainController extends BaseController {
 
     }
 
+    /**
+     * Třida starající se o vypnutí (nemá zde zatím jíný účel)
+     */
     private class MainViewWindowListener implements WindowListener {
 
         public MainViewWindowListener() {

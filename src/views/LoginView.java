@@ -21,7 +21,7 @@ public class LoginView extends javax.swing.JFrame {
      */
     public LoginView() {
         initComponents();
-        getRootPane().setDefaultButton(loginButton);
+        getRootPane().setDefaultButton(BTNlogin);
         setIconImage(new ImageIcon(getClass().getResource("/images/LSIcon.png")).getImage());
     }
 
@@ -38,11 +38,11 @@ public class LoginView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        resetButton = new javax.swing.JButton();
-        loginButton = new javax.swing.JButton();
-        inputLoginPassword = new javax.swing.JPasswordField();
+        BTNreset = new javax.swing.JButton();
+        BTNlogin = new javax.swing.JButton();
+        INPpassword = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
-        inputLoginName = new javax.swing.JTextField();
+        INPlogin = new javax.swing.JTextField();
         infoLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -62,22 +62,24 @@ public class LoginView extends javax.swing.JFrame {
         jLabel4.setToolTipText("České vysoké učení technické v Praze");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        resetButton.setText("Reset");
-        resetButton.setToolTipText("Vymaže obsah vstupních polí");
-        resetButton.setNextFocusableComponent(inputLoginName);
+        BTNreset.setText("Reset");
+        BTNreset.setToolTipText("Vymaže obsah vstupních polí");
+        BTNreset.setName("reset"); // NOI18N
+        BTNreset.setNextFocusableComponent(INPlogin);
 
-        loginButton.setText("Přihlásit");
-        loginButton.setToolTipText("Přihlášení do systému");
-        loginButton.setNextFocusableComponent(resetButton);
+        BTNlogin.setText("Přihlásit");
+        BTNlogin.setToolTipText("Přihlášení do systému");
+        BTNlogin.setName("login"); // NOI18N
+        BTNlogin.setNextFocusableComponent(BTNreset);
 
-        inputLoginPassword.setToolTipText("vložte své heslo");
-        inputLoginPassword.setNextFocusableComponent(loginButton);
+        INPpassword.setToolTipText("vložte své heslo");
+        INPpassword.setNextFocusableComponent(BTNlogin);
 
         jLabel5.setForeground(new java.awt.Color(153, 0, 204));
         jLabel5.setText("knihovní systém");
 
-        inputLoginName.setToolTipText("vložte své uživatelské jméno");
-        inputLoginName.setNextFocusableComponent(inputLoginPassword);
+        INPlogin.setToolTipText("vložte své uživatelské jméno");
+        INPlogin.setNextFocusableComponent(INPpassword);
 
         infoLabel.setForeground(new java.awt.Color(255, 51, 51));
         infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -104,13 +106,13 @@ public class LoginView extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputLoginName)
-                            .addComponent(inputLoginPassword))
+                            .addComponent(INPlogin)
+                            .addComponent(INPpassword))
                         .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTNlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTNreset, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,50 +137,50 @@ public class LoginView extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(inputLoginName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(inputLoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(INPpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(resetButton)
-                    .addComponent(loginButton))
+                    .addComponent(BTNreset)
+                    .addComponent(BTNlogin))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNlogin;
+    private javax.swing.JButton BTNreset;
+    private javax.swing.JTextField INPlogin;
+    private javax.swing.JPasswordField INPpassword;
     private javax.swing.JLabel infoLabel;
-    private javax.swing.JTextField inputLoginName;
-    private javax.swing.JPasswordField inputLoginPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JButton loginButton;
-    private javax.swing.JButton resetButton;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getInputLoginName() {
-        return inputLoginName;
+    public JButton getBTNlogin() {
+        return BTNlogin;
     }
 
-    public JPasswordField getInputLoginPassword() {
-        return inputLoginPassword;
+    public JButton getBTNreset() {
+        return BTNreset;
     }
 
-    public JButton getLoginButton() {
-        return loginButton;
+    public JTextField getINPlogin() {
+        return INPlogin;
     }
 
-    public JButton getResetButton() {
-        return resetButton;
+    public JPasswordField getINPpassword() {
+        return INPpassword;
     }
 
     public JLabel getInfoLabel() {

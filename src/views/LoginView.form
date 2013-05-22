@@ -38,15 +38,15 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="inputLoginName" max="32767" attributes="0"/>
-                          <Component id="inputLoginPassword" max="32767" attributes="0"/>
+                          <Component id="INPlogin" max="32767" attributes="0"/>
+                          <Component id="INPpassword" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="loginButton" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="BTNlogin" min="-2" pref="113" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="resetButton" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="BTNreset" min="-2" pref="113" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -79,19 +79,19 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputLoginName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPlogin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputLoginPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPpassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="infoLabel" min="-2" pref="14" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="resetButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="loginButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTNreset" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTNlogin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -129,29 +129,31 @@
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="resetButton">
+    <Component class="javax.swing.JButton" name="BTNreset">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reset"/>
         <Property name="toolTipText" type="java.lang.String" value="Vyma&#x17e;e obsah vstupn&#xed;ch pol&#xed;"/>
+        <Property name="name" type="java.lang.String" value="reset" noResource="true"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="inputLoginName"/>
+          <ComponentRef name="INPlogin"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="loginButton">
+    <Component class="javax.swing.JButton" name="BTNlogin">
       <Properties>
         <Property name="text" type="java.lang.String" value="P&#x159;ihl&#xe1;sit"/>
         <Property name="toolTipText" type="java.lang.String" value="P&#x159;ihl&#xe1;&#x161;en&#xed; do syst&#xe9;mu"/>
+        <Property name="name" type="java.lang.String" value="login" noResource="true"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="resetButton"/>
+          <ComponentRef name="BTNreset"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="inputLoginPassword">
+    <Component class="javax.swing.JPasswordField" name="INPpassword">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="vlo&#x17e;te sv&#xe9; heslo"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="loginButton"/>
+          <ComponentRef name="BTNlogin"/>
         </Property>
       </Properties>
     </Component>
@@ -163,11 +165,11 @@
         <Property name="text" type="java.lang.String" value="knihovn&#xed; syst&#xe9;m"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputLoginName">
+    <Component class="javax.swing.JTextField" name="INPlogin">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="vlo&#x17e;te sv&#xe9; u&#x17e;ivatelsk&#xe9; jm&#xe9;no"/>
         <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="inputLoginPassword"/>
+          <ComponentRef name="INPpassword"/>
         </Property>
       </Properties>
     </Component>

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import coding.Barcode;
@@ -28,18 +24,25 @@ import views.CustomerSearchDialog;
 import views.MainView;
 
 /**
+ * Třída (controller) starající se o záložku zákazníku na hlavním pohledu
  *
- * @author petr.hejhal
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class CustomerTabController {
 
-    MainView mainView;
-    CustomerTableModel tableModel;
-    CustomerFilterDialog filter;
+    MainView mainView; // hlavní pohled
+    CustomerTableModel tableModel; // tabulka zákazníků
+    CustomerFilterDialog filter; // filtr zobrazení
+    CustomerSearchDialog csd; // dialog pro vyhledávání
+    // ŘAZENÍ
     Map<String, String> orderType = CustomerService.getInstance().getOrderTypeMap();
     Map<String, String> orderBy = CustomerService.getInstance().getOrderByMap();
-    CustomerSearchDialog csd;
 
+    /**
+     * Třídní konstruktor
+     *
+     * @param mainView hlavní pohled
+     */
     CustomerTabController(MainView mainView) {
         // MainView
         this.mainView = mainView;
@@ -62,6 +65,9 @@ public class CustomerTabController {
         updateView();
     }
 
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         // MouseListener
         CustomerTabMouseListener m = new CustomerTabMouseListener();
@@ -92,6 +98,9 @@ public class CustomerTabController {
         csd.getBTNreset().addActionListener(a);
     }
 
+    /**
+     * update dat pohledu
+     */
     public void updateView() {
         // UPDATE DATA
         tableModel.updateData();
@@ -117,6 +126,9 @@ public class CustomerTabController {
         }
     }
 
+    /**
+     * Nastavení filtru zobrazení
+     */
     private void setFilterData() {
         filter.getINPssn().setSelected(Configuration.getInstance().isCustomerShowSSN());
         filter.getINPname().setSelected(Configuration.getInstance().isCustomerShowName());
@@ -144,10 +156,133 @@ public class CustomerTabController {
         updateView();
     }
 
-    private class CustomerTabKeyListener implements KeyListener {
+    /**
+     * zobrazí filtr zobrazení
+     */
+    private void showFilter() {
+        filter.setLocationRelativeTo(null);
+        filter.setVisible(true);
+    }
 
-        public CustomerTabKeyListener() {
+    /**
+     * Nastaví filtr zobreazení
+     */
+    private void setFilter() {
+        Configuration.getInstance().setCustomerShowSSN(filter.getINPssn().isSelected());
+        Configuration.getInstance().setCustomerShowName(filter.getINPname().isSelected());
+        Configuration.getInstance().setCustomerShowEmail(filter.getINPemail().isSelected());
+        Configuration.getInstance().setCustomerShowPhone(filter.getINPphone().isSelected());
+        Configuration.getInstance().setCustomerShowAdress(filter.getINPadress().isSelected());
+        Configuration.getInstance().setCustomerShowNotes(filter.getINPnotes().isSelected());
+
+        Configuration.getInstance().setCustomerOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
+        Configuration.getInstance().setCustomerOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
+        Configuration.getInstance().setMaxCustomerRowsCount((int) filter.getINPcustomerMaxRowsCount().getValue());
+        updateView();
+        filter.setVisible(false);
+    }
+
+    /**
+     * Zobrazí vyhledávání
+     */
+    private void showSearch() {
+        if (mainView.getTabPanel().getSelectedIndex() != 1) {
+            return;
         }
+        csd.setLocationRelativeTo(null);
+        csd.setVisible(true);
+    }
+
+    /**
+     * Smaže vstupy vyhledávání
+     */
+    private void resetSearch() {
+        csd.getInputSSN().setText("");
+        csd.getInputFName().setText("");
+        csd.getInputLName().setText("");
+        csd.getInputPhone().setText("");
+        csd.getInputEmail().setText("");
+    }
+
+    /**
+     * Zastaví vyhledávání
+     */
+    private void stopSearch() {
+        csd.getInputSSN().setText("");
+        csd.getInputFName().setText("");
+        csd.getInputLName().setText("");
+        csd.getInputPhone().setText("");
+        csd.getInputEmail().setText("");
+        tableModel.stopSearch();
+        updateView();
+        mainView.getBTNstopCustomerSearch().setVisible(false);
+    }
+
+    /**
+     * Vyhledá zákaznáky
+     */
+    private void search() {
+        tableModel.search(
+                csd.getInputSSN().getText().trim(),
+                csd.getInputFName().getText().trim(),
+                csd.getInputLName().getText().trim(),
+                csd.getInputEmail().getText().trim(),
+                csd.getInputPhone().getText().trim());
+        updateView();
+        csd.setVisible(false);
+
+        mainView.getBTNstopCustomerSearch().setVisible(true);
+
+    }
+
+    /**
+     * Vygeneruje čárové kódy
+     */
+    private void generateBarcode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 1) {
+            return;
+        }
+        if (mainView.getCustomerTable().getSelectedRowCount() > 0) {
+            List<Customer> customers = tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows());
+            String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
+            FileManager.getInstance().createDir(folderName);
+
+            for (Customer c : customers) {
+                FileManager.getInstance().saveImage(folderName + "/" + c.getStringSSN(), Barcode.encode(c.getStringSSN()));
+            }
+            FileManager.getInstance().open(folderName + "/");
+        } else {
+            JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    /**
+     * Vygeneruje QR kódy
+     */
+    private void generateQRCode() {
+        if (mainView.getTabPanel().getSelectedIndex() != 1) {
+            return;
+        }
+        if (mainView.getCustomerTable().getSelectedRowCount() > 0) {
+            List<Customer> customers = tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows());
+            String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
+            FileManager.getInstance().createDir(folderName);
+
+            for (Customer c : customers) {
+                FileManager.getInstance().saveImage(folderName + "/" + c.getStringSSN(), QRCode.encode(c.getStringSSN()));
+            }
+            FileManager.getInstance().open(folderName + "/");
+        } else {
+            JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
+    private class CustomerTabKeyListener implements KeyListener {
 
         @Override
         public void keyTyped(KeyEvent e) {
@@ -205,6 +340,9 @@ public class CustomerTabController {
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class CustomerTabActionListener implements ActionListener {
 
         public CustomerTabActionListener() {
@@ -214,66 +352,25 @@ public class CustomerTabController {
         public void actionPerformed(ActionEvent e) {
             switch (((JComponent) e.getSource()).getName()) {
                 case "filter":
-                    filter.setLocationRelativeTo(null);
-                    filter.setVisible(true);
+                    showFilter();
                     break;
-
                 case "filterConfirmed":
-                    Configuration.getInstance().setCustomerShowSSN(filter.getINPssn().isSelected());
-                    Configuration.getInstance().setCustomerShowName(filter.getINPname().isSelected());
-                    Configuration.getInstance().setCustomerShowEmail(filter.getINPemail().isSelected());
-                    Configuration.getInstance().setCustomerShowPhone(filter.getINPphone().isSelected());
-                    Configuration.getInstance().setCustomerShowAdress(filter.getINPadress().isSelected());
-                    Configuration.getInstance().setCustomerShowNotes(filter.getINPnotes().isSelected());
-
-                    Configuration.getInstance().setCustomerOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
-                    Configuration.getInstance().setCustomerOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
-                    Configuration.getInstance().setMaxCustomerRowsCount((int) filter.getINPcustomerMaxRowsCount().getValue());
-                    updateView();
-                    filter.setVisible(false);
+                    setFilter();
                     break;
                 case "searchDialog":
-                    if (mainView.getTabPanel().getSelectedIndex() != 1) {
-                        break;
-                    }
-                    csd.setLocationRelativeTo(null);
-                    csd.setVisible(true);
+                    showSearch();
                     break;
-
                 case "closeSearchDialog":
                     csd.setVisible(false);
                     break;
                 case "resetSearchDialog":
-                    csd.getInputSSN().setText("");
-                    csd.getInputFName().setText("");
-                    csd.getInputLName().setText("");
-                    csd.getInputPhone().setText("");
-                    csd.getInputEmail().setText("");
+                    resetSearch();
                     break;
-
                 case "stopSearch":
-                    csd.getInputSSN().setText("");
-                    csd.getInputFName().setText("");
-                    csd.getInputLName().setText("");
-                    csd.getInputPhone().setText("");
-                    csd.getInputEmail().setText("");
-                    tableModel.stopSearch();
-                    updateView();
-                    mainView.getBTNstopCustomerSearch().setVisible(false);
+                    stopSearch();
                     break;
-
                 case "search":
-                    tableModel.search(
-                            csd.getInputSSN().getText().trim(),
-                            csd.getInputFName().getText().trim(),
-                            csd.getInputLName().getText().trim(),
-                            csd.getInputEmail().getText().trim(),
-                            csd.getInputPhone().getText().trim());
-                    updateView();
-                    csd.setVisible(false);
-
-                    mainView.getBTNstopCustomerSearch().setVisible(true);
-
+                    search();
                     break;
                 case "nextPage":
                     tableModel.nextPage();
@@ -284,45 +381,22 @@ public class CustomerTabController {
                     updateView();
                     break;
                 case "barcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 1) {
-                        break;
-                    }
-                    if (mainView.getCustomerTable().getSelectedRowCount() > 0) {
-                        List<Customer> customers = tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows());
-                        String folderName = "ba-" + DateHelper.getCurrentDateIncludingTimeString();
-                        FileManager.getInstance().createDir(folderName);
-
-                        for (Customer c : customers) {
-                            FileManager.getInstance().saveImage(folderName + "/" + c.getStringSSN(), Barcode.encode(c.getStringSSN()));
-                        }
-                        FileManager.getInstance().open(folderName + "/");
-                    } else {
-                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    }
+                    generateBarcode();
                     break;
                 case "qrcode":
-                    if (mainView.getTabPanel().getSelectedIndex() != 1) {
-                        break;
-                    }
-                    if (mainView.getCustomerTable().getSelectedRowCount() > 0) {
-                        List<Customer> customers = tableModel.getCustomers(mainView.getCustomerTable().getSelectedRows());
-                        String folderName = "qr-" + DateHelper.getCurrentDateIncludingTimeString();
-                        FileManager.getInstance().createDir(folderName);
-
-                        for (Customer c : customers) {
-                            FileManager.getInstance().saveImage(folderName + "/" + c.getStringSSN(), QRCode.encode(c.getStringSSN()));
-                        }
-                        FileManager.getInstance().open(folderName + "/");
-                    } else {
-                        JOptionPane.showMessageDialog(mainView, "Nejprve vyberte položky z tabulky", "Chyba", JOptionPane.ERROR_MESSAGE);
-                    }
+                    generateQRCode();
                     break;
                 default:
+                    // DO NOTHING
                     break;
             }
         }
     }
 
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
     private class CustomerTabMouseListener implements MouseListener {
 
         public CustomerTabMouseListener() {

@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
+import helpers.Validator;
 import io.ApplicationLog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,38 +11,54 @@ import services.SystemUserService;
 import views.NewSystemUserDialog;
 
 /**
+ * Třída (controller) starající se o přidání nového uživatele
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class NewSystemUserController extends BaseController {
 
-    private NewSystemUserDialog dialog;
-    private boolean success = false;
+    private NewSystemUserDialog dialog; // připojený pohled
+    private boolean success = false; // indikace úspěšného přiidání
 
+    /**
+     * Třídní konstruktor
+     */
     public NewSystemUserController() {
         dialog = new NewSystemUserDialog(null, true);
 
         initListeners();
     }
 
-    private void initListeners() {
-        NewSystemUserActionListener a = new NewSystemUserActionListener();
-        dialog.getBTNsave().addActionListener(a);
-        dialog.getBTNcancel().addActionListener(a);
-    }
-
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
     @Override
     void showView() {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 
+    /**
+     * Zrušení pohledu
+     */
     @Override
     void dispose() {
         dialog.dispose();
         dialog = null;
     }
 
+    /**
+     * Inicializace listenerů
+     */
+    private void initListeners() {
+        NewSystemUserActionListener a = new NewSystemUserActionListener();
+        dialog.getBTNsave().addActionListener(a);
+        dialog.getBTNcancel().addActionListener(a);
+    }
+
+    /**
+     * Uložení nového uživatele
+     */
     private void saveSystemUser() {
         StringBuilder validationLog = new StringBuilder();
 
@@ -58,30 +71,30 @@ public class NewSystemUserController extends BaseController {
 
         SystemUser u = new SystemUser();
 
-        if (firstName == null || firstName.isEmpty()) {
+        if (Validator.isValidString(firstName)) {
             validationLog.append("Vyplňte jméno\n");
         } else {
             u.setFirstName(firstName);
         }
 
-        if (lastName == null || lastName.isEmpty()) {
+        if (Validator.isValidString(lastName)) {
             validationLog.append("Vyplňte přijmení\n");
         } else {
             u.setLastName(lastName);
         }
 
-        if (login == null || login.isEmpty()) {
+        if (Validator.isValidString(login)) {
             validationLog.append("Vyplňte login\n");
         } else {
             u.setLogin(login);
         }
 
-        if (password == null || password.isEmpty()) {
+        if (Validator.isValidString(password)) {
             validationLog.append("Vyplňte heslo\n");
         } else {
             u.setPassword(SystemUserService.getInstance().getHash(password));
         }
-        if (email == null || !email.matches(".+@.+\\.[a-z]+")) {
+        if (Validator.isValidEmail(email)) {
             validationLog.append("Neplatný email\n");
         } else {
             u.setEmail(email);
@@ -97,17 +110,25 @@ public class NewSystemUserController extends BaseController {
                 return;
             }
             SystemUserService.getInstance().save(u);
-            ApplicationLog.getInstance().addMessage("Vytvoření uživatele "+u.getFullName()+" úspěšně uložena");
+            ApplicationLog.getInstance().addMessage("Vytvoření uživatele " + u.getFullName() + " úspěšně uložena");
             success = true;
             dispose();
         }
 
     }
 
+    /**
+     * Vrací zda bylo uložení úspěné
+     *
+     * @return indikace úspěšného uložení
+     */
     public boolean isSuccess() {
         return success;
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class NewSystemUserActionListener implements ActionListener {
 
         public NewSystemUserActionListener() {

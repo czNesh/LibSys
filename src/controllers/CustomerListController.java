@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import java.awt.Point;
@@ -14,7 +10,6 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JTable;
 import models.CustomerTableModel;
 import models.entity.Customer;
@@ -23,27 +18,53 @@ import views.CustomerFilterDialog;
 import views.CustomerListDialog;
 
 /**
+ * Třída (controller) starající se o výber uživatele ze seznamu
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class CustomerListController extends BaseController {
+    
+    CustomerListDialog dialog; // připojený pohled
+    CustomerTableModel tableModel; // model tabulky zákazníků
+    CustomerFilterDialog filterDialog; // filtr zobrazení tabulky
+    Customer customer; // vybraný zákazník
+    boolean selectionMode; // indikace zda jde o výběr
 
-    CustomerListDialog dialog;
-    CustomerTableModel tableModel;
-    CustomerFilterDialog filterDialog;
-    Customer customer;
-    boolean selectionMode;
-
-    public CustomerListController(JFrame parent, boolean selectionMode) {
-        dialog = new CustomerListDialog(parent, true);
-        this.selectionMode = selectionMode;
+    /**
+     * Třídní konstruktor
+     *
+     * @param parent hlavní pohled
+     */
+    public CustomerListController() {
+        dialog = new CustomerListDialog(null, true);
         tableModel = new CustomerTableModel();
-        updateView();
         dialog.getResultTable().setModel(tableModel);
         filterDialog = new CustomerFilterDialog(null, true);
+        updateView();
         initListeners();
     }
 
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
+    @Override
+    void showView() {
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    /**
+     * Zrušení pohledu
+     */
+    @Override
+    void dispose() {
+        dialog.dispose();
+        dialog = null;
+    }
+
+    /**
+     * Inicializace listenerů
+     */
     private void initListeners() {
         // ActionListener
         CustomerListButtonListener b = new CustomerListButtonListener();
@@ -67,36 +88,80 @@ public class CustomerListController extends BaseController {
         dialog.getResultTable().addMouseListener(m);
     }
 
-    @Override
-    void showView() {
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-
-    @Override
-    void dispose() {
-        dialog.dispose();
-        dialog = null;
-    }
-
+    /**
+     * update dat pohledu
+     */
     private void updateView() {
+        // UPDATE DATA
         tableModel.updateData();
+
+        // Update table
         tableModel.fireTableDataChanged();
+        tableModel.fireTableStructureChanged();
 
         // Update page counting 
         dialog.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
         dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
+        
+        if (tableModel.getPage() == 1) {
+            dialog.getBookTablePrevButton().setEnabled(false);
+        } else {
+            dialog.getBookTablePrevButton().setEnabled(true);
+        }
+        
+        if (tableModel.getPage() == tableModel.getTotalPageCount()) {
+            dialog.getBookTableNextButton().setEnabled(false);
+        } else {
+            dialog.getBookTableNextButton().setEnabled(true);
+        }
     }
 
+    /**
+     * Vrátí vybraného uživatele
+     *
+     * @return uživatel
+     */
     public Customer getSeletedCustomer() {
         return customer;
     }
 
-    private class CustomerMouseListener implements MouseListener {
-
-        public CustomerMouseListener() {
+    /**
+     * Výběr zákazníka
+     */
+    private void selectUser() {
+        if (dialog.getResultTable().getSelectedRow() != -1 && selectionMode) {
+            customer = tableModel.getCustomer(dialog.getResultTable().getSelectedRow());
+            dialog.dispose();
         }
+    }
 
+    /**
+     * Zobrazení filtru
+     */
+    private void filterDialog() {
+        filterDialog.setLocationRelativeTo(null);
+        filterDialog.setVisible(true);
+    }
+
+    /**
+     * vyhledávání zákazníků
+     */
+    private void search() {
+        tableModel.search(
+                dialog.getInputSSN().getText().trim(),
+                dialog.getInputFName().getText().trim(),
+                dialog.getInputLName().getText().trim(),
+                dialog.getInputEmail().getText().trim(),
+                dialog.getInputPhone().getText().trim());
+        updateView();
+    }
+
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
+    private class CustomerMouseListener implements MouseListener {
+        
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
@@ -104,76 +169,52 @@ public class CustomerListController extends BaseController {
                 JTable t = dialog.getResultTable();
                 customer = (Customer) tableModel.getCustomer(t.getSelectedRow());
             }
-            if (selectionMode) {
-                if (customer != null) {
-                    dialog.dispose();
-                }
-            }
+            dialog.dispose();
         }
-
+        
         @Override
         public void mousePressed(MouseEvent e) {
         }
-
+        
         @Override
         public void mouseReleased(MouseEvent e) {
         }
-
+        
         @Override
         public void mouseEntered(MouseEvent e) {
         }
-
+        
         @Override
         public void mouseExited(MouseEvent e) {
         }
     }
 
-    // LISTENER CLASSes
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class CustomerListButtonListener implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton) e.getSource();
             String buttonName = b.getName();
-
+            
             switch (buttonName) {
                 case "confirm":
-                    if (dialog.getResultTable().getSelectedRow() != -1 && selectionMode) {
-                        customer = tableModel.getCustomer(dialog.getResultTable().getSelectedRow());
-                        dialog.dispose();
-                    }
-
+                    selectUser();                    
                     break;
                 case "cancel":
                     dispose();
-                    break;
-
+                    break;                
                 case "filter":
                     filterDialog.getBTNok().addActionListener(this);
-                    filterDialog.setLocationRelativeTo(null);
-                    filterDialog.setVisible(true);
+                    filterDialog();
                     break;
-
                 case "filterConfirmed":
-//                    tableModel.setVisibility(
-//                            filterDialog.getINPssn().isSelected(),
-//                            filterDialog.getINPname().isSelected(),
-//                            filterDialog.getINPadress().isSelected(),
-//                            filterDialog.getINPemail().isSelected(),
-//                            filterDialog.getINPphone().isSelected(),
-//                            filterDialog.getINPnotes().isSelected());
-                    tableModel.fireTableStructureChanged();
-                    filterDialog.setVisible(false);
+                    updateView();
                     break;
-
                 case "search":
-//                    tableModel.setFilter(
-//                            dialog.getInputSSN().getText().trim(),
-//                            dialog.getInputFName().getText().trim(),
-//                            dialog.getInputLName().getText().trim(),
-//                            dialog.getInputEmail().getText().trim(),
-//                            dialog.getInputPhone().getText().trim());
-                    tableModel.fireTableDataChanged();
+                    search();
                     break;
                 case "nextPage":
                     tableModel.nextPage();
@@ -184,28 +225,33 @@ public class CustomerListController extends BaseController {
                     updateView();
                     break;
                 default:
-                    System.out.println("Chyba - Jmeno polozky neodpovida zadne operaci (Buttonlistener)");
+                    // DOO NOTHING
+                    break;
             }
-
+            
         }
     }
 
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
     private class CustomerListKeyListener implements KeyListener {
-
+        
         List<Customer> customers;
-
+        
         public CustomerListKeyListener() {
             customers = CustomerService.getInstance().getCustomers();
         }
-
+        
         @Override
         public void keyTyped(KeyEvent e) {
         }
-
+        
         @Override
         public void keyPressed(KeyEvent e) {
         }
-
+        
         @Override
         public void keyReleased(KeyEvent e) {
             // pokud se nezapise znak - hned skonci
@@ -264,7 +310,7 @@ public class CustomerListController extends BaseController {
                     dialog.getInputLName().setSelectionStart(start);
                     dialog.getInputLName().setSelectionEnd(dialog.getInputLName().getText().length());
                     break;
-
+                
                 case "ssn":
                     in = dialog.getInputSSN().getText().trim();
                     start = in.length();

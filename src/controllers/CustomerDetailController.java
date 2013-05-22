@@ -71,7 +71,7 @@ public class CustomerDetailController extends BaseController {
     }
 
     @Override
-    void showView() {
+    public void showView() {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
@@ -312,7 +312,7 @@ public class CustomerDetailController extends BaseController {
                 Borrow b = (Borrow) tableModel.getBorrow(dialog.getTABborrows().getSelectedRow());
                 BorrowDetailController bdc = new BorrowDetailController(b);
                 bdc.showView();
-                
+
                 showData();
             }
         }

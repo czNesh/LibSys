@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import io.Configuration;
@@ -12,107 +8,116 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import models.BookTableModel;
-import models.entity.Author;
 import models.entity.Book;
-import services.AuthorService;
 import services.BookService;
 import views.BookFilterDialog;
 import views.BookListDialog;
 
 /**
+ * Třída (controller) starající se o hledání v seznamu knih
  *
- * @author Nesh
+ * @author Petr Hejhal (hejhape1@fel.cvut.cz)
  */
 public class BookListController extends BaseController {
 
-    private BookListDialog dialog;
-    private ArrayList<Book> selectedBooks = new ArrayList<>();
-    private boolean selectionMode;
-    private BookTableModel tableModel;
-    private BookFilterDialog filter;
+    private BookListDialog dialog; // připojený pohled
+    private ArrayList<Book> selectedBooks = new ArrayList<>(); // vybrané knihy
+    private boolean selectionMode; // mód výběru
+    private BookTableModel tableModel; // model tabulky nalezených knih
+    private BookFilterDialog filter; // dialog zobrazení
+    // ŘAZENÍ
     Map<String, String> orderType = BookService.getInstance().getOrderTypeMap();
     Map<String, String> orderBy = BookService.getInstance().getOrderByMap();
 
+    /**
+     * Konstruktor třídy
+     */
     public BookListController(JFrame parent, boolean selectionMode) {
         dialog = new BookListDialog(parent, selectionMode);
         this.selectionMode = selectionMode;
         tableModel = new BookTableModel();
-        dialog.getResultTable().setModel(tableModel);
+        dialog.getTABresults().setModel(tableModel);
         filter = new BookFilterDialog(null, true);
         setFilterData();
         initListeners();
         updateView();
     }
 
-    private void initListeners() {
-        // ActionListener
-        BookListActionListener a = new BookListActionListener();
-        dialog.getConfirmButton().addActionListener(a);
-        dialog.getCancelButton().addActionListener(a);
-        dialog.getFilterButton().addActionListener(a);
-        dialog.getSearchButton().addActionListener(a);
-        dialog.getBookTablePrevButton().addActionListener(a);
-        dialog.getBookTableNextButton().addActionListener(a);
-        dialog.getBTNreset().addActionListener(a);
-
-        // KeyListener
-        BookListKeyListener k = new BookListKeyListener();
-        dialog.getInputBarcode().addKeyListener(k);
-        dialog.getInputTitle().addKeyListener(k);
-        dialog.getInputAuthor().addKeyListener(k);
-        dialog.getInputISBN10().addKeyListener(k);
-        dialog.getInputISBN13().addKeyListener(k);
-        dialog.getBookTableInputNumber().addKeyListener(k);
-
-        // MouseListener
-        BookListMouseListener m = new BookListMouseListener();
-        dialog.getResultTable().addMouseListener(m);
-    }
-
-    private void updateView() {
-        // UPDATE DATA
-        tableModel.setForBorrow(true);
-        tableModel.updateData();
-
-        // Update table
-        tableModel.fireTableDataChanged();
-        tableModel.fireTableStructureChanged();
-
-        // Update page counting 
-        dialog.getBookTableInputNumber().setText(String.valueOf(tableModel.getPage()));
-        dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
-
-        if (tableModel.getPage() == 1) {
-            dialog.getBookTablePrevButton().setEnabled(false);
-        } else {
-            dialog.getBookTablePrevButton().setEnabled(true);
-        }
-
-        if (tableModel.getPage() == tableModel.getTotalPageCount()) {
-            dialog.getBookTableNextButton().setEnabled(false);
-        } else {
-            dialog.getBookTableNextButton().setEnabled(true);
-        }
-    }
-
+    /**
+     * Vycentrování a zobrazení pohledu
+     */
     @Override
     void showView() {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 
+    /**
+     * Zrušení pohledu
+     */
     @Override
     void dispose() {
         dialog.dispose();
         dialog = null;
     }
 
+    /**
+     * Inicializace listenerů
+     */
+    private void initListeners() {
+        // ActionListener
+        BookListActionListener a = new BookListActionListener();
+        dialog.getBTNconfirm().addActionListener(a);
+        dialog.getBTNcancel().addActionListener(a);
+        dialog.getBTNfilter().addActionListener(a);
+        dialog.getBTNsearch().addActionListener(a);
+        dialog.getBTNprevPage().addActionListener(a);
+        dialog.getBTNnextPage().addActionListener(a);
+        dialog.getBTNreset().addActionListener(a);
+
+        // KeyListener
+        BookListKeyListener k = new BookListKeyListener();
+        dialog.getINPpageNumber().addKeyListener(k);
+
+        // MouseListener
+        BookListMouseListener m = new BookListMouseListener();
+        dialog.getTABresults().addMouseListener(m);
+    }
+
+    /**
+     * Update dat v pohledu
+     */
+    private void updateView() {
+        // UPDATE tabulky
+        tableModel.setForBorrow(true);
+        tableModel.updateData();
+        tableModel.fireTableDataChanged();
+        tableModel.fireTableStructureChanged();
+
+        // Update stránkování
+        dialog.getINPpageNumber().setText(String.valueOf(tableModel.getPage()));
+        dialog.getBookTableTotalPage().setText("/ " + String.valueOf(tableModel.getTotalPageCount()));
+
+        if (tableModel.getPage() == 1) {
+            dialog.getBTNprevPage().setEnabled(false);
+        } else {
+            dialog.getBTNprevPage().setEnabled(true);
+        }
+
+        if (tableModel.getPage() == tableModel.getTotalPageCount()) {
+            dialog.getBTNnextPage().setEnabled(false);
+        } else {
+            dialog.getBTNnextPage().setEnabled(true);
+        }
+    }
+
+    /**
+     * Metoda měnící zobrazení v tabulce
+     */
     private void setFilterData() {
         filter.getTitleCheckbox().setSelected(Configuration.getInstance().isShowTitle());
         filter.getAuthorCheckbox().setSelected(Configuration.getInstance().isShowAuthor());
@@ -144,6 +149,122 @@ public class BookListController extends BaseController {
         RefreshController.getInstance().refreshBookTab();
     }
 
+    /**
+     * Vrátí označené knihy
+     *
+     * @return označené knihy
+     */
+    public ArrayList<Book> getBooks() {
+        return selectedBooks;
+    }
+
+    /**
+     * Potvrdí dialog
+     */
+    private void confirmDialog() {
+        if (dialog.getTABresults().getSelectedRows().length > 0 && selectionMode) {
+            int[] selRows = dialog.getTABresults().getSelectedRows();
+            for (int i = 0; i < selRows.length; i++) {
+                selectedBooks.add(tableModel.getBook(selRows[i]));
+            }
+            dialog.dispose();
+        }
+    }
+
+    /**
+     * Smaže vyhledávací data
+     */
+    private void resetSearch() {
+        dialog.getINPauthor().setText("");
+        dialog.getINPbarcode().setText("");
+        dialog.getINPisbn10().setText("");
+        dialog.getINPisbn13().setText("");
+        dialog.getINPpublishedYear().setText("");
+        dialog.getINPtitle().setText("");
+        updateView();
+    }
+
+    /**
+     * Zobrazení dialogu pro nastavení zobrazení
+     */
+    private void showFilter() {
+        filter.setLocationRelativeTo(null);
+        filter.setVisible(true);
+    }
+
+    /**
+     * Nastavení zobrazení knih
+     */
+    private void setSilter() {
+        Configuration.getInstance().setShowTitle(filter.getTitleCheckbox().isSelected());
+        Configuration.getInstance().setShowAuthor(filter.getAuthorCheckbox().isSelected());
+        Configuration.getInstance().setShowPublisher(filter.getPublisherCheckbox().isSelected());
+        Configuration.getInstance().setShowPublishedYear(filter.getPublishedDateCheckbox().isSelected());
+        Configuration.getInstance().setShowLanguage(filter.getLanguageCheckbox().isSelected());
+        Configuration.getInstance().setShowISBN10(filter.getISBN10Checkbox().isSelected());
+        Configuration.getInstance().setShowISBN13(filter.getISBN13Checkbox().isSelected());
+        Configuration.getInstance().setShowPageCount(filter.getPageCountCheckbox().isSelected());
+        Configuration.getInstance().setShowCount(filter.getCountCheckbox().isSelected());
+        Configuration.getInstance().setShowLocation(filter.getLocationCheckbox().isSelected());
+
+        Configuration.getInstance().setBookOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
+        Configuration.getInstance().setBookOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
+        Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
+        tableModel.updateData();
+        tableModel.fireTableStructureChanged();
+        filter.setVisible(false);
+    }
+
+    /**
+     * Vyhledávání knih
+     */
+    private void search() {
+        tableModel.search(
+                dialog.getINPbarcode().getText().trim(),
+                dialog.getINPtitle().getText().trim(),
+                dialog.getINPauthor().getText().trim(),
+                dialog.getINPisbn10().getText().trim(),
+                dialog.getINPisbn13().getText().trim(),
+                dialog.getINPpublishedYear().getText().trim());
+        tableModel.stopSearchWithEmptyResult();
+        updateView();
+    }
+
+    /**
+     * Předchozí stránka v tabulce
+     */
+    private void prevPage() {
+        tableModel.prevPage();
+        updateView();
+    }
+
+    /**
+     * Další stránka v tabulce
+     */
+    private void nextPage() {
+        tableModel.nextPage();
+        updateView();
+    }
+
+    /**
+     * Nastaví stránku dle textového vstupu
+     */
+    private void setPageNumber() {
+
+        String in = dialog.getINPpageNumber().getText();
+        try {
+            tableModel.setPage(Integer.parseInt(in));
+        } catch (NumberFormatException ex) {
+            System.out.println("NESPRAVNY FORMAT CISLA");
+        }
+        updateView();
+
+    }
+
+    /**
+     * Třída zodpovídající za pohyby a akce myši z odposlouchávaných komponent
+     * pohledu
+     */
     private class BookListMouseListener implements MouseListener {
 
         public BookListMouseListener() {
@@ -152,14 +273,13 @@ public class BookListController extends BaseController {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
-                selectedBooks.add((Book) tableModel.getBook(dialog.getResultTable().getSelectedRow()));
+                selectedBooks.add((Book) tableModel.getBook(dialog.getTABresults().getSelectedRow()));
             }
             if (selectionMode) {
                 if (!selectedBooks.isEmpty()) {
                     dialog.dispose();
                 }
             }
-
         }
 
         @Override
@@ -179,15 +299,11 @@ public class BookListController extends BaseController {
         }
     }
 
+    /**
+     * Třída zodpovídající za stisk klávesy z odposlouchávaných komponent
+     * pohledu
+     */
     private class BookListKeyListener implements KeyListener {
-
-        private List<Book> books;
-        private List<Author> authors;
-
-        public BookListKeyListener() {
-            books = BookService.getInstance().getBooks();
-            authors = AuthorService.getInstance().getAuthors();
-        }
 
         @Override
         public void keyTyped(KeyEvent e) {
@@ -199,101 +315,22 @@ public class BookListController extends BaseController {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            String sourceName = ((JComponent) e.getSource()).getName();
-
-            if (e.getKeyCode() == KeyEvent.VK_ENTER && sourceName.equals("inputPageNumber")) {
-                String in = dialog.getBookTableInputNumber().getText();
-                try {
-                    tableModel.setPage(Integer.parseInt(in));
-                } catch (NumberFormatException ex) {
-                    System.out.println("NESPRAVNY FORMAT CISLA");
-                }
-                updateView();
-            }
-
-            // pokud se nezapise znak - hned skonci
-            if (String.valueOf(e.getKeyChar()).trim().isEmpty()) {
-                return;
-            }
-
-            // ESCAPE pri stisku sipky
-            if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                return;
-            }
-
-            // priprava promennych 
-            String in;
-            int start;
-
-            // co se doplňuje 
-            switch (sourceName) {
-
-                // doplnění jména
-                case "barcode":
-                    in = dialog.getInputBarcode().getText().trim();
-                    start = in.length();
-
-                    // zadano aspon 5 znaku
-                    if (start > 4) {
-                        for (Book b : books) {
-                            if (b.getBarcode().startsWith(in)) {
-                                dialog.getInputBarcode().setText(b.getBarcode());
-                                break;
-                            }
-                        }
+            switch (((JComponent) e.getSource()).getName()) {
+                case "inputPageNumber":
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        setPageNumber();
                     }
-
-                    // oznaci doplnene
-                    dialog.getInputBarcode().setSelectionStart(start);
-                    dialog.getInputBarcode().setSelectionEnd(dialog.getInputBarcode().getText().length());
-                    break;
-
-                // doplnění přijmení    
-                case "title":
-                    in = dialog.getInputTitle().getText().trim();
-                    start = in.length();
-
-                    // zadano aspon 5 znaku
-                    if (start > 4) {
-                        for (Book b : books) {
-                            if (b.getTitle().startsWith(in)) {
-                                dialog.getInputTitle().setText(b.getTitle());
-                                break;
-                            }
-                        }
-                    }
-
-                    // oznaci doplnene
-                    dialog.getInputTitle().setSelectionStart(start);
-                    dialog.getInputTitle().setSelectionEnd(dialog.getInputTitle().getText().length());
-                    break;
-
-                case "author":
-                    in = dialog.getInputAuthor().getText().trim();
-                    start = in.length();
-
-                    // zadany aspon 4 znaky
-                    if (start > 6) {
-                        for (Author a : authors) {
-                            if (String.valueOf(a.toString()).startsWith(in)) {
-                                dialog.getInputAuthor().setText(String.valueOf(a.toString()));
-                                break;
-                            }
-                        }
-                    }
-
-                    // oznaci doplnene
-                    dialog.getInputAuthor().setSelectionStart(start);
-                    dialog.getInputAuthor().setSelectionEnd(dialog.getInputAuthor().getText().length());
-
                     break;
                 default:
+                    // DO NOTHING
                     break;
-
             }
         }
     }
 
+    /**
+     * Třída zodpovídající za akci z odposlouchávaných komponent pohledu
+     */
     private class BookListActionListener implements ActionListener {
 
         public BookListActionListener() {
@@ -301,87 +338,36 @@ public class BookListController extends BaseController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JButton b = (JButton) e.getSource();
-            String buttonName = b.getName();
-
-            switch (buttonName) {
+            switch (((JComponent) e.getSource()).getName()) {
                 case "confirm":
-                    if (dialog.getResultTable().getSelectedRows().length > 0 && selectionMode) {
-                        int[] selRows = dialog.getResultTable().getSelectedRows();
-                        for (int i = 0; i < selRows.length; i++) {
-                            selectedBooks.add(tableModel.getBook(selRows[i]));
-                        }
-                        dialog.dispose();
-                    }
-
+                    confirmDialog();
                     break;
                 case "cancel":
                     dispose();
                     break;
-
                 case "reset":
-                    dialog.getInputAuthor().setText("");
-                    dialog.getInputBarcode().setText("");
-                    dialog.getInputISBN10().setText("");
-                    dialog.getInputISBN13().setText("");
-                    dialog.getInputPublishedYear().setText("");
-                    dialog.getInputTitle().setText("");
-                    updateView();
+                    resetSearch();
                     break;
-
                 case "filter":
                     filter.getOkButton().addActionListener(this);
-                    filter.setLocationRelativeTo(null);
-                    filter.setVisible(true);
+                    showFilter();
                     break;
-
                 case "filterConfirm":
-                    Configuration.getInstance().setShowTitle(filter.getTitleCheckbox().isSelected());
-                    Configuration.getInstance().setShowAuthor(filter.getAuthorCheckbox().isSelected());
-                    Configuration.getInstance().setShowPublisher(filter.getPublisherCheckbox().isSelected());
-                    Configuration.getInstance().setShowPublishedYear(filter.getPublishedDateCheckbox().isSelected());
-                    Configuration.getInstance().setShowLanguage(filter.getLanguageCheckbox().isSelected());
-                    Configuration.getInstance().setShowISBN10(filter.getISBN10Checkbox().isSelected());
-                    Configuration.getInstance().setShowISBN13(filter.getISBN13Checkbox().isSelected());
-                    Configuration.getInstance().setShowPageCount(filter.getPageCountCheckbox().isSelected());
-                    Configuration.getInstance().setShowCount(filter.getCountCheckbox().isSelected());
-                    Configuration.getInstance().setShowLocation(filter.getLocationCheckbox().isSelected());
-
-                    Configuration.getInstance().setBookOrderBy(orderBy.get((String) filter.getINPorderBy().getSelectedItem()));
-                    Configuration.getInstance().setBookOrderType(orderType.get((String) filter.getINPorderType().getSelectedItem()));
-                    Configuration.getInstance().setMaxBookRowsCount((int) filter.getINPbookMaxRowsCount().getValue());
-                    tableModel.updateData();
-                    tableModel.fireTableStructureChanged();
-                    filter.setVisible(false);
+                    setSilter();
                     break;
-
                 case "search":
-                    tableModel.search(
-                            dialog.getInputBarcode().getText().trim(),
-                            dialog.getInputTitle().getText().trim(),
-                            dialog.getInputAuthor().getText().trim(),
-                            dialog.getInputISBN10().getText().trim(),
-                            dialog.getInputISBN13().getText().trim(),
-                            dialog.getInputPublishedYear().getText().trim());
-                    tableModel.stopSearchWithEmptyResult();
-                    updateView();
+                    search();
                     break;
-
                 case "prevPage":
-                    tableModel.prevPage();
-                    updateView();
+                    prevPage();
                     break;
                 case "nextPage":
-                    tableModel.nextPage();
-                    updateView();
+                    nextPage();
                     break;
                 default:
-                    System.out.println("Chyba - Jmeno polozky neodpovida zadne operaci (Buttonlistener)");
+                    // DO NOTHING
+                    break;
             }
         }
-    }
-
-    public ArrayList<Book> getBooks() {
-        return selectedBooks;
     }
 }

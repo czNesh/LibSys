@@ -32,49 +32,51 @@
                           <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="bookTablePrevButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNprevPage" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="bookTableInputNumber" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="INPpageNumber" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="bookTableTotalPage" min="-2" pref="23" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="bookTableNextButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="BTNnextPage" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="filterButton" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <Component id="BTNfilter" min="-2" pref="141" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel5" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel2" max="32767" attributes="0"/>
-                                          <Component id="jLabel1" alignment="0" pref="70" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabel2" max="32767" attributes="0"/>
+                                              <Component id="jLabel1" alignment="0" pref="70" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel5" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="inputBarcode" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="inputAuthor" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="inputTitle" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="inputPublishedYear" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="INPbarcode" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="INPauthor" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="INPtitle" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="INPpublishedYear" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="inputISBN13" min="-2" pref="138" max="-2" attributes="0"/>
+                                              <Component id="INPisbn13" min="-2" pref="138" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="inputISBN10" min="-2" pref="138" max="-2" attributes="0"/>
+                                              <Component id="INPisbn10" min="-2" pref="138" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace pref="73" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="searchButton" pref="103" max="32767" attributes="0"/>
+                                  <Component id="BTNsearch" pref="103" max="32767" attributes="0"/>
                                   <Component id="BTNreset" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -82,9 +84,9 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
-                      <Component id="confirmButton" min="-2" pref="146" max="-2" attributes="0"/>
+                      <Component id="BTNconfirm" min="-2" pref="146" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cancelButton" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="BTNcancel" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -103,34 +105,36 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="inputISBN10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="INPisbn10" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="inputISBN13" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="INPisbn13" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="inputBarcode" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPbarcode" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="inputTitle" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPtitle" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="inputAuthor" min="-2" max="-2" attributes="0"/>
+                              <Component id="INPauthor" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                              <Component id="inputPublishedYear" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="INPpublishedYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" pref="27" max="32767" attributes="0"/>
-                      <Component id="filterButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="BTNfilter" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="searchButton" min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="BTNsearch" min="-2" pref="59" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BTNreset" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -140,15 +144,15 @@
               <Component id="jScrollPane1" min="-2" pref="458" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bookTableInputNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="INPpageNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bookTableTotalPage" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bookTablePrevButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bookTableNextButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTNprevPage" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTNnextPage" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="confirmButton" max="32767" attributes="0"/>
-                  <Component id="cancelButton" max="32767" attributes="0"/>
+                  <Component id="BTNconfirm" max="32767" attributes="0"/>
+                  <Component id="BTNcancel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -163,7 +167,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="resultTable">
+        <Component class="javax.swing.JTable" name="TABresults">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -197,22 +201,22 @@
         <Property name="text" type="java.lang.String" value="Rok vyd&#xe1;n&#xed;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputAuthor">
+    <Component class="javax.swing.JTextField" name="INPauthor">
       <Properties>
         <Property name="name" type="java.lang.String" value="author" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputBarcode">
+    <Component class="javax.swing.JTextField" name="INPbarcode">
       <Properties>
         <Property name="name" type="java.lang.String" value="barcode" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputTitle">
+    <Component class="javax.swing.JTextField" name="INPtitle">
       <Properties>
         <Property name="name" type="java.lang.String" value="title" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="filterButton">
+    <Component class="javax.swing.JButton" name="BTNfilter">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volby zobrazen&#xed;"/>
         <Property name="name" type="java.lang.String" value="filter" noResource="true"/>
@@ -223,18 +227,18 @@
         <Property name="text" type="java.lang.String" value="ISBN10:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputISBN10">
+    <Component class="javax.swing.JTextField" name="INPisbn10">
       <Properties>
         <Property name="name" type="java.lang.String" value="lname" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="bookTablePrevButton">
+    <Component class="javax.swing.JButton" name="BTNprevPage">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
         <Property name="name" type="java.lang.String" value="prevPage" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="bookTableInputNumber">
+    <Component class="javax.swing.JTextField" name="INPpageNumber">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="1"/>
@@ -247,13 +251,13 @@
         <Property name="text" type="java.lang.String" value="/ 5"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="bookTableNextButton">
+    <Component class="javax.swing.JButton" name="BTNnextPage">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
         <Property name="name" type="java.lang.String" value="nextPage" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="searchButton">
+    <Component class="javax.swing.JButton" name="BTNsearch">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/search_icon.gif"/>
@@ -262,13 +266,13 @@
         <Property name="name" type="java.lang.String" value="search" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="cancelButton">
+    <Component class="javax.swing.JButton" name="BTNcancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zru&#x161;it"/>
         <Property name="name" type="java.lang.String" value="cancel" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="confirmButton">
+    <Component class="javax.swing.JButton" name="BTNconfirm">
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
         <Property name="name" type="java.lang.String" value="confirm" noResource="true"/>
@@ -279,12 +283,12 @@
         <Property name="text" type="java.lang.String" value="ISBN13:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputISBN13">
+    <Component class="javax.swing.JTextField" name="INPisbn13">
       <Properties>
         <Property name="name" type="java.lang.String" value="lname" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputPublishedYear">
+    <Component class="javax.swing.JTextField" name="INPpublishedYear">
     </Component>
     <Component class="javax.swing.JButton" name="BTNreset">
       <Properties>

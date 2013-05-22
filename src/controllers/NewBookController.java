@@ -138,6 +138,7 @@ public class NewBookController extends BaseController {
                     }
                     break;
                 case "genres":
+                    System.out.println("aaa");
                     //potlaceni mezer
                     if (dialog.getInputGenres().getText().endsWith(" ")) {
                         dialog.getInputGenres().setText(dialog.getInputGenres().getText().trim());
@@ -164,8 +165,6 @@ public class NewBookController extends BaseController {
                         in = in.substring(lastNewWord + 1);
                     }
 
-                    System.out.println("BEFORE " + before);
-                    System.out.println("in " + in);
                     int start = in.length();
 
                     // zadany aspon 2 znaky
